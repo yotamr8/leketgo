@@ -1,11 +1,25 @@
 import Link from 'next/link'
 import Head from 'next/head'
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import fire from '../config/firebaseConfig'
 
 class Header extends React.Component {
     constructor(props) {
-      super(props);
+        super(props);
+    }
+
+    state = {}
+
+    logout = () => {
+        fire.auth().signOut(
+        ).then(
+            () => {
+                this.props.dispatch({ type: 'LOGOUT' });
+            }).catch(
+            (err) => {
+                console.log("error on logout.", err)
+            });
     }
 
     render() {
@@ -53,7 +67,7 @@ class Header extends React.Component {
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <Link href="/personal-information"><a class="dropdown-item">פרטים אישיים</a></Link>
                                 <div class="dropdown-divider"></div>
-                                <Link href="/login"><a class="dropdown-item">התנתקות</a></Link>
+                                <Link href="/login"><a class="dropdown-item" onClick={this.logout}>התנתקות</a></Link>
                             </div>
                         </li>
                         <li class="nav-item">

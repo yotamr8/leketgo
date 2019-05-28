@@ -93,6 +93,33 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./config/firebaseConfig.js":
+/*!**********************************!*\
+  !*** ./config/firebaseConfig.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase */ "firebase");
+/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_0__);
+
+var firebaseConfig = {
+  apiKey: "AIzaSyAvu90OSR5YeQ4JSH61gerVvwLJZm64ADQ",
+  authDomain: "leketgo.firebaseapp.com",
+  databaseURL: "https://leketgo.firebaseio.com",
+  projectId: "leketgo",
+  storageBucket: "leketgo.appspot.com",
+  messagingSenderId: "427584696273",
+  appId: "1:427584696273:web:286a00c4ddae79ec"
+}; // Initialize Firebase
+
+var fire = !firebase__WEBPACK_IMPORTED_MODULE_0___default.a.apps.length ? firebase__WEBPACK_IMPORTED_MODULE_0___default.a.initializeApp(firebaseConfig) : firebase__WEBPACK_IMPORTED_MODULE_0___default.a.app();
+/* harmony default export */ __webpack_exports__["default"] = (fire);
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js ***!
@@ -1067,6 +1094,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(next_redux_wrapper__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../config/firebaseConfig */ "./config/firebaseConfig.js");
 
 
 
@@ -1076,7 +1104,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\baram\\Git\\leket-go\\pages\\_app.js";
+var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\leketgo\\pages\\_app.js";
+
 
 
 
@@ -1095,6 +1124,28 @@ var reducer = function reducer() {
       });
       break;
 
+    case 'LOGIN':
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_8__["default"])({}, state, {
+        isLoggedIn: true,
+        loginErr: false,
+        firebaseData: action.user
+      });
+      break;
+
+    case 'LOGIN_ERR':
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_8__["default"])({}, state, {
+        isLoggedIn: false,
+        loginErr: action.msg
+      });
+      break;
+
+    case 'LOGOUT':
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_8__["default"])({}, state, {
+        isLoggedIn: false,
+        firebaseData: false
+      });
+      break;
+
     default:
       return state;
       break;
@@ -1102,7 +1153,8 @@ var reducer = function reducer() {
 };
 
 var initialState = {
-  isLoggedIn: true,
+  loginErr: false,
+  isLoggedIn: _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_15__["default"].auth().isLoggedIn ? true : false,
   isManager: true,
   userData: {
     userId: 123456789,
@@ -1140,20 +1192,20 @@ function (_App) {
       return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(next_app__WEBPACK_IMPORTED_MODULE_12__["Container"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 57
+          lineNumber: 67
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_11__["Provider"], {
         store: store,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 58
+          lineNumber: 68
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, pageProps, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 59
+          lineNumber: 69
         },
         __self: this
       }))));
@@ -1363,6 +1415,17 @@ module.exports = require("core-js/library/fn/symbol");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/symbol/iterator");
+
+/***/ }),
+
+/***/ "firebase":
+/*!***************************!*\
+  !*** external "firebase" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("firebase");
 
 /***/ }),
 
