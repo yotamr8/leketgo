@@ -5,6 +5,7 @@ import App, {Container} from "next/app"
 import withRedux from 'next-redux-wrapper'
 import axios from 'axios'
 import fire from '../config/firebaseConfig'
+import { Route } from 'react-router-dom';
 
 
 const reducer = (state = initialState, action) => {
@@ -13,7 +14,8 @@ const reducer = (state = initialState, action) => {
             return {...state, tasks: [action.taskList]};
             break;
         case 'LOGIN':
-            return { ...state, isLoggedIn: true, loginErr: false, firebaseData: action.user };
+            return { ...state, isLoggedIn: true, loginErr: false, userData: action.user, isManager: (action.user.admin == 'TRUE')? true : false };
+            console.log("logged in store")
             break;
         case 'LOGIN_ERR':
             return { ...state, isLoggedIn: false, loginErr: action.msg};
@@ -29,19 +31,11 @@ const reducer = (state = initialState, action) => {
 
 var initialState = {
     loginErr: false,
-    isLoggedIn: fire.auth().isLoggedIn ? true : false,
-    isManager: true,
-    userData: {
-        userId: 123456789,
-        firstName: 'בר',
-        lastName: 'עמיר',
-        region: 'ראשון לציון',
-        email: 'baramir@mail.tau.ac.il',
-        phone: '0523668566'
-    },
+    isLoggedIn: false,
+    isManager: false,
+    userData: [],
     tasks: []
 }
-
 
 const makeStore = (initialState, options) => {
     return createStore(reducer, initialState);
@@ -53,12 +47,12 @@ class MyApp extends App {
     }
 
     static async getInitialProps({Component, ctx}) {
-        axios.get('http://localhost:5000/api/get_tasks').then((response) => 
+        /*axios.get('http://localhost:5000/api/get_tasks').then((response) => 
         {         
             ctx.store.dispatch({type: 'GETTASKSLIST', taskList: response});
         });
         const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
-        return {pageProps};
+        return {pageProps};*/
     }
 
     render() {
