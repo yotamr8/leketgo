@@ -2,6 +2,9 @@ html {
   direction: rtl;
   overflow-y: scroll; }
 
+.entry-selectable {
+  cursor: pointer; }
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px; }
