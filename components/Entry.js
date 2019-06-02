@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux"
 import {Button, ButtonGroup} from 'react-bootstrap'
+import fire from '../config/firebaseConfig'
 
 class Entry extends React.Component {
     constructor(props) {
@@ -15,11 +16,14 @@ class Entry extends React.Component {
     getDataValues(entry) {
         switch (this.props.type) {
             case 'tasks':
+                let options = { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric' };
+                let date = entry.timestamp.toDate();
                 return {
-                    date: entry.date,
+                    date: date.toLocaleDateString('he-IL', options),
+                    time: date.getHours()+':'+('0'+date.getMinutes()).slice(-2),
                     city: entry.city,
                     name: entry.name,
-                    catering: entry.name,
+                    street: entry.address,
                     actions: 'ACTIONS',
                 }
             case 'users':

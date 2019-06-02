@@ -13,15 +13,16 @@ class TableBlock extends React.Component {
 			columnNames: {
 				'actions': 'פעולות',
 				'date': 'תאריך',
+				'time': 'שעה',
 				'city': 'עיר',
-				'name': 'שם',
-				'catering': 'קייטרינג',
+				'name': 'ספק',
 				'uid': 'uid',
 				'firstName': 'שם פרטי',
 				'lastName': 'שם משפחה',
 				'region': 'אזור',
 				'email': 'דוא"ל',
-				'tz': 'תעודת זהות'
+				'tz': 'תעודת זהות',
+				'street': 'רחוב'
 			}
 		};
 		this.selectCallback = this.selectCallback.bind(this);
@@ -32,15 +33,15 @@ class TableBlock extends React.Component {
 	getTableColumns() {
 		switch (this.props.page) {
 			case 'index':
-				return ['date', 'city', 'name', 'catering'];
+				return ['date', 'street', 'time', 'city', 'name'];
 			case 'assignedTasks':
-				return ['date', 'city', 'name', 'catering', 'actions'];
+				return ['date', 'street', 'city', 'name', 'actions'];
 			case 'taskReports':
-				return ['date', 'city', 'name', 'catering', 'actions'];
+				return ['date', 'street', 'city', 'name', 'actions'];
 			case 'adminUsers':
 				return ['tz', 'firstName', 'lastName', 'email', 'phone', 'region', 'actions'];
 			case 'adminTasks':
-					return ['actions', 'date', 'city', 'name', 'catering'];
+					return ['actions', 'date', 'street', 'city', 'name'];
 			default:
 				break;
 		}
@@ -78,7 +79,7 @@ class TableBlock extends React.Component {
 		let actionsBar = '';
 		if (this.props.isSelectable && this.state.entrySelectedCounter > 0) {
 			actionsBar = 
-				<Navbar fixed='bottom'>
+				<Navbar bg='light' fixed='bottom'>
 					<ButtonGroup>
 						<Button onClick={this.assignTasks} variant='primary'>שיבוץ {this.state.entrySelectedCounter} איסופים</Button>
 						<Button onClick={this.cancelSelection} variant='secondary'>ביטול</Button>
@@ -87,7 +88,7 @@ class TableBlock extends React.Component {
 		}
 		if (this.props.isSearchable) {
 			actionsBar = 
-				<Navbar fixed='bottom'>
+				<Navbar bg='light' fixed='bottom'>
 					<Form>
 						<Row>
 							<Col>

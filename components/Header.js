@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import fire from '../config/firebaseConfig'
 import {Nav, Navbar, NavItem, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
+import Link from 'next/link'
 
 class Header extends React.Component {
     constructor(props) {
@@ -36,17 +37,34 @@ class Header extends React.Component {
             let trNum = this.props.taskReports.length;
             pages = 
             <Nav className="mr-auto">
-                <Nav.Link href="/">שיבוץ לאיסופים</Nav.Link>
-                <Nav.Link href="/assigned-tasks">איסופים קרובים</Nav.Link>
-                <Nav.Link href="/task-reports">מילוי משוב</Nav.Link>
+                <Link className='navlink' href="/"><a className='nav-link'>שיבוץ לאיסופים</a></Link>
+                <Link href="/assigned-tasks"><a className='nav-link'>איסופים קרובים</a></Link>
+                <Link href="/task-reports"><a className='nav-link'>מילוי משוב</a></Link>
             </Nav>;
         } else {
             pages = 
             <Nav className="mr-auto">
-                <Nav.Link href="/">לוח בקרה</Nav.Link>
-                <Nav.Link href="/users">משתמשים</Nav.Link>
-                <Nav.Link href="/tasks">משימות</Nav.Link>
+                <Link href="/"><a className='nav-link'>לוח בקרה</a></Link>
+                <Link href="/users"><a className='nav-link'>משתמשים</a></Link>
+                <Link href="/tasks"><a className='nav-link'>משימות</a></Link>
             </Nav>;
+        }
+        let navbar = '';
+        if (!this.props.isLogin) {
+            navbar = <Navbar sticky='top' bg='dark' variant='dark' expand='lg'>
+            <Link href="/"><a className='navbar-brand'>LetsGo</a></Link>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                {pages}
+                <Nav className='mr-sm-2'>
+                <NavDropdown alignRight title={this.props.userData.firstName + ' ' + this.props.userData.lastName} id="basic-nav-dropdown">
+                    <Link href="/personal-information"><a className='dropdown-item'>פרטים אישיים</a></Link>
+                    <NavDropdown.Divider />
+                    <Link href='/login'><a className='dropdown-item' onClick={this.logout}>התנתקות</a></Link>
+                </NavDropdown>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>;
         }
             return (
                 <div>
@@ -59,20 +77,7 @@ class Header extends React.Component {
                             integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
                         <title>LetsGo</title>
                     </Head>
-                    <Navbar sticky='top' bg='dark' variant='dark'>
-                        <Navbar.Brand href="/">LetsGo</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            {pages}
-                            <Nav className='mr-sm-2'>
-                            <NavDropdown alignRight title={this.props.userData.firstName + ' ' + this.props.userData.lastName} id="basic-nav-dropdown">
-                                <NavDropdown.Item href="/personal-information">פרטים אישיים</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={this.logout}>התנתקות</NavDropdown.Item>
-                            </NavDropdown>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Navbar>
+                    {navbar}
                 </div>
             );
     }

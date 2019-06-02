@@ -5,8 +5,61 @@ import { Component } from "react"
 import { connect } from "react-redux"
 import {Alert} from 'react-bootstrap'
 import Link from 'next/link'
+import fire from '../config/firebaseConfig'
+import Header from '../components/Header.js'
 
 class Index extends Component {
+
+    componentDidMount() {
+        this.handleSubmit();
+    }
+
+    handleSubmit = (e) => {
+        const db = fire.firestore();
+        fire.auth().signInWithEmailAndPassword("matanwilchek@gmail.com", "111111"
+        ).then(
+            (user) => {
+                db.collection("users").doc(user.user.uid).get().then((doc) => {
+                    this.props.dispatch({ type: 'LOGIN', user: doc.data() });
+                    db.collection("tasks").where("region", "==", doc.data().region).where("volunteerUid", "==", null).get()
+                        .then((querySnapshot) => {
+                            var tasks = [];
+                            querySnapshot.forEach(function (doc) {
+                                var task = doc.data();
+                                task.id = doc.id;
+                                tasks.push(task);
+                            });
+                            this.props.dispatch({ type: 'UNASSIGNEDTASKS', tasks: tasks });
+                        });
+                    db.collection("tasks").where("volunteerUid", "==", user.user.uid).where("timestamp", ">", new Date()).get()
+                        .then((querySnapshot) => {
+                            var tasks = [];
+                            querySnapshot.forEach(function (doc) {
+                                var task = doc.data();
+                                task.id = doc.id;
+                                tasks.push(task);
+                            });
+                            this.props.dispatch({ type: 'ASSIGNEDTASKS', tasks: tasks });
+                        }); //reportFilled
+                    db.collection("tasks").where("volunteerUid", "==", user.user.uid)
+                        .where("timestamp", "<", new Date())
+                        .where("reportFilled", "==", false).get()
+                        .then((querySnapshot) => {
+                            var tasks = [];
+                            querySnapshot.forEach(function (doc) {
+                                var task = doc.data();
+                                task.id = doc.id;
+                                tasks.push(task);
+                            });
+                            this.props.dispatch({ type: 'TASKREPORTS', tasks: tasks });
+                        });
+                })
+
+            }).catch(
+            (err) => {
+                this.props.dispatch({ type: 'LOGIN_ERR', msg: err.message });
+            });
+    }
     
     render() {
         console.log(this.props);
@@ -21,13 +74,16 @@ class Index extends Component {
 
         if (!this.props.userData.isManager) {
             return (
-                <main className="m-2" style={{ paddingBottom: '3rem' }}>
-                    {alert}
-                    <div className="mb-4 mt-4">
-                        <h2>שיבוץ לאיסופים</h2>
-                    </div>
-                    <TableBlock isSelectable={true} data={this.props.unassignedTasks} page='index' type='tasks' />
-                </main>
+                <div>
+                <Header />
+                    <main className="m-2" style={{ paddingBottom: '3rem' }}>
+                        {alert}
+                        <div className="mb-4 mt-4">
+                            <h2>שיבוץ לאיסופים</h2>
+                        </div>
+                        <TableBlock isSelectable={true} data={this.props.unassignedTasks} page='index' type='tasks' />
+                    </main>
+                </div>
             );
         } else {
             return <div>לוח בקרה של מנהל</div>;
