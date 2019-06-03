@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -173,7 +173,27 @@ function (_React$Component) {
                 lineNumber: 29
               },
               __self: this
-            }, entry['contact number'])
+            }, entry['contact number']),
+            checkBox: this.props.isSelected ? react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Form"].Check, {
+              custom: true,
+              checked: true,
+              label: "",
+              type: "checkbox",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 30
+              },
+              __self: this
+            }) : react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Form"].Check, {
+              custom: true,
+              label: "",
+              type: "checkbox",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 30
+              },
+              __self: this
+            })
           };
 
         case 'users':
@@ -308,7 +328,7 @@ function (_React$Component) {
         className: (this.props.isSelected ? 'table-primary' : '') + (this.props.isSelectable ? ' entry-selectable' : ''),
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 114
+          lineNumber: 115
         },
         __self: this
       }, this.props.tableColumns.map(function (column) {
@@ -318,7 +338,7 @@ function (_React$Component) {
             key: column,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 118
+              lineNumber: 119
             },
             __self: this
           }, _this2.getDataValues(_this2.props.entry)[column]);
@@ -327,13 +347,13 @@ function (_React$Component) {
             key: column,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 124
+              lineNumber: 125
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["ButtonGroup"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 125
+              lineNumber: 126
             },
             __self: this
           }, buttons.map(function (button) {
@@ -343,7 +363,7 @@ function (_React$Component) {
               variant: button.color,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 128
+                lineNumber: 129
               },
               __self: this
             }, button.text);
@@ -794,7 +814,8 @@ function (_React$Component) {
         'tz': 'תעודת זהות',
         'street': 'רחוב',
         'contactName': 'איש קשר',
-        'contactNumber': 'טלפון'
+        'contactNumber': 'טלפון',
+        'checkBox': ''
       }
     };
     _this.selectCallback = _this.selectCallback.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__["default"])(_this));
@@ -808,7 +829,7 @@ function (_React$Component) {
     value: function getTableColumns() {
       switch (this.props.page) {
         case 'index':
-          return ['date', 'time', 'city', 'name'];
+          return ['checkBox', 'date', 'time', 'city', 'name'];
 
         case 'assignedTasks':
           return ['date', 'time', 'street', 'city', 'name', 'contactName', 'contactNumber', 'actions'];
@@ -877,13 +898,13 @@ function (_React$Component) {
           fixed: "bottom",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 89
+            lineNumber: 90
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["ButtonGroup"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 90
+            lineNumber: 91
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Button"], {
@@ -891,7 +912,7 @@ function (_React$Component) {
           variant: "primary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 91
+            lineNumber: 92
           },
           __self: this
         }, "\u05E9\u05D9\u05D1\u05D5\u05E5 ", this.state.entrySelectedCounter, " \u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Button"], {
@@ -899,7 +920,7 @@ function (_React$Component) {
           variant: "secondary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 92
+            lineNumber: 93
           },
           __self: this
         }, "\u05D1\u05D9\u05D8\u05D5\u05DC")));
@@ -911,25 +932,25 @@ function (_React$Component) {
           fixed: "bottom",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 98
+            lineNumber: 99
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 99
+            lineNumber: 100
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Row"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 100
+            lineNumber: 101
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 101
+            lineNumber: 102
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
@@ -938,7 +959,7 @@ function (_React$Component) {
           "aria-label": "Basic example",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 102
+            lineNumber: 103
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
@@ -946,7 +967,7 @@ function (_React$Component) {
           className: "btn btn-primary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 103
+            lineNumber: 104
           },
           __self: this
         }, "\u05D4\u05D5\u05E1\u05E4\u05EA \u05DE\u05E9\u05EA\u05DE\u05E9"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
@@ -954,20 +975,20 @@ function (_React$Component) {
           className: "btn btn-secondary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 104
+            lineNumber: 105
           },
           __self: this
         }, "\u05D4\u05D5\u05E1\u05E4\u05D4 \u05DE\u05E7\u05D5\u05D1\u05E5"))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 106
+            lineNumber: 107
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["InputGroup"], {
           className: "mb-3",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 107
+            lineNumber: 108
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"].Control, {
@@ -977,44 +998,44 @@ function (_React$Component) {
           drop: "up",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 108
+            lineNumber: 109
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 113
+            lineNumber: 114
           },
           __self: this
         }, "\u05E9\u05DD \u05DE\u05DC\u05D0"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 114
+            lineNumber: 115
           },
           __self: this
         }, "\u05EA\u05E2\u05D5\u05D3\u05EA \u05D6\u05D4\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 115
+            lineNumber: 116
           },
           __self: this
         }, "\u05DB\u05EA\u05D5\u05D1\u05EA \u05DE\u05D2\u05D5\u05E8\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 116
+            lineNumber: 117
           },
           __self: this
         }, "\u05DE\u05E1\u05E4\u05E8 \u05D8\u05DC\u05E4\u05D5\u05DF"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 117
+            lineNumber: 118
           },
           __self: this
         }, "\u05D3\u05D5\u05D0\u05E8 \u05D0\u05DC\u05E7\u05D8\u05E8\u05D5\u05E0\u05D9")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["FormControl"], {
           "aria-describedby": "basic-addon1",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 119
+            lineNumber: 120
           },
           __self: this
         }))))));
@@ -1024,7 +1045,7 @@ function (_React$Component) {
         className: "table-responsive",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 128
+          lineNumber: 129
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Table"], {
@@ -1032,19 +1053,19 @@ function (_React$Component) {
         responsive: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 129
+          lineNumber: 130
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("thead", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 130
+          lineNumber: 131
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tr", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 131
+          lineNumber: 132
         },
         __self: this
       }, this.state.tableColumns.map(function (column) {
@@ -1053,14 +1074,14 @@ function (_React$Component) {
           key: column,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 134
+            lineNumber: 135
           },
           __self: this
         }, _this2.state.columnNames[column]);
       }))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tbody", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 139
+          lineNumber: 140
         },
         __self: this
       }, this.props.data.map(function (entry) {
@@ -1077,7 +1098,7 @@ function (_React$Component) {
           tableColumns: _this2.state.tableColumns,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 145
+            lineNumber: 146
           },
           __self: this
         });
@@ -2433,7 +2454,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 7:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

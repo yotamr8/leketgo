@@ -25,7 +25,8 @@ class TableBlock extends React.Component {
 				'tz': 'תעודת זהות',
 				'street': 'רחוב',
 				'contactName': 'איש קשר',
-				'contactNumber': 'טלפון'
+				'contactNumber': 'טלפון',
+				'checkBox': ''
 			}
 		};
 		this.selectCallback = this.selectCallback.bind(this);
@@ -36,7 +37,7 @@ class TableBlock extends React.Component {
 	getTableColumns() {
 		switch (this.props.page) {
 			case 'index':
-				return ['date', 'time', 'city', 'name'];
+				return ['checkBox', 'date', 'time', 'city', 'name'];
 			case 'assignedTasks':
 				return ['date', 'time', 'street', 'city', 'name', 'contactName', 'contactNumber', 'actions'];
 			case 'taskReports':

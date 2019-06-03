@@ -17,12 +17,6 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/assigned-tasks": [
-      "static/runtime/webpack.js",
-      "static/css/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/runtime/main.js"
-    ],
     "/index": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",
@@ -30,12 +24,6 @@
       "static/runtime/main.js"
     ],
     "/login": [
-      "static/runtime/webpack.js",
-      "static/css/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/runtime/main.js"
-    ],
-    "/personal-information": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",
       "static/chunks/styles.js",

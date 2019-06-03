@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux"
-import {Button, ButtonGroup} from 'react-bootstrap'
+import {Button, Form, ButtonGroup} from 'react-bootstrap'
 import fire from '../config/firebaseConfig'
 
 class Entry extends React.Component {
@@ -26,7 +26,8 @@ class Entry extends React.Component {
                     street: entry.address,
                     actions: 'ACTIONS',
                     contactName: entry['contact name'],
-                    contactNumber: <a href={'tel: '+ entry['contact number']}>{entry['contact number']}</a>
+                    contactNumber: <a href={'tel: '+ entry['contact number']}>{entry['contact number']}</a>,
+                    checkBox: this.props.isSelected ? <Form.Check custom checked label='' type='checkbox' /> : <Form.Check custom label='' type='checkbox' />
                 }
             case 'users':
                 return {
