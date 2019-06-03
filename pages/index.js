@@ -30,11 +30,11 @@ class Index extends Component {
         let alert = ''; 
         if (atNum > 0 || trNum > 0){
             alert = <Alert variant='warning'>
-                היי {this.props.userData.firstName}, יש לך {atNum > 0 ? <Link href="/assigned-tasks"><a><strong>{atNum}</strong> איסופים קרובים</a></Link> : ''} {(atNum > 0 && trNum > 0 ? 'ועוד' : '')} {trNum > 0 ? <Link href='/task-reports'><a><strong>{trNum}</strong> איסופים הממתינים למשוב</a></Link> : ''}.
+                היי {this.props.userData.firstName}, יש לך {atNum > 0 ? <Link href="/assigned-tasks"><a><strong>{atNum}</strong> איסופים קרובים</a></Link> : ''}{(atNum > 0 && trNum > 0 ? 'ועוד ' : '')}{trNum > 0 ? <Link href='/task-reports'><a><strong>{trNum}</strong> איסופים הממתינים למשוב</a></Link> : ''}.
                 </Alert>
         }
 
-        if (!this.props.userData.isManager) {
+        if (!this.props.userData.admin) {
             return (
                 <div>
                 <Header />
@@ -48,7 +48,7 @@ class Index extends Component {
                 </div>
             );
         } else {
-            return <div>לוח בקרה של מנהל</div>;
+            return <div><Header /></div>;
         }
     }
 }

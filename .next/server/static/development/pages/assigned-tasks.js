@@ -219,7 +219,8 @@ function (_React$Component) {
             onClick: function onClick() {
               return _this2.props.dispatch({
                 type: 'OPEN_MODAL',
-                msg: 'TASK_CANCEL'
+                msg: 'TASK_CANCEL',
+                entries: _this2.props.entry
               });
             },
             color: 'outline-secondary',
@@ -425,7 +426,7 @@ function (_React$Component) {
     value: function render() {
       var pages;
 
-      if (!this.props.userData.isManager) {
+      if (!this.props.userData.admin) {
         var atNum = this.props.assignedTasks.length;
         var trNum = this.props.taskReports.length;
         pages = react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Nav"], {
@@ -464,7 +465,14 @@ function (_React$Component) {
             lineNumber: 41
           },
           __self: this
-        }, "\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E7\u05E8\u05D5\u05D1\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
+        }, "\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E7\u05E8\u05D5\u05D1\u05D9\u05DD ", atNum > 0 ? react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Badge"], {
+          variant: "secondary",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 41
+          },
+          __self: this
+        }, atNum) : '')), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/task-reports",
           __source: {
             fileName: _jsxFileName,
@@ -478,7 +486,14 @@ function (_React$Component) {
             lineNumber: 42
           },
           __self: this
-        }, "\u05DE\u05D9\u05DC\u05D5\u05D9 \u05DE\u05E9\u05D5\u05D1")));
+        }, "\u05DE\u05D9\u05DC\u05D5\u05D9 \u05DE\u05E9\u05D5\u05D1 ", trNum > 0 ? react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Badge"], {
+          variant: "secondary",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 42
+          },
+          __self: this
+        }, trNum) : '')));
       } else {
         pages = react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Nav"], {
           className: "mr-auto",
@@ -716,6 +731,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-bootstrap */ "react-bootstrap");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _dbActions_setAssignedTasks__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../dbActions/setAssignedTasks */ "./dbActions/setAssignedTasks.js");
 
 
 
@@ -724,6 +740,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _jsxFileName = "C:\\Users\\baram\\Git\\leket-go\\components\\TableBlock.js";
+
 
 
 
@@ -818,11 +835,13 @@ function (_React$Component) {
   }, {
     key: "assignTasks",
     value: function assignTasks() {
-      this.props.dispatch({
-        type: 'OPEN_MODAL',
-        msg: 'ASSIGN_TASKS_SUCCESS',
-        entries: this.state.selectedEntries
-      });
+      var taskIDs = [];
+
+      for (var taskID in this.state.selectedEntries) {
+        taskIDs.push(taskID);
+      }
+
+      Object(_dbActions_setAssignedTasks__WEBPACK_IMPORTED_MODULE_11__["default"])(this.props.dispatch, taskIDs, this.props.userData.uid, this.state.entrySelectedCounter, this.state.selectedEntries);
     }
   }, {
     key: "render",
@@ -837,13 +856,13 @@ function (_React$Component) {
           fixed: "bottom",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 82
+            lineNumber: 87
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["ButtonGroup"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 83
+            lineNumber: 88
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Button"], {
@@ -851,7 +870,7 @@ function (_React$Component) {
           variant: "primary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 84
+            lineNumber: 89
           },
           __self: this
         }, "\u05E9\u05D9\u05D1\u05D5\u05E5 ", this.state.entrySelectedCounter, " \u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Button"], {
@@ -859,7 +878,7 @@ function (_React$Component) {
           variant: "secondary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 85
+            lineNumber: 90
           },
           __self: this
         }, "\u05D1\u05D9\u05D8\u05D5\u05DC")));
@@ -871,25 +890,25 @@ function (_React$Component) {
           fixed: "bottom",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 91
+            lineNumber: 96
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 92
+            lineNumber: 97
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Row"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 93
+            lineNumber: 98
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 94
+            lineNumber: 99
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
@@ -898,7 +917,7 @@ function (_React$Component) {
           "aria-label": "Basic example",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 95
+            lineNumber: 100
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
@@ -906,7 +925,7 @@ function (_React$Component) {
           className: "btn btn-primary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 96
+            lineNumber: 101
           },
           __self: this
         }, "\u05D4\u05D5\u05E1\u05E4\u05EA \u05DE\u05E9\u05EA\u05DE\u05E9"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
@@ -914,20 +933,20 @@ function (_React$Component) {
           className: "btn btn-secondary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 97
+            lineNumber: 102
           },
           __self: this
         }, "\u05D4\u05D5\u05E1\u05E4\u05D4 \u05DE\u05E7\u05D5\u05D1\u05E5"))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 99
+            lineNumber: 104
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["InputGroup"], {
           className: "mb-3",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 100
+            lineNumber: 105
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"].Control, {
@@ -937,44 +956,44 @@ function (_React$Component) {
           drop: "up",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 101
+            lineNumber: 106
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 106
+            lineNumber: 111
           },
           __self: this
         }, "\u05E9\u05DD \u05DE\u05DC\u05D0"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 107
+            lineNumber: 112
           },
           __self: this
         }, "\u05EA\u05E2\u05D5\u05D3\u05EA \u05D6\u05D4\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 108
+            lineNumber: 113
           },
           __self: this
         }, "\u05DB\u05EA\u05D5\u05D1\u05EA \u05DE\u05D2\u05D5\u05E8\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 109
+            lineNumber: 114
           },
           __self: this
         }, "\u05DE\u05E1\u05E4\u05E8 \u05D8\u05DC\u05E4\u05D5\u05DF"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 110
+            lineNumber: 115
           },
           __self: this
         }, "\u05D3\u05D5\u05D0\u05E8 \u05D0\u05DC\u05E7\u05D8\u05E8\u05D5\u05E0\u05D9")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["FormControl"], {
           "aria-describedby": "basic-addon1",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 112
+            lineNumber: 117
           },
           __self: this
         }))))));
@@ -984,7 +1003,7 @@ function (_React$Component) {
         className: "table-responsive",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 121
+          lineNumber: 126
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Table"], {
@@ -992,19 +1011,19 @@ function (_React$Component) {
         responsive: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 122
+          lineNumber: 127
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("thead", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 123
+          lineNumber: 128
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tr", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 124
+          lineNumber: 129
         },
         __self: this
       }, this.state.tableColumns.map(function (column) {
@@ -1013,14 +1032,14 @@ function (_React$Component) {
           key: column,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 127
+            lineNumber: 132
           },
           __self: this
         }, _this2.state.columnNames[column]);
       }))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tbody", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 132
+          lineNumber: 137
         },
         __self: this
       }, this.props.data.map(function (entry) {
@@ -1037,7 +1056,7 @@ function (_React$Component) {
           tableColumns: _this2.state.tableColumns,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 138
+            lineNumber: 143
           },
           __self: this
         });
@@ -1078,6 +1097,139 @@ var firebaseConfig = {
 
 var fire = !firebase__WEBPACK_IMPORTED_MODULE_0___default.a.apps.length ? firebase__WEBPACK_IMPORTED_MODULE_0___default.a.initializeApp(firebaseConfig) : firebase__WEBPACK_IMPORTED_MODULE_0___default.a.app();
 /* harmony default export */ __webpack_exports__["default"] = (fire);
+
+/***/ }),
+
+/***/ "./dbActions/getAssignedTasks.js":
+/*!***************************************!*\
+  !*** ./dbActions/getAssignedTasks.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getAssigned; });
+/* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config/firebaseConfig */ "./config/firebaseConfig.js");
+
+function getAssigned(dispatch, uid) {
+  var db = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__["default"].firestore();
+  db.collection("tasks").where("volunteerUid", "==", uid).where("timestamp", ">", new Date()).get().then(function (querySnapshot) {
+    var tasks = [];
+    querySnapshot.forEach(function (doc) {
+      var task = doc.data();
+      task.id = doc.id;
+      tasks.push(task);
+    });
+    dispatch({
+      type: 'ASSIGNEDTASKS',
+      tasks: tasks
+    });
+  });
+}
+
+/***/ }),
+
+/***/ "./dbActions/setAssignedTasks.js":
+/*!***************************************!*\
+  !*** ./dbActions/setAssignedTasks.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return setAssignedTasks; });
+/* harmony import */ var _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/promise */ "./node_modules/@babel/runtime-corejs2/core-js/promise.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../config/firebaseConfig */ "./config/firebaseConfig.js");
+
+
+
+function sendCompletionMsg(dispatch, numOfFailures, numOfSuccesses, entrySelectedCounter, selectedEntries) {
+  console.log("test2", numOfSuccesses, numOfFailures, entrySelectedCounter);
+
+  if (numOfFailures == 0 && numOfSuccesses == entrySelectedCounter) {
+    dispatch({
+      type: 'OPEN_MODAL',
+      msg: 'ASSIGN_TASKS_SUCCESS',
+      entries: selectedEntries
+    });
+  }
+
+  if (numOfSuccesses == 0 && numOfFailures == entrySelectedCounter) {
+    dispatch({
+      type: 'OPEN_MODAL',
+      msg: 'ASSIGN_TASKS_FAILED',
+      entries: selectedEntries
+    });
+  }
+
+  if (numOfFailures > 0 && numOfSuccesses > 0) {
+    dispatch({
+      type: 'OPEN_MODAL',
+      msg: 'ASSIGN_TASKS_MIX',
+      entries: selectedEntries
+    });
+  }
+}
+
+function runTrans(dispatch, taskIDs, uid, entrySelectedCounter, selectedEntries, index, numOfSuccesses, numOfFailures, db) {
+  db.runTransaction(function (transaction) {
+    var taskID = taskIDs[index];
+    var task = db.collection("tasks").doc(taskID);
+    return transaction.get(task).then(function (taskSnapshot) {
+      if (!taskSnapshot.exists) {
+        throw "Could not find task with given ID: " + taskID;
+      }
+
+      var taskIsAvialable = taskSnapshot.data().volunteerUid == null ? true : false;
+
+      if (taskIsAvialable) {
+        transaction.update(task, {
+          volunteerUid: uid
+        });
+        return "Task was assigned to user successfully!";
+      } else {
+        return _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0___default.a.reject("Sorry! task was taken earlier.");
+      }
+    });
+  }).then(function (msg) {
+    index++;
+    console.log(msg);
+    numOfSuccesses++;
+    console.log("test", numOfSuccesses, numOfFailures, entrySelectedCounter);
+
+    if (index < entrySelectedCounter) {
+      runTrans(dispatch, taskIDs, uid, entrySelectedCounter, selectedEntries, index, numOfSuccesses, numOfFailures, db);
+    }
+
+    if (numOfFailures + numOfSuccesses == entrySelectedCounter) {
+      sendCompletionMsg(dispatch, numOfFailures, numOfSuccesses, entrySelectedCounter, selectedEntries);
+    }
+  }).catch(function (msg) {
+    index++;
+    console.log(msg);
+    numOfFailures++;
+    console.log("test", numOfSuccesses, numOfFailures, entrySelectedCounter);
+
+    if (index < entrySelectedCounter) {
+      runTrans(dispatch, taskIDs, uid, entrySelectedCounter, selectedEntries, index, numOfSuccesses, numOfFailures, db);
+    }
+
+    if (numOfFailures + numOfSuccesses == entrySelectedCounter) {
+      sendCompletionMsg(dispatch, numOfFailures, numOfSuccesses, entrySelectedCounter, selectedEntries);
+    }
+  });
+}
+
+function setAssignedTasks(dispatch, taskIDs, uid, entrySelectedCounter, selectedEntries) {
+  var db = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_1__["default"].firestore();
+  var numOfSuccesses = 0;
+  var numOfFailures = 0;
+  var index = 0;
+  runTrans(dispatch, taskIDs, uid, entrySelectedCounter, selectedEntries, index, numOfSuccesses, numOfFailures, db);
+}
 
 /***/ }),
 
@@ -1166,6 +1318,17 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "core
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/object/set-prototype-of */ "core-js/library/fn/object/set-prototype-of");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/promise.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/promise.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/promise */ "core-js/library/fn/promise");
 
 /***/ }),
 
@@ -1973,12 +2136,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _components_Header_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Header.js */ "./components/Header.js");
+/* harmony import */ var _dbActions_getAssignedTasks__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../dbActions/getAssignedTasks */ "./dbActions/getAssignedTasks.js");
 
 
 
 
 
 var _jsxFileName = "C:\\Users\\baram\\Git\\leket-go\\pages\\assigned-tasks.js";
+
 
 
 
@@ -1997,18 +2162,28 @@ function (_Component) {
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(Assigned_tasks, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var dispatch = this.props.dispatch;
+      var uid = this.props.userData.uid;
+
+      if (uid && dispatch) {
+        Object(_dbActions_getAssignedTasks__WEBPACK_IMPORTED_MODULE_10__["default"])(dispatch, uid);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 14
+          lineNumber: 23
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_Header_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 15
+          lineNumber: 24
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("main", {
@@ -2018,20 +2193,20 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 16
+          lineNumber: 25
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         className: "mb-4 mt-4",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 17
+          lineNumber: 26
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h2", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 18
+          lineNumber: 27
         },
         __self: this
       }, "\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E7\u05E8\u05D5\u05D1\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_TableBlock_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -2040,7 +2215,7 @@ function (_Component) {
         data: this.props.assignedTasks,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 20
+          lineNumber: 29
         },
         __self: this
       })));
@@ -2164,6 +2339,17 @@ module.exports = require("core-js/library/fn/object/keys");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/object/set-prototype-of");
+
+/***/ }),
+
+/***/ "core-js/library/fn/promise":
+/*!*********************************************!*\
+  !*** external "core-js/library/fn/promise" ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/promise");
 
 /***/ }),
 

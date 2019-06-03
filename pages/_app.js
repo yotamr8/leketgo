@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
             break;
         case 'LOGIN':
             return {
-                ...state, isLoggedIn: true, loginErr: false, userData: { ...action.user, uid:action.uid }, isManager: action.user.admin };
+                ...state, isLoggedIn: true, loginErr: false, userData: { ...action.user, uid:action.uid }};
             console.log("logged in store")
             break;
         case 'LOGIN_ERR':
@@ -53,6 +53,7 @@ var initialState = {
     unassignedTasks: [],
     assignedTasks: [],
     taskReports: [],
+    regionalTasks: [],
     users: []
 }
 

@@ -26,7 +26,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\leketgo\\components\\Entry.js";
+var _jsxFileName = "C:\\Users\\baram\\Git\\leket-go\\components\\Entry.js";
 
 
 
@@ -124,7 +124,8 @@ function (_React$Component) {
             onClick: function onClick() {
               return _this2.props.dispatch({
                 type: 'OPEN_MODAL',
-                msg: 'TASK_CANCEL'
+                msg: 'TASK_CANCEL',
+                entries: _this2.props.entry
               });
             },
             color: 'outline-secondary',
@@ -279,7 +280,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\leketgo\\components\\Header.js";
+var _jsxFileName = "C:\\Users\\baram\\Git\\leket-go\\components\\Header.js";
 
 
 
@@ -328,7 +329,7 @@ function (_React$Component) {
     value: function render() {
       var pages;
 
-      if (!this.props.userData.isManager) {
+      if (!this.props.userData.admin) {
         var atNum = this.props.assignedTasks.length;
         var trNum = this.props.taskReports.length;
         pages = react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Nav"], {
@@ -367,7 +368,14 @@ function (_React$Component) {
             lineNumber: 41
           },
           __self: this
-        }, "\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E7\u05E8\u05D5\u05D1\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
+        }, "\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E7\u05E8\u05D5\u05D1\u05D9\u05DD ", atNum > 0 ? react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Badge"], {
+          variant: "secondary",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 41
+          },
+          __self: this
+        }, atNum) : '')), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/task-reports",
           __source: {
             fileName: _jsxFileName,
@@ -381,7 +389,14 @@ function (_React$Component) {
             lineNumber: 42
           },
           __self: this
-        }, "\u05DE\u05D9\u05DC\u05D5\u05D9 \u05DE\u05E9\u05D5\u05D1")));
+        }, "\u05DE\u05D9\u05DC\u05D5\u05D9 \u05DE\u05E9\u05D5\u05D1 ", trNum > 0 ? react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Badge"], {
+          variant: "secondary",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 42
+          },
+          __self: this
+        }, trNum) : '')));
       } else {
         pages = react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Nav"], {
           className: "mr-auto",
@@ -617,6 +632,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Entry__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/Entry */ "./components/Entry.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
+/* harmony import */ var _dbActions_setAssignedTasks__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../dbActions/setAssignedTasks */ "./dbActions/setAssignedTasks.js");
 
 
 
@@ -624,7 +640,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\leketgo\\components\\TableBlock.js";
+var _jsxFileName = "C:\\Users\\baram\\Git\\leket-go\\components\\TableBlock.js";
+
 
 
 
@@ -719,11 +736,13 @@ function (_React$Component) {
   }, {
     key: "assignTasks",
     value: function assignTasks() {
-      this.props.dispatch({
-        type: 'OPEN_MODAL',
-        msg: 'ASSIGN_TASKS_SUCCESS',
-        entries: this.state.selectedEntries
-      });
+      var taskIDs = [];
+
+      for (var taskID in this.state.selectedEntries) {
+        taskIDs.push(taskID);
+      }
+
+      Object(_dbActions_setAssignedTasks__WEBPACK_IMPORTED_MODULE_11__["default"])(this.props.dispatch, taskIDs, this.props.userData.uid, this.state.entrySelectedCounter, this.state.selectedEntries);
     }
   }, {
     key: "render",
@@ -738,13 +757,13 @@ function (_React$Component) {
           fixed: "bottom",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 82
+            lineNumber: 87
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["ButtonGroup"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 83
+            lineNumber: 88
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Button"], {
@@ -752,7 +771,7 @@ function (_React$Component) {
           variant: "primary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 84
+            lineNumber: 89
           },
           __self: this
         }, "\u05E9\u05D9\u05D1\u05D5\u05E5 ", this.state.entrySelectedCounter, " \u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Button"], {
@@ -760,7 +779,7 @@ function (_React$Component) {
           variant: "secondary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 85
+            lineNumber: 90
           },
           __self: this
         }, "\u05D1\u05D9\u05D8\u05D5\u05DC")));
@@ -772,25 +791,25 @@ function (_React$Component) {
           fixed: "bottom",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 91
+            lineNumber: 96
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 92
+            lineNumber: 97
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Row"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 93
+            lineNumber: 98
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 94
+            lineNumber: 99
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
@@ -799,7 +818,7 @@ function (_React$Component) {
           "aria-label": "Basic example",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 95
+            lineNumber: 100
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
@@ -807,7 +826,7 @@ function (_React$Component) {
           className: "btn btn-primary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 96
+            lineNumber: 101
           },
           __self: this
         }, "\u05D4\u05D5\u05E1\u05E4\u05EA \u05DE\u05E9\u05EA\u05DE\u05E9"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
@@ -815,20 +834,20 @@ function (_React$Component) {
           className: "btn btn-secondary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 97
+            lineNumber: 102
           },
           __self: this
         }, "\u05D4\u05D5\u05E1\u05E4\u05D4 \u05DE\u05E7\u05D5\u05D1\u05E5"))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 99
+            lineNumber: 104
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["InputGroup"], {
           className: "mb-3",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 100
+            lineNumber: 105
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"].Control, {
@@ -838,44 +857,44 @@ function (_React$Component) {
           drop: "up",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 101
+            lineNumber: 106
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 106
+            lineNumber: 111
           },
           __self: this
         }, "\u05E9\u05DD \u05DE\u05DC\u05D0"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 107
+            lineNumber: 112
           },
           __self: this
         }, "\u05EA\u05E2\u05D5\u05D3\u05EA \u05D6\u05D4\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 108
+            lineNumber: 113
           },
           __self: this
         }, "\u05DB\u05EA\u05D5\u05D1\u05EA \u05DE\u05D2\u05D5\u05E8\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 109
+            lineNumber: 114
           },
           __self: this
         }, "\u05DE\u05E1\u05E4\u05E8 \u05D8\u05DC\u05E4\u05D5\u05DF"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 110
+            lineNumber: 115
           },
           __self: this
         }, "\u05D3\u05D5\u05D0\u05E8 \u05D0\u05DC\u05E7\u05D8\u05E8\u05D5\u05E0\u05D9")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["FormControl"], {
           "aria-describedby": "basic-addon1",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 112
+            lineNumber: 117
           },
           __self: this
         }))))));
@@ -885,7 +904,7 @@ function (_React$Component) {
         className: "table-responsive",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 121
+          lineNumber: 126
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Table"], {
@@ -893,19 +912,19 @@ function (_React$Component) {
         responsive: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 122
+          lineNumber: 127
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("thead", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 123
+          lineNumber: 128
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tr", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 124
+          lineNumber: 129
         },
         __self: this
       }, this.state.tableColumns.map(function (column) {
@@ -914,14 +933,14 @@ function (_React$Component) {
           key: column,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 127
+            lineNumber: 132
           },
           __self: this
         }, _this2.state.columnNames[column]);
       }))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tbody", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 132
+          lineNumber: 137
         },
         __self: this
       }, this.props.data.map(function (entry) {
@@ -938,7 +957,7 @@ function (_React$Component) {
           tableColumns: _this2.state.tableColumns,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 138
+            lineNumber: 143
           },
           __self: this
         });
@@ -979,6 +998,139 @@ var firebaseConfig = {
 
 var fire = !firebase__WEBPACK_IMPORTED_MODULE_0___default.a.apps.length ? firebase__WEBPACK_IMPORTED_MODULE_0___default.a.initializeApp(firebaseConfig) : firebase__WEBPACK_IMPORTED_MODULE_0___default.a.app();
 /* harmony default export */ __webpack_exports__["default"] = (fire);
+
+/***/ }),
+
+/***/ "./dbActions/getTaskReports.js":
+/*!*************************************!*\
+  !*** ./dbActions/getTaskReports.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getTaskReports; });
+/* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config/firebaseConfig */ "./config/firebaseConfig.js");
+
+function getTaskReports(dispatch, uid) {
+  var db = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__["default"].firestore();
+  db.collection("tasks").where("volunteerUid", "==", uid).where("timestamp", "<", new Date()).where("reportFilled", "==", false).get().then(function (querySnapshot) {
+    var tasks = [];
+    querySnapshot.forEach(function (doc) {
+      var task = doc.data();
+      task.id = doc.id;
+      tasks.push(task);
+    });
+    dispatch({
+      type: 'TASKREPORTS',
+      tasks: tasks
+    });
+  });
+}
+
+/***/ }),
+
+/***/ "./dbActions/setAssignedTasks.js":
+/*!***************************************!*\
+  !*** ./dbActions/setAssignedTasks.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return setAssignedTasks; });
+/* harmony import */ var _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/promise */ "./node_modules/@babel/runtime-corejs2/core-js/promise.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../config/firebaseConfig */ "./config/firebaseConfig.js");
+
+
+
+function sendCompletionMsg(dispatch, numOfFailures, numOfSuccesses, entrySelectedCounter, selectedEntries) {
+  console.log("test2", numOfSuccesses, numOfFailures, entrySelectedCounter);
+
+  if (numOfFailures == 0 && numOfSuccesses == entrySelectedCounter) {
+    dispatch({
+      type: 'OPEN_MODAL',
+      msg: 'ASSIGN_TASKS_SUCCESS',
+      entries: selectedEntries
+    });
+  }
+
+  if (numOfSuccesses == 0 && numOfFailures == entrySelectedCounter) {
+    dispatch({
+      type: 'OPEN_MODAL',
+      msg: 'ASSIGN_TASKS_FAILED',
+      entries: selectedEntries
+    });
+  }
+
+  if (numOfFailures > 0 && numOfSuccesses > 0) {
+    dispatch({
+      type: 'OPEN_MODAL',
+      msg: 'ASSIGN_TASKS_MIX',
+      entries: selectedEntries
+    });
+  }
+}
+
+function runTrans(dispatch, taskIDs, uid, entrySelectedCounter, selectedEntries, index, numOfSuccesses, numOfFailures, db) {
+  db.runTransaction(function (transaction) {
+    var taskID = taskIDs[index];
+    var task = db.collection("tasks").doc(taskID);
+    return transaction.get(task).then(function (taskSnapshot) {
+      if (!taskSnapshot.exists) {
+        throw "Could not find task with given ID: " + taskID;
+      }
+
+      var taskIsAvialable = taskSnapshot.data().volunteerUid == null ? true : false;
+
+      if (taskIsAvialable) {
+        transaction.update(task, {
+          volunteerUid: uid
+        });
+        return "Task was assigned to user successfully!";
+      } else {
+        return _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0___default.a.reject("Sorry! task was taken earlier.");
+      }
+    });
+  }).then(function (msg) {
+    index++;
+    console.log(msg);
+    numOfSuccesses++;
+    console.log("test", numOfSuccesses, numOfFailures, entrySelectedCounter);
+
+    if (index < entrySelectedCounter) {
+      runTrans(dispatch, taskIDs, uid, entrySelectedCounter, selectedEntries, index, numOfSuccesses, numOfFailures, db);
+    }
+
+    if (numOfFailures + numOfSuccesses == entrySelectedCounter) {
+      sendCompletionMsg(dispatch, numOfFailures, numOfSuccesses, entrySelectedCounter, selectedEntries);
+    }
+  }).catch(function (msg) {
+    index++;
+    console.log(msg);
+    numOfFailures++;
+    console.log("test", numOfSuccesses, numOfFailures, entrySelectedCounter);
+
+    if (index < entrySelectedCounter) {
+      runTrans(dispatch, taskIDs, uid, entrySelectedCounter, selectedEntries, index, numOfSuccesses, numOfFailures, db);
+    }
+
+    if (numOfFailures + numOfSuccesses == entrySelectedCounter) {
+      sendCompletionMsg(dispatch, numOfFailures, numOfSuccesses, entrySelectedCounter, selectedEntries);
+    }
+  });
+}
+
+function setAssignedTasks(dispatch, taskIDs, uid, entrySelectedCounter, selectedEntries) {
+  var db = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_1__["default"].firestore();
+  var numOfSuccesses = 0;
+  var numOfFailures = 0;
+  var index = 0;
+  runTrans(dispatch, taskIDs, uid, entrySelectedCounter, selectedEntries, index, numOfSuccesses, numOfFailures, db);
+}
 
 /***/ }),
 
@@ -58674,10 +58826,10 @@ exports.formatWithValidation = formatWithValidation;
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Ftask-reports&absolutePagePath=C%3A%5CUsers%5Cmwilchek%5CDocuments%5CGitHub%5Cleketgo%5Cpages%5Ctask-reports.js!./":
-/*!*********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Ftask-reports&absolutePagePath=C%3A%5CUsers%5Cmwilchek%5CDocuments%5CGitHub%5Cleketgo%5Cpages%5Ctask-reports.js ***!
-  \*********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Ftask-reports&absolutePagePath=C%3A%5CUsers%5Cbaram%5CGit%5Cleket-go%5Cpages%5Ctask-reports.js!./":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Ftask-reports&absolutePagePath=C%3A%5CUsers%5Cbaram%5CGit%5Cleket-go%5Cpages%5Ctask-reports.js ***!
+  \****************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -59230,12 +59382,12 @@ module.exports = __webpack_require__(/*! ./dist/client/link */ "./node_modules/n
 
 /***/ "./node_modules/object-assign/index.js":
 /*!***************************************************************************************************!*\
-  !*** delegated ./node_modules/object-assign/index.js from dll-reference dll_e9ced4903ed7b2c99d94 ***!
+  !*** delegated ./node_modules/object-assign/index.js from dll-reference dll_81bd344d8f06700801e0 ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_e9ced4903ed7b2c99d94 */ "dll-reference dll_e9ced4903ed7b2c99d94"))("./node_modules/object-assign/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_81bd344d8f06700801e0 */ "dll-reference dll_81bd344d8f06700801e0"))("./node_modules/object-assign/index.js");
 
 /***/ }),
 
@@ -62753,12 +62905,12 @@ module.exports = exports['default'];
 
 /***/ "./node_modules/prop-types/checkPropTypes.js":
 /*!*********************************************************************************************************!*\
-  !*** delegated ./node_modules/prop-types/checkPropTypes.js from dll-reference dll_e9ced4903ed7b2c99d94 ***!
+  !*** delegated ./node_modules/prop-types/checkPropTypes.js from dll-reference dll_81bd344d8f06700801e0 ***!
   \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_e9ced4903ed7b2c99d94 */ "dll-reference dll_e9ced4903ed7b2c99d94"))("./node_modules/prop-types/checkPropTypes.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_81bd344d8f06700801e0 */ "dll-reference dll_81bd344d8f06700801e0"))("./node_modules/prop-types/checkPropTypes.js");
 
 /***/ }),
 
@@ -63366,12 +63518,12 @@ if (true) {
 
 /***/ "./node_modules/prop-types/lib/ReactPropTypesSecret.js":
 /*!*******************************************************************************************************************!*\
-  !*** delegated ./node_modules/prop-types/lib/ReactPropTypesSecret.js from dll-reference dll_e9ced4903ed7b2c99d94 ***!
+  !*** delegated ./node_modules/prop-types/lib/ReactPropTypesSecret.js from dll-reference dll_81bd344d8f06700801e0 ***!
   \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_e9ced4903ed7b2c99d94 */ "dll-reference dll_e9ced4903ed7b2c99d94"))("./node_modules/prop-types/lib/ReactPropTypesSecret.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_81bd344d8f06700801e0 */ "dll-reference dll_81bd344d8f06700801e0"))("./node_modules/prop-types/lib/ReactPropTypesSecret.js");
 
 /***/ }),
 
@@ -72538,12 +72690,12 @@ function mapContextToProps(maybeOpts, mapToProps, Component) {
 
 /***/ "./node_modules/react-dom/index.js":
 /*!***********************************************************************************************!*\
-  !*** delegated ./node_modules/react-dom/index.js from dll-reference dll_e9ced4903ed7b2c99d94 ***!
+  !*** delegated ./node_modules/react-dom/index.js from dll-reference dll_81bd344d8f06700801e0 ***!
   \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_e9ced4903ed7b2c99d94 */ "dll-reference dll_e9ced4903ed7b2c99d94"))("./node_modules/react-dom/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_81bd344d8f06700801e0 */ "dll-reference dll_81bd344d8f06700801e0"))("./node_modules/react-dom/index.js");
 
 /***/ }),
 
@@ -78282,12 +78434,12 @@ var classNamesShape =  true ? prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.
 
 /***/ "./node_modules/react/index.js":
 /*!*******************************************************************************************!*\
-  !*** delegated ./node_modules/react/index.js from dll-reference dll_e9ced4903ed7b2c99d94 ***!
+  !*** delegated ./node_modules/react/index.js from dll-reference dll_81bd344d8f06700801e0 ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_e9ced4903ed7b2c99d94 */ "dll-reference dll_e9ced4903ed7b2c99d94"))("./node_modules/react/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_81bd344d8f06700801e0 */ "dll-reference dll_81bd344d8f06700801e0"))("./node_modules/react/index.js");
 
 /***/ }),
 
@@ -81183,12 +81335,12 @@ module.exports = warning;
 
 /***/ "./node_modules/webpack/buildin/global.js":
 /*!******************************************************************************************************!*\
-  !*** delegated ./node_modules/webpack/buildin/global.js from dll-reference dll_e9ced4903ed7b2c99d94 ***!
+  !*** delegated ./node_modules/webpack/buildin/global.js from dll-reference dll_81bd344d8f06700801e0 ***!
   \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_e9ced4903ed7b2c99d94 */ "dll-reference dll_e9ced4903ed7b2c99d94"))("./node_modules/webpack/buildin/global.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_81bd344d8f06700801e0 */ "dll-reference dll_81bd344d8f06700801e0"))("./node_modules/webpack/buildin/global.js");
 
 /***/ }),
 
@@ -81281,12 +81433,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_TableBlock_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/TableBlock.js */ "./components/TableBlock.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _components_Header_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/Header.js */ "./components/Header.js");
+/* harmony import */ var _dbActions_getTaskReports__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../dbActions/getTaskReports */ "./dbActions/getTaskReports.js");
 
 
 
 
 
-var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\leketgo\\pages\\task-reports.js";
+var _jsxFileName = "C:\\Users\\baram\\Git\\leket-go\\pages\\task-reports.js";
+
 
 
 
@@ -81305,19 +81459,29 @@ function (_Component) {
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(Task_reports, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var dispatch = this.props.dispatch;
+      var uid = this.props.userData.uid;
+
+      if (uid && dispatch) {
+        Object(_dbActions_getTaskReports__WEBPACK_IMPORTED_MODULE_10__["default"])(dispatch, uid);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       console.log(this.props);
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 11
+          lineNumber: 21
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_Header_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 12
+          lineNumber: 22
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("main", {
@@ -81327,20 +81491,20 @@ function (_Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 13
+          lineNumber: 23
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
         className: "mb-4 mt-4",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 14
+          lineNumber: 24
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h2", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 15
+          lineNumber: 25
         },
         __self: this
       }, "\u05DE\u05D9\u05DC\u05D5\u05D9 \u05DE\u05E9\u05D5\u05D1")), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_TableBlock_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -81349,7 +81513,7 @@ function (_Component) {
         type: "tasks",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 17
+          lineNumber: 27
         },
         __self: this
       })));
@@ -81365,28 +81529,28 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 0:
-/*!*************************************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Ftask-reports&absolutePagePath=C%3A%5CUsers%5Cmwilchek%5CDocuments%5CGitHub%5Cleketgo%5Cpages%5Ctask-reports.js ***!
-  \*************************************************************************************************************************************************************/
+/***/ 7:
+/*!********************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2Ftask-reports&absolutePagePath=C%3A%5CUsers%5Cbaram%5CGit%5Cleket-go%5Cpages%5Ctask-reports.js ***!
+  \********************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Ftask-reports&absolutePagePath=C%3A%5CUsers%5Cmwilchek%5CDocuments%5CGitHub%5Cleketgo%5Cpages%5Ctask-reports.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Ftask-reports&absolutePagePath=C%3A%5CUsers%5Cmwilchek%5CDocuments%5CGitHub%5Cleketgo%5Cpages%5Ctask-reports.js!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Ftask-reports&absolutePagePath=C%3A%5CUsers%5Cbaram%5CGit%5Cleket-go%5Cpages%5Ctask-reports.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Ftask-reports&absolutePagePath=C%3A%5CUsers%5Cbaram%5CGit%5Cleket-go%5Cpages%5Ctask-reports.js!./");
 
 
 /***/ }),
 
-/***/ "dll-reference dll_e9ced4903ed7b2c99d94":
+/***/ "dll-reference dll_81bd344d8f06700801e0":
 /*!*******************************************!*\
-  !*** external "dll_e9ced4903ed7b2c99d94" ***!
+  !*** external "dll_81bd344d8f06700801e0" ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = dll_e9ced4903ed7b2c99d94;
+module.exports = dll_81bd344d8f06700801e0;
 
 /***/ })
 
-},[[0,"static/runtime/webpack.js","styles"]]]);
+},[[7,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=task-reports.js.map

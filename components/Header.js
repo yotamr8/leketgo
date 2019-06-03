@@ -2,7 +2,7 @@ import Head from 'next/head'
 import React from 'react'
 import { connect } from 'react-redux'
 import fire from '../config/firebaseConfig'
-import {Nav, Navbar, NavItem, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
+import {Badge, Nav, Navbar, NavItem, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
 import Link from 'next/link'
 
 class Header extends React.Component {
@@ -32,14 +32,14 @@ class Header extends React.Component {
     
     render() {
         let pages;
-        if (!this.props.userData.isManager) {
+        if (!this.props.userData.admin) {
             let atNum = this.props.assignedTasks.length;
             let trNum = this.props.taskReports.length;
             pages = 
             <Nav className="mr-auto">
                 <Link className='navlink' href="/"><a className='nav-link'>שיבוץ לאיסופים</a></Link>
-                <Link href="/assigned-tasks"><a className='nav-link'>איסופים קרובים</a></Link>
-                <Link href="/task-reports"><a className='nav-link'>מילוי משוב</a></Link>
+                <Link href="/assigned-tasks"><a className='nav-link'>איסופים קרובים {atNum > 0 ? <Badge variant="secondary">{atNum}</Badge> : ''}</a></Link>
+                <Link href="/task-reports"><a className='nav-link'>מילוי משוב {trNum > 0 ? <Badge variant="secondary">{trNum}</Badge> : ''}</a></Link>
             </Nav>;
         } else {
             pages = 
