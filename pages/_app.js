@@ -5,6 +5,7 @@ import App, {Container} from "next/app"
 import withRedux from 'next-redux-wrapper'
 import fire from '../config/firebaseConfig'
 import ModalBlock from '../components/ModalBlock.js'
+import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from "react-router-dom";
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -18,7 +19,8 @@ const reducer = (state = initialState, action) => {
             return { ...state, taskReports: action.tasks };
             break;
         case 'LOGIN':
-            return { ...state, isLoggedIn: true, loginErr: false, userData: action.user, isManager: (action.user.admin == 'TRUE')? true : false };
+            return {
+                ...state, isLoggedIn: true, loginErr: false, userData: { ...action.user, uid:action.uid }, isManager: (action.user.admin == 'TRUE')? true : false };
             console.log("logged in store")
             break;
         case 'LOGIN_ERR':
@@ -42,7 +44,7 @@ const reducer = (state = initialState, action) => {
 
 var initialState = {
     loginErr: false,
-    isLoggedIn: true,
+    isLoggedIn: false,
     userData: {
     },
     modal: {

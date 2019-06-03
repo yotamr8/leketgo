@@ -1,7 +1,8 @@
 import React from 'react'
 import Entry from '../components/Entry'
 import { connect } from "react-redux"
-import {Table, Button, ButtonGroup, InputGroup, Form, Col, Row, DropdownButton, Dropdown, FormControl, Navbar} from 'react-bootstrap'
+import { Table, Button, ButtonGroup, InputGroup, Form, Col, Row, DropdownButton, Dropdown, FormControl, Navbar } from 'react-bootstrap'
+import setAssignedTasks from '../dbActions/setAssignedTasks'
 
 class TableBlock extends React.Component {
 	constructor(props) {
@@ -72,7 +73,11 @@ class TableBlock extends React.Component {
 	}
 
 	assignTasks() {
-		this.props.dispatch({type: 'OPEN_MODAL', msg: 'ASSIGN_TASKS_SUCCESS', entries: this.state.selectedEntries});
+        var taskIDs = [];
+        for (var taskID in this.state.selectedEntries) {
+            taskIDs.push(taskID)         
+        }
+        setAssignedTasks(this.props.dispatch, taskIDs, this.props.userData.uid, this.state.entrySelectedCounter, this.state.selectedEntries)
 	}
 
 	render() {

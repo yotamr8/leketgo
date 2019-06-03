@@ -3,8 +3,18 @@ import "../statics/styles.scss"
 import TableBlock from '../components/TableBlock.js'
 import { connect } from "react-redux"
 import Header from '../components/Header.js'
+import getTaskReports from '../dbActions/getTaskReports'
 
 class Task_reports extends Component {
+
+    componentDidMount() {
+        var { dispatch } = this.props
+        var { uid } = this.props.userData
+        if (uid && dispatch) {
+            getTaskReports(dispatch, uid);
+        }
+    }
+
     render() {
         console.log(this.props);
         return (

@@ -3,6 +3,10 @@ import "../statics/styles.scss"
 import { connect } from "react-redux"
 import fire from '../config/firebaseConfig'
 import Header from '../components/Header.js'
+import Router from 'next/router'
+import getUnassigned from '../dbActions/getUnassignedTasks'
+import getAssigned from '../dbActions/getAssignedTasks'
+import getTaskReports from '../dbActions/getTaskReports'
 
 class Login extends Component {
     state = {
@@ -17,10 +21,53 @@ class Login extends Component {
     }
 
     handleSubmit = (e) => {
+        const db = fire.firestore();
+        fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password
+        ).then(
+            (user) => {
+                db.collection("users").doc(user.user.uid).get().then((doc) => {
+
+                    this.props.dispatch({ type: 'LOGIN', user: doc.data(), uid: user.user.uid });
+
+                    getUnassigned(this.props.dispatch, doc.data().region);
+
+                    getAssigned(this.props.dispatch, user.user.uid);
+                    
+                    getTaskReports(this.props.dispatch, user.user.uid);
+
+                    Router.push('/');
+
+                })
+            }).catch(
+                (err) => {
+                    this.props.dispatch({ type: 'LOGIN_ERR', msg: err.message });
+                });
+    }
+
+    
+    static async getInitialProps({ res }) {
+        // TODO - not working
+        var user = fire.auth().currentUser;
+        //console.log(this.props)//(function (user) {
+            if (user) {
+                console.log(user)
+                // TODO add dispatch login for user data????
+                if (res) {
+                    res.writeHead(302, {
+                        Location: '/'
+                    })
+                    res.end()                    
+                } else {
+                    Router.push('/')
+                }
+                return {}
+            }
+        //});
         
     }
 
     render() {
+        console.log(this.props)
         return (
             <div>
                 <Header isLogin={true} />

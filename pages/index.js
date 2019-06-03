@@ -1,4 +1,5 @@
 import React from 'react'
+import Router from 'next/router'
 import "../statics/styles.scss"
 import TableBlock from '../components/TableBlock.js'
 import { Component } from "react"
@@ -7,58 +8,19 @@ import {Alert} from 'react-bootstrap'
 import Link from 'next/link'
 import fire from '../config/firebaseConfig'
 import Header from '../components/Header.js'
+import refresh4User from '../dbActions/refresh4User'
 
 class Index extends Component {
 
     componentDidMount() {
-        this.handleSubmit();
-    }
-
-    handleSubmit = (e) => {
-        const db = fire.firestore();
-        fire.auth().signInWithEmailAndPassword("matanwilchek@gmail.com", "111111"
-        ).then(
-            (user) => {
-                db.collection("users").doc(user.user.uid).get().then((doc) => {
-                    this.props.dispatch({ type: 'LOGIN', user: doc.data() });
-                    db.collection("tasks").where("region", "==", doc.data().region).where("volunteerUid", "==", null).get()
-                        .then((querySnapshot) => {
-                            var tasks = [];
-                            querySnapshot.forEach(function (doc) {
-                                var task = doc.data();
-                                task.id = doc.id;
-                                tasks.push(task);
-                            });
-                            this.props.dispatch({ type: 'UNASSIGNEDTASKS', tasks: tasks });
-                        });
-                    db.collection("tasks").where("volunteerUid", "==", user.user.uid).where("timestamp", ">", new Date()).get()
-                        .then((querySnapshot) => {
-                            var tasks = [];
-                            querySnapshot.forEach(function (doc) {
-                                var task = doc.data();
-                                task.id = doc.id;
-                                tasks.push(task);
-                            });
-                            this.props.dispatch({ type: 'ASSIGNEDTASKS', tasks: tasks });
-                        }); //reportFilled
-                    db.collection("tasks").where("volunteerUid", "==", user.user.uid)
-                        .where("timestamp", "<", new Date())
-                        .where("reportFilled", "==", false).get()
-                        .then((querySnapshot) => {
-                            var tasks = [];
-                            querySnapshot.forEach(function (doc) {
-                                var task = doc.data();
-                                task.id = doc.id;
-                                tasks.push(task);
-                            });
-                            this.props.dispatch({ type: 'TASKREPORTS', tasks: tasks });
-                        });
-                })
-
-            }).catch(
-            (err) => {
-                this.props.dispatch({ type: 'LOGIN_ERR', msg: err.message });
-            });
+        var { dispatch } = this.props
+        var { region } = this.props.userData
+        var { uid } = this.props.userData
+        if (region && uid && dispatch) {
+            refresh4User(dispatch, region, uid);
+        } else {
+            Router.push('/login');
+        }
     }
     
     render() {

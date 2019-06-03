@@ -62,7 +62,7 @@ class Entry extends React.Component {
                         text: 'הערות'
                     },
                     {
-                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_CANCEL' }),
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_CANCEL', entries: this.props.entry }),
                         color: 'outline-secondary',
                         text: 'הסרה'
                     },

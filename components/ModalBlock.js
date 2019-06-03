@@ -2,6 +2,8 @@ import Link from 'next/link'
 import React from 'react'
 import { connect } from 'react-redux'
 import {Modal, ModalDialog, Button, Form, FormControl, Col, InputGroup} from 'react-bootstrap'
+import setUndoTask from '../dbActions/setUndoTask'
+import refresh4User from '../dbActions/refresh4User'
 
 class ModalBlock extends React.Component {
     render() {
@@ -11,6 +13,26 @@ class ModalBlock extends React.Component {
         var buttons = [];
         
         switch (modal.msg) {
+            case 'ASSIGN_TASKS_MIX':
+                title = 'הצלחה חלקית';
+                body = <span>                   חלק מהאיסופים שבחרת שובצו בהצלחה, וחלק לא! ניתן לראות לאילו איסופים שובצת בעמוד <Link href="assigned-tasks"><a onClick={() => this.props.dispatch({ type: 'CLOSE_MODAL' })}>איסופים קרובים</a></Link>.</span>;
+                buttons = [
+                    {
+                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        color: 'secondary',
+                        text: 'סגירה'
+                    }];
+                break;
+            case 'ASSIGN_TASKS_FAILED':
+                title = 'כשלון בשיבוץ האיסופים';
+                body = <span>{Object.keys(modal.entries).length}                     שיבוץ האיסופים נכשל! אנא נסה להשתבץ לאיסופים אחרים. </span>;
+                buttons = [
+                    {
+                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        color: 'secondary',
+                        text: 'סגירה'
+                    }];
+                break;
             case 'ASSIGN_TASKS_SUCCESS':
                 title = 'הצלחה';
                 body = <span>{Object.keys(modal.entries).length}                     האיסופים שובצו בהצלחה! ניתן לראות את כל השיבוצים שלך בעמוד <Link href="assigned-tasks"><a onClick={() => this.props.dispatch({ type: 'CLOSE_MODAL' })}>איסופים קרובים</a></Link>.</span>;
@@ -145,7 +167,12 @@ class ModalBlock extends React.Component {
                 body = <div>...</div>;
                 buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => {
+                            console.log(modal.entries.id)
+                            setUndoTask(modal.entries.id)
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                            refresh4User(this.props.dispatch, this.props.userData.region, this.props.userData.uid);
+                        },
                         color: 'danger',
                         text: 'הסרה'
                     },

@@ -3,10 +3,19 @@ import "../statics/styles.scss"
 import TableBlock from '../components/TableBlock.js'
 import { connect } from "react-redux"
 import Header from '../components/Header.js'
+import getAssigned from '../dbActions/getAssignedTasks'
 
 class Assigned_tasks extends Component {
     constructor(props){
         super(props);
+    }
+
+    componentDidMount() {
+        var { dispatch } = this.props
+        var { uid } = this.props.userData
+        if (uid && dispatch) {
+            getAssigned(dispatch, uid);
+        }
     }
 
     render() {
