@@ -96,7 +96,7 @@ class Personal_information extends Component {
                                     </Form.Text>
                                 </Form.Group>
                             </Form.Row>
-                            <Navbar fixed='bottom'>
+                            <Navbar bg='light' fixed='bottom'>
                                 <Button variant="primary" type="submit">
                                     שמירת שינויים
                                 </Button>

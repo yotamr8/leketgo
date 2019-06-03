@@ -23,7 +23,9 @@ class TableBlock extends React.Component {
 				'region': 'אזור',
 				'email': 'דוא"ל',
 				'tz': 'תעודת זהות',
-				'street': 'רחוב'
+				'street': 'רחוב',
+				'contactName': 'איש קשר',
+				'contactNumber': 'טלפון'
 			}
 		};
 		this.selectCallback = this.selectCallback.bind(this);
@@ -34,15 +36,15 @@ class TableBlock extends React.Component {
 	getTableColumns() {
 		switch (this.props.page) {
 			case 'index':
-				return ['date', 'street', 'time', 'city', 'name'];
+				return ['date', 'time', 'city', 'name'];
 			case 'assignedTasks':
-				return ['date', 'street', 'city', 'name', 'actions'];
+				return ['date', 'time', 'street', 'city', 'name', 'contactName', 'contactNumber', 'actions'];
 			case 'taskReports':
 				return ['date', 'street', 'city', 'name', 'actions'];
 			case 'adminUsers':
 				return ['tz', 'firstName', 'lastName', 'email', 'phone', 'region', 'actions'];
 			case 'adminTasks':
-					return ['actions', 'date', 'street', 'city', 'name'];
+					return ['date', 'time', 'street', 'city', 'name', 'actions'];
 			default:
 				break;
 		}

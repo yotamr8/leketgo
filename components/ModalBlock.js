@@ -115,6 +115,11 @@ class ModalBlock extends React.Component {
                 buttons = [
                     {
                         onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        color: 'primary',
+                        text: 'שליחה'
+                    },
+                    {
+                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
                         color: 'secondary',
                         text: 'סגירה'
                     }];
@@ -164,7 +169,7 @@ class ModalBlock extends React.Component {
                 break;
             case 'TASK_CANCEL':
                 title = 'הסרת שיבוץ';
-                body = <div>...</div>;
+                body = 'הסרת השיבוץ תחזיר את משימת האיסוף לרשימת המשימות הפנויות.';
                 buttons = [
                     {
                         onClick: () => {
@@ -251,6 +256,22 @@ class ModalBlock extends React.Component {
                             text: 'ביטול'
                         }];
                 break;
+                case 'TASK_DONE':
+                    title = 'האיסוף בוצע';
+                    body = 'תודה! האיסוף סומן כבוצע. השלב הבא הוא למלא משוב.';
+                    buttons = [
+                    {
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL',msg: 'REPORT_FILL' }),
+                        color: 'primary',
+                        text: 'דיווח'
+                    },
+
+                    {
+                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        color: 'secondary',
+                        text: 'סגירה'
+                    }    
+                    ];
         }
 
             return (

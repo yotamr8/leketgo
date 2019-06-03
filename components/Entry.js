@@ -25,6 +25,8 @@ class Entry extends React.Component {
                     name: entry.name,
                     street: entry.address,
                     actions: 'ACTIONS',
+                    contactName: entry['contact name'],
+                    contactNumber: <a href={'tel: '+ entry['contact number']}>{entry['contact number']}</a>
                 }
             case 'users':
                 return {
@@ -60,6 +62,11 @@ class Entry extends React.Component {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_NOTES', entries: this.props.entry}),
                         color: 'outline-primary',
                         text: 'הערות'
+                    },
+                    {
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_DONE', entries: this.props.entry}),
+                        color: 'outline-primary',
+                        text: 'בוצע'
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_CANCEL', entries: this.props.entry }),
