@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
             break;
         case 'LOGIN':
             return {
-                ...state, isLoggedIn: true, loginErr: false, userData: { ...action.user, uid:action.uid }, isManager: (action.user.admin == 'TRUE')? true : false };
+                ...state, isLoggedIn: true, loginErr: false, userData: { ...action.user, uid:action.uid }, isManager: action.user.admin };
             console.log("logged in store")
             break;
         case 'LOGIN_ERR':
