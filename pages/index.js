@@ -1,12 +1,9 @@
 import React from 'react'
-import Router from 'next/router'
-import "../statics/styles.scss"
 import TableBlock from '../components/TableBlock.js'
 import { Component } from "react"
 import { connect } from "react-redux"
 import {Alert} from 'react-bootstrap'
 import Link from 'next/link'
-import fire from '../config/firebaseConfig'
 import Header from '../components/Header.js'
 import Loading from './loading'
 import checkAuthAndRefresh from '../dbActions/checkAuth'

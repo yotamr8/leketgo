@@ -33,7 +33,7 @@ class Personal_information extends Component {
 
     render() {
         if (!this.props.authChecked || !this.props.isLoggedIn) {
-            return (<Loading />))
+            return (<Loading />);
         }
         var user = this.props.userData;
         return (

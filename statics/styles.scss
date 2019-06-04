@@ -1,6 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo:400,700&display=swap');
+
 html {
-    direction: rtl;
-    overflow-y: scroll;
+  direction: rtl;
+  overflow-y: scroll;
+}
+
+:root {
+  --font-family-sans-serif: 'Heebo';
+}
+
+body, .tooltip, .popover {
+  font-family: 'Heebo', sans-serif;
+}
+
+#top-nav.bg-light {
+  background-color: #99E1ED !important;
 }
 
 .entry-selectable {
