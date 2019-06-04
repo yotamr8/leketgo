@@ -9,6 +9,9 @@ import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from "reac
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'AUTHCHECKED':
+            return { ...state, authChecked: true}
+            break;
         case 'UNASSIGNEDTASKS':
             return { ...state, unassignedTasks: action.tasks };
             break;
@@ -52,6 +55,7 @@ const reducer = (state = initialState, action) => {
 };
 
 var initialState = {
+    authChecked: false,
     loginErr: false,
     isLoggedIn: false,
     userData: {

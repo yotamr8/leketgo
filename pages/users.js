@@ -5,6 +5,7 @@ import { Component } from "react"
 import { connect } from "react-redux"
 import Header from '../components/Header.js'
 import checkAuthAndRefresh from '../dbActions/checkAuth'
+import Loading from './loading'
 
 class Users extends Component {
     
@@ -13,7 +14,10 @@ class Users extends Component {
     }
 	
 	render() {
-        
+        if (!this.props.authChecked || !this.props.isLoggedIn) {
+            return (<Loading />)
+        }
+
         return (
             <div>
                 <Header />

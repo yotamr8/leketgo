@@ -5,9 +5,7 @@ import fire from '../config/firebaseConfig'
 import Header from '../components/Header.js'
 import Router from 'next/router'
 import checkAuthAndRefresh from '../dbActions/checkAuth'
-//import getUnassigned from '../dbActions/getUnassignedTasks'
-//import getAssigned from '../dbActions/getAssignedTasks'
-//import getTaskReports from '../dbActions/getTaskReports'
+import Loading from './loading'
 
 class Login extends Component {
     state = {
@@ -21,8 +19,8 @@ class Login extends Component {
         })
     }
 
-	componentWillMount() {
-        checkAuthAndRefresh(this.props.dispatch)
+    componentWillMount() {
+        if (!this.props.authChecked) checkAuthAndRefresh(this.props.dispatch)
     }
 	
     handleSubmit = (e) => {
@@ -31,17 +29,7 @@ class Login extends Component {
         ).then(
             (user) => {
                 db.collection("users").doc(user.user.uid).get().then((doc) => {
-
-                    /*this.props.dispatch({ type: 'LOGIN', user: doc.data(), uid: user.user.uid });
-
-                    getUnassigned(this.props.dispatch, doc.data().region);
-
-                    getAssigned(this.props.dispatch, user.user.uid);
-                    
-                    getTaskReports(this.props.dispatch, user.user.uid);*/
-
                     Router.push('/');
-
                 })
             }).catch(
                 (err) => {
@@ -51,6 +39,9 @@ class Login extends Component {
 
     render() {
         console.log(this.props)
+        if (!this.props.authChecked) {
+            return (<Loading />)
+        }
         return (
             <div>
                 <Header isLogin={true} />

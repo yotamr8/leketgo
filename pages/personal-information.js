@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import {Form, Button, Col, Navbar} from 'react-bootstrap'
 import Header from '../components/Header.js'
 import checkAuthAndRefresh from '../dbActions/checkAuth'
+import Loading from './loading'
 
 class Personal_information extends Component {
     constructor(...args) {
@@ -31,6 +32,9 @@ class Personal_information extends Component {
       }
 
     render() {
+        if (!this.props.authChecked || !this.props.isLoggedIn) {
+            return (<Loading />))
+        }
         var user = this.props.userData;
         return (
                 <div>

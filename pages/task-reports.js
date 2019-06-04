@@ -4,6 +4,7 @@ import TableBlock from '../components/TableBlock.js'
 import { connect } from "react-redux"
 import Header from '../components/Header.js'
 import checkAuthAndRefresh from '../dbActions/checkAuth'
+import Loading from './loading'
 
 class Task_reports extends Component {
 
@@ -13,6 +14,9 @@ class Task_reports extends Component {
 
     render() {
         console.log(this.props);
+        if (!this.props.authChecked || !this.props.isLoggedIn) {
+            return (<Loading />)
+        }
         return (
             <div>
                 <Header />

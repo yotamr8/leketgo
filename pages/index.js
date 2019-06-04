@@ -8,17 +8,21 @@ import {Alert} from 'react-bootstrap'
 import Link from 'next/link'
 import fire from '../config/firebaseConfig'
 import Header from '../components/Header.js'
-//import refresh4User from '../dbActions/refresh4User'
+import Loading from './loading'
 import checkAuthAndRefresh from '../dbActions/checkAuth'
 
 class Index extends Component {
-
+    
     componentWillMount() {
         checkAuthAndRefresh(this.props.dispatch)
     }  
     
     render() {
         console.log(this.props);
+        if (!this.props.authChecked || !this.props.isLoggedIn) {
+            return (<Loading />)
+        }
+
         let atNum = this.props.assignedTasks.length;
         let trNum = this.props.taskReports.length;
         let alert = ''; 
