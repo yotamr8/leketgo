@@ -5,6 +5,8 @@ import {Modal, ModalDialog, Button, Form, FormControl, Col, InputGroup} from 're
 import setUndoTask from '../dbActions/setUndoTask'
 import refresh4User from '../dbActions/refresh4User'
 import setTaskReport from '../dbActions/setTaskReport'
+import getTaskReports from '../dbActions/getTaskReports'
+import setTaskCollected from '../dbActions/setCollected'
 
 class ModalBlock extends React.Component {
 
@@ -14,7 +16,8 @@ class ModalBlock extends React.Component {
         pastriesQ: 0,
         pastriesS: "",
         breadQ: 0,
-        breadS: ""
+        breadS: "",
+        formComment: ""
     }
 
     resetState() {
@@ -24,7 +27,8 @@ class ModalBlock extends React.Component {
             pastriesQ: 0,
             pastriesS: "",
             breadQ: 0,
-            breadS: ""
+            breadS: "",
+            formComment: ""
         })
     }
 
@@ -35,12 +39,37 @@ class ModalBlock extends React.Component {
         })
     }
 
-    verifyValuesForReport(modal) {
+    verifyValuesForReport() {
         var isValid = true;
         console.log(this.props.modal.entries.id)
         // some logic here
+
+        // organize data for db
         if (isValid) {
-            setTaskReport(this.props.modal.entries.id, this.state)
+            var numOfFields = 0;
+            var fields = [];
+            if (this.state.mainCourseQ > 0) { numOfFields++; fields.push("mainCourseQ"); }
+            if (this.state.sideCourseQ > 0) { numOfFields++; fields.push("sideCourseQ"); }
+            if (this.state.pastriesQ > 0) { numOfFields++; fields.push("pastriesQ"); }
+            if (this.state.breadQ > 0) { numOfFields++; fields.push("breadQ"); }
+            var data = {
+                reportFilled: true,
+                reportFieldNum: numOfFields,
+                reportComment: this.state.formComment,
+                collected: true
+            }
+            var dic = {
+                "mainCourseQ": 'עיקריות',
+                "sideCourseQ": 'תוספות',
+                "pastriesQ": 'מאפים',
+                "breadQ": 'לחם'
+            }
+            for (var i = 0; i < numOfFields; i++) {
+                data["foodDesc" + (i + 1)] = dic[fields[i]];
+                data["foodContainerType" + (i + 1)] = (fields[i] == "mainCourseQ" || fields[i] == "sideCourseQ") ? 'מיכלים' : (fields[i] == "pastriesQ") ? this.state.pastriesS : this.state.breadS;
+                data["foodContainerQuantity" + (i + 1)] = this.state[fields[i]]
+            }
+            setTaskReport(this.props.modal.entries.id, data)
         }
     }
 
@@ -152,7 +181,8 @@ class ModalBlock extends React.Component {
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formBasicEmail">
                                     <Form.Label>הערות נוספות</Form.Label>
-                                    <Form.Control as="textarea" rows="3"/>
+                            <Form.Control as="textarea" rows="3"
+                                id="formComment" onChange={this.handleChange}/>
                                 </Form.Group>
                             </Form.Row>
                         </Form>;
@@ -162,7 +192,7 @@ class ModalBlock extends React.Component {
                             this.props.dispatch({ type: 'CLOSE_MODAL' });
                             this.verifyValuesForReport(modal);
                             this.resetState();
-                        },
+                            getTaskReports(this.props.dispatch, this.props.userData.uid)                        },
                         color: 'primary',
                         text: 'שליחה'
                     },
@@ -313,8 +343,12 @@ class ModalBlock extends React.Component {
                         text: 'דיווח'
                     },
 
-                    {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        {
+                            onClick: () => {
+                                this.props.dispatch({ type: 'CLOSE_MODAL' })
+                                setTaskCollected(modal.entries.id);
+                                refresh4User(this.props.dispatch, this.props.userData.region, this.props.userData.uid);
+                            },
                         color: 'secondary',
                         text: 'סגירה'
                     }    
