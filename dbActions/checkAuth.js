@@ -11,16 +11,18 @@ export default function checkAuthAndRefresh(dispatch) {
         console.log(user);
         if (user) {
             db.collection("users").doc(user.uid).get().then((doc) => {
-                dispatch({ type: 'LOGIN', user: doc.data(), uid: user.uid });               
+                dispatch({ type: 'LOGIN', user: doc.data(), uid: user.uid });
                 if (doc.data().admin == false) {
                     refresh4User(dispatch, doc.data().region, user.uid);
                 } else {
                     getAllUsers(dispatch);
                     getAllRegionTasks(dispatch, doc.data().region);
                 }
+                dispatch({ type: 'AUTHCHECKED' });
             });
         } else {
             Router.push('/login');
+            dispatch({ type: 'AUTHCHECKED' });
         }
     });
 }
