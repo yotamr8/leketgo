@@ -9,16 +9,23 @@ import getTaskReports from '../dbActions/getTaskReports'
 import setTaskCollected from '../dbActions/setCollected'
 
 class ModalBlock extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            mainCourseQ: 0,
+            sideCourseQ: 0,
+            pastriesQ: 0,
+            pastriesS: "",
+            breadQ: 0,
+            breadS: "",
+            formComment: "",
+            startDate: new Date()
+        }
+        this.dateHandleChange = this.dateHandleChange.bind(this);
 
-    state = {
-        mainCourseQ: 0,
-        sideCourseQ: 0,
-        pastriesQ: 0,
-        pastriesS: "",
-        breadQ: 0,
-        breadS: "",
-        formComment: ""
     }
+    
+
 
     resetState() {
         this.setState({
@@ -31,6 +38,12 @@ class ModalBlock extends React.Component {
             formComment: ""
         })
     }
+
+    dateHandleChange(date) {
+        this.setState({
+          startDate: date
+        });
+      }
 
     handleChange = (e) => {
         console.log(e.target.id, e.target.value)
@@ -366,8 +379,53 @@ class ModalBlock extends React.Component {
                             break;
                     case 'ADD_TASK':
                             title = 'הוספת משימה';
-                            body = <span></span>;
+                            body = 
+                                <Form>
+                                    <Form.Row>
+                                        <Form.Group as={Col} controlId="formBasicEmail">
+                                            <Form.Label>תאריך</Form.Label><br />
+                                            <FormControl type="date"
+                                            />
+                                        </Form.Group>
+                                        <Form.Group as={Col} controlId="formBasicEmail">
+                                            <Form.Label>שעה</Form.Label><br />
+                                            <FormControl pattern="[0-9]{2}:[0-9]{2}" type="time"
+                                            />
+                                        </Form.Group>
+                                    </Form.Row>
+                                    <Form.Row>
+                                        <Form.Group as={Col} controlId="formBasicEmail">
+                                            <Form.Label>עיר</Form.Label>
+                                            <Form.Control />
+                                        </Form.Group>
+                                        <Form.Group as={Col} controlId="formBasicEmail">
+                                            <Form.Label>רחוב ומספר</Form.Label>
+                                            <Form.Control />
+                                        </Form.Group>
+                                    </Form.Row>
+                                    <Form.Row>
+                                        <Form.Group as={Col} controlId="formBasicEmail">
+                                            <Form.Label>ספק</Form.Label>
+                                            <Form.Control />
+                                        </Form.Group>
+                                    </Form.Row>
+                                    <Form.Row>
+                                        <Form.Group as={Col} controlId="formBasicEmail">
+                                            <Form.Label>שם איש קשר</Form.Label>
+                                            <Form.Control />
+                                        </Form.Group>
+                                        <Form.Group as={Col} controlId="formBasicEmail">
+                                            <Form.Label>טלפון איש קשר</Form.Label>
+                                            <Form.Control />
+                                        </Form.Group>
+                                    </Form.Row>
+                                </Form>;
                             buttons = [
+                                {
+                                    onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                                    color: 'primary',
+                                    text: 'הוספה'
+                                },
                                 {
                                     onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
                                     color: 'secondary',

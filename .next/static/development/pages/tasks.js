@@ -82574,7 +82574,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 6:
+/***/ 0:
 /*!******************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Ftasks&absolutePagePath=C%3A%5CUsers%5Cbaram%5CGit%5Cleket-go%5Cpages%5Ctasks.js ***!
   \******************************************************************************************************************************/
@@ -82597,5 +82597,5 @@ module.exports = dll_81bd344d8f06700801e0;
 
 /***/ })
 
-},[[6,"static/runtime/webpack.js","styles"]]]);
+},[[0,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=tasks.js.map
