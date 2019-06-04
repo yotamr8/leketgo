@@ -8,20 +8,14 @@ import {Alert} from 'react-bootstrap'
 import Link from 'next/link'
 import fire from '../config/firebaseConfig'
 import Header from '../components/Header.js'
-import refresh4User from '../dbActions/refresh4User'
+//import refresh4User from '../dbActions/refresh4User'
+import checkAuthAndRefresh from '../dbActions/checkAuth'
 
 class Index extends Component {
 
-    componentDidMount() {
-        var { dispatch } = this.props
-        var { region } = this.props.userData
-        var { uid } = this.props.userData
-        if (region && uid && dispatch) {
-            refresh4User(dispatch, region, uid);
-        } else {
-            Router.push('/login');
-        }
-    }
+    componentWillMount() {
+        checkAuthAndRefresh(this.props.dispatch)
+    }  
     
     render() {
         console.log(this.props);

@@ -4,9 +4,15 @@ import TableBlock from '../components/TableBlock.js'
 import { Component } from "react"
 import { connect } from "react-redux"
 import Header from '../components/Header.js'
+import checkAuthAndRefresh from '../dbActions/checkAuth'
 
 class Users extends Component {
-    render() {
+    
+	componentWillMount() {
+        checkAuthAndRefresh(this.props.dispatch)
+    }
+	
+	render() {
         
         return (
             <div>

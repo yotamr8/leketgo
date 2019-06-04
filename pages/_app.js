@@ -27,16 +27,25 @@ const reducer = (state = initialState, action) => {
             return { ...state, isLoggedIn: false, loginErr: action.msg};
             break;
         case 'LOGOUT':
-            return { ...state, isLoggedIn: false, firebaseData: false};
+            return { ...state, isLoggedIn: false};
+            break;
+        case 'GETALLUSERS':
+            return { ...state, users: action.users };
+            break;
+        case 'GETALLREGIONTASKS':
+            return { ...state, regionalTasks: action.tasks };
             break;
         case 'OPEN_MODAL':
-            return { ...state, modal: {
-                isOpen: true,
-                msg: action.msg,
-                entries: action.entries
-            }};  
+            return {
+                ...state, modal: {
+                    isOpen: true,
+                    msg: action.msg,
+                    entries: action.entries
+                }
+            };
+            break;
         case 'CLOSE_MODAL':
-            return { ...state, modal: {...state.modal, isOpen: false}};
+            return { ...state, modal: { ...state.modal, isOpen: false } };
         default:
             return state
     }

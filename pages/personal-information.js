@@ -3,6 +3,7 @@ import "../statics/styles.scss"
 import { connect } from "react-redux"
 import {Form, Button, Col, Navbar} from 'react-bootstrap'
 import Header from '../components/Header.js'
+import checkAuthAndRefresh from '../dbActions/checkAuth'
 
 class Personal_information extends Component {
     constructor(...args) {
@@ -11,6 +12,10 @@ class Personal_information extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+	componentWillMount() {
+        checkAuthAndRefresh(this.props.dispatch)
+    }
+	
     handleSubmit(event) {
         const form = event.currentTarget;
         

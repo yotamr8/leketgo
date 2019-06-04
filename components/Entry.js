@@ -79,7 +79,7 @@ class Entry extends React.Component {
             case 'taskReports':
                 buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL',msg: 'REPORT_FILL' }),
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_FILL', entries: this.props.entry }),
                         color: 'outline-primary',
                         text: 'דיווח'
                     },

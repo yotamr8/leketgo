@@ -4,8 +4,46 @@ import { connect } from 'react-redux'
 import {Modal, ModalDialog, Button, Form, FormControl, Col, InputGroup} from 'react-bootstrap'
 import setUndoTask from '../dbActions/setUndoTask'
 import refresh4User from '../dbActions/refresh4User'
+import setTaskReport from '../dbActions/setTaskReport'
 
 class ModalBlock extends React.Component {
+
+    state = {
+        mainCourseQ: 0,
+        sideCourseQ: 0,
+        pastriesQ: 0,
+        pastriesS: "",
+        breadQ: 0,
+        breadS: ""
+    }
+
+    resetState() {
+        this.setState({
+            mainCourseQ: 0,
+            sideCourseQ: 0,
+            pastriesQ: 0,
+            pastriesS: "",
+            breadQ: 0,
+            breadS: ""
+        })
+    }
+
+    handleChange = (e) => {
+        console.log(e.target.id, e.target.value)
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+
+    verifyValuesForReport(modal) {
+        var isValid = true;
+        console.log(this.props.modal.entries.id)
+        // some logic here
+        if (isValid) {
+            setTaskReport(this.props.modal.entries.id, this.state)
+        }
+    }
+
     render() {
         var modal = this.props.modal;
         var title = '';
@@ -51,7 +89,8 @@ class ModalBlock extends React.Component {
                                 <Form.Group as={Col} controlId="formBasicEmail">
                                     <Form.Label>עיקריות</Form.Label>
                                     <InputGroup>
-                                        <FormControl
+                                <FormControl id="mainCourseQ"
+                                    onChange={this.handleChange}
                                         placeholder="כמות"
                                         />
                                         <InputGroup.Append>
@@ -64,7 +103,8 @@ class ModalBlock extends React.Component {
                                 <Form.Group as={Col} controlId="formBasicEmail">
                                     <Form.Label>תוספות</Form.Label>
                                     <InputGroup>
-                                        <FormControl
+                                <FormControl id="sideCourseQ"
+                                    onChange={this.handleChange}
                                         placeholder="כמות"
                                         />
                                         <InputGroup.Append>
@@ -77,10 +117,12 @@ class ModalBlock extends React.Component {
                                 <Form.Group as={Col} controlId="formBasicEmail">
                                     <Form.Label>מאפים</Form.Label>
                                     <InputGroup>
-                                        <FormControl
+                                <FormControl id="pastriesQ"
+                                    onChange={this.handleChange}
                                         placeholder="כמות"
                                         />
-                                        <Form.Control as="select">
+                                <Form.Control as="select" id="pastriesS"
+                                    onChange={this.handleChange}>
                                             <option>בחירת סוג</option>
                                             <option>ארגזים</option>
                                             <option>שקיות סופר</option>
@@ -93,10 +135,12 @@ class ModalBlock extends React.Component {
                                 <Form.Group as={Col} controlId="formBasicEmail">
                                     <Form.Label>לחם</Form.Label>
                                     <InputGroup>
-                                        <FormControl
+                                <FormControl id="breadQ"
+                                    onChange={this.handleChange}
                                         placeholder="כמות"
                                         />
-                                        <Form.Control as="select">
+                                <Form.Control as="select" id="breadS"
+                                    onChange={this.handleChange}>
                                             <option>בחירת סוג</option>
                                             <option>ארגזים</option>
                                             <option>שקיות סופר</option>
@@ -114,7 +158,11 @@ class ModalBlock extends React.Component {
                         </Form>;
                 buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => {
+                            this.props.dispatch({ type: 'CLOSE_MODAL' });
+                            this.verifyValuesForReport(modal);
+                            this.resetState();
+                        },
                         color: 'primary',
                         text: 'שליחה'
                     },
@@ -173,7 +221,6 @@ class ModalBlock extends React.Component {
                 buttons = [
                     {
                         onClick: () => {
-                            console.log(modal.entries.id)
                             setUndoTask(modal.entries.id)
                             this.props.dispatch({ type: 'CLOSE_MODAL' })
                             refresh4User(this.props.dispatch, this.props.userData.region, this.props.userData.uid);
@@ -261,7 +308,7 @@ class ModalBlock extends React.Component {
                     body = 'תודה! האיסוף סומן כבוצע. השלב הבא הוא למלא משוב.';
                     buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL',msg: 'REPORT_FILL' }),
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL',msg: 'REPORT_FILL', entries: modal.entries }),
                         color: 'primary',
                         text: 'דיווח'
                     },

@@ -80,7 +80,7 @@ class TableBlock extends React.Component {
         for (var taskID in this.state.selectedEntries) {
             taskIDs.push(taskID)         
         }
-        setAssignedTasks(this.props.dispatch, taskIDs, this.props.userData.uid, this.state.entrySelectedCounter, this.state.selectedEntries)
+        setAssignedTasks(this.props, taskIDs, this.state.entrySelectedCounter, this.state.selectedEntries)
 	}
 
 	render() {
