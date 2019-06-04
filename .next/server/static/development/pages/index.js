@@ -164,13 +164,17 @@ function (_React$Component) {
             city: entry.city,
             name: entry.name,
             street: entry.address,
+            fullAddress: entry.address + ', ' + entry.city,
             actions: 'ACTIONS',
             contactName: entry['contact name'],
             contactNumber: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("a", {
+              style: {
+                whiteSpace: 'nowrap'
+              },
               href: 'tel: ' + entry['contact number'],
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 29
+                lineNumber: 30
               },
               __self: this
             }, entry['contact number']),
@@ -181,7 +185,7 @@ function (_React$Component) {
               type: "checkbox",
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 30
+                lineNumber: 31
               },
               __self: this
             }) : react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Form"].Check, {
@@ -190,7 +194,7 @@ function (_React$Component) {
               type: "checkbox",
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 30
+                lineNumber: 31
               },
               __self: this
             })
@@ -243,7 +247,20 @@ function (_React$Component) {
               });
             },
             color: 'outline-primary',
-            text: 'הערות'
+            text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 66
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
+              class: "far fa-sticky-note",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 66
+              },
+              __self: this
+            }), "\u05D4\u05E2\u05E8\u05D5\u05EA")
           }, {
             onClick: function onClick() {
               return _this2.props.dispatch({
@@ -253,7 +270,20 @@ function (_React$Component) {
               });
             },
             color: 'outline-primary',
-            text: 'בוצע'
+            text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 71
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
+              class: "far fa-calendar-check",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 71
+              },
+              __self: this
+            }), "\u05D1\u05D5\u05E6\u05E2")
           }, {
             onClick: function onClick() {
               return _this2.props.dispatch({
@@ -263,7 +293,20 @@ function (_React$Component) {
               });
             },
             color: 'outline-secondary',
-            text: 'הסרה'
+            text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 76
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
+              class: "far fa-calendar-times",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 76
+              },
+              __self: this
+            }), "\u05D4\u05E1\u05E8\u05D4")
           }];
           break;
 
@@ -323,13 +366,47 @@ function (_React$Component) {
             text: 'מחיקה'
           }];
           break;
+
+        case 'adminTasks':
+          buttons = [{
+            onClick: function onClick() {
+              return _this2.props.dispatch({
+                type: 'OPEN_MODAL',
+                msg: 'EDIT_USER',
+                entries: _this2.props.entry
+              });
+            },
+            color: 'outline-primary',
+            text: 'עריכה'
+          }, {
+            onClick: function onClick() {
+              return _this2.props.dispatch({
+                type: 'OPEN_MODAL',
+                msg: 'RESET_PASSWORD',
+                entries: _this2.props.entry
+              });
+            },
+            color: 'outline-secondary',
+            text: 'סטטוס'
+          }, {
+            onClick: function onClick() {
+              return _this2.props.dispatch({
+                type: 'OPEN_MODAL',
+                msg: 'RESET_PASSWORD',
+                entries: _this2.props.entry
+              });
+            },
+            color: 'outline-secondary',
+            text: 'מחיקה'
+          }];
+          break;
       }
 
       return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("tr", {
         className: (this.props.isSelected ? 'table-primary' : '') + (this.props.isSelectable ? ' entry-selectable' : ''),
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 115
+          lineNumber: 135
         },
         __self: this
       }, this.props.tableColumns.map(function (column) {
@@ -339,36 +416,189 @@ function (_React$Component) {
             key: column,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 119
+              lineNumber: 139
             },
             __self: this
           }, _this2.getDataValues(_this2.props.entry)[column]);
         } else {
-          return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
-            key: column,
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 125
-            },
-            __self: this
-          }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["ButtonGroup"], {
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 126
-            },
-            __self: this
-          }, buttons.map(function (button) {
-            return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Button"], {
-              key: button.text,
-              onClick: button.onClick,
-              variant: button.color,
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 129
-              },
-              __self: this
-            }, button.text);
-          })));
+          switch (_this2.props.page) {
+            case 'assignedTasks':
+              return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
+                key: column,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 146
+                },
+                __self: this
+              }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+                style: {
+                  whiteSpace: 'nowrap'
+                },
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 147
+                },
+                __self: this
+              }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"], {
+                width: "200",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 147
+                },
+                __self: this
+              }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Toggle, {
+                variant: "secondary",
+                id: "dropdown-basic",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 148
+                },
+                __self: this
+              }, "\u05E4\u05E2\u05D5\u05DC\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Menu, {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 151
+                },
+                __self: this
+              }, buttons.map(function (button) {
+                return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Item, {
+                  key: button.text,
+                  onClick: button.onClick,
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 154
+                  },
+                  __self: this
+                }, button.text);
+              })))));
+
+            case 'adminUsers':
+              return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
+                key: column,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 161
+                },
+                __self: this
+              }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+                style: {
+                  whiteSpace: 'nowrap'
+                },
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 162
+                },
+                __self: this
+              }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"], {
+                width: "200",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 162
+                },
+                __self: this
+              }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Toggle, {
+                variant: "secondary",
+                id: "dropdown-basic",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 163
+                },
+                __self: this
+              }, "\u05E4\u05E2\u05D5\u05DC\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Menu, {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 166
+                },
+                __self: this
+              }, buttons.map(function (button) {
+                return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Item, {
+                  key: button.text,
+                  onClick: button.onClick,
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 169
+                  },
+                  __self: this
+                }, button.text);
+              })))));
+
+            case 'adminTasks':
+              return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
+                key: column,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 176
+                },
+                __self: this
+              }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+                style: {
+                  whiteSpace: 'nowrap'
+                },
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 177
+                },
+                __self: this
+              }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"], {
+                width: "200",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 177
+                },
+                __self: this
+              }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Toggle, {
+                variant: "secondary",
+                id: "dropdown-basic",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 178
+                },
+                __self: this
+              }, "\u05E4\u05E2\u05D5\u05DC\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Menu, {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 181
+                },
+                __self: this
+              }, buttons.map(function (button) {
+                return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Item, {
+                  key: button.text,
+                  onClick: button.onClick,
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 184
+                  },
+                  __self: this
+                }, button.text);
+              })))));
+
+            default:
+              return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
+                key: column,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 192
+                },
+                __self: this
+              }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["ButtonGroup"], {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 193
+                },
+                __self: this
+              }, buttons.map(function (button) {
+                return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Button"], {
+                  key: button.text,
+                  onClick: button.onClick,
+                  variant: button.color,
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 196
+                  },
+                  __self: this
+                }, button.text);
+              })));
+          }
         }
       }));
     }
@@ -410,10 +640,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _statics_bootstrap_min_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../statics/bootstrap.min.scss */ "./statics/bootstrap.min.scss");
-/* harmony import */ var _statics_bootstrap_min_scss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_statics_bootstrap_min_scss__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _statics_styles_scss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../statics/styles.scss */ "./statics/styles.scss");
-/* harmony import */ var _statics_styles_scss__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_statics_styles_scss__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _static_bootstrap_min_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../static/bootstrap.min.scss */ "./static/bootstrap.min.scss");
+/* harmony import */ var _static_bootstrap_min_scss__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_static_bootstrap_min_scss__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _static_styles_scss__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../static/styles.scss */ "./static/styles.scss");
+/* harmony import */ var _static_styles_scss__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_static_styles_scss__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _components_Logo_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/Logo.js */ "./components/Logo.js");
 
 
 
@@ -422,6 +653,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _jsxFileName = "C:\\Users\\baram\\Git\\leket-go\\components\\Header.js";
+
 
 
 
@@ -479,7 +711,7 @@ function (_React$Component) {
           className: "mr-auto",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 41
+            lineNumber: 42
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -487,56 +719,56 @@ function (_React$Component) {
           href: "/",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 42
+            lineNumber: 43
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 42
+            lineNumber: 43
           },
           __self: this
         }, "\u05E9\u05D9\u05D1\u05D5\u05E5 \u05DC\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/assigned-tasks",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 43
+            lineNumber: 44
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 43
+            lineNumber: 44
           },
           __self: this
         }, "\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E7\u05E8\u05D5\u05D1\u05D9\u05DD ", atNum > 0 ? react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Badge"], {
           variant: "secondary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 43
+            lineNumber: 44
           },
           __self: this
         }, atNum) : '')), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/task-reports",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 44
+            lineNumber: 45
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 44
+            lineNumber: 45
           },
           __self: this
         }, "\u05DE\u05D9\u05DC\u05D5\u05D9 \u05DE\u05E9\u05D5\u05D1 ", trNum > 0 ? react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Badge"], {
           variant: "secondary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 44
+            lineNumber: 45
           },
           __self: this
         }, trNum) : '')));
@@ -545,49 +777,49 @@ function (_React$Component) {
           className: "mr-auto",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 48
+            lineNumber: 49
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 49
+            lineNumber: 50
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 49
+            lineNumber: 50
           },
           __self: this
         }, "\u05DC\u05D5\u05D7 \u05D1\u05E7\u05E8\u05D4")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/users",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 50
+            lineNumber: 51
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 50
+            lineNumber: 51
           },
           __self: this
         }, "\u05DE\u05E9\u05EA\u05DE\u05E9\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/tasks",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 51
+            lineNumber: 52
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 51
+            lineNumber: 52
           },
           __self: this
         }, "\u05DE\u05E9\u05D9\u05DE\u05D5\u05EA")));
@@ -604,42 +836,48 @@ function (_React$Component) {
           expand: "lg",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 56
+            lineNumber: 57
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 57
+            lineNumber: 58
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "navbar-brand",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 57
+            lineNumber: 58
           },
           __self: this
-        }, "LetsGo")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Navbar"].Toggle, {
-          "aria-controls": "basic-navbar-nav",
+        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_Logo_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
           __source: {
             fileName: _jsxFileName,
             lineNumber: 58
+          },
+          __self: this
+        }))), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Navbar"].Toggle, {
+          "aria-controls": "basic-navbar-nav",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 59
           },
           __self: this
         }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Navbar"].Collapse, {
           id: "basic-navbar-nav",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 59
+            lineNumber: 60
           },
           __self: this
         }, pages, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Nav"], {
           className: "mr-sm-2",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 61
+            lineNumber: 62
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["NavDropdown"], {
@@ -648,34 +886,41 @@ function (_React$Component) {
           id: "basic-nav-dropdown",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 62
+            lineNumber: 63
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/personal-information",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 63
+            lineNumber: 64
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "dropdown-item",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 63
+            lineNumber: 64
           },
           __self: this
-        }, "\u05E4\u05E8\u05D8\u05D9\u05DD \u05D0\u05D9\u05E9\u05D9\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["NavDropdown"].Divider, {
+        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("i", {
+          className: "far fa-user-circle",
           __source: {
             fileName: _jsxFileName,
             lineNumber: 64
+          },
+          __self: this
+        }), "\u05E4\u05E8\u05D8\u05D9\u05DD \u05D0\u05D9\u05E9\u05D9\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["NavDropdown"].Divider, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 65
           },
           __self: this
         }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/login",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 65
+            lineNumber: 66
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
@@ -683,22 +928,64 @@ function (_React$Component) {
           onClick: this.logout,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 65
+            lineNumber: 66
           },
           __self: this
-        }, "\u05D4\u05EA\u05E0\u05EA\u05E7\u05D5\u05EA"))))));
+        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("i", {
+          className: "fas fa-sign-out-alt",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 66
+          },
+          __self: this
+        }), "\u05D4\u05EA\u05E0\u05EA\u05E7\u05D5\u05EA"))), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["ButtonToolbar"], {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 68
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["OverlayTrigger"], {
+          key: "help",
+          placement: "bottom",
+          overlay: react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Tooltip"], {
+            id: "tooltip",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 73
+            },
+            __self: this
+          }, "\u05E2\u05D6\u05E8\u05D4"),
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 69
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Nav"].Link, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 77
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("i", {
+          className: "fas fa-question-circle",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 77
+          },
+          __self: this
+        })))))));
       }
 
       return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 72
+          lineNumber: 85
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_7___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 73
+          lineNumber: 86
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("link", {
@@ -708,14 +995,14 @@ function (_React$Component) {
         crossorigin: "anonymous",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 74
+          lineNumber: 87
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("meta", {
         charset: "utf-8",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 76
+          lineNumber: 89
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("meta", {
@@ -723,16 +1010,16 @@ function (_React$Component) {
         content: "width=device-width, initial-scale=1, shrink-to-fit=no",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 77
+          lineNumber: 90
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("title", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 78
+          lineNumber: 91
         },
         __self: this
-      }, "LetsGo")), navbar);
+      }, "\u05DC\u05E7\u05D8\u05BEGO")), navbar);
     }
   }]);
 
@@ -742,6 +1029,155 @@ function (_React$Component) {
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_9__["connect"])(function (state) {
   return state;
 })(Header));
+
+/***/ }),
+
+/***/ "./components/Logo.js":
+/*!****************************!*\
+  !*** ./components/Logo.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/createClass */ "./node_modules/@babel/runtime-corejs2/helpers/esm/createClass.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime-corejs2/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime-corejs2/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/assertThisInitialized */ "./node_modules/@babel/runtime-corejs2/helpers/esm/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/inherits */ "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_7__);
+
+
+
+
+
+
+var _jsxFileName = "C:\\Users\\baram\\Git\\leket-go\\components\\Logo.js";
+
+
+
+var Logo =
+/*#__PURE__*/
+function (_React$Component) {
+  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(Logo, _React$Component);
+
+  function Logo(props) {
+    var _this;
+
+    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, Logo);
+
+    _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(Logo).call(this, props));
+    _this.state = {
+      color: '#4C7076'
+    };
+    _this.logoHover = _this.logoHover.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
+    _this.logoNotHover = _this.logoNotHover.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
+    return _this;
+  }
+
+  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(Logo, [{
+    key: "logoHover",
+    value: function logoHover() {
+      this.setState({
+        color: '#2E4347'
+      });
+    }
+  }, {
+    key: "logoNotHover",
+    value: function logoNotHover() {
+      this.setState({
+        color: '#4C7076'
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      switch (this.props.use) {
+        case 'login':
+          return 'LOGO PLACEHOLDER';
+
+        default:
+          return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("svg", {
+            onMouseEnter: this.logoHover,
+            onMouseLeave: this.logoNotHover,
+            viewBox: "0 0 117.9 44.77",
+            width: "117.9",
+            height: "44.77",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 27
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("g", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 28
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("path", {
+            fill: this.state.color,
+            d: "M117.78,3.49c-0.55-0.08-1.07-0.16-1.58-0.23c-0.51-0.07-1.06-0.1-1.66-0.1c-3.61,0-6.3,1.29-8.08,3.85\r c-1.5,2.19-2.25,5.17-2.25,8.94c0,0.46,0.05,3.09,0.16,7.87c0.03,1.2,0.04,2.76,0.04,4.67c-0.33-0.52-0.55-0.9-0.66-1.15\r c-0.19-0.38-0.37-0.78-0.53-1.19l-4.8,4.8c1.56,1.86,3.37,3.33,5.43,4.41c2.06,1.08,4.22,1.62,6.46,1.62h0.62l-0.37-20.66v-0.33\r c0-2.02,0.37-3.61,1.11-4.76c0.9-1.39,2.28-2.09,4.14-2.09c0.79,0,1.49,0.1,2.09,0.29L117.78,3.49z",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 29
+            },
+            __self: this
+          }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("path", {
+            fill: this.state.color,
+            d: "M35.43,22.03l-0.05-0.62H16.7v7.14h9.24c-1.57,2.23-4.56,3.99-8.12,3.99c-2.7,0-4.92-0.81-6.8-2.47\r c-1.91-1.66-2.83-3.62-2.83-5.96s0.93-4.29,2.83-5.96c1.89-1.68,4.12-2.49,6.8-2.49c2.62,0,4.86,0.88,6.81,2.7l0.52,0.49l5.91-5.62\r l-0.51-0.5c-2.86-2.66-7.07-4.84-12.24-4.98l-0.02-0.07h-0.53c-4.97,0-9.26,1.62-12.75,4.83C1.69,15.73,0,19.62,0,24.1\r c0,4.52,1.69,8.41,5.01,11.57c3.47,3.18,7.76,4.79,12.74,4.79c4.94,0,9.23-1.62,12.76-4.81C33.81,32.51,35.92,28.11,35.43,22.03z",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 33
+            },
+            __self: this
+          }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("path", {
+            fill: this.state.color,
+            d: "M42.16,8.18C42.46,3.06,43.91,2,43.91,2l-1.15-0.74c-0.76,0.6-1.12,2.13-1.28,3.74c-0.17-0.4-1.62-3.69-4.45-4.69\r C34.03-0.74,30.6,1.2,30.6,1.2s1.45,3.67,4.46,4.73c2.87,1.01,6.13-0.71,6.42-0.87c-0.1,1.07-0.12,2.17-0.1,3.06\r c-0.28-0.01-0.57-0.02-0.85-0.02c-3.36,0-6.48,1.02-9.07,2.78c0.15,0.13,0.31,0.26,0.46,0.4l2.02,1.98l-6.47,6.15h9.76l0.19,2.47\r c0.49,6.13-1.37,11.26-5.52,15.23c-0.19,0.17-0.39,0.32-0.58,0.48c2.61,1.81,5.78,2.88,9.21,2.88c8.94,0,16.18-7.25,16.18-16.18\r C56.71,15.89,50.33,9,42.16,8.18z",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 38
+            },
+            __self: this
+          }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("path", {
+            fill: this.state.color,
+            d: "M74.47,16.48l-5.21,3.03c1.04,0.96,1.86,1.93,2.46,2.91c0.76,1.23,1.15,2.43,1.15,3.61v0.62l-6.71,3.77\r c-1.07-1.15-1.93-2.43-2.59-3.85c-0.66-1.42-0.99-2.85-0.99-4.3c0-2.24,0.81-4.34,2.42-6.3c1.28-1.58,3.14-3.1,5.58-4.54\r c1.72-1.04,3.77-2.03,6.15-2.99L73.6,3.78c-0.88,0.27-1.76,0.6-2.64,0.98c-0.89,0.38-1.72,0.76-2.48,1.15\r c-3.64,1.8-6.52,3.85-8.65,6.14c-1.28,1.38-2.25,2.82-2.93,4.31c1.15,2.4,1.8,5.08,1.8,7.91c0,1.74-0.26,3.43-0.72,5.02\r c0.23,0.42,0.47,0.84,0.74,1.26c1.5,2.43,3.57,4.89,6.19,7.37l13.33-7.91c0.57-1.37,0.86-2.72,0.86-4.06\r c0-1.67-0.49-3.38-1.48-5.13C76.94,19.6,75.89,18.15,74.47,16.48z",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 43
+            },
+            __self: this
+          }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("polygon", {
+            fill: this.state.color,
+            points: "80.65,44.77 87.21,44.77 87.21,20.75 80.65,22.02 \t",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 49
+            },
+            __self: this
+          }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("path", {
+            fill: this.state.color,
+            d: "M95.72,30.84l4.51-4.51l1.57-4.41c-2.13-3.06-4.85-5.58-8.16-7.57c-3.06-1.83-6.52-3.18-10.37-4.05\r c-1.37-0.3-2.23-0.48-2.58-0.53c-0.88-0.14-1.74-0.21-2.58-0.21l-0.33,6.07c3.14,0,6.23,0.63,9.27,1.88\r c3.03,1.26,5.62,2.99,7.75,5.2l-5.25,14.36h6.85l1.38-3.87c-0.3-0.31-0.6-0.62-0.88-0.96L95.72,30.84z",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 50
+            },
+            __self: this
+          })));
+      }
+    }
+  }]);
+
+  return Logo;
+}(react__WEBPACK_IMPORTED_MODULE_6___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["connect"])(function (state) {
+  return state;
+})(Logo));
 
 /***/ }),
 
@@ -803,6 +1239,7 @@ function (_React$Component) {
         'date': 'תאריך',
         'time': 'שעה',
         'city': 'עיר',
+        'fullAddress': 'כתובת',
         'name': 'ספק',
         'uid': 'uid',
         'firstName': 'שם פרטי',
@@ -811,9 +1248,10 @@ function (_React$Component) {
         'email': 'דוא"ל',
         'tz': 'תעודת זהות',
         'street': 'רחוב',
-        'contactName': 'איש קשר',
+        'contactName': 'שם',
         'contactNumber': 'טלפון',
-        'checkBox': ''
+        'checkBox': '',
+        'phone': 'טלפון'
       }
     };
     _this.selectCallback = _this.selectCallback.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__["default"])(_this));
@@ -830,7 +1268,7 @@ function (_React$Component) {
           return ['checkBox', 'date', 'time', 'city', 'name'];
 
         case 'assignedTasks':
-          return ['date', 'time', 'street', 'city', 'name', 'contactName', 'contactNumber', 'actions'];
+          return ['date', 'time', 'fullAddress', 'name', 'contactName', 'contactNumber', 'actions'];
 
         case 'taskReports':
           return ['date', 'street', 'city', 'name', 'actions'];
@@ -888,219 +1326,435 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var actionsBar = '';
-
-      if (this.props.isSelectable && this.state.entrySelectedCounter > 0) {
-        actionsBar = react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Navbar"], {
-          bg: "light",
-          fixed: "bottom",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 90
+      if (this.props.data.length == 0) {
+        return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+          style: {
+            display: 'flex',
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center'
           },
-          __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["ButtonGroup"], {
           __source: {
             fileName: _jsxFileName,
             lineNumber: 91
           },
           __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Button"], {
-          onClick: this.assignTasks,
-          variant: "primary",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 92
-          },
-          __self: this
-        }, "\u05E9\u05D9\u05D1\u05D5\u05E5 ", this.state.entrySelectedCounter, " \u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Button"], {
-          onClick: this.cancelSelection,
-          variant: "secondary",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 93
-          },
-          __self: this
-        }, "\u05D1\u05D9\u05D8\u05D5\u05DC")));
-      }
-
-      if (this.props.isSearchable) {
-        actionsBar = react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Navbar"], {
-          bg: "light",
-          fixed: "bottom",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 99
-          },
-          __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"], {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 100
-          },
-          __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Row"], {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 101
-          },
-          __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 102
-          },
-          __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
-          className: "btn-group",
-          role: "group",
-          "aria-label": "Basic example",
+          style: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
+          },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 103
+            lineNumber: 97
           },
           __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
-          type: "button",
-          className: "btn btn-primary",
+        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("img", {
+          src: "/static/nothing.png",
+          width: "100",
           __source: {
             fileName: _jsxFileName,
             lineNumber: 104
           },
           __self: this
-        }, "\u05D4\u05D5\u05E1\u05E4\u05EA \u05DE\u05E9\u05EA\u05DE\u05E9"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
-          type: "button",
-          className: "btn btn-secondary",
+        }), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+          style: {
+            fontSize: '20px',
+            marginTop: '10px'
+          },
           __source: {
             fileName: _jsxFileName,
             lineNumber: 105
           },
           __self: this
-        }, "\u05D4\u05D5\u05E1\u05E4\u05D4 \u05DE\u05E7\u05D5\u05D1\u05E5"))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 107
-          },
-          __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["InputGroup"], {
-          className: "mb-3",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 108
-          },
-          __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"].Control, {
-          as: "select",
-          variant: "outline-secondary",
-          title: "Dropdown",
-          drop: "up",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 109
-          },
-          __self: this
-        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 114
-          },
-          __self: this
-        }, "\u05E9\u05DD \u05DE\u05DC\u05D0"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 115
-          },
-          __self: this
-        }, "\u05EA\u05E2\u05D5\u05D3\u05EA \u05D6\u05D4\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 116
-          },
-          __self: this
-        }, "\u05DB\u05EA\u05D5\u05D1\u05EA \u05DE\u05D2\u05D5\u05E8\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 117
-          },
-          __self: this
-        }, "\u05DE\u05E1\u05E4\u05E8 \u05D8\u05DC\u05E4\u05D5\u05DF"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 118
-          },
-          __self: this
-        }, "\u05D3\u05D5\u05D0\u05E8 \u05D0\u05DC\u05E7\u05D8\u05E8\u05D5\u05E0\u05D9")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["FormControl"], {
-          "aria-describedby": "basic-addon1",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 120
-          },
-          __self: this
-        }))))));
-      }
+        }, "\u05D4\u05DE\u05DE\u05DE... \u05D0\u05D9\u05DF \u05DB\u05D0\u05DF \u05DB\u05DC\u05D5\u05DD")));
+      } else {
+        var actionsBar = '';
 
-      return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
-        className: "table-responsive",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 129
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Table"], {
-        hover: true,
-        responsive: true,
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 130
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("thead", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 131
-        },
-        __self: this
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tr", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 132
-        },
-        __self: this
-      }, this.state.tableColumns.map(function (column) {
-        return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", {
-          scope: "col",
-          key: column,
+        if (this.props.isSelectable && this.state.entrySelectedCounter > 0) {
+          actionsBar = react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Navbar"], {
+            bg: "light",
+            fixed: "bottom",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 116
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["ButtonGroup"], {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 117
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Button"], {
+            onClick: this.assignTasks,
+            variant: "primary",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 118
+            },
+            __self: this
+          }, "\u05E9\u05D9\u05D1\u05D5\u05E5 ", this.state.entrySelectedCounter, " \u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Button"], {
+            onClick: this.cancelSelection,
+            variant: "secondary",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 119
+            },
+            __self: this
+          }, "\u05D1\u05D9\u05D8\u05D5\u05DC")));
+        }
+
+        if (this.props.isSearchable && this.props.page == 'adminUsers') {
+          actionsBar = react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Navbar"], {
+            bg: "light",
+            fixed: "bottom",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 125
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"], {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 126
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Row"], {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 127
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 128
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+            className: "btn-group",
+            role: "group",
+            "aria-label": "Basic example",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 129
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
+            style: {
+              whiteSpace: 'nowrap'
+            },
+            type: "button",
+            className: "btn btn-primary",
+            onClick: function onClick() {
+              return _this2.props.dispatch({
+                type: 'OPEN_MODAL',
+                msg: 'ADD_USER',
+                entries: _this2.props.entry
+              });
+            },
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 130
+            },
+            __self: this
+          }, "\u05D4\u05D5\u05E1\u05E4\u05EA \u05DE\u05E9\u05EA\u05DE\u05E9"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
+            style: {
+              whiteSpace: 'nowrap'
+            },
+            type: "button",
+            className: "btn btn-secondary",
+            onClick: function onClick() {
+              return _this2.props.dispatch({
+                type: 'OPEN_MODAL',
+                msg: 'ADD_USER_CSV',
+                entries: _this2.props.entry
+              });
+            },
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 131
+            },
+            __self: this
+          }, "\u05D4\u05D5\u05E1\u05E4\u05D4 \u05DE\u05E7\u05D5\u05D1\u05E5"))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 133
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["InputGroup"], {
+            className: "mb-3",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 134
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"].Control, {
+            as: "select",
+            variant: "outline-secondary",
+            title: "Dropdown",
+            drop: "up",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 135
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 140
+            },
+            __self: this
+          }, "\u05E9\u05DD \u05DE\u05DC\u05D0"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 141
+            },
+            __self: this
+          }, "\u05EA\u05E2\u05D5\u05D3\u05EA \u05D6\u05D4\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 142
+            },
+            __self: this
+          }, "\u05DB\u05EA\u05D5\u05D1\u05EA \u05DE\u05D2\u05D5\u05E8\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 143
+            },
+            __self: this
+          }, "\u05DE\u05E1\u05E4\u05E8 \u05D8\u05DC\u05E4\u05D5\u05DF"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 144
+            },
+            __self: this
+          }, "\u05D3\u05D5\u05D0\u05E8 \u05D0\u05DC\u05E7\u05D8\u05E8\u05D5\u05E0\u05D9")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["FormControl"], {
+            "aria-describedby": "basic-addon1",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 146
+            },
+            __self: this
+          }))))));
+        }
+
+        if (this.props.isSearchable && this.props.page == 'adminTasks') {
+          actionsBar = react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Navbar"], {
+            bg: "light",
+            fixed: "bottom",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 155
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"], {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 156
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Row"], {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 157
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 158
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+            className: "btn-group",
+            role: "group",
+            "aria-label": "Basic example",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 159
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
+            style: {
+              whiteSpace: 'nowrap'
+            },
+            type: "button",
+            className: "btn btn-primary",
+            onClick: function onClick() {
+              return _this2.props.dispatch({
+                type: 'OPEN_MODAL',
+                msg: 'ADD_TASK',
+                entries: _this2.props.entry
+              });
+            },
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 160
+            },
+            __self: this
+          }, "\u05D4\u05D5\u05E1\u05E4\u05EA \u05DE\u05E9\u05D9\u05DE\u05D4"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
+            style: {
+              whiteSpace: 'nowrap'
+            },
+            type: "button",
+            className: "btn btn-secondary",
+            onClick: function onClick() {
+              return _this2.props.dispatch({
+                type: 'OPEN_MODAL',
+                msg: 'ADD_TASK_CSV',
+                entries: _this2.props.entry
+              });
+            },
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 161
+            },
+            __self: this
+          }, "\u05D4\u05D5\u05E1\u05E4\u05D4 \u05DE\u05E7\u05D5\u05D1\u05E5"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
+            style: {
+              whiteSpace: 'nowrap'
+            },
+            type: "button",
+            className: "btn btn-secondary",
+            onClick: function onClick() {
+              return _this2.props.dispatch({
+                type: 'OPEN_MODAL',
+                msg: 'EXPORT_TASK_CSV',
+                entries: _this2.props.entry
+              });
+            },
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 162
+            },
+            __self: this
+          }, "\u05D9\u05D9\u05E6\u05D5\u05D0 \u05D3\u05D5\u05D7"))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 165
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["InputGroup"], {
+            className: "mb-3",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 166
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"].Control, {
+            as: "select",
+            variant: "outline-secondary",
+            title: "Dropdown",
+            drop: "up",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 167
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 172
+            },
+            __self: this
+          }, "\u05E1\u05E4\u05E7"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 173
+            },
+            __self: this
+          }, "\u05DB\u05EA\u05D5\u05D1\u05EA"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 174
+            },
+            __self: this
+          }, "\u05D0\u05D9\u05E9 \u05E7\u05E9\u05E8"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 175
+            },
+            __self: this
+          }, "\u05D8\u05DC\u05E4\u05D5\u05DF")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["FormControl"], {
+            "aria-describedby": "basic-addon1",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 177
+            },
+            __self: this
+          }))))));
+        }
+
+        return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+          className: "table-responsive",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 135
+            lineNumber: 186
           },
           __self: this
-        }, _this2.state.columnNames[column]);
-      }))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tbody", {
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 140
-        },
-        __self: this
-      }, this.props.data.map(function (entry) {
-        var isSelected = false;
-        if (_this2.state.selectedEntries[entry.id]) isSelected = true;
-        return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_components_Entry__WEBPACK_IMPORTED_MODULE_8__["default"], {
-          page: _this2.props.page,
-          isSelected: isSelected,
-          isSelectable: _this2.props.isSelectable,
-          type: _this2.props.type,
-          key: entry.id,
-          selectCallback: _this2.selectCallback,
-          entry: entry,
-          tableColumns: _this2.state.tableColumns,
+        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Table"], {
+          hover: true,
+          responsive: true,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 146
+            lineNumber: 187
           },
           __self: this
-        });
-      }))), actionsBar);
+        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("thead", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 188
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tr", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 189
+          },
+          __self: this
+        }, this.state.tableColumns.map(function (column) {
+          switch (column) {
+            default:
+              return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("th", {
+                scope: "col",
+                key: column,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 194
+                },
+                __self: this
+              }, _this2.state.columnNames[column]);
+          }
+        }))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tbody", {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 200
+          },
+          __self: this
+        }, this.props.data.map(function (entry) {
+          var isSelected = false;
+          if (_this2.state.selectedEntries[entry.id]) isSelected = true;
+          return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_components_Entry__WEBPACK_IMPORTED_MODULE_8__["default"], {
+            page: _this2.props.page,
+            isSelected: isSelected,
+            isSelectable: _this2.props.isSelectable,
+            type: _this2.props.type,
+            key: entry.id,
+            selectCallback: _this2.selectCallback,
+            entry: entry,
+            tableColumns: _this2.state.tableColumns,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 206
+            },
+            __self: this
+          });
+        }))), actionsBar);
+      }
     }
   }]);
 
@@ -1196,6 +1850,49 @@ function checkAuthAndRefresh(dispatch) {
 
 /***/ }),
 
+/***/ "./dbActions/dates.js":
+/*!****************************!*\
+  !*** ./dbActions/dates.js ***!
+  \****************************/
+/*! exports provided: getEndDate, getStartDate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEndDate", function() { return getEndDate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStartDate", function() { return getStartDate; });
+function getEndDate() {
+  // if it is Thursday or after, return time of next Saturday. else, return time of this saturday.
+  var now = new Date();
+  var result = new Date(now);
+  var weekDay = result.getDay();
+
+  if (weekDay < 4) {
+    // before thursday
+    result.setDate(result.getDate() + 6 - weekDay);
+  } else {
+    result.setDate(result.getDate() + 13 - weekDay);
+  }
+
+  result.setHours(23);
+  result.setMinutes(59);
+  result.setSeconds(59);
+  result.setMilliseconds(999);
+  return result;
+}
+function getStartDate() {
+  // get the beginning time of the day
+  var now = new Date();
+  var result = new Date(now);
+  result.setHours(0);
+  result.setMinutes(0);
+  result.setSeconds(0);
+  result.setMilliseconds(0);
+  return result;
+}
+
+/***/ }),
+
 /***/ "./dbActions/getAllRegionTasks.js":
 /*!****************************************!*\
   !*** ./dbActions/getAllRegionTasks.js ***!
@@ -1215,7 +1912,7 @@ function getAllRegionTasks(dispatch, region) {
   var tasks = [];
   db.collection("tasks").where("region", "==", region).get().then(function (querySnapshot) {
     querySnapshot.forEach(function (task) {
-      tasks.push(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, task.data, {
+      tasks.push(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, task.data(), {
         id: task.id
       }));
     });
@@ -1247,7 +1944,7 @@ function getAllUsers(dispatch) {
   var users = [];
   db.collection("users").get().then(function (querySnapshot) {
     querySnapshot.forEach(function (user) {
-      users.push(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, user.data, {
+      users.push(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, user.data(), {
         uid: user.id
       }));
     });
@@ -1271,10 +1968,12 @@ function getAllUsers(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getAssigned; });
 /* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config/firebaseConfig */ "./config/firebaseConfig.js");
+/* harmony import */ var _dates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dates */ "./dbActions/dates.js");
+
 
 function getAssigned(dispatch, uid) {
   var db = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__["default"].firestore();
-  db.collection("tasks").where("volunteerUid", "==", uid).where("timestamp", ">", new Date()).get().then(function (querySnapshot) {
+  db.collection("tasks").where("volunteerUid", "==", uid).where("timestamp", ">", Object(_dates__WEBPACK_IMPORTED_MODULE_1__["getStartDate"])()).where("collected", "==", false).get().then(function (querySnapshot) {
     var tasks = [];
     querySnapshot.forEach(function (doc) {
       var task = doc.data();
@@ -1301,15 +2000,24 @@ function getAssigned(dispatch, uid) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getTaskReports; });
 /* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config/firebaseConfig */ "./config/firebaseConfig.js");
+/* harmony import */ var _dates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dates */ "./dbActions/dates.js");
+
 
 function getTaskReports(dispatch, uid) {
   var db = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__["default"].firestore();
-  db.collection("tasks").where("volunteerUid", "==", uid).where("timestamp", "<", new Date()).where("reportFilled", "==", false).get().then(function (querySnapshot) {
+  db.collection("tasks").where("volunteerUid", "==", uid).where("reportFilled", "==", false).get().then(function (querySnapshot) {
     var tasks = [];
     querySnapshot.forEach(function (doc) {
       var task = doc.data();
       task.id = doc.id;
-      tasks.push(task);
+
+      if (task.collected) {
+        tasks.push(task);
+      } else {
+        if (task.timestamp < Object(_dates__WEBPACK_IMPORTED_MODULE_1__["getStartDate"])()) {
+          tasks.push(task);
+        }
+      }
     });
     dispatch({
       type: 'TASKREPORTS',
@@ -1331,16 +2039,21 @@ function getTaskReports(dispatch, uid) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getUnassigned; });
 /* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config/firebaseConfig */ "./config/firebaseConfig.js");
+/* harmony import */ var _dates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dates */ "./dbActions/dates.js");
+
 
 function getUnassigned(dispatch, region) {
   var db = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__["default"].firestore();
-  db.collection("tasks").where("region", "==", region).where("volunteerUid", "==", null).where("timestamp", ">", new Date()).get().then(function (querySnapshot) {
+  console.log(Object(_dates__WEBPACK_IMPORTED_MODULE_1__["getStartDate"])());
+  console.log(Object(_dates__WEBPACK_IMPORTED_MODULE_1__["getEndDate"])());
+  db.collection("tasks").where("region", "==", region).where("volunteerUid", "==", null).where("timestamp", ">", Object(_dates__WEBPACK_IMPORTED_MODULE_1__["getStartDate"])()).where("timestamp", "<", Object(_dates__WEBPACK_IMPORTED_MODULE_1__["getEndDate"])()).get().then(function (querySnapshot) {
     var tasks = [];
     querySnapshot.forEach(function (doc) {
       var task = doc.data();
       task.id = doc.id;
       tasks.push(task);
     });
+    console.log(tasks);
     dispatch({
       type: 'UNASSIGNEDTASKS',
       tasks: tasks
@@ -2447,7 +3160,14 @@ function (_Component) {
             lineNumber: 27
           },
           __self: this
-        }, "\u05D4\u05D9\u05D9 ", this.props.userData.firstName, ", \u05D9\u05E9 \u05DC\u05DA ", atNum > 0 ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_9___default.a, {
+        }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("i", {
+          class: "fas fa-bell",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 27
+          },
+          __self: this
+        }), "\u05D4\u05D9\u05D9 ", this.props.userData.firstName, ", \u05D9\u05E9 \u05DC\u05DA ", atNum > 0 ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_9___default.a, {
           href: "/assigned-tasks",
           __source: {
             fileName: _jsxFileName,
@@ -2496,56 +3216,72 @@ function (_Component) {
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_Header_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+          page: "index",
           __source: {
             fileName: _jsxFileName,
             lineNumber: 35
           },
           __self: this
-        }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("main", {
+        }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+          className: "wrapper d-flex justify-content-center",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 36
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("main", {
           className: "m-2",
           style: {
             paddingBottom: '3rem'
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 36
+            lineNumber: 37
           },
           __self: this
         }, alert, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
           className: "mb-4 mt-4",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 38
+            lineNumber: 39
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h2", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 39
+            lineNumber: 40
           },
           __self: this
-        }, "\u05E9\u05D9\u05D1\u05D5\u05E5 \u05DC\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_TableBlock_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("img", {
+          src: "/static/assign.png",
+          width: "60",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 40
+          },
+          __self: this
+        }), " \u05E9\u05D9\u05D1\u05D5\u05E5 \u05DC\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_TableBlock_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
           isSelectable: true,
           data: this.props.unassignedTasks,
           page: "index",
           type: "tasks",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 41
+            lineNumber: 42
           },
           __self: this
-        })));
+        }))));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 46
+            lineNumber: 47
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_Header_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 46
+            lineNumber: 47
           },
           __self: this
         }));
@@ -2574,30 +3310,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Loading; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_Logo_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Logo.js */ "./components/Logo.js");
 var _jsxFileName = "C:\\Users\\baram\\Git\\leket-go\\pages\\loading.js";
+
 
 function Loading() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      display: 'flex',
+      width: '100%',
+      height: '100vh',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 3
+      lineNumber: 5
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 4
+      lineNumber: 12
     },
     __self: this
-  }, "LOADING"));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: "/static/loading.png",
+    width: "100",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19
+    },
+    __self: this
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    style: {
+      fontSize: '20px',
+      marginTop: '10px'
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: this
+  }, "\u05D1\u05D8\u05E2\u05D9\u05E0\u05D4...")));
 }
 
 /***/ }),
 
-/***/ "./statics/bootstrap.min.scss":
-/*!************************************!*\
-  !*** ./statics/bootstrap.min.scss ***!
-  \************************************/
+/***/ "./static/bootstrap.min.scss":
+/*!***********************************!*\
+  !*** ./static/bootstrap.min.scss ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -2605,10 +3374,10 @@ function Loading() {
 
 /***/ }),
 
-/***/ "./statics/styles.scss":
-/*!*****************************!*\
-  !*** ./statics/styles.scss ***!
-  \*****************************/
+/***/ "./static/styles.scss":
+/*!****************************!*\
+  !*** ./static/styles.scss ***!
+  \****************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 

@@ -16,6 +16,7 @@ class TableBlock extends React.Component {
 				'date': 'תאריך',
 				'time': 'שעה',
 				'city': 'עיר',
+				'fullAddress': 'כתובת',
 				'name': 'ספק',
 				'uid': 'uid',
 				'firstName': 'שם פרטי',
@@ -24,9 +25,10 @@ class TableBlock extends React.Component {
 				'email': 'דוא"ל',
 				'tz': 'תעודת זהות',
 				'street': 'רחוב',
-				'contactName': 'איש קשר',
+				'contactName': 'שם',
 				'contactNumber': 'טלפון',
-				'checkBox': ''
+				'checkBox': '',
+				'phone': 'טלפון'
 			}
 		};
 		this.selectCallback = this.selectCallback.bind(this);
@@ -39,7 +41,7 @@ class TableBlock extends React.Component {
 			case 'index':
 				return ['checkBox', 'date', 'time', 'city', 'name'];
 			case 'assignedTasks':
-				return ['date', 'time', 'street', 'city', 'name', 'contactName', 'contactNumber', 'actions'];
+				return ['date', 'time', 'fullAddress', 'name', 'contactName', 'contactNumber', 'actions'];
 			case 'taskReports':
 				return ['date', 'street', 'city', 'name', 'actions'];
 			case 'adminUsers':
@@ -84,6 +86,30 @@ class TableBlock extends React.Component {
 	}
 
 	render() {
+		if (this.props.data.length == 0){
+			return (
+				<div style={{
+					display: 'flex',
+					width: '100%',
+					alignItems: 'center',
+					justifyContent: 'center'
+				}}>
+					<div style= {{
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+						justifyContent: 'center'
+		
+					}}>
+						<img src="/static/nothing.png" width="100"/>
+						<div style={{
+							fontSize: '20px',
+							marginTop: '10px'
+						}}>המממ... אין כאן כלום</div>
+					</div>
+				</div>
+			);
+		} else {
 		let actionsBar = '';
 		if (this.props.isSelectable && this.state.entrySelectedCounter > 0) {
 			actionsBar = 
@@ -94,15 +120,15 @@ class TableBlock extends React.Component {
 					</ButtonGroup>
 				</Navbar>;
 		}
-		if (this.props.isSearchable) {
+		if (this.props.isSearchable && this.props.page=='adminUsers') {
 			actionsBar = 
 				<Navbar bg='light' fixed='bottom'>
 					<Form>
 						<Row>
 							<Col>
 						<div className="btn-group" role="group" aria-label="Basic example">
-							<button type="button" className="btn btn-primary">הוספת משתמש</button>
-							<button type="button" className="btn btn-secondary">הוספה מקובץ</button></div>
+							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER', entries: this.props.entry})}>הוספת משתמש</button>
+							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER_CSV', entries: this.props.entry})}>הוספה מקובץ</button></div>
 							</Col>
 							<Col>
 								<InputGroup className="mb-3">
@@ -124,6 +150,37 @@ class TableBlock extends React.Component {
 					</Form>
 				</Navbar>;
 		}
+		if (this.props.isSearchable && this.props.page=='adminTasks') {
+			actionsBar = 
+				<Navbar bg='light' fixed='bottom'>
+					<Form>
+						<Row>
+							<Col>
+						<div className="btn-group" role="group" aria-label="Basic example">
+							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK', entries: this.props.entry})}>הוספת משימה</button>
+							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK_CSV', entries: this.props.entry})}>הוספה מקובץ</button>
+							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EXPORT_TASK_CSV', entries: this.props.entry})}>ייצוא דוח</button>
+							</div>
+							</Col>
+							<Col>
+								<InputGroup className="mb-3">
+								<Form.Control
+								as="select"
+								variant='outline-secondary'
+								title='Dropdown'
+								drop='up'>
+									<option>ספק</option>
+									<option>כתובת</option>
+									<option>איש קשר</option>
+									<option>טלפון</option>
+								</Form.Control>
+								<FormControl aria-describedby="basic-addon1" />
+								</InputGroup>
+							</Col>
+						</Row>
+					</Form>
+				</Navbar>;
+		}
 
 		return (
 			<div className="table-responsive">
@@ -131,9 +188,12 @@ class TableBlock extends React.Component {
 					<thead>
 						<tr>
 						{this.state.tableColumns.map((column) => {
-							return (
-								<th scope="col" key={column}>{this.state.columnNames[column]}</th>
-							);
+							switch (column){
+								default:
+									return (
+										<th scope="col" key={column}>{this.state.columnNames[column]}</th>
+								);
+							}
 						})}
 						</tr>
 					</thead>
@@ -151,6 +211,7 @@ class TableBlock extends React.Component {
 				{actionsBar}
 			</div>
 		);
+					}
 	}
 }
 

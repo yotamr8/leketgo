@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import "../statics/styles.scss"
 import { connect } from "react-redux"
 import fire from '../config/firebaseConfig'
 import Header from '../components/Header.js'
 import Router from 'next/router'
 import checkAuthAndRefresh from '../dbActions/checkAuth'
 import Loading from './loading'
+import Logo from '../components/Logo.js'
 
 class Login extends Component {
     state = {
@@ -45,6 +45,8 @@ class Login extends Component {
         return (
             <div>
                 <Header isLogin={true} />
+                <Logo use='login' />
+                <div className="wrapper d-flex justify-content-center">
                 <main className="m-2" style={{ paddingBottom: '3rem' }}>
                     <div className="card">
                         <h5 className="card-header">התחברות</h5>
@@ -71,7 +73,7 @@ class Login extends Component {
                     <div style={{ color: 'red' }}>
                         {this.props.loginErr ? <h3>{this.props.loginErr}</h3> : null}
                     </div>
-                </main>
+                </main></div>
             </div>
         )
     }

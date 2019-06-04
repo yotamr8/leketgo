@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux"
-import {Button, Form, ButtonGroup} from 'react-bootstrap'
+import {Button, Dropdown, Form, ButtonGroup} from 'react-bootstrap'
 import fire from '../config/firebaseConfig'
 
 class Entry extends React.Component {
@@ -24,9 +24,10 @@ class Entry extends React.Component {
                     city: entry.city,
                     name: entry.name,
                     street: entry.address,
+                    fullAddress: entry.address + ', ' + entry.city,
                     actions: 'ACTIONS',
                     contactName: entry['contact name'],
-                    contactNumber: <a href={'tel: '+ entry['contact number']}>{entry['contact number']}</a>,
+                    contactNumber: <a style={{whiteSpace: 'nowrap'}} href={'tel: '+ entry['contact number']}>{entry['contact number']}</a>,
                     checkBox: this.props.isSelected ? <Form.Check custom checked label='' type='checkbox' /> : <Form.Check custom label='' type='checkbox' />
                 }
             case 'users':
@@ -62,17 +63,17 @@ class Entry extends React.Component {
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_NOTES', entries: this.props.entry}),
                         color: 'outline-primary',
-                        text: 'הערות'
+                        text: <span><i class="far fa-sticky-note"></i>הערות</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_DONE', entries: this.props.entry}),
                         color: 'outline-primary',
-                        text: 'בוצע'
+                        text: <span><i class="far fa-calendar-check"></i>בוצע</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_CANCEL', entries: this.props.entry }),
                         color: 'outline-secondary',
-                        text: 'הסרה'
+                        text: <span><i class="far fa-calendar-times"></i>הסרה</span>
                     },
                 ];
                 break;
@@ -109,6 +110,25 @@ class Entry extends React.Component {
                     }
                 ];
                 break;
+                case 'adminTasks':
+                        buttons = [
+                            {
+                                onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EDIT_USER', entries: this.props.entry}),
+                                color: 'outline-primary',
+                                text: 'עריכה'
+                            },
+                            {
+                                onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'RESET_PASSWORD', entries: this.props.entry}),
+                                color: 'outline-secondary',
+                                text: 'סטטוס'
+                            },
+                            {
+                                onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'RESET_PASSWORD', entries: this.props.entry}),
+                                color: 'outline-secondary',
+                                text: 'מחיקה'
+                            }
+                        ];
+                        break;
         }
 
         return (
@@ -121,16 +141,64 @@ class Entry extends React.Component {
                             </td>
                         );
                     } else {
-                        return (
-                        <td key={column}>
-                            <ButtonGroup>
-                                {buttons.map((button) => {
+                        switch (this.props.page){
+                            case 'assignedTasks':
+                                return <td key={column}>
+                                <span style={{whiteSpace: 'nowrap'}}><Dropdown width='200'>
+                                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                        פעולות
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                    {buttons.map((button) => {
+                                            return (
+                                                <Dropdown.Item key={button.text} onClick={button.onClick}>{button.text}</Dropdown.Item>
+                                                );
+                                            })}
+                                    </Dropdown.Menu>
+                                </Dropdown></span>
+                            </td>;
+                            case 'adminUsers':
+                                return <td key={column}>
+                                <span style={{whiteSpace: 'nowrap'}}><Dropdown width='200'>
+                                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                        פעולות
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                    {buttons.map((button) => {
+                                            return (
+                                                <Dropdown.Item key={button.text} onClick={button.onClick}>{button.text}</Dropdown.Item>
+                                                );
+                                            })}
+                                    </Dropdown.Menu>
+                                </Dropdown></span>
+                            </td>;
+                            case 'adminTasks':
+                                    return <td key={column}>
+                                    <span style={{whiteSpace: 'nowrap'}}><Dropdown width='200'>
+                                        <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                            פעולות
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                        {buttons.map((button) => {
+                                                return (
+                                                    <Dropdown.Item key={button.text} onClick={button.onClick}>{button.text}</Dropdown.Item>
+                                                    );
+                                                })}
+                                        </Dropdown.Menu>
+                                    </Dropdown></span>
+                                </td>;
+                            default:
                                 return (
-                                    <Button key={button.text} onClick={button.onClick} variant={button.color}>{button.text}</Button>
-                                    );
-                                })}
-                            </ButtonGroup>
-                        </td>);
+                                    <td key={column}>
+                                        <ButtonGroup>
+                                            {buttons.map((button) => {
+                                            return (
+                                                <Button key={button.text} onClick={button.onClick} variant={button.color}>{button.text}</Button>
+                                                );
+                                            })}
+                                        </ButtonGroup>
+                                    </td>);
+                        }
                     }
                 })}
             </tr>

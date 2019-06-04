@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import "../statics/styles.scss"
 import { connect } from "react-redux"
 import {Form, Button, Col, Navbar} from 'react-bootstrap'
 import Header from '../components/Header.js'
@@ -39,9 +38,10 @@ class Personal_information extends Component {
         return (
                 <div>
                     <Header />
+                    <div className="wrapper d-flex justify-content-center">
                     <main className="m-2" style={{paddingBottom: '3rem'}}>
                         <div className="mt-4 mb-4">
-                            <h2>עדכון פרטים אישיים</h2>
+                            <h2><img src='/static/profile.png' width="60"/> עדכון פרטים אישיים</h2>
                         </div>
                         <Form
                             noValidate
@@ -112,7 +112,7 @@ class Personal_information extends Component {
                             </Navbar>
                         </Form>
                     </main>
-                </div>
+                </div></div>
         );
     }
 }

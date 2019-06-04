@@ -2,16 +2,17 @@ import Head from 'next/head'
 import React from 'react'
 import { connect } from 'react-redux'
 import fire from '../config/firebaseConfig'
-import {Badge, Nav, Navbar, NavItem, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
+import {ButtonToolbar, Tooltip, OverlayTrigger, Badge, Nav, Navbar, NavItem, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
 import Link from 'next/link'
-import '../statics/bootstrap.min.scss'
-import '../statics/styles.scss'
+import '../static/bootstrap.min.scss'
+import '../static/styles.scss'
+import Logo from '../components/Logo.js'
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isUserDropdown: false
+            isUserDropdown: false,
         }
 
         this.toggleUserDropDown = this.toggleUserDropDown.bind(this);
@@ -54,16 +55,28 @@ class Header extends React.Component {
         let navbar = '';
         if (!this.props.isLogin) {
             navbar = <Navbar id='top-nav' sticky='top' bg='light' variant='light' expand='lg'>
-            <Link href="/"><a className='navbar-brand'>LetsGo</a></Link>
+            <Link href="/"><a className='navbar-brand'>{<Logo />}</a></Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 {pages}
                 <Nav className='mr-sm-2'>
                 <NavDropdown alignRight title={this.props.userData.firstName + ' ' + this.props.userData.lastName} id="basic-nav-dropdown">
-                    <Link href="/personal-information"><a className='dropdown-item'>פרטים אישיים</a></Link>
+                    <Link href="/personal-information"><a className='dropdown-item'><i className="far fa-user-circle"></i>פרטים אישיים</a></Link>
                     <NavDropdown.Divider />
-                    <Link href='/login'><a className='dropdown-item' onClick={this.logout}>התנתקות</a></Link>
+                    <Link href='/login'><a className='dropdown-item' onClick={this.logout}><i className="fas fa-sign-out-alt"></i>התנתקות</a></Link>
                 </NavDropdown>
+                <ButtonToolbar>
+                <OverlayTrigger
+                    key='help'
+                    placement='bottom'
+                    overlay={
+                        <Tooltip id='tooltip'>
+                        עזרה
+                        </Tooltip>
+                    }>
+                    <Nav.Link><i className="fas fa-question-circle"></i></Nav.Link>
+                </OverlayTrigger>
+                </ButtonToolbar>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>;
@@ -75,7 +88,7 @@ class Header extends React.Component {
                             integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
                         <meta charset="utf-8" />
                         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                        <title>LetsGo</title>
+                        <title>לקט־GO</title>
                     </Head>
                     {navbar}
                 </div>

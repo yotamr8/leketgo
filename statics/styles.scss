@@ -10,7 +10,30 @@ html {
 }
 
 body, .tooltip, .popover {
-  font-family: 'Heebo', sans-serif;
+  font-family: 'Heebo', sans-serif !important;
+}
+
+.fas.fa-sign-out-alt, .far.fa-user-circle, .far.fa-calendar-times, .far.fa-sticky-note, .far.fa-calendar-check, .fas.fa-bell {
+  margin-left: 8px;
+}
+
+#top-nav {
+  position: sticky !important;
+  top: 0 !important;
+}
+
+h2 img {
+  user-select: none;
+}
+
+main {
+  width: 100%;
+}
+
+.wrapper {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #top-nav.bg-light {

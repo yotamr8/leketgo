@@ -353,6 +353,57 @@ class ModalBlock extends React.Component {
                         text: 'סגירה'
                     }    
                     ];
+                    break;
+                    case 'ADD_USER':
+                            title = 'הוספת משתמש';
+                            body = <span></span>;
+                            buttons = [
+                                {
+                                    onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                                    color: 'secondary',
+                                    text: 'סגירה'
+                                }];
+                            break;
+                    case 'ADD_TASK':
+                            title = 'הוספת משימה';
+                            body = <span></span>;
+                            buttons = [
+                                {
+                                    onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                                    color: 'secondary',
+                                    text: 'סגירה'
+                                }];
+                            break;
+                    case 'ADD_USER_CSV':
+                            title = 'הוספת משתמשים מקובץ';
+                            body = <span></span>;
+                            buttons = [
+                                {
+                                    onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                                    color: 'secondary',
+                                    text: 'סגירה'
+                                }];
+                            break;
+                    case 'ADD_TASK_CSV':
+                            title = 'הוספת משימות מקובץ';
+                            body = <span></span>;
+                            buttons = [
+                                {
+                                    onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                                    color: 'secondary',
+                                    text: 'סגירה'
+                                }];
+                            break;
+                    case 'EXPORT_TASK_CSV':
+                            title = 'הוספת משימות מקובץ';
+                            body = <span></span>;
+                            buttons = [
+                                {
+                                    onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                                    color: 'secondary',
+                                    text: 'סגירה'
+                                }];
+                            break;
         }
 
             return (

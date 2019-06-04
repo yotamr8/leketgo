@@ -24,7 +24,7 @@ class Index extends Component {
         let trNum = this.props.taskReports.length;
         let alert = ''; 
         if (atNum > 0 || trNum > 0){
-            alert = <Alert variant='warning'>
+            alert = <Alert variant='warning'><i class="fas fa-bell"></i>
                 היי {this.props.userData.firstName}, יש לך {atNum > 0 ? <Link href="/assigned-tasks"><a><strong>{atNum}</strong> איסופים קרובים</a></Link> : ''}{(atNum > 0 && trNum > 0 ? 'ועוד ' : '')}{trNum > 0 ? <Link href='/task-reports'><a><strong>{trNum}</strong> איסופים הממתינים למשוב</a></Link> : ''}.
                 </Alert>
         }
@@ -32,14 +32,15 @@ class Index extends Component {
         if (!this.props.userData.admin) {
             return (
                 <div>
-                <Header />
+                <Header page='index' />
+                <div className="wrapper d-flex justify-content-center">
                     <main className="m-2" style={{ paddingBottom: '3rem' }}>
                         {alert}
                         <div className="mb-4 mt-4">
-                            <h2>שיבוץ לאיסופים</h2>
+                            <h2><img src='/static/assign.png' width="60"/> שיבוץ לאיסופים</h2>
                         </div>
                         <TableBlock isSelectable={true} data={this.props.unassignedTasks} page='index' type='tasks' />
-                    </main>
+                    </main></div>
                 </div>
             );
         } else {
