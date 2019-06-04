@@ -41,7 +41,7 @@ class Personal_information extends Component {
                     <div className="wrapper d-flex justify-content-center">
                     <main className="m-2" style={{paddingBottom: '3rem'}}>
                         <div className="mt-4 mb-4">
-                            <h2><img src='/static/profile.png' width="60"/> עדכון פרטים אישיים</h2>
+                            <h2><img src='/static/profile.png' width="60"/>עדכון פרטים אישיים</h2>
                         </div>
                         <Form
                             noValidate

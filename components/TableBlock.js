@@ -21,15 +21,18 @@ class TableBlock extends React.Component {
 				'uid': 'uid',
 				'firstName': 'שם פרטי',
 				'lastName': 'שם משפחה',
+				'fullName': 'שם מלא',
 				'region': 'אזור',
 				'email': 'דוא"ל',
 				'tz': 'תעודת זהות',
-				'street': 'רחוב',
+				'street': 'רחוב ומספר',
 				'contactName': 'שם',
 				'contactNumber': 'טלפון',
 				'checkBox': '',
 				'phone': 'טלפון'
-			}
+			},
+			searchValue: '',
+			searchField: this.props.page == 'adminUsers' ? 'firstName' : 'name',
 		};
 		this.selectCallback = this.selectCallback.bind(this);
 		this.cancelSelection = this.cancelSelection.bind(this);
@@ -85,6 +88,56 @@ class TableBlock extends React.Component {
         setAssignedTasks(this.props, taskIDs, this.state.entrySelectedCounter, this.state.selectedEntries)
 	}
 
+	handleChangeForm(event) {
+		
+		let fleldVal = event.target.value;
+		this.setState({searchValue: fleldVal});
+	}
+
+	handleChangeDropDown(event) {
+		let fleldVal = event.target.value;
+		switch (fleldVal) {
+			case 'שם פרטי':
+				this.setState({searchField: 'firstName'});
+				break;
+			case 'שם משפחה':
+					this.setState({searchField: 'lastName'});
+					break;
+			case 'תעודת זהות':
+				this.setState({searchField: 'tz'});
+				break;
+			case 'רחוב ומספר':
+				this.setState({searchField: 'address'});
+				break;
+			case 'עיר מגורים':
+					this.setState({searchField: 'city'});
+					break;
+			case 'מספר טלפון':
+				this.setState({searchField: 'phone'});
+				break;
+			case 'דואר אלקטרוני':
+				this.setState({searchField: 'email'});
+				break;
+			case 'ספק':
+					this.setState({searchField: 'name'});
+					break;
+			case 'עיר':
+					this.setState({searchField: 'city'});
+					break;
+			case 'רחוב ומספר':
+					this.setState({searchField: 'address'});
+					break;
+			case 'איש קשר':
+					this.setState({searchField: 'contact name'});
+					break;
+			case 'טלפון':
+					this.setState({searchField: 'contact number'});
+					break;
+			default:
+				break;
+		}
+	}
+
 	render() {
 		if (this.props.data.length == 0){
 			return (
@@ -127,7 +180,7 @@ class TableBlock extends React.Component {
 						<Row>
 							<Col>
 						<div className="btn-group" role="group" aria-label="Basic example">
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER', entries: this.props.entry})}>הוספת משתמש</button>
+							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER', entries: this.props.entry})}>הוספת מתנדב</button>
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER_CSV', entries: this.props.entry})}>הוספה מקובץ</button></div>
 							</Col>
 							<Col>
@@ -136,14 +189,16 @@ class TableBlock extends React.Component {
 								as="select"
 								variant='outline-secondary'
 								title='Dropdown'
-								drop='up'>
-									<option>שם מלא</option>
+								drop='up' onChange={this.handleChangeDropDown.bind(this)}>
+									<option>שם פרטי</option>
+									<option>שם משפחה</option>
 									<option>תעודת זהות</option>
-									<option>כתובת מגורים</option>
+									<option>רחוב ומספר</option>
+									<option>עיר מגורים</option>
 									<option>מספר טלפון</option>
 									<option>דואר אלקטרוני</option>
 								</Form.Control>
-								<FormControl aria-describedby="basic-addon1" />
+								<FormControl onChange={this.handleChangeForm.bind(this)} aria-describedby="basic-addon1" />
 								</InputGroup>
 							</Col>
 						</Row>
@@ -157,7 +212,7 @@ class TableBlock extends React.Component {
 						<Row>
 							<Col>
 						<div className="btn-group" role="group" aria-label="Basic example">
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK', entries: this.props.entry})}>הוספת משימה</button>
+							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK', entries: this.props.entry})}>הוספת איסוף</button>
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK_CSV', entries: this.props.entry})}>הוספה מקובץ</button>
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EXPORT_TASK_CSV', entries: this.props.entry})}>ייצוא דוח</button>
 							</div>
@@ -168,13 +223,15 @@ class TableBlock extends React.Component {
 								as="select"
 								variant='outline-secondary'
 								title='Dropdown'
-								drop='up'>
+								drop='up'
+								onChange={this.handleChangeDropDown.bind(this)}>
 									<option>ספק</option>
-									<option>כתובת</option>
+									<option>עיר</option>
+									<option>רחוב ומספר</option>
 									<option>איש קשר</option>
 									<option>טלפון</option>
 								</Form.Control>
-								<FormControl aria-describedby="basic-addon1" />
+								<FormControl onChange={this.handleChangeForm.bind(this)} aria-describedby="basic-addon1" />
 								</InputGroup>
 							</Col>
 						</Row>
@@ -200,11 +257,20 @@ class TableBlock extends React.Component {
 					<tbody>
 						{this.props.data.map((entry) => {
 							let isSelected = false;
+							let ret = <Entry page={this.props.page} isSelected={isSelected} isSelectable={this.props.isSelectable} type={this.props.type} key={entry.id} selectCallback={this.selectCallback} entry={entry} tableColumns={this.state.tableColumns}/>
+
 							if (this.state.selectedEntries[entry.id])
 								isSelected = true;
-							return (
-								<Entry page={this.props.page} isSelected={isSelected} isSelectable={this.props.isSelectable} type={this.props.type} key={entry.id} selectCallback={this.selectCallback} entry={entry} tableColumns={this.state.tableColumns}/>
-							);
+							if (this.props.isSearchable){
+								for (let key in entry){
+									if (key == this.state.searchField)
+										if(entry[key].includes(this.state.searchValue))
+											return ret;
+								}
+							}
+							else {
+							return ret;
+							}
 						})}
 					</tbody>
 				</Table>

@@ -8148,8 +8148,12 @@ html {
 body, .tooltip, .popover {
   font-family: 'Heebo', sans-serif !important; }
 
-.fas.fa-sign-out-alt, .far.fa-user-circle, .far.fa-calendar-times, .far.fa-sticky-note, .far.fa-calendar-check, .fas.fa-bell {
+.fas, .far {
   margin-left: 8px; }
+
+.ltr.fas, .ltr.far {
+  margin-left: 0px;
+  margin-right: 8px; }
 
 #top-nav {
   position: sticky !important;
@@ -8162,6 +8166,10 @@ main {
   max-width: 900px;
   margin-left: auto;
   margin-right: auto; }
+
+h2 img {
+  user-select: none;
+  margin-left: 10px; }
 
 #top-nav.bg-light {
   background-color: #99E1ED !important; }

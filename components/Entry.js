@@ -35,6 +35,7 @@ class Entry extends React.Component {
                     uid: entry.id,
                     firstName: entry.firstName,
                     lastName: entry.lastName,
+                    fullName: entry.firstName + '' + entry.lastName,
                     region: entry.region,
                     email: entry.email,
                     phone: entry.phone,

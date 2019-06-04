@@ -48,8 +48,8 @@ class Header extends React.Component {
             pages = 
             <Nav className="mr-auto">
                 <Link href="/"><a className='nav-link'>לוח בקרה</a></Link>
-                <Link href="/users"><a className='nav-link'>משתמשים</a></Link>
-                <Link href="/tasks"><a className='nav-link'>משימות</a></Link>
+                <Link href="/tasks"><a className='nav-link'>איסופים</a></Link>
+                <Link href="/users"><a className='nav-link'>מתנדבים</a></Link>
             </Nav>;
         }
         let navbar = '';

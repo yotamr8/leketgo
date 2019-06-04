@@ -703,7 +703,7 @@ function (_React$Component) {
 
         case 'EDIT_USER':
           var user = modal.entries;
-          title = 'עריכת פרטי משתמש';
+          title = 'עריכת פרטי מתנדב';
           body = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Form"], {
             __source: {
               fileName: _jsxFileName,
@@ -988,7 +988,7 @@ function (_React$Component) {
           break;
 
         case 'ADD_USER':
-          title = 'הוספת משתמש';
+          title = 'הוספת מתנדב';
           body = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("span", {
             __source: {
               fileName: _jsxFileName,
@@ -1008,7 +1008,7 @@ function (_React$Component) {
           break;
 
         case 'ADD_TASK':
-          title = 'הוספת משימה';
+          title = 'הוספת איסוף';
           body = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Form"], {
             __source: {
               fileName: _jsxFileName,
@@ -1215,7 +1215,7 @@ function (_React$Component) {
           break;
 
         case 'ADD_USER_CSV':
-          title = 'הוספת משתמשים מקובץ';
+          title = 'הוספת מתנדבים מקובץ';
           body = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("span", {
             __source: {
               fileName: _jsxFileName,
@@ -1235,7 +1235,7 @@ function (_React$Component) {
           break;
 
         case 'ADD_TASK_CSV':
-          title = 'הוספת משימות מקובץ';
+          title = 'הוספת איסופים מקובץ';
           body = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("span", {
             __source: {
               fileName: _jsxFileName,
@@ -1255,7 +1255,7 @@ function (_React$Component) {
           break;
 
         case 'EXPORT_TASK_CSV':
-          title = 'הוספת משימות מקובץ';
+          title = 'הוספת איסופים מקובץ';
           body = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("span", {
             __source: {
               fileName: _jsxFileName,

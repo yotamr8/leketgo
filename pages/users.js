@@ -22,7 +22,7 @@ class Users extends Component {
                 <Header /><div className="wrapper d-flex justify-content-center">
                 <main className="m-2" style={{ paddingBottom: '3rem' }}>
                     <div className="mb-4 mt-4">
-                        <h2><img src='/static/profile.png' width="60"/> משתמשים</h2>
+                        <h2><img src='/static/profile.png' width="60"/>מתנדבים</h2>
                     </div>
                     <TableBlock isSearchable={true} isSelectable={false} data={this.props.users} page='adminUsers' type='users' />
                 </main></div>

@@ -279,7 +279,7 @@ class ModalBlock extends React.Component {
                 break;
             case 'EDIT_USER':
                     var user = modal.entries;
-                    title = 'עריכת פרטי משתמש';
+                    title = 'עריכת פרטי מתנדב';
                     body =
                             <Form>
                                 <Form.Row>
@@ -368,7 +368,7 @@ class ModalBlock extends React.Component {
                     ];
                     break;
                     case 'ADD_USER':
-                            title = 'הוספת משתמש';
+                            title = 'הוספת מתנדב';
                             body = <span></span>;
                             buttons = [
                                 {
@@ -378,7 +378,7 @@ class ModalBlock extends React.Component {
                                 }];
                             break;
                     case 'ADD_TASK':
-                            title = 'הוספת משימה';
+                            title = 'הוספת איסוף';
                             body = 
                                 <Form>
                                     <Form.Row>
@@ -433,7 +433,7 @@ class ModalBlock extends React.Component {
                                 }];
                             break;
                     case 'ADD_USER_CSV':
-                            title = 'הוספת משתמשים מקובץ';
+                            title = 'הוספת מתנדבים מקובץ';
                             body = <span></span>;
                             buttons = [
                                 {
@@ -443,7 +443,7 @@ class ModalBlock extends React.Component {
                                 }];
                             break;
                     case 'ADD_TASK_CSV':
-                            title = 'הוספת משימות מקובץ';
+                            title = 'הוספת איסופים מקובץ';
                             body = <span></span>;
                             buttons = [
                                 {
@@ -453,7 +453,7 @@ class ModalBlock extends React.Component {
                                 }];
                             break;
                     case 'EXPORT_TASK_CSV':
-                            title = 'הוספת משימות מקובץ';
+                            title = 'הוספת איסופים מקובץ';
                             body = <span></span>;
                             buttons = [
                                 {
