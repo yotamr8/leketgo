@@ -4,7 +4,6 @@ import getAllUsers from './getAllUsers'
 import getAllRegionTasks from './getAllRegionTasks'
 import Router from 'next/router'
 
-
 export default function checkAuthAndRefresh(dispatch) {
     fire.auth().onAuthStateChanged((user) => {
         const db = fire.firestore();

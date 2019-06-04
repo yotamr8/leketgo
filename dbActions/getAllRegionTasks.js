@@ -7,7 +7,7 @@ export default function getAllRegionTasks(dispatch, region) {
         .where("region", "==", region)
         .get().then(function (querySnapshot) {
         querySnapshot.forEach(function (task) {
-            tasks.push({ ...task.data, id: task.id })
+            tasks.push({ ...task.data(), id: task.id })
         });
 		dispatch({ type: 'GETALLREGIONTASKS', tasks: tasks })
     });
