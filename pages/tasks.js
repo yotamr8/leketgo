@@ -18,8 +18,8 @@ class Users extends Component {
         }
 
         return (
-            <div><div className='app'>
-                <Header /><div className="wrapper d-flex justify-content-center">
+            <div>
+                <Header /><div className='app'><div className="wrapper d-flex justify-content-center">
                 <main className="m-2" style={{ paddingBottom: '3rem' }}>
                     <div className="mb-4 mt-4">
                         <h2><img src='/static/tasks.png' width="60"/>איסופים</h2>
