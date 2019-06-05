@@ -18,13 +18,13 @@ class Task_reports extends Component {
         }
         return (
             <div>
-                <Header /><div className="wrapper d-flex justify-content-center">
+                <Header /><div className='app'><div className="wrapper d-flex justify-content-center">
                 <main className="m-2" style={{ paddingBottom: '3rem' }}>
                     <div className="mb-4 mt-4">
                         <h2><img src='/static/report.png' width="60"/>מילוי משוב</h2>
                     </div>
                     <TableBlock data={this.props.taskReports} page='taskReports' type='tasks' />
-                </main></div>
+                </main></div></div>
             </div>
         )
     }

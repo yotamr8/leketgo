@@ -64,17 +64,17 @@ class Entry extends React.Component {
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_NOTES', entries: this.props.entry}),
                         color: 'outline-primary',
-                        text: <span><i class="far fa-sticky-note"></i>הערות</span>
+                        text: <span><i className="far fa-sticky-note fa-fw"></i>הערות</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_DONE', entries: this.props.entry}),
                         color: 'outline-primary',
-                        text: <span><i class="far fa-calendar-check"></i>בוצע</span>
+                        text: <span><i className="far fa-calendar-check fa-fw"></i>בוצע</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_CANCEL', entries: this.props.entry }),
                         color: 'outline-secondary',
-                        text: <span><i class="far fa-calendar-times"></i>הסרה</span>
+                        text: <span><i className="far fa-calendar-times fa-fw"></i>הסרה</span>
                     },
                 ];
                 break;
@@ -83,12 +83,12 @@ class Entry extends React.Component {
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_FILL', entries: this.props.entry }),
                         color: 'outline-primary',
-                        text: 'דיווח'
+                        text: <span><i className="far fa-calendar-check fa-fw"></i>דיווח</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE' }),
                         color: 'outline-secondary',
-                        text: 'לא בוצע'
+                        text: <span><i className="far fa-calendar-times fa-fw"></i>לא בוצע</span>
                     },
                 ];
                 break;
@@ -97,36 +97,36 @@ class Entry extends React.Component {
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EDIT_USER', entries: this.props.entry}),
                         color: 'outline-primary',
-                        text: 'עריכה'
+                        text: <span><i className="far fa-edit fa-fw"></i>עריכה</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'RESET_PASSWORD', entries: this.props.entry}),
                         color: 'outline-secondary',
-                        text: 'איפוס סיסמה'
+                        text: <span><i className="fas fa-unlock-alt fa-fw"></i>איפוס סיסמה</span>
                     },
                     {
-                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'RESET_PASSWORD', entries: this.props.entry}),
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REMOVE_USER', entries: this.props.entry}),
                         color: 'outline-secondary',
-                        text: 'מחיקה'
+                        text: <span><i className="far fa-trash-alt fa-fw"></i>מחיקה</span>
                     }
                 ];
                 break;
                 case 'adminTasks':
                         buttons = [
                             {
-                                onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EDIT_USER', entries: this.props.entry}),
+                                onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EDIT_TASK', entries: this.props.entry}),
                                 color: 'outline-primary',
-                                text: 'עריכה'
+                                text: <span><i className="far fa-edit fa-fw"></i>עריכה</span>
                             },
                             {
-                                onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'RESET_PASSWORD', entries: this.props.entry}),
+                                onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_STATUS', entries: this.props.entry}),
                                 color: 'outline-secondary',
-                                text: 'סטטוס'
+                                text: <span><i className="fas fa-question fa-fw"></i>סטטוס</span>
                             },
                             {
-                                onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'RESET_PASSWORD', entries: this.props.entry}),
+                                onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REMOVE_TASK', entries: this.props.entry}),
                                 color: 'outline-secondary',
-                                text: 'מחיקה'
+                                text: <span><i className="far fa-trash-alt fa-fw"></i>מחיקה</span>
                             }
                         ];
                         break;
@@ -188,6 +188,19 @@ class Entry extends React.Component {
                                         </Dropdown.Menu>
                                     </Dropdown></span>
                                 </td>;
+                            case 'taskReports':
+                                return <td key={column}><span style={{whiteSpace: 'nowrap'}}><Dropdown width='200'>
+                                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                    פעולות
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                {buttons.map((button) => {
+                                        return (
+                                            <Dropdown.Item key={button.text} onClick={button.onClick}>{button.text}</Dropdown.Item>
+                                            );
+                                        })}
+                                </Dropdown.Menu>
+                            </Dropdown></span></td>;
                             default:
                                 return (
                                     <td key={column}>

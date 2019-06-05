@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -255,7 +255,7 @@ function (_React$Component) {
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
-              class: "far fa-sticky-note",
+              className: "far fa-sticky-note fa-fw",
               __source: {
                 fileName: _jsxFileName,
                 lineNumber: 67
@@ -278,7 +278,7 @@ function (_React$Component) {
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
-              class: "far fa-calendar-check",
+              className: "far fa-calendar-check fa-fw",
               __source: {
                 fileName: _jsxFileName,
                 lineNumber: 72
@@ -301,7 +301,7 @@ function (_React$Component) {
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
-              class: "far fa-calendar-times",
+              className: "far fa-calendar-times fa-fw",
               __source: {
                 fileName: _jsxFileName,
                 lineNumber: 77
@@ -321,7 +321,20 @@ function (_React$Component) {
               });
             },
             color: 'outline-primary',
-            text: 'דיווח'
+            text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 86
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
+              className: "far fa-calendar-check fa-fw",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 86
+              },
+              __self: this
+            }), "\u05D3\u05D9\u05D5\u05D5\u05D7")
           }, {
             onClick: function onClick() {
               return _this2.props.dispatch({
@@ -330,7 +343,20 @@ function (_React$Component) {
               });
             },
             color: 'outline-secondary',
-            text: 'לא בוצע'
+            text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 91
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
+              className: "far fa-calendar-times fa-fw",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 91
+              },
+              __self: this
+            }), "\u05DC\u05D0 \u05D1\u05D5\u05E6\u05E2")
           }];
           break;
 
@@ -344,7 +370,20 @@ function (_React$Component) {
               });
             },
             color: 'outline-primary',
-            text: 'עריכה'
+            text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 100
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
+              className: "far fa-edit fa-fw",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 100
+              },
+              __self: this
+            }), "\u05E2\u05E8\u05D9\u05DB\u05D4")
           }, {
             onClick: function onClick() {
               return _this2.props.dispatch({
@@ -354,17 +393,43 @@ function (_React$Component) {
               });
             },
             color: 'outline-secondary',
-            text: 'איפוס סיסמה'
+            text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 105
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
+              className: "fas fa-unlock-alt fa-fw",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 105
+              },
+              __self: this
+            }), "\u05D0\u05D9\u05E4\u05D5\u05E1 \u05E1\u05D9\u05E1\u05DE\u05D4")
           }, {
             onClick: function onClick() {
               return _this2.props.dispatch({
                 type: 'OPEN_MODAL',
-                msg: 'RESET_PASSWORD',
+                msg: 'REMOVE_USER',
                 entries: _this2.props.entry
               });
             },
             color: 'outline-secondary',
-            text: 'מחיקה'
+            text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 110
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
+              className: "far fa-trash-alt fa-fw",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 110
+              },
+              __self: this
+            }), "\u05DE\u05D7\u05D9\u05E7\u05D4")
           }];
           break;
 
@@ -373,32 +438,71 @@ function (_React$Component) {
             onClick: function onClick() {
               return _this2.props.dispatch({
                 type: 'OPEN_MODAL',
-                msg: 'EDIT_USER',
+                msg: 'EDIT_TASK',
                 entries: _this2.props.entry
               });
             },
             color: 'outline-primary',
-            text: 'עריכה'
+            text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 119
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
+              className: "far fa-edit fa-fw",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 119
+              },
+              __self: this
+            }), "\u05E2\u05E8\u05D9\u05DB\u05D4")
           }, {
             onClick: function onClick() {
               return _this2.props.dispatch({
                 type: 'OPEN_MODAL',
-                msg: 'RESET_PASSWORD',
+                msg: 'TASK_STATUS',
                 entries: _this2.props.entry
               });
             },
             color: 'outline-secondary',
-            text: 'סטטוס'
+            text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 124
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
+              className: "fas fa-question fa-fw",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 124
+              },
+              __self: this
+            }), "\u05E1\u05D8\u05D8\u05D5\u05E1")
           }, {
             onClick: function onClick() {
               return _this2.props.dispatch({
                 type: 'OPEN_MODAL',
-                msg: 'RESET_PASSWORD',
+                msg: 'REMOVE_TASK',
                 entries: _this2.props.entry
               });
             },
             color: 'outline-secondary',
-            text: 'מחיקה'
+            text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 129
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
+              className: "far fa-trash-alt fa-fw",
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 129
+              },
+              __self: this
+            }), "\u05DE\u05D7\u05D9\u05E7\u05D4")
           }];
           break;
       }
@@ -573,18 +677,68 @@ function (_React$Component) {
                 }, button.text);
               })))));
 
-            default:
+            case 'taskReports':
               return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
                 key: column,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 192
+                },
+                __self: this
+              }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+                style: {
+                  whiteSpace: 'nowrap'
+                },
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 192
+                },
+                __self: this
+              }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"], {
+                width: "200",
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 192
+                },
+                __self: this
+              }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Toggle, {
+                variant: "secondary",
+                id: "dropdown-basic",
                 __source: {
                   fileName: _jsxFileName,
                   lineNumber: 193
                 },
                 __self: this
+              }, "\u05E4\u05E2\u05D5\u05DC\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Menu, {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 196
+                },
+                __self: this
+              }, buttons.map(function (button) {
+                return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Item, {
+                  key: button.text,
+                  onClick: button.onClick,
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 199
+                  },
+                  __self: this
+                }, button.text);
+              })))));
+
+            default:
+              return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("td", {
+                key: column,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 206
+                },
+                __self: this
               }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["ButtonGroup"], {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 194
+                  lineNumber: 207
                 },
                 __self: this
               }, buttons.map(function (button) {
@@ -594,7 +748,7 @@ function (_React$Component) {
                   variant: button.color,
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 197
+                    lineNumber: 210
                   },
                   __self: this
                 }, button.text);
@@ -694,6 +848,15 @@ function (_React$Component) {
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(Header, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (!this.props.isLogin) {
+        var root = document.documentElement;
+        var topBarHeight = document.getElementById('top-nav').getBoundingClientRect().height;
+        root.style.setProperty('--top-navbar-height', topBarHeight + "px");
+      }
+    }
+  }, {
     key: "toggleUserDropDown",
     value: function toggleUserDropDown() {
       this.setState({
@@ -712,7 +875,7 @@ function (_React$Component) {
           className: "mr-auto",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 42
+            lineNumber: 50
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -720,56 +883,56 @@ function (_React$Component) {
           href: "/",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 43
+            lineNumber: 51
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 43
+            lineNumber: 51
           },
           __self: this
         }, "\u05E9\u05D9\u05D1\u05D5\u05E5 \u05DC\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/assigned-tasks",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 44
+            lineNumber: 52
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 44
+            lineNumber: 52
           },
           __self: this
         }, "\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E7\u05E8\u05D5\u05D1\u05D9\u05DD ", atNum > 0 ? react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Badge"], {
           variant: "secondary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 44
+            lineNumber: 52
           },
           __self: this
         }, atNum) : '')), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/task-reports",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 45
+            lineNumber: 53
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 45
+            lineNumber: 53
           },
           __self: this
         }, "\u05DE\u05D9\u05DC\u05D5\u05D9 \u05DE\u05E9\u05D5\u05D1 ", trNum > 0 ? react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Badge"], {
           variant: "secondary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 45
+            lineNumber: 53
           },
           __self: this
         }, trNum) : '')));
@@ -778,49 +941,49 @@ function (_React$Component) {
           className: "mr-auto",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 49
+            lineNumber: 57
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 50
+            lineNumber: 58
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 50
+            lineNumber: 58
           },
           __self: this
         }, "\u05DC\u05D5\u05D7 \u05D1\u05E7\u05E8\u05D4")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/tasks",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 51
+            lineNumber: 59
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 51
+            lineNumber: 59
           },
           __self: this
         }, "\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/users",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 52
+            lineNumber: 60
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 52
+            lineNumber: 60
           },
           __self: this
         }, "\u05DE\u05EA\u05E0\u05D3\u05D1\u05D9\u05DD")));
@@ -837,48 +1000,48 @@ function (_React$Component) {
           expand: "lg",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 57
+            lineNumber: 65
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 66
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "navbar-brand",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 66
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_Logo_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 66
           },
           __self: this
         }))), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Navbar"].Toggle, {
           "aria-controls": "basic-navbar-nav",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 59
+            lineNumber: 67
           },
           __self: this
         }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Navbar"].Collapse, {
           id: "basic-navbar-nav",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 60
+            lineNumber: 68
           },
           __self: this
         }, pages, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Nav"], {
           className: "mr-sm-2",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 62
+            lineNumber: 70
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["NavDropdown"], {
@@ -887,41 +1050,41 @@ function (_React$Component) {
           id: "basic-nav-dropdown",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 63
+            lineNumber: 71
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/personal-information",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 72
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "dropdown-item",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 72
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("i", {
-          className: "far fa-user-circle",
+          className: "far fa-user-circle fa-fw",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 72
           },
           __self: this
         }), "\u05E4\u05E8\u05D8\u05D9\u05DD \u05D0\u05D9\u05E9\u05D9\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["NavDropdown"].Divider, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 65
+            lineNumber: 73
           },
           __self: this
         }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/login",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 66
+            lineNumber: 74
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
@@ -929,20 +1092,20 @@ function (_React$Component) {
           onClick: this.logout,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 66
+            lineNumber: 74
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("i", {
-          className: "fas fa-sign-out-alt",
+          className: "fas fa-sign-out-alt fa-fw",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 66
+            lineNumber: 74
           },
           __self: this
         }), "\u05D4\u05EA\u05E0\u05EA\u05E7\u05D5\u05EA"))), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["ButtonToolbar"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 68
+            lineNumber: 76
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["OverlayTrigger"], {
@@ -952,26 +1115,26 @@ function (_React$Component) {
             id: "tooltip",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 73
+              lineNumber: 81
             },
             __self: this
           }, "\u05E2\u05D6\u05E8\u05D4"),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 69
+            lineNumber: 77
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Nav"].Link, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 77
+            lineNumber: 85
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("i", {
           className: "fas fa-question-circle",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 77
+            lineNumber: 85
           },
           __self: this
         })))))));
@@ -980,13 +1143,13 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 85
+          lineNumber: 93
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_7___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 86
+          lineNumber: 94
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("link", {
@@ -996,14 +1159,14 @@ function (_React$Component) {
         crossorigin: "anonymous",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 87
+          lineNumber: 95
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("meta", {
         charset: "utf-8",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 89
+          lineNumber: 97
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("meta", {
@@ -1011,13 +1174,13 @@ function (_React$Component) {
         content: "width=device-width, initial-scale=1, shrink-to-fit=no",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 90
+          lineNumber: 98
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("title", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 91
+          lineNumber: 99
         },
         __self: this
       }, "\u05DC\u05E7\u05D8\u05BEGO")), navbar);
@@ -1103,7 +1266,7 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("svg", {
             viewBox: "0 0 117.9 44.77",
             width: "300",
-            height: "170",
+            height: "120",
             __source: {
               fileName: _jsxFileName,
               lineNumber: 25
@@ -1497,6 +1660,7 @@ function (_React$Component) {
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+          className: "nothing",
           style: {
             display: 'flex',
             flexDirection: 'column',
@@ -1916,6 +2080,11 @@ function (_React$Component) {
           __self: this
         }, this.props.data.map(function (entry) {
           var isSelected = false;
+
+          if (_this2.state.selectedEntries[entry.id]) {
+            isSelected = true;
+          }
+
           var ret = react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_components_Entry__WEBPACK_IMPORTED_MODULE_8__["default"], {
             page: _this2.props.page,
             isSelected: isSelected,
@@ -1927,11 +2096,10 @@ function (_React$Component) {
             tableColumns: _this2.state.tableColumns,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 260
+              lineNumber: 263
             },
             __self: this
           });
-          if (_this2.state.selectedEntries[entry.id]) isSelected = true;
 
           if (_this2.props.isSearchable) {
             for (var key in entry) {
@@ -3323,13 +3491,11 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props);
-
       if (!this.props.authChecked || !this.props.isLoggedIn) {
         return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_loading__WEBPACK_IMPORTED_MODULE_11__["default"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 20
+            lineNumber: 19
           },
           __self: this
         });
@@ -3344,52 +3510,52 @@ function (_Component) {
           variant: "warning",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 27
+            lineNumber: 26
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("i", {
-          class: "fas fa-bell",
+          className: "fas fa-bell",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 27
+            lineNumber: 26
           },
           __self: this
         }), "\u05D4\u05D9\u05D9 ", this.props.userData.firstName, ", \u05D9\u05E9 \u05DC\u05DA ", atNum > 0 ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_9___default.a, {
           href: "/assigned-tasks",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 28
+            lineNumber: 27
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("a", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 28
+            lineNumber: 27
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("strong", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 28
+            lineNumber: 27
           },
           __self: this
-        }, atNum), " \u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E7\u05E8\u05D5\u05D1\u05D9\u05DD")) : '', atNum > 0 && trNum > 0 ? 'ועוד ' : '', trNum > 0 ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_9___default.a, {
+        }, atNum), " \u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E7\u05E8\u05D5\u05D1\u05D9\u05DD")) : '', atNum > 0 && trNum > 0 ? ' ועוד ' : '', trNum > 0 ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_9___default.a, {
           href: "/task-reports",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 28
+            lineNumber: 27
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("a", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 28
+            lineNumber: 27
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("strong", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 28
+            lineNumber: 27
           },
           __self: this
         }, trNum), " \u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05D4\u05DE\u05DE\u05EA\u05D9\u05E0\u05D9\u05DD \u05DC\u05DE\u05E9\u05D5\u05D1")) : '', ".");
@@ -3399,17 +3565,24 @@ function (_Component) {
         return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 34
+            lineNumber: 33
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_components_Header_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
           page: "index",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 35
+            lineNumber: 34
           },
           __self: this
         }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+          className: "app",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 35
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
           className: "wrapper d-flex justify-content-center",
           __source: {
             fileName: _jsxFileName,
@@ -3457,7 +3630,7 @@ function (_Component) {
             lineNumber: 42
           },
           __self: this
-        }))));
+        })))));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
           __source: {
@@ -3473,10 +3646,17 @@ function (_Component) {
           },
           __self: this
         }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
-          className: "wrapper d-flex justify-content-center",
+          className: "app",
           __source: {
             fileName: _jsxFileName,
             lineNumber: 49
+          },
+          __self: this
+        }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+          className: "wrapper d-flex justify-content-center",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 50
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("main", {
@@ -3486,20 +3666,20 @@ function (_Component) {
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 50
+            lineNumber: 51
           },
           __self: this
         }, alert, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
           className: "mb-4 mt-4",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 52
+            lineNumber: 53
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("h2", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 53
+            lineNumber: 54
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("img", {
@@ -3507,14 +3687,14 @@ function (_Component) {
           width: "60",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 53
+            lineNumber: 54
           },
           __self: this
         }), "\u05DC\u05D5\u05D7 \u05D1\u05E7\u05E8\u05D4"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["CardColumns"], {
           className: "mt-4",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 54
+            lineNumber: 55
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"], {
@@ -3525,25 +3705,25 @@ function (_Component) {
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 55
+            lineNumber: 56
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"].Header, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 56
+            lineNumber: 57
           },
           __self: this
         }, "\u05D4\u05E9\u05D1\u05D5\u05E2"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"].Body, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 57
+            lineNumber: 58
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"].Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 59
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
@@ -3553,19 +3733,19 @@ function (_Component) {
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 59
+            lineNumber: 60
           },
           __self: this
         }, "5"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 60
+            lineNumber: 61
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["ButtonToolbar"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 61
+            lineNumber: 62
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["OverlayTrigger"], {
@@ -3574,13 +3754,13 @@ function (_Component) {
             id: "tooltip",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 66
+              lineNumber: 67
             },
             __self: this
           }, "\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05D4\u05E7\u05D1\u05D5\u05E2\u05D9\u05DD \u05DC\u05D4\u05D9\u05D5\u05DD \u05D5\u05DE\u05D7\u05E8 \u05E9\u05E2\u05D3\u05D9\u05D9\u05DF \u05DC\u05D0 \u05E9\u05D5\u05D1\u05E6\u05D5 \u05DC\u05D0\u05E3 \u05DE\u05EA\u05E0\u05D3\u05D1"),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 62
+            lineNumber: 63
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
@@ -3590,78 +3770,78 @@ function (_Component) {
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 70
+            lineNumber: 71
           },
           __self: this
         }, " \u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05D3\u05D7\u05D5\u05E4\u05D9\u05DD \u05DC\u05E9\u05D9\u05D1\u05D5\u05E5 ", react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("i", {
           className: "fas fa-question-circle",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 70
+            lineNumber: 71
           },
           __self: this
         }))))), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
           className: "mt-4",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 74
+            lineNumber: 75
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("i", {
-          class: "fas fa-hourglass-start",
+          className: "fas fa-hourglass-start fa-fw",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 74
+            lineNumber: 75
           },
           __self: this
         }), "21 \u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E2\u05EA\u05D9\u05D3\u05D9\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 75
+            lineNumber: 76
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("i", {
-          class: "far fa-calendar-times",
+          className: "far fa-calendar-times fa-fw",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 75
+            lineNumber: 76
           },
           __self: this
         }), "11 \u05DE\u05E9\u05D5\u05D1\u05D9\u05DD \u05DC\u05D0 \u05DE\u05D5\u05DC\u05D0\u05D5"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 76
+            lineNumber: 77
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("i", {
-          class: "far fa-calendar-alt",
+          className: "far fa-calendar-alt fa-fw",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 76
+            lineNumber: 77
           },
           __self: this
         }), "51 \u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E1\u05D4\"\u05DB")))), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 80
+            lineNumber: 81
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"].Header, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 81
+            lineNumber: 82
           },
           __self: this
         }, "\u05E1\u05D8\u05D8\u05D5\u05E1 \u05DE\u05EA\u05E0\u05D3\u05D1\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"].Body, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 82
+            lineNumber: 83
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"].Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 83
+            lineNumber: 84
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
@@ -3671,7 +3851,7 @@ function (_Component) {
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 84
+            lineNumber: 85
           },
           __self: this
         }, "143"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
@@ -3680,37 +3860,37 @@ function (_Component) {
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 85
+            lineNumber: 86
           },
           __self: this
         }, "\u05DE\u05EA\u05E0\u05D3\u05D1\u05D9\u05DD \u05E4\u05E2\u05D9\u05DC\u05D9\u05DD \u05D4\u05E9\u05D1\u05D5\u05E2"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
           className: "mt-4",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 86
+            lineNumber: 87
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("i", {
-          class: "far fa-user",
+          className: "far fa-user fa-fw",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 86
+            lineNumber: 87
           },
           __self: this
         }), "324 \u05DE\u05EA\u05E0\u05D3\u05D1\u05D9\u05DD \u05D1\u05D0\u05D6\u05D5\u05E8 ", this.props.userData.region), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 87
+            lineNumber: 88
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("i", {
-          class: "far fa-envelope",
+          className: "far fa-envelope fa-fw",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 87
+            lineNumber: 88
           },
           __self: this
-        }), "2 \u05D0\u05D9\u05DE\u05D5\u05EA\u05D9 \u05D3\u05D5\u05D0\"\u05DC \u05DE\u05DE\u05EA\u05D9\u05E0\u05D9\u05DD")))))))));
+        }), "2 \u05D0\u05D9\u05DE\u05D5\u05EA\u05D9 \u05D3\u05D5\u05D0\"\u05DC \u05DE\u05DE\u05EA\u05D9\u05E0\u05D9\u05DD"))))))))));
       }
     }
   }]);
@@ -3811,7 +3991,7 @@ function Loading() {
 
 /***/ }),
 
-/***/ 6:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

@@ -147,7 +147,7 @@ class TableBlock extends React.Component {
 					alignItems: 'center',
 					justifyContent: 'center'
 				}}>
-					<div style= {{
+					<div className="nothing" style= {{
 						display: 'flex',
 						flexDirection: 'column',
 						alignItems: 'center',
@@ -257,10 +257,10 @@ class TableBlock extends React.Component {
 					<tbody>
 						{this.props.data.map((entry) => {
 							let isSelected = false;
-							let ret = <Entry page={this.props.page} isSelected={isSelected} isSelectable={this.props.isSelectable} type={this.props.type} key={entry.id} selectCallback={this.selectCallback} entry={entry} tableColumns={this.state.tableColumns}/>
-
-							if (this.state.selectedEntries[entry.id])
+							if (this.state.selectedEntries[entry.id]){
 								isSelected = true;
+							}
+							let ret = <Entry page={this.props.page} isSelected={isSelected} isSelectable={this.props.isSelectable} type={this.props.type} key={entry.id} selectCallback={this.selectCallback} entry={entry} tableColumns={this.state.tableColumns}/>
 							if (this.props.isSearchable){
 								for (let key in entry){
 									if (key == this.state.searchField)

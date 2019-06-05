@@ -38,7 +38,7 @@ class Personal_information extends Component {
         return (
                 <div>
                     <Header />
-                    <div className="wrapper d-flex justify-content-center">
+                    <div className="wrapper d-flex justify-content-center"><div className='app'>
                     <main className="m-2" style={{paddingBottom: '3rem'}}>
                         <div className="mt-4 mb-4">
                             <h2><img src='/static/profile.png' width="60"/>עדכון פרטים אישיים</h2>
@@ -111,7 +111,7 @@ class Personal_information extends Component {
                                 </Button>
                             </Navbar>
                         </Form>
-                    </main>
+                    </main></div>
                 </div></div>
         );
     }

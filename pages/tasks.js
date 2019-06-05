@@ -18,14 +18,14 @@ class Users extends Component {
         }
 
         return (
-            <div>
+            <div><div className='app'>
                 <Header /><div className="wrapper d-flex justify-content-center">
                 <main className="m-2" style={{ paddingBottom: '3rem' }}>
                     <div className="mb-4 mt-4">
                         <h2><img src='/static/tasks.png' width="60"/>איסופים</h2>
                     </div>
                     <TableBlock isSearchable={true} data={this.props.regionalTasks} page='adminTasks' type='tasks' />
-                </main></div>
+                </main></div></div>
             </div>
         )
     }

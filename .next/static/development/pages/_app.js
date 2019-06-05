@@ -1255,7 +1255,7 @@ function (_React$Component) {
           break;
 
         case 'EXPORT_TASK_CSV':
-          title = 'הוספת איסופים מקובץ';
+          title = 'ייצוא דוח';
           body = react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("span", {
             __source: {
               fileName: _jsxFileName,

@@ -22,7 +22,7 @@ class Logo extends React.Component {
     render() {
         switch (this.props.use){
             case 'login':
-                return <svg viewBox="0 0 117.9 44.77" width='300' height='170'>
+                return <svg viewBox="0 0 117.9 44.77" width='300' height='120'>
                 <g>
                     <path fill={this.state.color} d="M117.78,3.49c-0.55-0.08-1.07-0.16-1.58-0.23c-0.51-0.07-1.06-0.1-1.66-0.1c-3.61,0-6.3,1.29-8.08,3.85
                         c-1.5,2.19-2.25,5.17-2.25,8.94c0,0.46,0.05,3.09,0.16,7.87c0.03,1.2,0.04,2.76,0.04,4.67c-0.33-0.52-0.55-0.9-0.66-1.15

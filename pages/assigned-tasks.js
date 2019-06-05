@@ -21,14 +21,14 @@ class Assigned_tasks extends Component {
 
         return (
             <div>
-                <Header />
+                <Header /><div className='app'>
                 <div className="wrapper d-flex justify-content-center">
                 <main className="m-2">
                     <div className="mb-4 mt-4">
                         <h2><img src='/static/assigned.png' width="60"/>איסופים קרובים</h2>
                     </div>
                     <TableBlock page='assignedTasks' type='tasks' data={this.props.assignedTasks} />
-                </main></div>
+                </main></div></div>
             </div>
         )
     }

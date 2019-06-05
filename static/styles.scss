@@ -2,15 +2,30 @@
 
 html {
   direction: rtl;
-  overflow-y: scroll;
 }
 
 :root {
   --font-family-sans-serif: 'Heebo';
+  --top-navbar-height: 0px;
 }
 
 body, .tooltip, .popover {
   font-family: 'Heebo', sans-serif !important;
+}
+
+.nothing {
+  user-select: none;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+.app {
+  height: calc(100vh - var(--top-navbar-height));
+  overflow-y: scroll;
+}
+
+.nothing img {
+  
 }
 
 .fas, .far {

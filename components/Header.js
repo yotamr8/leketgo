@@ -18,6 +18,14 @@ class Header extends React.Component {
         this.toggleUserDropDown = this.toggleUserDropDown.bind(this);
     }
 
+    componentDidMount() {
+        if (!this.props.isLogin){
+            let root = document.documentElement;
+            let topBarHeight = document.getElementById('top-nav').getBoundingClientRect().height;
+            root.style.setProperty('--top-navbar-height', topBarHeight + "px");
+        }
+    }
+
     toggleUserDropDown() {
         this.setState({isUserDropdown: !this.state.isUserDropdown});
     }
@@ -61,9 +69,9 @@ class Header extends React.Component {
                 {pages}
                 <Nav className='mr-sm-2'>
                 <NavDropdown alignRight title={this.props.userData.firstName + ' ' + this.props.userData.lastName} id="basic-nav-dropdown">
-                    <Link href="/personal-information"><a className='dropdown-item'><i className="far fa-user-circle"></i>פרטים אישיים</a></Link>
+                    <Link href="/personal-information"><a className='dropdown-item'><i className="far fa-user-circle fa-fw"></i>פרטים אישיים</a></Link>
                     <NavDropdown.Divider />
-                    <Link href='/login'><a className='dropdown-item' onClick={this.logout}><i className="fas fa-sign-out-alt"></i>התנתקות</a></Link>
+                    <Link href='/login'><a className='dropdown-item' onClick={this.logout}><i className="fas fa-sign-out-alt fa-fw"></i>התנתקות</a></Link>
                 </NavDropdown>
                 <ButtonToolbar>
                 <OverlayTrigger

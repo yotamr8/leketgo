@@ -12,10 +12,9 @@ class Index extends Component {
     
     componentWillMount() {
         checkAuthAndRefresh(this.props.dispatch)
-    }  
+    }
     
     render() {
-        console.log(this.props);
         if (!this.props.authChecked || !this.props.isLoggedIn) {
             return (<Loading />)
         }
@@ -24,8 +23,8 @@ class Index extends Component {
         let trNum = this.props.taskReports.length;
         let alert = ''; 
         if (atNum > 0 || trNum > 0){
-            alert = <Alert variant='warning'><i class="fas fa-bell"></i>
-                היי {this.props.userData.firstName}, יש לך {atNum > 0 ? <Link href="/assigned-tasks"><a><strong>{atNum}</strong> איסופים קרובים</a></Link> : ''}{(atNum > 0 && trNum > 0 ? 'ועוד ' : '')}{trNum > 0 ? <Link href='/task-reports'><a><strong>{trNum}</strong> איסופים הממתינים למשוב</a></Link> : ''}.
+            alert = <Alert variant='warning'><i className="fas fa-bell"></i>
+                היי {this.props.userData.firstName}, יש לך {atNum > 0 ? <Link href="/assigned-tasks"><a><strong>{atNum}</strong> איסופים קרובים</a></Link> : ''}{(atNum > 0 && trNum > 0 ? ' ועוד ' : '')}{trNum > 0 ? <Link href='/task-reports'><a><strong>{trNum}</strong> איסופים הממתינים למשוב</a></Link> : ''}.
                 </Alert>
         }
 
@@ -33,6 +32,7 @@ class Index extends Component {
             return (
                 <div>
                 <Header page='index' />
+                <div className='app'>
                 <div className="wrapper d-flex justify-content-center">
                     <main className="m-2" style={{ paddingBottom: '3rem' }}>
                         {alert}
@@ -40,12 +40,13 @@ class Index extends Component {
                             <h2><img src='/static/assign.png' width="60"/>שיבוץ לאיסופים</h2>
                         </div>
                         <TableBlock isSelectable={true} data={this.props.unassignedTasks} page='index' type='tasks' />
-                    </main></div>
+                    </main></div></div>
                 </div>
             );
         } else {
             return <div>
             <Header page='index' />
+            <div className='app'>
             <div className="wrapper d-flex justify-content-center">
                 <main className="m-2" style={{ paddingBottom: '3rem' }}>
                     {alert}
@@ -71,9 +72,9 @@ class Index extends Component {
                                     </OverlayTrigger>
                                     </ButtonToolbar>
                                 </div>
-                                <div className='mt-4'><i class="fas fa-hourglass-start"></i>21 איסופים עתידיים</div>
-                                <div><i class="far fa-calendar-times"></i>11 משובים לא מולאו</div>
-                                <div><i class="far fa-calendar-alt"></i>51 איסופים סה"כ</div>
+                                <div className='mt-4'><i className="fas fa-hourglass-start fa-fw"></i>21 איסופים עתידיים</div>
+                                <div><i className="far fa-calendar-times fa-fw"></i>11 משובים לא מולאו</div>
+                                <div><i className="far fa-calendar-alt fa-fw"></i>51 איסופים סה"כ</div>
                             </Card.Text>
                             </Card.Body>
                         </Card>
@@ -83,14 +84,14 @@ class Index extends Component {
                                 <Card.Text>
                                     <div style={{textAlign: 'center', fontSize: '2rem'}}>143</div>
                                     <div  style={{textAlign: 'center'}}>מתנדבים פעילים השבוע</div>
-                                    <div className='mt-4'><i class="far fa-user"></i>324 מתנדבים באזור {this.props.userData.region}</div>
-                                    <div><i class="far fa-envelope"></i>2 אימותי דוא"ל ממתינים</div>
+                                    <div className='mt-4'><i className="far fa-user fa-fw"></i>324 מתנדבים באזור {this.props.userData.region}</div>
+                                    <div><i className="far fa-envelope fa-fw"></i>2 אימותי דוא"ל ממתינים</div>
                                 </Card.Text>
                                 </Card.Body>
                             </Card>
                         </CardColumns>
                     </div>
-                </main></div>
+                </main></div></div>
             </div>;
         }
     }

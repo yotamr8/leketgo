@@ -78,6 +78,15 @@ function (_React$Component) {
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(Header, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (!this.props.isLogin) {
+        var root = document.documentElement;
+        var topBarHeight = document.getElementById('top-nav').getBoundingClientRect().height;
+        root.style.setProperty('--top-navbar-height', topBarHeight + "px");
+      }
+    }
+  }, {
     key: "toggleUserDropDown",
     value: function toggleUserDropDown() {
       this.setState({
@@ -96,7 +105,7 @@ function (_React$Component) {
           className: "mr-auto",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 42
+            lineNumber: 50
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -104,56 +113,56 @@ function (_React$Component) {
           href: "/",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 43
+            lineNumber: 51
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 43
+            lineNumber: 51
           },
           __self: this
         }, "\u05E9\u05D9\u05D1\u05D5\u05E5 \u05DC\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/assigned-tasks",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 44
+            lineNumber: 52
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 44
+            lineNumber: 52
           },
           __self: this
         }, "\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E7\u05E8\u05D5\u05D1\u05D9\u05DD ", atNum > 0 ? react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Badge"], {
           variant: "secondary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 44
+            lineNumber: 52
           },
           __self: this
         }, atNum) : '')), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/task-reports",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 45
+            lineNumber: 53
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 45
+            lineNumber: 53
           },
           __self: this
         }, "\u05DE\u05D9\u05DC\u05D5\u05D9 \u05DE\u05E9\u05D5\u05D1 ", trNum > 0 ? react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Badge"], {
           variant: "secondary",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 45
+            lineNumber: 53
           },
           __self: this
         }, trNum) : '')));
@@ -162,49 +171,49 @@ function (_React$Component) {
           className: "mr-auto",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 49
+            lineNumber: 57
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 50
+            lineNumber: 58
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 50
+            lineNumber: 58
           },
           __self: this
         }, "\u05DC\u05D5\u05D7 \u05D1\u05E7\u05E8\u05D4")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/tasks",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 51
+            lineNumber: 59
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 51
+            lineNumber: 59
           },
           __self: this
         }, "\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/users",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 52
+            lineNumber: 60
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "nav-link",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 52
+            lineNumber: 60
           },
           __self: this
         }, "\u05DE\u05EA\u05E0\u05D3\u05D1\u05D9\u05DD")));
@@ -221,48 +230,48 @@ function (_React$Component) {
           expand: "lg",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 57
+            lineNumber: 65
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 66
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "navbar-brand",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 66
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_components_Logo_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 66
           },
           __self: this
         }))), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Navbar"].Toggle, {
           "aria-controls": "basic-navbar-nav",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 59
+            lineNumber: 67
           },
           __self: this
         }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Navbar"].Collapse, {
           id: "basic-navbar-nav",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 60
+            lineNumber: 68
           },
           __self: this
         }, pages, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Nav"], {
           className: "mr-sm-2",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 62
+            lineNumber: 70
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["NavDropdown"], {
@@ -271,41 +280,41 @@ function (_React$Component) {
           id: "basic-nav-dropdown",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 63
+            lineNumber: 71
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/personal-information",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 72
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "dropdown-item",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 72
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("i", {
-          className: "far fa-user-circle",
+          className: "far fa-user-circle fa-fw",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 72
           },
           __self: this
         }), "\u05E4\u05E8\u05D8\u05D9\u05DD \u05D0\u05D9\u05E9\u05D9\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["NavDropdown"].Divider, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 65
+            lineNumber: 73
           },
           __self: this
         }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/login",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 66
+            lineNumber: 74
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
@@ -313,20 +322,20 @@ function (_React$Component) {
           onClick: this.logout,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 66
+            lineNumber: 74
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("i", {
-          className: "fas fa-sign-out-alt",
+          className: "fas fa-sign-out-alt fa-fw",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 66
+            lineNumber: 74
           },
           __self: this
         }), "\u05D4\u05EA\u05E0\u05EA\u05E7\u05D5\u05EA"))), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["ButtonToolbar"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 68
+            lineNumber: 76
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["OverlayTrigger"], {
@@ -336,26 +345,26 @@ function (_React$Component) {
             id: "tooltip",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 73
+              lineNumber: 81
             },
             __self: this
           }, "\u05E2\u05D6\u05E8\u05D4"),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 69
+            lineNumber: 77
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Nav"].Link, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 77
+            lineNumber: 85
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("i", {
           className: "fas fa-question-circle",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 77
+            lineNumber: 85
           },
           __self: this
         })))))));
@@ -364,13 +373,13 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 85
+          lineNumber: 93
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_7___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 86
+          lineNumber: 94
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("link", {
@@ -380,14 +389,14 @@ function (_React$Component) {
         crossorigin: "anonymous",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 87
+          lineNumber: 95
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("meta", {
         charset: "utf-8",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 89
+          lineNumber: 97
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("meta", {
@@ -395,13 +404,13 @@ function (_React$Component) {
         content: "width=device-width, initial-scale=1, shrink-to-fit=no",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 90
+          lineNumber: 98
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("title", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 91
+          lineNumber: 99
         },
         __self: this
       }, "\u05DC\u05E7\u05D8\u05BEGO")), navbar);
@@ -486,7 +495,7 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("svg", {
             viewBox: "0 0 117.9 44.77",
             width: "300",
-            height: "170",
+            height: "120",
             __source: {
               fileName: _jsxFileName,
               lineNumber: 25
@@ -81577,7 +81586,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 7:
+/***/ 0:
 /*!******************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Flogin&absolutePagePath=C%3A%5CUsers%5Cbaram%5CGit%5Cleket-go%5Cpages%5Clogin.js ***!
   \******************************************************************************************************************************/
@@ -81600,5 +81609,5 @@ module.exports = dll_81bd344d8f06700801e0;
 
 /***/ })
 
-},[[7,"static/runtime/webpack.js","styles"]]]);
+},[[0,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=login.js.map

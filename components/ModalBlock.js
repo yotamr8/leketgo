@@ -453,7 +453,7 @@ class ModalBlock extends React.Component {
                                 }];
                             break;
                     case 'EXPORT_TASK_CSV':
-                            title = 'הוספת איסופים מקובץ';
+                            title = 'ייצוא דוח';
                             body = <span></span>;
                             buttons = [
                                 {
