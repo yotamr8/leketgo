@@ -2,17 +2,14 @@ import Head from 'next/head'
 import React from 'react'
 import { connect } from 'react-redux'
 import fire from '../config/firebaseConfig'
-import {ButtonToolbar, Tooltip, OverlayTrigger, Badge, Nav, Navbar, NavItem, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
+import {Badge, Nav, Navbar, NavItem, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
 import Link from 'next/link'
-import '../static/bootstrap.min.scss'
-import '../static/styles.scss'
-import Logo from '../components/Logo.js'
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isUserDropdown: false,
+            isUserDropdown: false
         }
 
         this.toggleUserDropDown = this.toggleUserDropDown.bind(this);
@@ -48,35 +45,23 @@ class Header extends React.Component {
             pages = 
             <Nav className="mr-auto">
                 <Link href="/"><a className='nav-link'>לוח בקרה</a></Link>
-                <Link href="/tasks"><a className='nav-link'>איסופים</a></Link>
-                <Link href="/users"><a className='nav-link'>מתנדבים</a></Link>
+                <Link href="/users"><a className='nav-link'>משתמשים</a></Link>
+                <Link href="/tasks"><a className='nav-link'>משימות</a></Link>
             </Nav>;
         }
         let navbar = '';
         if (!this.props.isLogin) {
-            navbar = <Navbar id='top-nav' sticky='top' bg='light' variant='light' expand='lg'>
-            <Link href="/"><a className='navbar-brand'>{<Logo />}</a></Link>
+            navbar = <Navbar sticky='top' bg='dark' variant='dark' expand='lg'>
+            <Link href="/"><a className='navbar-brand'>LetsGo</a></Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 {pages}
                 <Nav className='mr-sm-2'>
                 <NavDropdown alignRight title={this.props.userData.firstName + ' ' + this.props.userData.lastName} id="basic-nav-dropdown">
-                    <Link href="/personal-information"><a className='dropdown-item'><i className="far fa-user-circle"></i>פרטים אישיים</a></Link>
+                    <Link href="/personal-information"><a className='dropdown-item'>פרטים אישיים</a></Link>
                     <NavDropdown.Divider />
-                    <Link href='/login'><a className='dropdown-item' onClick={this.logout}><i className="fas fa-sign-out-alt"></i>התנתקות</a></Link>
+                    <Link href='/login'><a className='dropdown-item' onClick={this.logout}>התנתקות</a></Link>
                 </NavDropdown>
-                <ButtonToolbar>
-                <OverlayTrigger
-                    key='help'
-                    placement='bottom'
-                    overlay={
-                        <Tooltip id='tooltip'>
-                        עזרה
-                        </Tooltip>
-                    }>
-                    <Nav.Link><i className="fas fa-question-circle"></i></Nav.Link>
-                </OverlayTrigger>
-                </ButtonToolbar>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>;
@@ -84,11 +69,13 @@ class Header extends React.Component {
             return (
                 <div>
                     <Head>
-                        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-                            integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
                         <meta charset="utf-8" />
                         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                        <title>לקט־GO</title>
+                        <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
+                            integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous" />
+                        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+                            integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+                        <title>LetsGo</title>
                     </Head>
                     {navbar}
                 </div>

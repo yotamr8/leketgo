@@ -16,23 +16,18 @@ class TableBlock extends React.Component {
 				'date': 'תאריך',
 				'time': 'שעה',
 				'city': 'עיר',
-				'fullAddress': 'כתובת',
 				'name': 'ספק',
 				'uid': 'uid',
 				'firstName': 'שם פרטי',
 				'lastName': 'שם משפחה',
-				'fullName': 'שם מלא',
 				'region': 'אזור',
 				'email': 'דוא"ל',
 				'tz': 'תעודת זהות',
-				'street': 'רחוב ומספר',
-				'contactName': 'שם',
+				'street': 'רחוב',
+				'contactName': 'איש קשר',
 				'contactNumber': 'טלפון',
-				'checkBox': '',
-				'phone': 'טלפון'
-			},
-			searchValue: '',
-			searchField: this.props.page == 'adminUsers' ? 'firstName' : 'name',
+				'checkBox': ''
+			}
 		};
 		this.selectCallback = this.selectCallback.bind(this);
 		this.cancelSelection = this.cancelSelection.bind(this);
@@ -44,7 +39,7 @@ class TableBlock extends React.Component {
 			case 'index':
 				return ['checkBox', 'date', 'time', 'city', 'name'];
 			case 'assignedTasks':
-				return ['date', 'time', 'fullAddress', 'name', 'contactName', 'contactNumber', 'actions'];
+				return ['date', 'time', 'street', 'city', 'name', 'contactName', 'contactNumber', 'actions'];
 			case 'taskReports':
 				return ['date', 'street', 'city', 'name', 'actions'];
 			case 'adminUsers':
@@ -88,81 +83,7 @@ class TableBlock extends React.Component {
         setAssignedTasks(this.props, taskIDs, this.state.entrySelectedCounter, this.state.selectedEntries)
 	}
 
-	handleChangeForm(event) {
-		
-		let fleldVal = event.target.value;
-		this.setState({searchValue: fleldVal});
-	}
-
-	handleChangeDropDown(event) {
-		let fleldVal = event.target.value;
-		switch (fleldVal) {
-			case 'שם פרטי':
-				this.setState({searchField: 'firstName'});
-				break;
-			case 'שם משפחה':
-					this.setState({searchField: 'lastName'});
-					break;
-			case 'תעודת זהות':
-				this.setState({searchField: 'tz'});
-				break;
-			case 'רחוב ומספר':
-				this.setState({searchField: 'address'});
-				break;
-			case 'עיר מגורים':
-					this.setState({searchField: 'city'});
-					break;
-			case 'מספר טלפון':
-				this.setState({searchField: 'phone'});
-				break;
-			case 'דואר אלקטרוני':
-				this.setState({searchField: 'email'});
-				break;
-			case 'ספק':
-					this.setState({searchField: 'name'});
-					break;
-			case 'עיר':
-					this.setState({searchField: 'city'});
-					break;
-			case 'רחוב ומספר':
-					this.setState({searchField: 'address'});
-					break;
-			case 'איש קשר':
-					this.setState({searchField: 'contact name'});
-					break;
-			case 'טלפון':
-					this.setState({searchField: 'contact number'});
-					break;
-			default:
-				break;
-		}
-	}
-
 	render() {
-		if (this.props.data.length == 0){
-			return (
-				<div style={{
-					display: 'flex',
-					width: '100%',
-					alignItems: 'center',
-					justifyContent: 'center'
-				}}>
-					<div style= {{
-						display: 'flex',
-						flexDirection: 'column',
-						alignItems: 'center',
-						justifyContent: 'center'
-		
-					}}>
-						<img src="/static/nothing.png" width="100"/>
-						<div style={{
-							fontSize: '20px',
-							marginTop: '10px'
-						}}>המממ... אין כאן כלום</div>
-					</div>
-				</div>
-			);
-		} else {
 		let actionsBar = '';
 		if (this.props.isSelectable && this.state.entrySelectedCounter > 0) {
 			actionsBar = 
@@ -173,15 +94,15 @@ class TableBlock extends React.Component {
 					</ButtonGroup>
 				</Navbar>;
 		}
-		if (this.props.isSearchable && this.props.page=='adminUsers') {
+		if (this.props.isSearchable) {
 			actionsBar = 
 				<Navbar bg='light' fixed='bottom'>
 					<Form>
 						<Row>
 							<Col>
 						<div className="btn-group" role="group" aria-label="Basic example">
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER', entries: this.props.entry})}>הוספת מתנדב</button>
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER_CSV', entries: this.props.entry})}>הוספה מקובץ</button></div>
+							<button type="button" className="btn btn-primary">הוספת משתמש</button>
+							<button type="button" className="btn btn-secondary">הוספה מקובץ</button></div>
 							</Col>
 							<Col>
 								<InputGroup className="mb-3">
@@ -189,49 +110,14 @@ class TableBlock extends React.Component {
 								as="select"
 								variant='outline-secondary'
 								title='Dropdown'
-								drop='up' onChange={this.handleChangeDropDown.bind(this)}>
-									<option>שם פרטי</option>
-									<option>שם משפחה</option>
+								drop='up'>
+									<option>שם מלא</option>
 									<option>תעודת זהות</option>
-									<option>רחוב ומספר</option>
-									<option>עיר מגורים</option>
+									<option>כתובת מגורים</option>
 									<option>מספר טלפון</option>
 									<option>דואר אלקטרוני</option>
 								</Form.Control>
-								<FormControl onChange={this.handleChangeForm.bind(this)} aria-describedby="basic-addon1" />
-								</InputGroup>
-							</Col>
-						</Row>
-					</Form>
-				</Navbar>;
-		}
-		if (this.props.isSearchable && this.props.page=='adminTasks') {
-			actionsBar = 
-				<Navbar bg='light' fixed='bottom'>
-					<Form>
-						<Row>
-							<Col>
-						<div className="btn-group" role="group" aria-label="Basic example">
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK', entries: this.props.entry})}>הוספת איסוף</button>
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK_CSV', entries: this.props.entry})}>הוספה מקובץ</button>
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EXPORT_TASK_CSV', entries: this.props.entry})}>ייצוא דוח</button>
-							</div>
-							</Col>
-							<Col>
-								<InputGroup className="mb-3">
-								<Form.Control
-								as="select"
-								variant='outline-secondary'
-								title='Dropdown'
-								drop='up'
-								onChange={this.handleChangeDropDown.bind(this)}>
-									<option>ספק</option>
-									<option>עיר</option>
-									<option>רחוב ומספר</option>
-									<option>איש קשר</option>
-									<option>טלפון</option>
-								</Form.Control>
-								<FormControl onChange={this.handleChangeForm.bind(this)} aria-describedby="basic-addon1" />
+								<FormControl aria-describedby="basic-addon1" />
 								</InputGroup>
 							</Col>
 						</Row>
@@ -245,39 +131,26 @@ class TableBlock extends React.Component {
 					<thead>
 						<tr>
 						{this.state.tableColumns.map((column) => {
-							switch (column){
-								default:
-									return (
-										<th scope="col" key={column}>{this.state.columnNames[column]}</th>
-								);
-							}
+							return (
+								<th scope="col" key={column}>{this.state.columnNames[column]}</th>
+							);
 						})}
 						</tr>
 					</thead>
 					<tbody>
 						{this.props.data.map((entry) => {
 							let isSelected = false;
-							let ret = <Entry page={this.props.page} isSelected={isSelected} isSelectable={this.props.isSelectable} type={this.props.type} key={entry.id} selectCallback={this.selectCallback} entry={entry} tableColumns={this.state.tableColumns}/>
-
 							if (this.state.selectedEntries[entry.id])
 								isSelected = true;
-							if (this.props.isSearchable){
-								for (let key in entry){
-									if (key == this.state.searchField)
-										if(entry[key].includes(this.state.searchValue))
-											return ret;
-								}
-							}
-							else {
-							return ret;
-							}
+							return (
+								<Entry page={this.props.page} isSelected={isSelected} isSelectable={this.props.isSelectable} type={this.props.type} key={entry.id} selectCallback={this.selectCallback} entry={entry} tableColumns={this.state.tableColumns}/>
+							);
 						})}
 					</tbody>
 				</Table>
 				{actionsBar}
 			</div>
 		);
-					}
 	}
 }
 

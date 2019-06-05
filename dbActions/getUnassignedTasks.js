@@ -1,17 +1,12 @@
 import fire from '../config/firebaseConfig'
-import { getEndDate, getStartDate } from './dates'
 
 export default function getUnassigned(dispatch, region){
     const db = fire.firestore();
 
-    console.log(getStartDate())
-    console.log(getEndDate() )
-
     db.collection("tasks")
         .where("region", "==", region)
         .where("volunteerUid", "==", null)
-        .where("timestamp", ">", getStartDate() )
-        .where("timestamp", "<", getEndDate() )
+        .where("timestamp", ">", new Date())
         .get()
         .then((querySnapshot) => {
             var tasks = [];
@@ -20,7 +15,6 @@ export default function getUnassigned(dispatch, region){
                 task.id = doc.id;
                 tasks.push(task);
             });
-            console.log(tasks)
             dispatch({ type: 'UNASSIGNEDTASKS', tasks: tasks });
         });
 }

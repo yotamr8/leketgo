@@ -3,7 +3,9 @@ import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import App, {Container} from "next/app"
 import withRedux from 'next-redux-wrapper'
+import fire from '../config/firebaseConfig'
 import ModalBlock from '../components/ModalBlock.js'
+import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from "react-router-dom";
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {

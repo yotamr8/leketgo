@@ -5,27 +5,17 @@ import {Modal, ModalDialog, Button, Form, FormControl, Col, InputGroup} from 're
 import setUndoTask from '../dbActions/setUndoTask'
 import refresh4User from '../dbActions/refresh4User'
 import setTaskReport from '../dbActions/setTaskReport'
-import getTaskReports from '../dbActions/getTaskReports'
-import setTaskCollected from '../dbActions/setCollected'
 
 class ModalBlock extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            mainCourseQ: 0,
-            sideCourseQ: 0,
-            pastriesQ: 0,
-            pastriesS: "",
-            breadQ: 0,
-            breadS: "",
-            formComment: "",
-            startDate: new Date()
-        }
-        this.dateHandleChange = this.dateHandleChange.bind(this);
 
+    state = {
+        mainCourseQ: 0,
+        sideCourseQ: 0,
+        pastriesQ: 0,
+        pastriesS: "",
+        breadQ: 0,
+        breadS: ""
     }
-    
-
 
     resetState() {
         this.setState({
@@ -34,16 +24,9 @@ class ModalBlock extends React.Component {
             pastriesQ: 0,
             pastriesS: "",
             breadQ: 0,
-            breadS: "",
-            formComment: ""
+            breadS: ""
         })
     }
-
-    dateHandleChange(date) {
-        this.setState({
-          startDate: date
-        });
-      }
 
     handleChange = (e) => {
         console.log(e.target.id, e.target.value)
@@ -52,37 +35,12 @@ class ModalBlock extends React.Component {
         })
     }
 
-    verifyValuesForReport() {
+    verifyValuesForReport(modal) {
         var isValid = true;
         console.log(this.props.modal.entries.id)
         // some logic here
-
-        // organize data for db
         if (isValid) {
-            var numOfFields = 0;
-            var fields = [];
-            if (this.state.mainCourseQ > 0) { numOfFields++; fields.push("mainCourseQ"); }
-            if (this.state.sideCourseQ > 0) { numOfFields++; fields.push("sideCourseQ"); }
-            if (this.state.pastriesQ > 0) { numOfFields++; fields.push("pastriesQ"); }
-            if (this.state.breadQ > 0) { numOfFields++; fields.push("breadQ"); }
-            var data = {
-                reportFilled: true,
-                reportFieldNum: numOfFields,
-                reportComment: this.state.formComment,
-                collected: true
-            }
-            var dic = {
-                "mainCourseQ": 'עיקריות',
-                "sideCourseQ": 'תוספות',
-                "pastriesQ": 'מאפים',
-                "breadQ": 'לחם'
-            }
-            for (var i = 0; i < numOfFields; i++) {
-                data["foodDesc" + (i + 1)] = dic[fields[i]];
-                data["foodContainerType" + (i + 1)] = (fields[i] == "mainCourseQ" || fields[i] == "sideCourseQ") ? 'מיכלים' : (fields[i] == "pastriesQ") ? this.state.pastriesS : this.state.breadS;
-                data["foodContainerQuantity" + (i + 1)] = this.state[fields[i]]
-            }
-            setTaskReport(this.props.modal.entries.id, data)
+            setTaskReport(this.props.modal.entries.id, this.state)
         }
     }
 
@@ -194,8 +152,7 @@ class ModalBlock extends React.Component {
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formBasicEmail">
                                     <Form.Label>הערות נוספות</Form.Label>
-                            <Form.Control as="textarea" rows="3"
-                                id="formComment" onChange={this.handleChange}/>
+                                    <Form.Control as="textarea" rows="3"/>
                                 </Form.Group>
                             </Form.Row>
                         </Form>;
@@ -205,7 +162,7 @@ class ModalBlock extends React.Component {
                             this.props.dispatch({ type: 'CLOSE_MODAL' });
                             this.verifyValuesForReport(modal);
                             this.resetState();
-                            getTaskReports(this.props.dispatch, this.props.userData.uid)                        },
+                        },
                         color: 'primary',
                         text: 'שליחה'
                     },
@@ -279,7 +236,7 @@ class ModalBlock extends React.Component {
                 break;
             case 'EDIT_USER':
                     var user = modal.entries;
-                    title = 'עריכת פרטי מתנדב';
+                    title = 'עריכת פרטי משתמש';
                     body =
                             <Form>
                                 <Form.Row>
@@ -356,112 +313,12 @@ class ModalBlock extends React.Component {
                         text: 'דיווח'
                     },
 
-                        {
-                            onClick: () => {
-                                this.props.dispatch({ type: 'CLOSE_MODAL' })
-                                setTaskCollected(modal.entries.id);
-                                refresh4User(this.props.dispatch, this.props.userData.region, this.props.userData.uid);
-                            },
+                    {
+                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
                         color: 'secondary',
                         text: 'סגירה'
                     }    
                     ];
-                    break;
-                    case 'ADD_USER':
-                            title = 'הוספת מתנדב';
-                            body = <span></span>;
-                            buttons = [
-                                {
-                                    onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
-                                    color: 'secondary',
-                                    text: 'סגירה'
-                                }];
-                            break;
-                    case 'ADD_TASK':
-                            title = 'הוספת איסוף';
-                            body = 
-                                <Form>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formBasicEmail">
-                                            <Form.Label>תאריך</Form.Label><br />
-                                            <FormControl type="date"
-                                            />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formBasicEmail">
-                                            <Form.Label>שעה</Form.Label><br />
-                                            <FormControl pattern="[0-9]{2}:[0-9]{2}" type="time"
-                                            />
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formBasicEmail">
-                                            <Form.Label>עיר</Form.Label>
-                                            <Form.Control />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formBasicEmail">
-                                            <Form.Label>רחוב ומספר</Form.Label>
-                                            <Form.Control />
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formBasicEmail">
-                                            <Form.Label>ספק</Form.Label>
-                                            <Form.Control />
-                                        </Form.Group>
-                                    </Form.Row>
-                                    <Form.Row>
-                                        <Form.Group as={Col} controlId="formBasicEmail">
-                                            <Form.Label>שם איש קשר</Form.Label>
-                                            <Form.Control />
-                                        </Form.Group>
-                                        <Form.Group as={Col} controlId="formBasicEmail">
-                                            <Form.Label>טלפון איש קשר</Form.Label>
-                                            <Form.Control />
-                                        </Form.Group>
-                                    </Form.Row>
-                                </Form>;
-                            buttons = [
-                                {
-                                    onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
-                                    color: 'primary',
-                                    text: 'הוספה'
-                                },
-                                {
-                                    onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
-                                    color: 'secondary',
-                                    text: 'סגירה'
-                                }];
-                            break;
-                    case 'ADD_USER_CSV':
-                            title = 'הוספת מתנדבים מקובץ';
-                            body = <span></span>;
-                            buttons = [
-                                {
-                                    onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
-                                    color: 'secondary',
-                                    text: 'סגירה'
-                                }];
-                            break;
-                    case 'ADD_TASK_CSV':
-                            title = 'הוספת איסופים מקובץ';
-                            body = <span></span>;
-                            buttons = [
-                                {
-                                    onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
-                                    color: 'secondary',
-                                    text: 'סגירה'
-                                }];
-                            break;
-                    case 'EXPORT_TASK_CSV':
-                            title = 'הוספת איסופים מקובץ';
-                            body = <span></span>;
-                            buttons = [
-                                {
-                                    onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
-                                    color: 'secondary',
-                                    text: 'סגירה'
-                                }];
-                            break;
         }
 
             return (

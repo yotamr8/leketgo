@@ -1,0 +1,90 @@
+[debug] [2019-06-05T01:57:00.533Z] ----------------------------------------------------------------------
+[debug] [2019-06-05T01:57:00.537Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Kagan\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve --only functions,hosting
+[debug] [2019-06-05T01:57:00.537Z] CLI Version:   6.11.0
+[debug] [2019-06-05T01:57:00.537Z] Platform:      win32
+[debug] [2019-06-05T01:57:00.537Z] Node Version:  v10.15.3
+[debug] [2019-06-05T01:57:00.538Z] Time:          Wed Jun 05 2019 04:57:00 GMT+0300 (Israel Daylight Time)
+[debug] [2019-06-05T01:57:00.538Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-06-05T01:57:00.548Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-06-05T01:57:00.549Z] > authorizing via signed-in user
+[debug] [2019-06-05T01:57:00.550Z] [iam] checking project leketgo for permissions ["firebase.projects.get"]
+[debug] [2019-06-05T01:57:00.551Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-06-05T01:57:00.552Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-06-05T01:57:01.019Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-05T01:57:01.034Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/leketgo:testIamPermissions  
+
+[debug] [2019-06-05T01:57:02.073Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-05T01:57:02.076Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/leketgo  
+ 
+[debug] [2019-06-05T01:57:02.971Z] <<< HTTP RESPONSE 200
+[warn] !  Your requested "node" version "8" doesn't match your global version "10"
+[debug] [2019-06-05T01:57:02.992Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/427584696273/clients/_:getWebAppConfig  
+ 
+[debug] [2019-06-05T01:57:02.993Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/427584696273:getServerAppConfig  
+ 
+[debug] [2019-06-05T01:57:03.525Z] <<< HTTP RESPONSE 200
+[info] +  functions: Emulator started at http://localhost:5001
+[debug] [2019-06-05T01:57:03.588Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "E:\Alon\univesity\semester h\Google\LeketGo\leketclean\leket-go\functions" for Cloud Functions...
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000
+[debug] [2019-06-05T01:57:04.079Z] Functions runtime initialized.
+[debug] [2019-06-05T01:57:04.080Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-05T01:57:04.782Z] firebase-admin has been stubbed.
+[warn] !  Error: Cannot find module './pages/index.js'
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:582:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:508:25)
+    at Module.require (internal/modules/cjs/loader.js:637:17)
+    at require (internal/modules/cjs/helpers.js:22:18)
+    at Object.<anonymous> (E:\Alon\univesity\semester h\Google\LeketGo\leketclean\leket-go\functions\index.js:18:14)
+    at Module._compile (internal/modules/cjs/loader.js:701:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:712:10)
+    at Module.load (internal/modules/cjs/loader.js:600:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:539:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:531:3)
+[warn] !  Your function was killed because it raised an unhandled error.
+[debug] [2019-06-05T01:59:46.113Z] ----------------------------------------------------------------------
+[debug] [2019-06-05T01:59:46.115Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Kagan\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve --only functions,hosting
+[debug] [2019-06-05T01:59:46.116Z] CLI Version:   6.11.0
+[debug] [2019-06-05T01:59:46.116Z] Platform:      win32
+[debug] [2019-06-05T01:59:46.116Z] Node Version:  v10.15.3
+[debug] [2019-06-05T01:59:46.117Z] Time:          Wed Jun 05 2019 04:59:46 GMT+0300 (Israel Daylight Time)
+[debug] [2019-06-05T01:59:46.117Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-06-05T01:59:46.126Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-06-05T01:59:46.127Z] > authorizing via signed-in user
+[debug] [2019-06-05T01:59:46.127Z] [iam] checking project leketgo for permissions ["firebase.projects.get"]
+[debug] [2019-06-05T01:59:46.129Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/leketgo:testIamPermissions  
+
+[debug] [2019-06-05T01:59:47.134Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-05T01:59:47.140Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/leketgo  
+ 
+[debug] [2019-06-05T01:59:48.020Z] <<< HTTP RESPONSE 200
+[info] +  functions: Using node@10 from host.
+[debug] [2019-06-05T01:59:48.041Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/427584696273/clients/_:getWebAppConfig  
+ 
+[debug] [2019-06-05T01:59:48.043Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/427584696273:getServerAppConfig  
+ 
+[debug] [2019-06-05T01:59:48.482Z] <<< HTTP RESPONSE 200
+[info] +  functions: Emulator started at http://localhost:5001
+[debug] [2019-06-05T01:59:48.545Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "E:\Alon\univesity\semester h\Google\LeketGo\leketclean\leket-go\functions" for Cloud Functions...
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000
+[debug] [2019-06-05T01:59:49.025Z] Functions runtime initialized.
+[debug] [2019-06-05T01:59:49.026Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-05T01:59:49.720Z] firebase-admin has been stubbed.
+[warn] !  Error: Cannot find module '../components/TableBlock.js'
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:582:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:508:25)
+    at Module.require (internal/modules/cjs/loader.js:637:17)
+    at require (internal/modules/cjs/helpers.js:22:18)
+    at Object.<anonymous> (E:\Alon\univesity\semester h\Google\LeketGo\leketclean\leket-go\functions\pages\index.js:13:19)
+    at Module._compile (internal/modules/cjs/loader.js:701:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:712:10)
+    at Module.load (internal/modules/cjs/loader.js:600:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:539:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:531:3)
+[warn] !  Your function was killed because it raised an unhandled error.
