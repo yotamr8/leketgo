@@ -29,6 +29,7 @@ class TableBlock extends React.Component {
 				'contactName': 'שם',
 				'contactNumber': 'טלפון',
 				'checkBox': '',
+				'status': '',
 				'phone': 'טלפון'
 			},
 			searchValue: '',
@@ -50,7 +51,7 @@ class TableBlock extends React.Component {
 			case 'adminUsers':
 				return ['tz', 'firstName', 'lastName', 'email', 'phone', 'region', 'actions'];
 			case 'adminTasks':
-					return ['date', 'time', 'street', 'city', 'name', 'actions'];
+					return ['status', 'date', 'time', 'street', 'city', 'name', 'actions'];
 			default:
 				break;
 		}

@@ -1,4 +1,5 @@
 import Logo from '../components/Logo.js'
+import '../static/styles.scss'
 
 export default function Loading() {
     return (
@@ -16,7 +17,7 @@ export default function Loading() {
                 justifyContent: 'center'
 
             }}>
-                <img src="/static/loading.png" width="100"/>
+                <img className="wiggle" src="/static/loading.png" width="100"/>
                 <span style={{
                     fontSize: '20px',
                     marginTop: '10px'
