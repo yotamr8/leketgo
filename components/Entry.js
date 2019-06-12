@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from "react-redux"
 import {Card, Button, ButtonToolbar, Tooltip, OverlayTrigger, Dropdown, Form, ButtonGroup} from 'react-bootstrap'
 import fire from '../config/firebaseConfig'
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import Link from 'next/link'
 
 class Entry extends React.Component {
     constructor(props) {
@@ -11,7 +13,13 @@ class Entry extends React.Component {
         }
         this.toggleSelection = this.toggleSelection.bind(this);
         this.toggleEditable = this.toggleEditable.bind(this);
+        this.copyToClipboard = this.copyToClipboard.bind(this);
     };
+    
+    copyToClipboard(values) {
+        let fullAddress = values.street + ', ' + values.city;
+        document.execCommand("copy");
+    }
 
     getDataValues(entry) {
         switch (this.props.type) {
@@ -20,6 +28,29 @@ class Entry extends React.Component {
                 let date = entry.timestamp.toDate();
                 let statusIcon;
                 let statusMessage;
+                let fullAddressWithButtons = (
+                    <span>{entry.address +', '+ entry.city}<OverlayTrigger
+                        placement='top'
+                        overlay={
+                            <Tooltip>
+                            העתקת כתובת
+                            </Tooltip>
+                        }>
+                            <CopyToClipboard text={entry.address +', '+ entry.city}><a href={'#'+entry.id}><i style={{cursor: 'pointer'}} className="ml-2 far fa-clipboard nm"></i></a>
+                            </CopyToClipboard>
+                        </OverlayTrigger>
+
+                        <OverlayTrigger
+                        placement='top'
+                        overlay={
+                            <Tooltip>
+                            חיפוש ב־Waze
+                            </Tooltip>
+                        }>
+                            <a target="_blank" href={`https://waze.com/ul?q=` + entry.address +', '+ entry.city}><i style={{cursor: 'pointer'}} className="ml-2 fab fa-waze nm"></i>
+                            </a>
+                        </OverlayTrigger></span>
+                )
                 if (entry.collected) {
                     if (entry.reportFilled) {
                         statusIcon = 'fas fa-calendar-check';
@@ -39,12 +70,14 @@ class Entry extends React.Component {
                     }
                 }
                 return {
+                    tid: entry.id,
                     date: date.toLocaleDateString('he-IL', options),
                     time: date.getHours() + ':' + ('0'+date.getMinutes()).slice(-2),
                     city: entry.city,
                     name: entry.name,
                     street: entry.address,
                     fullAddress: entry.address + ', ' + entry.city,
+                    fullAddressWithButtons: fullAddressWithButtons,
                     actions: 'ACTIONS',
                     contactName: entry['contact name'],
                     contactNumber: <a style={{whiteSpace: 'nowrap'}} href={'tel: '+ entry['contact number']}>{entry['contact number']}</a>,
@@ -167,13 +200,16 @@ class Entry extends React.Component {
                 </ButtonGroup>
             )
             return (
-                <Card>
+                <Card id={values.tid}>
                     <Card.Header>
                     {values.date}, {values.time}
                     </Card.Header>
                     <Card.Body>
                     <Card.Title>{values.name}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">{values['street']}, {values['city']}</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted">{values.fullAddressWithButtons}
+
+                        
+                    </Card.Subtitle>
                     <Card.Text>
                         <div className='mt-4'>{values.contactName}</div>
                         <div>{values.contactNumber}</div>

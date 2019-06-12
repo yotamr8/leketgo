@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -115,6 +115,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "react-bootstrap");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../config/firebaseConfig */ "./config/firebaseConfig.js");
+/* harmony import */ var react_copy_to_clipboard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-copy-to-clipboard */ "react-copy-to-clipboard");
+/* harmony import */ var react_copy_to_clipboard__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_copy_to_clipboard__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_11__);
 
 
 
@@ -122,6 +126,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _jsxFileName = "C:\\Users\\baram\\Git\\leket-go\\components\\Entry.js";
+
+
 
 
 
@@ -143,10 +149,17 @@ function (_React$Component) {
     };
     _this.toggleSelection = _this.toggleSelection.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
     _this.toggleEditable = _this.toggleEditable.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
+    _this.copyToClipboard = _this.copyToClipboard.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
     return _this;
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(Entry, [{
+    key: "copyToClipboard",
+    value: function copyToClipboard(values) {
+      var fullAddress = values.street + ', ' + values.city;
+      document.execCommand("copy");
+    }
+  }, {
     key: "getDataValues",
     value: function getDataValues(entry) {
       switch (this.props.type) {
@@ -160,6 +173,83 @@ function (_React$Component) {
           var date = entry.timestamp.toDate();
           var statusIcon;
           var statusMessage;
+          var fullAddressWithButtons = react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 32
+            },
+            __self: this
+          }, entry.address + ', ' + entry.city, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["OverlayTrigger"], {
+            placement: "top",
+            overlay: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Tooltip"], {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 35
+              },
+              __self: this
+            }, "\u05D4\u05E2\u05EA\u05E7\u05EA \u05DB\u05EA\u05D5\u05D1\u05EA"),
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 32
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_copy_to_clipboard__WEBPACK_IMPORTED_MODULE_10__["CopyToClipboard"], {
+            text: entry.address + ', ' + entry.city,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 39
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("a", {
+            href: '#' + entry.id,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 39
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
+            style: {
+              cursor: 'pointer'
+            },
+            className: "ml-2 far fa-clipboard nm",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 39
+            },
+            __self: this
+          })))), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["OverlayTrigger"], {
+            placement: "top",
+            overlay: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Tooltip"], {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 46
+              },
+              __self: this
+            }, "\u05D7\u05D9\u05E4\u05D5\u05E9 \u05D1\u05BEWaze"),
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 43
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("a", {
+            target: "_blank",
+            href: "https://waze.com/ul?q=" + entry.address + ', ' + entry.city,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 50
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
+            style: {
+              cursor: 'pointer'
+            },
+            className: "ml-2 fab fa-waze nm",
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 50
+            },
+            __self: this
+          }))));
 
           if (entry.collected) {
             if (entry.reportFilled) {
@@ -180,12 +270,14 @@ function (_React$Component) {
           }
 
           return {
+            tid: entry.id,
             date: date.toLocaleDateString('he-IL', options),
             time: date.getHours() + ':' + ('0' + date.getMinutes()).slice(-2),
             city: entry.city,
             name: entry.name,
             street: entry.address,
             fullAddress: entry.address + ', ' + entry.city,
+            fullAddressWithButtons: fullAddressWithButtons,
             actions: 'ACTIONS',
             contactName: entry['contact name'],
             contactNumber: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("a", {
@@ -195,7 +287,7 @@ function (_React$Component) {
               href: 'tel: ' + entry['contact number'],
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 50
+                lineNumber: 83
               },
               __self: this
             }, entry['contact number']),
@@ -206,7 +298,7 @@ function (_React$Component) {
               type: "checkbox",
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 51
+                lineNumber: 84
               },
               __self: this
             }) : react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Form"].Check, {
@@ -215,7 +307,7 @@ function (_React$Component) {
               type: "checkbox",
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 51
+                lineNumber: 84
               },
               __self: this
             }),
@@ -275,20 +367,20 @@ function (_React$Component) {
             text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 90
+                lineNumber: 123
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
               className: "far fa-sticky-note fa-fw " + nm,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 90
+                lineNumber: 123
               },
               __self: this
             }), this.props.tableTasksCardView ? react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("br", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 90
+                lineNumber: 123
               },
               __self: this
             }) : '', "\u05D4\u05E2\u05E8\u05D5\u05EA")
@@ -304,20 +396,20 @@ function (_React$Component) {
             text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 95
+                lineNumber: 128
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
               className: "far fa-calendar-check fa-fw " + nm,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 95
+                lineNumber: 128
               },
               __self: this
             }), this.props.tableTasksCardView ? react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("br", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 95
+                lineNumber: 128
               },
               __self: this
             }) : '', "\u05D1\u05D5\u05E6\u05E2")
@@ -333,20 +425,20 @@ function (_React$Component) {
             text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 100
+                lineNumber: 133
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
               className: "far fa-calendar-times fa-fw " + nm,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 100
+                lineNumber: 133
               },
               __self: this
             }), this.props.tableTasksCardView ? react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("br", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 100
+                lineNumber: 133
               },
               __self: this
             }) : '', "\u05D4\u05E1\u05E8\u05D4")
@@ -366,20 +458,20 @@ function (_React$Component) {
             text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 109
+                lineNumber: 142
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
               className: "far fa-calendar-check fa-fw " + nm,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 109
+                lineNumber: 142
               },
               __self: this
             }), this.props.tableTasksCardView ? react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("br", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 109
+                lineNumber: 142
               },
               __self: this
             }) : '', "\u05D3\u05D9\u05D5\u05D5\u05D7")
@@ -394,20 +486,20 @@ function (_React$Component) {
             text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 114
+                lineNumber: 147
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
               className: "far fa-calendar-times fa-fw " + nm,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 114
+                lineNumber: 147
               },
               __self: this
             }), this.props.tableTasksCardView ? react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("br", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 114
+                lineNumber: 147
               },
               __self: this
             }) : '', "\u05DC\u05D0 \u05D1\u05D5\u05E6\u05E2")
@@ -427,14 +519,14 @@ function (_React$Component) {
             text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 123
+                lineNumber: 156
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
               className: "far fa-edit fa-fw",
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 123
+                lineNumber: 156
               },
               __self: this
             }), "\u05E2\u05E8\u05D9\u05DB\u05D4")
@@ -450,14 +542,14 @@ function (_React$Component) {
             text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 128
+                lineNumber: 161
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
               className: "fas fa-unlock-alt fa-fw",
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 128
+                lineNumber: 161
               },
               __self: this
             }), "\u05D0\u05D9\u05E4\u05D5\u05E1 \u05E1\u05D9\u05E1\u05DE\u05D4")
@@ -473,14 +565,14 @@ function (_React$Component) {
             text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 133
+                lineNumber: 166
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
               className: "far fa-trash-alt fa-fw",
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 133
+                lineNumber: 166
               },
               __self: this
             }), "\u05E1\u05D2\u05D9\u05E8\u05EA \u05D7\u05E9\u05D1\u05D5\u05DF")
@@ -500,14 +592,14 @@ function (_React$Component) {
             text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 142
+                lineNumber: 175
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
               className: "far fa-edit fa-fw",
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 142
+                lineNumber: 175
               },
               __self: this
             }), "\u05E2\u05E8\u05D9\u05DB\u05D4")
@@ -523,14 +615,14 @@ function (_React$Component) {
             text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 147
+                lineNumber: 180
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
               className: "fas fa-question fa-fw",
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 147
+                lineNumber: 180
               },
               __self: this
             }), "\u05E1\u05D8\u05D8\u05D5\u05E1")
@@ -546,14 +638,14 @@ function (_React$Component) {
             text: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 152
+                lineNumber: 185
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
               className: "far fa-trash-alt fa-fw",
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 152
+                lineNumber: 185
               },
               __self: this
             }), "\u05DE\u05D7\u05D9\u05E7\u05D4")
@@ -568,7 +660,7 @@ function (_React$Component) {
           className: "w-100 mt-4",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 161
+            lineNumber: 194
           },
           __self: this
         }, buttons.map(function (button) {
@@ -579,59 +671,60 @@ function (_React$Component) {
             variant: "outline-secondary",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 164
+              lineNumber: 197
             },
             __self: this
           }, button.text);
         }));
         return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"], {
+          id: values.tid,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 170
+            lineNumber: 203
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"].Header, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 171
+            lineNumber: 204
           },
           __self: this
         }, values.date, ", ", values.time), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"].Body, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 174
+            lineNumber: 207
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"].Title, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 175
+            lineNumber: 208
           },
           __self: this
         }, values.name), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"].Subtitle, {
           className: "mb-2 text-muted",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 176
+            lineNumber: 209
           },
           __self: this
-        }, values['street'], ", ", values['city']), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"].Text, {
+        }, values.fullAddressWithButtons), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Card"].Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 177
+            lineNumber: 213
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
           className: "mt-4",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 178
+            lineNumber: 214
           },
           __self: this
         }, values.contactName), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 179
+            lineNumber: 215
           },
           __self: this
         }, values.contactNumber), viewButtons)));
@@ -640,7 +733,7 @@ function (_React$Component) {
           className: (this.props.isSelected ? 'table-primary' : '') + (this.props.isSelectable ? ' entry-selectable' : ''),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 188
+            lineNumber: 224
           },
           __self: this
         }, this.props.tableColumns.map(function (column) {
@@ -654,7 +747,7 @@ function (_React$Component) {
                       key: column,
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 196
+                        lineNumber: 232
                       },
                       __self: this
                     }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
@@ -663,14 +756,14 @@ function (_React$Component) {
                       },
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 197
+                        lineNumber: 233
                       },
                       __self: this
                     }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"], {
                       width: "200",
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 197
+                        lineNumber: 233
                       },
                       __self: this
                     }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Toggle, {
@@ -678,13 +771,13 @@ function (_React$Component) {
                       id: "dropdown-basic",
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 198
+                        lineNumber: 234
                       },
                       __self: this
                     }, "\u05E4\u05E2\u05D5\u05DC\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Menu, {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 201
+                        lineNumber: 237
                       },
                       __self: this
                     }, buttons.map(function (button) {
@@ -693,7 +786,7 @@ function (_React$Component) {
                         onClick: button.onClick,
                         __source: {
                           fileName: _jsxFileName,
-                          lineNumber: 204
+                          lineNumber: 240
                         },
                         __self: this
                       }, button.text);
@@ -705,7 +798,7 @@ function (_React$Component) {
                       key: column,
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 216
+                        lineNumber: 252
                       },
                       __self: this
                     }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
@@ -714,14 +807,14 @@ function (_React$Component) {
                       },
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 217
+                        lineNumber: 253
                       },
                       __self: this
                     }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"], {
                       width: "200",
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 218
+                        lineNumber: 254
                       },
                       __self: this
                     }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Toggle, {
@@ -729,13 +822,13 @@ function (_React$Component) {
                       id: "dropdown-basic",
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 219
+                        lineNumber: 255
                       },
                       __self: this
                     }, "\u05E4\u05E2\u05D5\u05DC\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Menu, {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 222
+                        lineNumber: 258
                       },
                       __self: this
                     }, buttons.map(function (button) {
@@ -744,7 +837,7 @@ function (_React$Component) {
                         onClick: button.onClick,
                         __source: {
                           fileName: _jsxFileName,
-                          lineNumber: 225
+                          lineNumber: 261
                         },
                         __self: this
                       }, button.text);
@@ -756,7 +849,7 @@ function (_React$Component) {
                       key: column,
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 236
+                        lineNumber: 272
                       },
                       __self: this
                     }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
@@ -765,14 +858,14 @@ function (_React$Component) {
                       },
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 237
+                        lineNumber: 273
                       },
                       __self: this
                     }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"], {
                       width: "200",
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 238
+                        lineNumber: 274
                       },
                       __self: this
                     }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Toggle, {
@@ -780,13 +873,13 @@ function (_React$Component) {
                       id: "dropdown-basic",
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 239
+                        lineNumber: 275
                       },
                       __self: this
                     }, "\u05E4\u05E2\u05D5\u05DC\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Menu, {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 242
+                        lineNumber: 278
                       },
                       __self: this
                     }, buttons.map(function (button) {
@@ -795,7 +888,7 @@ function (_React$Component) {
                         onClick: button.onClick,
                         __source: {
                           fileName: _jsxFileName,
-                          lineNumber: 245
+                          lineNumber: 281
                         },
                         __self: this
                       }, button.text);
@@ -807,7 +900,7 @@ function (_React$Component) {
                       key: column,
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 256
+                        lineNumber: 292
                       },
                       __self: this
                     }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("span", {
@@ -816,14 +909,14 @@ function (_React$Component) {
                       },
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 257
+                        lineNumber: 293
                       },
                       __self: this
                     }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"], {
                       width: "200",
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 258
+                        lineNumber: 294
                       },
                       __self: this
                     }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Toggle, {
@@ -831,13 +924,13 @@ function (_React$Component) {
                       id: "dropdown-basic",
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 259
+                        lineNumber: 295
                       },
                       __self: this
                     }, "\u05E4\u05E2\u05D5\u05DC\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Dropdown"].Menu, {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 262
+                        lineNumber: 298
                       },
                       __self: this
                     }, buttons.map(function (button) {
@@ -846,7 +939,7 @@ function (_React$Component) {
                         onClick: button.onClick,
                         __source: {
                           fileName: _jsxFileName,
-                          lineNumber: 265
+                          lineNumber: 301
                         },
                         __self: this
                       }, button.text);
@@ -858,13 +951,13 @@ function (_React$Component) {
                       key: column,
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 277
+                        lineNumber: 313
                       },
                       __self: this
                     }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["ButtonGroup"], {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 278
+                        lineNumber: 314
                       },
                       __self: this
                     }, buttons.map(function (button) {
@@ -874,7 +967,7 @@ function (_React$Component) {
                         variant: button.variant,
                         __source: {
                           fileName: _jsxFileName,
-                          lineNumber: 281
+                          lineNumber: 317
                         },
                         __self: this
                       }, button.text);
@@ -893,13 +986,13 @@ function (_React$Component) {
                   key: column,
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 295
+                    lineNumber: 331
                   },
                   __self: this
                 }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["ButtonToolbar"], {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 296
+                    lineNumber: 332
                   },
                   __self: this
                 }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["OverlayTrigger"], {
@@ -907,20 +1000,20 @@ function (_React$Component) {
                   overlay: react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Tooltip"], {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 300
+                      lineNumber: 336
                     },
                     __self: this
                   }, message),
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 297
+                    lineNumber: 333
                   },
                   __self: this
                 }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("i", {
                   className: icon,
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 304
+                    lineNumber: 340
                   },
                   __self: this
                 }))));
@@ -934,7 +1027,7 @@ function (_React$Component) {
                   key: column,
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 313
+                    lineNumber: 349
                   },
                   __self: this
                 }, _this2.getDataValues(_this2.props.entry)[column]);
@@ -1653,6 +1746,7 @@ function (_React$Component) {
         'time': 'שעה',
         'city': 'עיר',
         'fullAddress': 'כתובת',
+        'fullAddressWithButtons': 'כתובת',
         'name': 'ספק',
         'uid': 'uid',
         'firstName': 'שם פרטי',
@@ -1685,10 +1779,10 @@ function (_React$Component) {
           return ['checkBox', 'date', 'time', 'city', 'name'];
 
         case 'assignedTasks':
-          return ['date', 'time', 'fullAddress', 'name', 'contactName', 'contactNumber', 'actions'];
+          return ['date', 'time', 'fullAddressWithButtons', 'name', 'contactName', 'contactNumber', 'actions'];
 
         case 'taskReports':
-          return ['date', 'street', 'city', 'name', 'actions'];
+          return ['date', 'time', 'fullAddressWithButtons', 'name', 'contactName', 'contactNumber', 'actions'];
 
         case 'adminUsers':
           return ['tz', 'firstName', 'lastName', 'email', 'phone', 'region', 'actions'];
@@ -1843,7 +1937,7 @@ function (_React$Component) {
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 145
+            lineNumber: 146
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
@@ -1856,7 +1950,7 @@ function (_React$Component) {
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 151
+            lineNumber: 152
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("img", {
@@ -1864,7 +1958,7 @@ function (_React$Component) {
           width: "100",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 158
+            lineNumber: 159
           },
           __self: this
         }), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
@@ -1874,7 +1968,7 @@ function (_React$Component) {
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 159
+            lineNumber: 160
           },
           __self: this
         }, "\u05D4\u05DE\u05DE\u05DE... \u05D0\u05D9\u05DF \u05DB\u05D0\u05DF \u05DB\u05DC\u05D5\u05DD")));
@@ -1887,13 +1981,13 @@ function (_React$Component) {
             fixed: "bottom",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 170
+              lineNumber: 171
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["ButtonGroup"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 171
+              lineNumber: 172
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Button"], {
@@ -1901,7 +1995,7 @@ function (_React$Component) {
             variant: "primary",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 172
+              lineNumber: 173
             },
             __self: this
           }, "\u05E9\u05D9\u05D1\u05D5\u05E5 ", this.state.entrySelectedCounter, " \u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Button"], {
@@ -1909,7 +2003,7 @@ function (_React$Component) {
             variant: "secondary",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 173
+              lineNumber: 174
             },
             __self: this
           }, "\u05D1\u05D9\u05D8\u05D5\u05DC")));
@@ -1921,25 +2015,25 @@ function (_React$Component) {
             fixed: "bottom",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 179
+              lineNumber: 180
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 180
+              lineNumber: 181
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Row"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 181
+              lineNumber: 182
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 182
+              lineNumber: 183
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
@@ -1948,7 +2042,7 @@ function (_React$Component) {
             "aria-label": "Basic example",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 183
+              lineNumber: 184
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
@@ -1966,7 +2060,7 @@ function (_React$Component) {
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 184
+              lineNumber: 185
             },
             __self: this
           }, "\u05D4\u05D5\u05E1\u05E4\u05EA \u05DE\u05EA\u05E0\u05D3\u05D1"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
@@ -1984,20 +2078,20 @@ function (_React$Component) {
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 185
+              lineNumber: 186
             },
             __self: this
           }, "\u05D4\u05D5\u05E1\u05E4\u05D4 \u05DE\u05E7\u05D5\u05D1\u05E5"))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 187
+              lineNumber: 188
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["InputGroup"], {
             className: "mb-3",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 188
+              lineNumber: 189
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"].Control, {
@@ -2008,49 +2102,49 @@ function (_React$Component) {
             onChange: this.handleChangeDropDown.bind(this),
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 189
+              lineNumber: 190
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 194
+              lineNumber: 195
             },
             __self: this
           }, "\u05E9\u05DD \u05E4\u05E8\u05D8\u05D9"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 195
+              lineNumber: 196
             },
             __self: this
           }, "\u05E9\u05DD \u05DE\u05E9\u05E4\u05D7\u05D4"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 196
+              lineNumber: 197
             },
             __self: this
           }, "\u05EA\u05E2\u05D5\u05D3\u05EA \u05D6\u05D4\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 197
+              lineNumber: 198
             },
             __self: this
           }, "\u05E8\u05D7\u05D5\u05D1 \u05D5\u05DE\u05E1\u05E4\u05E8"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 198
+              lineNumber: 199
             },
             __self: this
           }, "\u05E2\u05D9\u05E8 \u05DE\u05D2\u05D5\u05E8\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 199
+              lineNumber: 200
             },
             __self: this
           }, "\u05DE\u05E1\u05E4\u05E8 \u05D8\u05DC\u05E4\u05D5\u05DF"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 200
+              lineNumber: 201
             },
             __self: this
           }, "\u05D3\u05D5\u05D0\u05E8 \u05D0\u05DC\u05E7\u05D8\u05E8\u05D5\u05E0\u05D9")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["FormControl"], {
@@ -2058,7 +2152,7 @@ function (_React$Component) {
             "aria-describedby": "basic-addon1",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 202
+              lineNumber: 203
             },
             __self: this
           }))))));
@@ -2070,25 +2164,25 @@ function (_React$Component) {
             fixed: "bottom",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 211
+              lineNumber: 212
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 212
+              lineNumber: 213
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Row"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 213
+              lineNumber: 214
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 214
+              lineNumber: 215
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
@@ -2097,7 +2191,7 @@ function (_React$Component) {
             "aria-label": "Basic example",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 215
+              lineNumber: 216
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
@@ -2115,7 +2209,7 @@ function (_React$Component) {
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 216
+              lineNumber: 217
             },
             __self: this
           }, "\u05D4\u05D5\u05E1\u05E4\u05EA \u05D0\u05D9\u05E1\u05D5\u05E3"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
@@ -2133,7 +2227,7 @@ function (_React$Component) {
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 217
+              lineNumber: 218
             },
             __self: this
           }, "\u05D4\u05D5\u05E1\u05E4\u05D4 \u05DE\u05E7\u05D5\u05D1\u05E5"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
@@ -2151,20 +2245,20 @@ function (_React$Component) {
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 218
+              lineNumber: 219
             },
             __self: this
           }, "\u05D9\u05D9\u05E6\u05D5\u05D0 \u05D3\u05D5\u05D7"))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Col"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 221
+              lineNumber: 222
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["InputGroup"], {
             className: "mb-3",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 222
+              lineNumber: 223
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Form"].Control, {
@@ -2175,37 +2269,37 @@ function (_React$Component) {
             onChange: this.handleChangeDropDown.bind(this),
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 223
+              lineNumber: 224
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 229
+              lineNumber: 230
             },
             __self: this
           }, "\u05E1\u05E4\u05E7"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 230
+              lineNumber: 231
             },
             __self: this
           }, "\u05E2\u05D9\u05E8"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 231
+              lineNumber: 232
             },
             __self: this
           }, "\u05E8\u05D7\u05D5\u05D1 \u05D5\u05DE\u05E1\u05E4\u05E8"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 232
+              lineNumber: 233
             },
             __self: this
           }, "\u05D0\u05D9\u05E9 \u05E7\u05E9\u05E8"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 233
+              lineNumber: 234
             },
             __self: this
           }, "\u05D8\u05DC\u05E4\u05D5\u05DF")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["FormControl"], {
@@ -2213,7 +2307,7 @@ function (_React$Component) {
             "aria-describedby": "basic-addon1",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 235
+              lineNumber: 236
             },
             __self: this
           }))))));
@@ -2223,7 +2317,7 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["CardColumns"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 244
+              lineNumber: 245
             },
             __self: this
           }, this.props.data.map(function (entry) {
@@ -2244,7 +2338,7 @@ function (_React$Component) {
               tableColumns: _this2.state.tableColumns,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 249
+                lineNumber: 250
               },
               __self: this
             });
@@ -2254,7 +2348,7 @@ function (_React$Component) {
             className: "table-responsive",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 256
+              lineNumber: 257
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["Table"], {
@@ -2262,19 +2356,19 @@ function (_React$Component) {
             responsive: true,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 257
+              lineNumber: 258
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("thead", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 258
+              lineNumber: 259
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tr", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 259
+              lineNumber: 260
             },
             __self: this
           }, this.state.tableColumns.map(function (column) {
@@ -2285,7 +2379,7 @@ function (_React$Component) {
                   key: column,
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 264
+                    lineNumber: 265
                   },
                   __self: this
                 }, _this2.state.columnNames[column]);
@@ -2293,7 +2387,7 @@ function (_React$Component) {
           }))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("tbody", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 270
+              lineNumber: 271
             },
             __self: this
           }, this.props.data.map(function (entry) {
@@ -2314,7 +2408,7 @@ function (_React$Component) {
               tableColumns: _this2.state.tableColumns,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 276
+                lineNumber: 277
               },
               __self: this
             });
@@ -3953,7 +4047,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!*************************************!*\
   !*** multi ./pages/task-reports.js ***!
   \*************************************/
@@ -4171,6 +4265,17 @@ module.exports = require("react");
 /***/ (function(module, exports) {
 
 module.exports = require("react-bootstrap");
+
+/***/ }),
+
+/***/ "react-copy-to-clipboard":
+/*!******************************************!*\
+  !*** external "react-copy-to-clipboard" ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-copy-to-clipboard");
 
 /***/ }),
 

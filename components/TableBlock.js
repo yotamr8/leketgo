@@ -17,6 +17,7 @@ class TableBlock extends React.Component {
 				'time': 'שעה',
 				'city': 'עיר',
 				'fullAddress': 'כתובת',
+				'fullAddressWithButtons': 'כתובת',
 				'name': 'ספק',
 				'uid': 'uid',
 				'firstName': 'שם פרטי',
@@ -45,9 +46,9 @@ class TableBlock extends React.Component {
 			case 'index':
 				return ['checkBox', 'date', 'time', 'city', 'name'];
 			case 'assignedTasks':
-				return ['date', 'time', 'fullAddress', 'name', 'contactName', 'contactNumber', 'actions'];
+				return ['date', 'time', 'fullAddressWithButtons', 'name', 'contactName', 'contactNumber', 'actions'];
 			case 'taskReports':
-				return ['date', 'street', 'city', 'name', 'actions'];
+				return ['date', 'time', 'fullAddressWithButtons', 'name', 'contactName', 'contactNumber', 'actions'];
 			case 'adminUsers':
 				return ['tz', 'firstName', 'lastName', 'email', 'phone', 'region', 'actions'];
 			case 'adminTasks':
