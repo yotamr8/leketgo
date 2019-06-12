@@ -3,6 +3,7 @@ import Entry from '../components/Entry'
 import { connect } from "react-redux"
 import { Table,CardColumns, Card, Button, ButtonGroup, InputGroup, Form, Col, Row, DropdownButton, Dropdown, FormControl, Navbar } from 'react-bootstrap'
 import setAssignedTasks from '../dbActions/setAssignedTasks'
+import handleFileUpload from '../dbActions/addTasksFromFile'
 
 class TableBlock extends React.Component {
 	constructor(props) {
@@ -214,8 +215,14 @@ class TableBlock extends React.Component {
 						<Row>
 							<Col>
 						<div className="btn-group" role="group" aria-label="Basic example">
+							<input type='file' id='fileUploader' accept='xlsx' style={{ display: "none" }} onChange={(e) => handleFileUpload(e.target.files[0])} />
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK', entries: this.props.entry})}>הוספת איסוף</button>
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK_CSV', entries: this.props.entry})}>הוספה מקובץ</button>
+							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick=
+							{() =>
+								document.getElementById('fileUploader').click()
+								//this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK_CSV', entries: this.props.entry})
+							}
+							>הוספה מקובץ</button>
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EXPORT_TASK_CSV', entries: this.props.entry})}>ייצוא דוח</button>
 							</div>
 							</Col>

@@ -1,6 +1,6 @@
 {
   "devFiles": [
-    "static/development/dll/dll_d595916e28f76d4b4c8d.js"
+    "static/development/dll/dll_f05580ca70a180854117.js"
   ],
   "pages": {
     "/": [
@@ -17,19 +17,19 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/assigned-tasks": [
-      "static/runtime/webpack.js",
-      "static/css/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/runtime/main.js"
-    ],
     "/index": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",
       "static/chunks/styles.js",
       "static/runtime/main.js"
     ],
-    "/task-reports": [
+    "/tasks": [
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
+    ],
+    "/users": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",
       "static/chunks/styles.js",
