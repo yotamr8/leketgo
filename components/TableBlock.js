@@ -1,7 +1,7 @@
 import React from 'react'
 import Entry from '../components/Entry'
 import { connect } from "react-redux"
-import { Table, Button, ButtonGroup, InputGroup, Form, Col, Row, DropdownButton, Dropdown, FormControl, Navbar } from 'react-bootstrap'
+import { Table,CardColumns, Card, Button, ButtonGroup, InputGroup, Form, Col, Row, DropdownButton, Dropdown, FormControl, Navbar } from 'react-bootstrap'
 import setAssignedTasks from '../dbActions/setAssignedTasks'
 
 class TableBlock extends React.Component {
@@ -239,7 +239,19 @@ class TableBlock extends React.Component {
 					</Form>
 				</Navbar>;
 		}
-
+		if (this.props.tableTasksCardView){
+			return (
+				<CardColumns>
+					{this.props.data.map((entry) => {
+						let options = { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric' };
+						let date = entry.timestamp.toDate();
+							return (
+								<Entry tableTasksCardView={this.props.tableTasksCardView} page={this.props.page} type={this.props.type} key={entry.id} selectCallback={this.selectCallback} entry={entry} tableColumns={this.state.tableColumns}/>
+						);})}
+				</CardColumns>
+			);
+		}
+		else {
 		return (
 			<div className="table-responsive">
 				<Table hover responsive>
@@ -277,7 +289,7 @@ class TableBlock extends React.Component {
 				</Table>
 				{actionsBar}
 			</div>
-		);
+		);}
 					}
 	}
 }

@@ -47,6 +47,10 @@ const reducer = (state = initialState, action) => {
             break;
         case 'CLOSE_MODAL':
             return { ...state, modal: { ...state.modal, isOpen: false } };
+        case 'TASK_LIST_VIEW':
+            return { ...state, tasksCardView: false };
+        case 'TASK_CARDS_VIEW':
+            return { ...state, tasksCardView: true };
         default:
             return state
     }
@@ -54,6 +58,7 @@ const reducer = (state = initialState, action) => {
 
 var initialState = {
     authChecked: false,
+    tasksCardView: true,
     loginErr: false,
     isLoggedIn: false,
     userData: {

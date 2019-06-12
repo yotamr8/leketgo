@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux"
-import {Button, ButtonToolbar, Tooltip, OverlayTrigger, Dropdown, Form, ButtonGroup} from 'react-bootstrap'
+import {Card, Button, ButtonToolbar, Tooltip, OverlayTrigger, Dropdown, Form, ButtonGroup} from 'react-bootstrap'
 import fire from '../config/firebaseConfig'
 
 class Entry extends React.Component {
@@ -79,24 +79,25 @@ class Entry extends React.Component {
     }
 
     render() {
-        var buttons = [];
-        switch (this.props.page) {
+        let buttons = [];
+        let nm = this.props.tableTasksCardView ? 'nm' : '';
+        switch (this.props.page) { 
             case 'assignedTasks':
                 buttons = [
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_NOTES', entries: this.props.entry}),
                         variant: 'outline-primary',
-                        text: <span><i className="far fa-sticky-note fa-fw"></i>הערות</span>
+                        text: <span><i className={"far fa-sticky-note fa-fw "+ nm}></i>{this.props.tableTasksCardView ? <br/> : ''}הערות</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_DONE', entries: this.props.entry}),
                         variant: 'outline-primary',
-                        text: <span><i className="far fa-calendar-check fa-fw"></i>בוצע</span>
+                        text: <span><i className={"far fa-calendar-check fa-fw "+ nm}></i>{this.props.tableTasksCardView ? <br/> : ''}בוצע</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_CANCEL', entries: this.props.entry }),
                         variant: 'outline-secondary',
-                        text: <span><i className="far fa-calendar-times fa-fw"></i>הסרה</span>
+                        text: <span><i className={"far fa-calendar-times fa-fw "+ nm}></i>{this.props.tableTasksCardView ? <br/> : ''}הסרה</span>
                     },
                 ];
                 break;
@@ -105,12 +106,12 @@ class Entry extends React.Component {
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_FILL', entries: this.props.entry }),
                         variant: 'outline-primary',
-                        text: <span><i className="far fa-calendar-check fa-fw"></i>דיווח</span>
+                        text: <span><i className={"far fa-calendar-check fa-fw "+ nm}></i>{this.props.tableTasksCardView ? <br/> : ''}דיווח</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE' }),
                         variant: 'outline-secondary',
-                        text: <span><i className="far fa-calendar-times fa-fw"></i>לא בוצע</span>
+                        text: <span><i className={"far fa-calendar-times fa-fw "+ nm}></i>{this.props.tableTasksCardView ? <br/> : ''}לא בוצע</span>
                     },
                 ];
                 break;
@@ -153,6 +154,36 @@ class Entry extends React.Component {
                 ];
                 break;
         }
+        if (this.props.tableTasksCardView) {
+            let values = this.getDataValues(this.props.entry);
+            let numButtons = 100/buttons.length;
+            let viewButtons = (
+                <ButtonGroup className="w-100 mt-4">
+                    {buttons.map((button) => {
+                    return (
+                        <Button className={"w-"+numButtons} key={button.text} onClick={button.onClick} variant='outline-secondary'>{button.text}</Button>
+                        );
+                    })}
+                </ButtonGroup>
+            )
+            return (
+                <Card>
+                    <Card.Header>
+                    {values.date}, {values.time}
+                    </Card.Header>
+                    <Card.Body>
+                    <Card.Title>{values.name}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">{values['street']}, {values['city']}</Card.Subtitle>
+                    <Card.Text>
+                        <div className='mt-4'>{values.contactName}</div>
+                        <div>{values.contactNumber}</div>
+                        {viewButtons}
+                    </Card.Text>
+                    </Card.Body>
+                    
+                </Card>
+            );
+        } else {
         return (
             <tr className={(this.props.isSelected ? 'table-primary' : '') + (this.props.isSelectable ? ' entry-selectable' : '')}>
                 {this.props.tableColumns.map((column) => {
@@ -161,24 +192,25 @@ class Entry extends React.Component {
                         {
                             switch (this.props.page){
                                 case 'assignedTasks':
-                                    return (
-                                    <td className="align-middle" key={column}>
-                                    <span style={{whiteSpace: 'nowrap'}}><Dropdown width='200'>
-                                        <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                            פעולות
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                        {buttons.map((button) => {
-                                                return (
-                                                    <Dropdown.Item key={button.text} onClick={button.onClick}>
-                                                    {button.text}
-                                                    </Dropdown.Item>
-                                                    );
-                                                })}
-                                        </Dropdown.Menu>
-                                    </Dropdown></span>
-                                    </td>
-                                    );
+                                        return (
+                                            <td className="align-middle" key={column}>
+                                            <span style={{whiteSpace: 'nowrap'}}><Dropdown width='200'>
+                                                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                                    פעולות
+                                                </Dropdown.Toggle>
+                                                <Dropdown.Menu>
+                                                {buttons.map((button) => {
+                                                        return (
+                                                            <Dropdown.Item key={button.text} onClick={button.onClick}>
+                                                            {button.text}
+                                                            </Dropdown.Item>
+                                                            );
+                                                        })}
+                                                </Dropdown.Menu>
+                                            </Dropdown></span>
+                                            </td>
+                                            );
+                                    
                                 case 'adminUsers':
                                     return (
                                     <td className="align-middle" key={column}>
@@ -286,7 +318,7 @@ class Entry extends React.Component {
                     }
                 })}
             </tr>
-        );
+        );}
     }
 }
 export default connect(state => state)(Entry);

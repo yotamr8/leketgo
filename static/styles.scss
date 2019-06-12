@@ -44,8 +44,16 @@ body, .tooltip, .popover {
   
 }
 
+label.custom-control-label {
+  cursor: pointer;
+}
+
 .fas, .far {
   margin-left: 8px;
+}
+
+.fas.nm, .far.nm {
+  margin-left: 0px;
 }
 
 .ltr.fas, .ltr.far {

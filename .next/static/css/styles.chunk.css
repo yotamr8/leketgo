@@ -8176,8 +8176,14 @@ body, .tooltip, .popover {
   height: calc(100vh - var(--top-navbar-height));
   overflow-y: scroll; }
 
+label.custom-control-label {
+  cursor: pointer; }
+
 .fas, .far {
   margin-left: 8px; }
+
+.fas.nm, .far.nm {
+  margin-left: 0px; }
 
 .ltr.fas, .ltr.far {
   margin-left: 0px;
