@@ -10,4 +10,8 @@ Developed by Bar Amir, Matan Wilchek, Alon Kagan and Roey Ravitz as our semestri
 ## Getting Started
 ## Running the Tests
 ## Built With
+* [Next.js](https://github.com/zeit/next.js) - The React Framework
+* [React Bootstrap](https://github.com/react-bootstrap/react-bootstrap) - The most popular front-end framework, rebuilt for React
+* [Firebase](https://firebase.google.com/) - Application development platform by Google
+
 ## License
