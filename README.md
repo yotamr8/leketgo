@@ -1,6 +1,6 @@
 # ![LeketGo](https://firebasestorage.googleapis.com/v0/b/leketgo.appspot.com/o/Asset%202%401.5x.png?alt=media&token=a4303fbe-414a-433c-a3ef-8ff573efb6b4)
 
-A NextJS app for managing food collecting tasks in the real world.<br>
+An all-hebrew NextJS app for managing food collecting tasks in the real world.<br>
 In the making for the non-profit organization [Leket Israel](https://www.leket.org/en/).
 
 ## Overview
@@ -10,8 +10,8 @@ Developed by Bar Amir, Matan Wilchek, Alon Kagan and Roey Ravitz as our semestri
 ## Getting Started
 ## Running the Tests
 ## Built With
-* [Next.js](https://github.com/zeit/next.js) - The React Framework
-* [React Bootstrap](https://github.com/react-bootstrap/react-bootstrap) - The most popular front-end framework, rebuilt for React
-* [Firebase](https://firebase.google.com/) - Application development platform by Google
+* [Next.js](https://github.com/zeit/next.js) – The React Framework
+* [React Bootstrap](https://github.com/react-bootstrap/react-bootstrap) – The most popular front-end framework, rebuilt for React
+* [Firebase](https://firebase.google.com/) – Application development platform by Google
 
 ## License
