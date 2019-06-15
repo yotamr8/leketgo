@@ -1,6 +1,5 @@
-# LeketGO
+# ![LeketGo](https://firebasestorage.googleapis.com/v0/b/leketgo.appspot.com/o/Asset%201.png?alt=media&token=74bb92a2-7dc7-446e-b1d8-0883bd7b7d6b)
 
-![alt text](https://firebasestorage.googleapis.com/v0/b/leketgo.appspot.com/o/Asset%201.png?alt=media&token=74bb92a2-7dc7-446e-b1d8-0883bd7b7d6b)
 A NextJS app for managing food collecting tasks in the real world.<br>
 In the making for the non-profit organization [Leket Israel](https://www.leket.org/en/).
 
