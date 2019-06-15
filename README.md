@@ -1,7 +1,7 @@
 # ![LeketGo](https://firebasestorage.googleapis.com/v0/b/leketgo.appspot.com/o/Asset%202%401.5x.png?alt=media&token=a4303fbe-414a-433c-a3ef-8ff573efb6b4)
 
 An all-hebrew NextJS app for managing food collecting tasks in the real world.<br>
-In the making for [Leket Israel (The National Food Bank)](https://www.leket.org/en/), a non-profit organization that distributes surplus food to needy people.
+In the making for [Leket Israel (The National Food Bank)](https://www.leket.org/en/), a non-profit organization that rescues surplus food for those in need.
 
 ## Overview
 
