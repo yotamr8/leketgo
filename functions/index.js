@@ -15,9 +15,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _server = require('react-dom/server');
 
-var _app = require('./pages/_app.js');
+var _index = require('./pages/index.js');
 
-var _app2 = _interopRequireDefault(_app);
+var _index2 = _interopRequireDefault(_index);
 
 var _express = require('express');
 
@@ -29,7 +29,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var app = (0, _express2.default)();
 app.get('**', function (req, res) {
-	var html = (0, _server.renderToString)(_react2.default.createElement('myApp', null));
+	var html = (0, _server.renderToString)(_react2.default.createElement(_index2.default, null));
 	res.set('Cache-Control', 'public, max-age=600, s-maxage=1200');
 	res.send(html);
 });

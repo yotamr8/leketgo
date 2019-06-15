@@ -40,7 +40,7 @@ class Login extends Component {
     render() {
         console.log(this.props)
         if (!this.props.authChecked) {
-            return (<Loading />)
+            return (<Loading />);
         }
         return (
             <div>

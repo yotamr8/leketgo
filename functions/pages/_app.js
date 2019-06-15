@@ -129,11 +129,11 @@ var MyApp = function (_App) {
                 store = _props.store;
 
             return _react2.default.createElement(
-                _reactRedux.Provider,
-                { store: store },
+                _app.Container,
+                null,
                 _react2.default.createElement(
-                    _app.Container,
-                    null,
+                    _reactRedux.Provider,
+                    { store: store },
                     _react2.default.createElement(_ModalBlock2.default, null),
                     _react2.default.createElement(Component, pageProps)
                 )
