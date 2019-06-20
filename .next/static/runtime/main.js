@@ -6655,7 +6655,7 @@ function connect(options) {
       error.name = err.name;
       error.stack = err.stack; // __NEXT_DIST_DIR is provided by webpack
 
-      source_map_support_1.rewriteStacktrace(error, "C:\\Users\\Oz\\Desktop\\leket\\leket\\.next");
+      source_map_support_1.rewriteStacktrace(error, "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\.next");
       return error;
     }
   };

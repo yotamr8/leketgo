@@ -5,7 +5,7 @@ In the making for [Leket Israel (The National Food Bank)](https://www.leket.org/
 
 ## Overview
 
-Developed by Bar Amir, Matan Wilchek, Alon Kagan and Roey Ravitz as our semestrial project in the [Google Technologies for Cloud and Web Development Workshop](https://sites.google.com/site/cloudweb18b/) at Tel Aviv University.
+Developed by Bar Amir, Matan Wilchek, Alon Kagan and Roey Ravits as our semestrial project in the [Google Technologies for Cloud and Web Development Workshop](https://sites.google.com/site/cloudweb18b/) at Tel Aviv University.
 
 ## Getting Started
 ## Running the Tests

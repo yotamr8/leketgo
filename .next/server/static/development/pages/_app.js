@@ -132,7 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\Oz\\Desktop\\leket\\leket\\components\\ModalBlock.js";
+var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\components\\ModalBlock.js";
 
 /* ModalBlock
  * This component is responsible for any modal window in the app,
@@ -3279,7 +3279,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\Oz\\Desktop\\leket\\leket\\pages\\_app.js";
+var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\pages\\_app.js";
 
 
 

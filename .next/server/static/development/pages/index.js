@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -125,7 +125,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\Oz\\Desktop\\leket\\leket\\components\\Entry.js";
+var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\components\\Entry.js";
 
 
 
@@ -1086,7 +1086,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\Oz\\Desktop\\leket\\leket\\components\\Header.js";
+var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\components\\Header.js";
 
 
 
@@ -1500,7 +1500,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\Oz\\Desktop\\leket\\leket\\components\\Logo.js";
+var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\components\\Logo.js";
 
 
 
@@ -1719,7 +1719,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\Oz\\Desktop\\leket\\leket\\components\\TableBlock.js";
+var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\components\\TableBlock.js";
 
 
 
@@ -3882,7 +3882,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\Oz\\Desktop\\leket\\leket\\pages\\index.js";
+var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\pages\\index.js";
 
 
 
@@ -4340,7 +4340,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Logo_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Logo.js */ "./components/Logo.js");
 /* harmony import */ var _static_styles_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../static/styles.scss */ "./static/styles.scss");
 /* harmony import */ var _static_styles_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_static_styles_scss__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "C:\\Users\\Oz\\Desktop\\leket\\leket\\pages\\loading.js";
+var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\pages\\loading.js";
 
 
 
@@ -4416,14 +4416,14 @@ function Loading() {
 
 /***/ }),
 
-/***/ 5:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Oz\Desktop\leket\leket\pages\index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! D:\Roey\Programming\google\ver_6.8\LeketGo\pages\index.js */"./pages/index.js");
 
 
 /***/ }),
