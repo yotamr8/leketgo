@@ -35,6 +35,7 @@ everything (include functions) -
 ```bash
 firebase deploy 
 ```
+*It's possible that chrome will show the old site. If so you'll first need to clean the web_cache and cookies
 ## Built With
 * [Next.js](https://github.com/zeit/next.js) – The React Framework
 * [React Bootstrap](https://github.com/react-bootstrap/react-bootstrap) – The most popular front-end framework, rebuilt for React
