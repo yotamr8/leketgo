@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([["70ed"],{C5RK:function(n,w,d){(window.__NEXT_P=window.__NEXT_P||[]).push(["/loading",function(){var n=d("Ti5x");return{page:n.default||n}}])}},[["C5RK","5d41","9da1"]]]);

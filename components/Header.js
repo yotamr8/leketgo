@@ -64,6 +64,7 @@ class Header extends React.Component {
         if (!this.props.isLogin) {
             navbar = <Navbar id='top-nav' sticky='top' bg='light' variant='light' expand='lg'>
             <Link href="/"><a className='navbar-brand'>{<Logo />}</a></Link>
+			<h2> alon kagan </h2>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 {pages}
