@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo:400,700&display=swap');
+
+html {
+  direction: rtl;
+}
+
+.wiggle {
+  animation-name: wiggle;
+  transform: rotate(5deg);
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes wiggle {
+  0% {transform: rotate(5deg);}
+  25% {transform: rotate(-5deg);}
+  50% {transform: rotate(10deg);}
+  75% {transform: rotate(-5deg);}
+  100% {transform: rotate(5deg);}
+}
+
+:root {
+  --font-family-sans-serif: 'Heebo';
+  --top-navbar-height: 0px;
+}
+
+body, .tooltip, .popover {
+  font-family: 'Heebo', sans-serif !important;
+}
+
+.nothing {
+  user-select: none;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+.app {
+  height: calc(100vh - var(--top-navbar-height));
+  overflow-y: scroll;
+}
+
+.nothing img {
+  
+}
+
+label.custom-control-label {
+  cursor: pointer;
+}
+
+.fas, .far {
+  margin-left: 8px;
+}
+
+.fas.nm, .far.nm {
+  margin-left: 0px;
+}
+
+.ltr.fas, .ltr.far {
+  margin-left: 0px;
+  margin-right: 8px;
+}
+
+#top-nav {
+  position: sticky !important;
+  top: 0 !important;
+}
+
+main {
+  width: 100%;
+}
+
+.wrapper {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h2 img {
+  user-select: none;
+  margin-left: 10px;
+}
+
+#top-nav.bg-light {
+  background-color: #99E1ED !important;
+}
+
+.entry-selectable {
+  cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
