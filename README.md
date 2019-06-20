@@ -9,6 +9,32 @@ Developed by Bar Amir, Matan Wilchek, Alon Kagan and Roey Ravits as our semestri
 
 ## Getting Started
 ## Running the Tests
+
+## Deploying to Firebase
+
+```bash
+npm run build
+npm run export
+firebase login
+firebase use leketgo
+```
+
+remove the content from /public, except '404.html'<br>
+copy the content from /out to /public
+
+test localy: 
+```bash
+firebase serve
+```
+deploying to firebase:<br>
+only hosting - 
+```bash
+firebase deploy --only hosting
+```
+everything (include functions) - 
+```bash
+firebase deploy 
+```
 ## Built With
 * [Next.js](https://github.com/zeit/next.js) – The React Framework
 * [React Bootstrap](https://github.com/react-bootstrap/react-bootstrap) – The most popular front-end framework, rebuilt for React
