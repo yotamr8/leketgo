@@ -37,6 +37,9 @@ const reducer = (state = initialState, action) => {
         case 'GETALLUSERS':
             return { ...state, users: action.users };
             break;
+		case 'HISTORYTASKS':
+			return { ...state, historyTasks: action.tasks };
+			break
         case 'GETALLREGIONTASKS':
             return { ...state, regionalTasks: action.tasks };
             break;
@@ -74,6 +77,7 @@ var initialState = {
     assignedTasks: [],
     taskReports: [],
     regionalTasks: [],
+	historyTasks: [],
     users: []
 }
 

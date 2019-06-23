@@ -1,6 +1,7 @@
 import getUnassigned from '../dbActions/getUnassignedTasks'
 import getAssigned from '../dbActions/getAssignedTasks'
 import getTaskReports from '../dbActions/getTaskReports'
+import getHistory from '../dbActions/getHistory'
 
 export default function refresh4User(dispatch, region, uid) {
     getUnassigned(dispatch, region);
@@ -8,4 +9,6 @@ export default function refresh4User(dispatch, region, uid) {
     getAssigned(dispatch, uid);
 
     getTaskReports(dispatch, uid);
+	
+	getHistory(dispatch, uid);
 }

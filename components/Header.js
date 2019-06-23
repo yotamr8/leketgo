@@ -51,6 +51,7 @@ class Header extends React.Component {
                 <Link className='navlink' href="/"><a className='nav-link'>שיבוץ לאיסופים</a></Link>
                 <Link href="/assigned-tasks"><a className='nav-link'>איסופים קרובים {atNum > 0 ? <Badge variant="secondary">{atNum}</Badge> : ''}</a></Link>
                 <Link href="/task-reports"><a className='nav-link'>מילוי משוב {trNum > 0 ? <Badge variant="secondary">{trNum}</Badge> : ''}</a></Link>
+				<Link href="/history"><a className='nav-link'>היסטוריה</a></Link>
             </Nav>;
         } else {
             pages = 
@@ -64,7 +65,6 @@ class Header extends React.Component {
         if (!this.props.isLogin) {
             navbar = <Navbar id='top-nav' sticky='top' bg='light' variant='light' expand='lg'>
             <Link href="/"><a className='navbar-brand'>{<Logo />}</a></Link>
-			<h2> alon kagan </h2>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 {pages}
