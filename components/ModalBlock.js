@@ -29,7 +29,9 @@ class ModalBlock extends React.Component {
             breadQ: 0,
             breadS: "",
             formComment: "",
-            startDate: new Date()
+            startDate: new Date(),
+            nonCollectedComment: "",
+            nonCollectedReason: ""
         }
         this.dateHandleChange = this.dateHandleChange.bind(this);
     }
@@ -44,7 +46,9 @@ class ModalBlock extends React.Component {
             pastriesS: "",
             breadQ: 0,
             breadS: "",
-            formComment: ""
+            formComment: "",
+            nonCollectedComment: "",
+            nonCollectedReason: ""
         })
     }
 
@@ -289,8 +293,9 @@ class ModalBlock extends React.Component {
                             this.props.dispatch({ type: 'CLOSE_MODAL' });
                             this.verifyValuesForReport(modal);
                             this.resetState();
-                            getTaskReports(this.props.dispatch, this.props.userData.uid)                        },
-                            variant: 'primary',
+                            getTaskReports(this.props.dispatch, this.props.userData.uid)
+                        },
+                        variant: 'primary',
                         text: 'שליחה'
                     },
                     {
@@ -307,7 +312,8 @@ class ModalBlock extends React.Component {
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>מדוע לא בוצע האיסוף?</Form.Label>
-                                <Form.Control as="select">
+                                <Form.Control as="select" id="nonCollectedReason" onChange={this.handleChange}>
+                                    <option>בחר סיבה</option>
                                     <option>לא נותר מזון</option>
                                     <option>לא נעניתי</option>
                                     <option>סיבה אחרת</option>
@@ -317,14 +323,25 @@ class ModalBlock extends React.Component {
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>הערות נוספות</Form.Label>
-                                <Form.Control as="textarea" rows="3"/>
+                                <Form.Control as="textarea" rows="3" id="nonCollectedComment" onChange={this.handleChange}/>
                             </Form.Group>
                         </Form.Row>
                     </Form>
                 );
                 buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => {
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                            let data = {
+                                reportFilled: true,
+                                reportFieldNum: 0,
+                                reportComment: this.state.nonCollectedReason + ' - ' + this.state.nonCollectedComment,
+                                collected: true
+                            }
+                            setTaskReport(this.props.modal.entries.id, data)
+                            this.resetState();
+                            getTaskReports(this.props.dispatch, this.props.userData.uid)
+                        },
                         variant: 'primary',
                         text: 'שליחה'
                     },
@@ -547,6 +564,12 @@ class ModalBlock extends React.Component {
                             <Form.Group as={Col}>
                                 <Form.Label>טלפון איש קשר</Form.Label>
                                 <Form.Control />
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col}>
+                                <Form.Label>הערות</Form.Label>
+                                <Form.Control as="textarea" rows="3" />
                             </Form.Group>
                         </Form.Row>
                     </Form>

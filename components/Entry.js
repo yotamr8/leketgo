@@ -142,7 +142,7 @@ class Entry extends React.Component {
                         text: <span><i className={"far fa-calendar-check fa-fw "+ nm}></i>{this.props.tableTasksCardView ? <br/> : ''}דיווח</span>
                     },
                     {
-                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE' }),
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE', entries: this.props.entry  }),
                         variant: 'outline-secondary',
                         text: <span><i className={"far fa-calendar-times fa-fw "+ nm}></i>{this.props.tableTasksCardView ? <br/> : ''}לא בוצע</span>
                     },

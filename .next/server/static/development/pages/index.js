@@ -125,7 +125,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\components\\Entry.js";
+var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\\Entry.js";
 
 
 
@@ -479,7 +479,8 @@ function (_React$Component) {
             onClick: function onClick() {
               return _this2.props.dispatch({
                 type: 'OPEN_MODAL',
-                msg: 'REPORT_UNDONE'
+                msg: 'REPORT_UNDONE',
+                entries: _this2.props.entry
               });
             },
             variant: 'outline-secondary',
@@ -1086,7 +1087,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\components\\Header.js";
+var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\\Header.js";
 
 
 
@@ -1302,25 +1303,31 @@ function (_React$Component) {
             lineNumber: 66
           },
           __self: this
-        }))), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Navbar"].Toggle, {
-          "aria-controls": "basic-navbar-nav",
+        }))), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("h2", {
           __source: {
             fileName: _jsxFileName,
             lineNumber: 67
+          },
+          __self: this
+        }, " alon kagan "), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Navbar"].Toggle, {
+          "aria-controls": "basic-navbar-nav",
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 68
           },
           __self: this
         }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Navbar"].Collapse, {
           id: "basic-navbar-nav",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 68
+            lineNumber: 69
           },
           __self: this
         }, pages, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Nav"], {
           className: "mr-sm-2",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 70
+            lineNumber: 71
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["NavDropdown"], {
@@ -1329,41 +1336,41 @@ function (_React$Component) {
           id: "basic-nav-dropdown",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 71
+            lineNumber: 72
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/personal-information",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 72
+            lineNumber: 73
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
           className: "dropdown-item",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 72
+            lineNumber: 73
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("i", {
           className: "far fa-user-circle fa-fw",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 72
+            lineNumber: 73
           },
           __self: this
         }), "\u05E4\u05E8\u05D8\u05D9\u05DD \u05D0\u05D9\u05E9\u05D9\u05D9\u05DD")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["NavDropdown"].Divider, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 73
+            lineNumber: 74
           },
           __self: this
         }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_12___default.a, {
           href: "/login",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 74
+            lineNumber: 75
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
@@ -1371,20 +1378,20 @@ function (_React$Component) {
           onClick: this.logout,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 74
+            lineNumber: 75
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("i", {
           className: "fas fa-sign-out-alt fa-fw",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 74
+            lineNumber: 75
           },
           __self: this
         }), "\u05D4\u05EA\u05E0\u05EA\u05E7\u05D5\u05EA"))), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["ButtonToolbar"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 76
+            lineNumber: 77
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["OverlayTrigger"], {
@@ -1394,26 +1401,26 @@ function (_React$Component) {
             id: "tooltip",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 81
+              lineNumber: 82
             },
             __self: this
           }, "\u05E2\u05D6\u05E8\u05D4"),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 77
+            lineNumber: 78
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_11__["Nav"].Link, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 85
+            lineNumber: 86
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("i", {
           className: "fas fa-question-circle",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 85
+            lineNumber: 86
           },
           __self: this
         })))))));
@@ -1422,13 +1429,13 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 93
+          lineNumber: 94
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_7___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 94
+          lineNumber: 95
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("link", {
@@ -1438,14 +1445,14 @@ function (_React$Component) {
         crossorigin: "anonymous",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 95
+          lineNumber: 96
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("meta", {
         charset: "utf-8",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 97
+          lineNumber: 98
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("meta", {
@@ -1453,13 +1460,13 @@ function (_React$Component) {
         content: "width=device-width, initial-scale=1, shrink-to-fit=no",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 98
+          lineNumber: 99
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("title", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 99
+          lineNumber: 100
         },
         __self: this
       }, "\u05DC\u05E7\u05D8\u05BEGO")), navbar);
@@ -1500,7 +1507,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\components\\Logo.js";
+var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\\Logo.js";
 
 
 
@@ -1719,7 +1726,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\components\\TableBlock.js";
+var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\\TableBlock.js";
 
 
 
@@ -3882,7 +3889,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\pages\\index.js";
+var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\pages\\index.js";
 
 
 
@@ -4340,7 +4347,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Logo_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Logo.js */ "./components/Logo.js");
 /* harmony import */ var _static_styles_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../static/styles.scss */ "./static/styles.scss");
 /* harmony import */ var _static_styles_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_static_styles_scss__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "D:\\Roey\\Programming\\google\\ver_6.8\\LeketGo\\pages\\loading.js";
+var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\pages\\loading.js";
 
 
 
@@ -4423,7 +4430,7 @@ function Loading() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Roey\Programming\google\ver_6.8\LeketGo\pages\index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! C:\Users\mwilchek\Documents\GitHub\LeketGo\pages\index.js */"./pages/index.js");
 
 
 /***/ }),
