@@ -185,6 +185,7 @@ class TableBlock extends React.Component {
 						<div className="btn-group" role="group" aria-label="Basic example">
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER', entries: this.props.entry})}>הוספת מתנדב</button>
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER_CSV', entries: this.props.entry})}>הוספה מקובץ</button></div>
+							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EXPORT_USER_CSV', entries: this.props.entry})}>ייצוא דוח מתנדבים</button>
 							</Col>
 							<Col>
 								<InputGroup className="mb-3">
@@ -223,7 +224,7 @@ class TableBlock extends React.Component {
 								//this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK_CSV', entries: this.props.entry})
 							}
 							>הוספה מקובץ</button>
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EXPORT_TASK_CSV', entries: this.props.entry})}>ייצוא דוח</button>
+							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EXPORT_TASK_CSV', entries: this.props.entry})}>ייצוא דוח איסופים</button>
 							</div>
 							</Col>
 							<Col>

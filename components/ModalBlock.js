@@ -15,6 +15,8 @@ import refresh4User from '../dbActions/refresh4User'
 import setTaskReport from '../dbActions/setTaskReport'
 import getTaskReports from '../dbActions/getTaskReports'
 import setTaskCollected from '../dbActions/setCollected'
+import XLSX from 'xlsx'
+
 
 class ModalBlock extends React.Component {
     constructor(props){
@@ -33,7 +35,7 @@ class ModalBlock extends React.Component {
         }
         this.dateHandleChange = this.dateHandleChange.bind(this);
     }
-
+	
     resetState() {
         /* This method is only relevant
            to the REPORT_FILL modal */
@@ -56,6 +58,44 @@ class ModalBlock extends React.Component {
         });
       }
 
+	exportTasksXcell(){
+		// TODO decide if this line should stay also
+		let rows = [Object.keys(this.props.regionalTasks[0])]
+		this.props.regionalTasks.forEach((task) => {
+			let taskRow = []
+			Object.keys(this.props.regionalTasks[0]).forEach((key) => {
+				taskRow.push(task[key])
+			})
+		     rows.push(Object.values(taskRow))
+        })
+		
+		const wb = XLSX.utils.book_new()
+        const wsAll = XLSX.utils.aoa_to_sheet(rows)
+    
+        XLSX.utils.book_append_sheet(wb, wsAll, "All Tasks")
+		XLSX.writeFile(wb, "LeketTasks.xlsx")
+		
+	}
+	
+	exportUsersXcell(){
+		// TODO decide if this line should stay.
+		let rows = [Object.keys(this.props.users[0])]
+		this.props.users.forEach((user) => {
+			let userRow = []
+			Object.keys(this.props.users[0]).forEach((key) => {
+				userRow.push(user[key])
+			})
+		     rows.push(Object.values(userRow))
+        })
+		
+		const wb = XLSX.utils.book_new()
+        const wsAll = XLSX.utils.aoa_to_sheet(rows)
+    
+        XLSX.utils.book_append_sheet(wb, wsAll, "All Users")
+		XLSX.writeFile(wb, "LeketUsers.xlsx")
+		
+	}
+	  
     handleChange = (e) => {
         /* This method is only relevant
            to the REPORT_FILL modal */
@@ -637,17 +677,46 @@ class ModalBlock extends React.Component {
                         text: 'סגירה'
                     }];
                 break;
+			// Why is it called csv if it exports to xlsx?
             case 'EXPORT_TASK_CSV':
                 /* For exporting reports (Admins only) */
                 title = 'ייצוא דוח';
-                body = <span></span>;
+                body = (
+                    <h2>
+						לחץ כדי לייצא דוח.
+					</h2>
+                );
                 buttons = [
+                    {
+					onClick: () => this.exportTasksXcell() ,
+                        variant: 'primary',
+                        text: 'ייצא דוח'
+                    },
                     {
                         onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
                         variant: 'secondary',
                         text: 'סגירה'
                     }];
                 break;
+			case 'EXPORT_USER_CSV':
+				title = 'ייצוא דוח';
+                body = (
+                    <h2>
+						לחץ כדי לייצא דוח.
+					</h2>
+                );
+                buttons = [
+                    {
+					onClick: () => this.exportUsersXcell() ,
+                        variant: 'primary',
+                        text: 'ייצא דוח'
+                    },
+                    {
+                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        variant: 'secondary',
+                        text: 'סגירה'
+                    }];
+				break;
         }
 
         return (
