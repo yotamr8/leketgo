@@ -9,49 +9,49 @@
 import Link from 'next/link'
 import React from 'react'
 import { connect } from 'react-redux'
-import {Modal, ModalDialog, Button, Form, FormControl, Col, InputGroup} from 'react-bootstrap'
+import { Modal, ModalDialog, Button, Form, FormControl, Col, InputGroup } from 'react-bootstrap'
 import setUndoTask from '../dbActions/setUndoTask'
 import refresh4User from '../dbActions/refresh4User'
 import setTaskReport from '../dbActions/setTaskReport'
 import getTaskReports from '../dbActions/getTaskReports'
 import setTaskCollected from '../dbActions/setCollected'
+import addTask from '../dbActions/addTask'
+import editTask from '../dbActions/editTask'
+import deleteTask from '../dbActions/deleteTask'
 import XLSX from 'xlsx'
 
+const initialState = {
+    mainCourseQ: 0,
+    sideCourseQ: 0,
+    pastriesQ: 0,
+    pastriesS: "",
+    breadQ: 0,
+    breadS: "",
+    startDate: new Date(),
+    nonCollectedReason: "",
+    date: null,
+    time: null,
+    city: "",
+    address: "",
+    name: "",
+    contact: "",
+    contactNumber: "",
+    comment: ""
+}
 
 class ModalBlock extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {
-            /* The ModalBlock state properties are only
-               relevant to the REPORT_FILL modal */
-            mainCourseQ: 0,
-            sideCourseQ: 0,
-            pastriesQ: 0,
-            pastriesS: "",
-            breadQ: 0,
-            breadS: "",
-            formComment: "",
-            startDate: new Date(),
-            nonCollectedComment: "",
-            nonCollectedReason: ""
-        }
+        this.state = initialState;
+        /* The ModalBlock state properties are only
+            relevant to the REPORT_FILL modal */                                
         this.dateHandleChange = this.dateHandleChange.bind(this);
     }
 	
     resetState() {
         /* This method is only relevant
            to the REPORT_FILL modal */
-        this.setState({
-            mainCourseQ: 0,
-            sideCourseQ: 0,
-            pastriesQ: 0,
-            pastriesS: "",
-            breadQ: 0,
-            breadS: "",
-            formComment: "",
-            nonCollectedComment: "",
-            nonCollectedReason: ""
-        })
+        this.setState(initialState)
     }
 
     dateHandleChange(date) {
@@ -122,7 +122,7 @@ class ModalBlock extends React.Component {
             let data = {
                 reportFilled: true,
                 reportFieldNum: numOfFields,
-                reportComment: this.state.formComment,
+                reportComment: this.state.comment,
                 collected: true
             }
             let dic = {
@@ -136,7 +136,7 @@ class ModalBlock extends React.Component {
                 data["foodContainerType" + (i + 1)] = (fields[i] == "mainCourseQ" || fields[i] == "sideCourseQ") ? 'מיכלים' : (fields[i] == "pastriesQ") ? this.state.pastriesS : this.state.breadS;
                 data["foodContainerQuantity" + (i + 1)] = this.state[fields[i]]
             }
-            setTaskReport(this.props.modal.entries.id, data)
+            setTaskReport(this.props, this.props.modal.entries.id, data)           
         }
     }
 
@@ -321,25 +321,27 @@ class ModalBlock extends React.Component {
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>הערות נוספות</Form.Label>
-                        <Form.Control as="textarea" rows="3"
-                            id="formComment" onChange={this.handleChange}/>
+                                    <Form.Control as="textarea" rows="3"
+                                    id="comment" onChange={this.handleChange}/>
                             </Form.Group>
                         </Form.Row>
                     </Form>
                 );
                 buttons = [
                     {
-                        onClick: () => {
-                            this.props.dispatch({ type: 'CLOSE_MODAL' });
+                        onClick: () => {                            
                             this.verifyValuesForReport(modal);
-                            this.resetState();
-                            getTaskReports(this.props.dispatch, this.props.userData.uid)
+                            this.resetState();                            
+                            this.props.dispatch({ type: 'CLOSE_MODAL' });
                         },
                         variant: 'primary',
                         text: 'שליחה'
                     },
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => {
+                            this.resetState();                            
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                        },
                         variant: 'secondary',
                         text: 'סגירה'
                     }];
@@ -363,24 +365,23 @@ class ModalBlock extends React.Component {
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>הערות נוספות</Form.Label>
-                                <Form.Control as="textarea" rows="3" id="nonCollectedComment" onChange={this.handleChange}/>
+                                <Form.Control as="textarea" rows="3" id="comment" onChange={this.handleChange}/>
                             </Form.Group>
                         </Form.Row>
                     </Form>
                 );
                 buttons = [
                     {
-                        onClick: () => {
-                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                        onClick: () => {                            
                             let data = {
                                 reportFilled: true,
                                 reportFieldNum: 0,
-                                reportComment: this.state.nonCollectedReason + ' - ' + this.state.nonCollectedComment,
+                                reportComment: this.state.nonCollectedReason + ' - ' + this.state.comment,
                                 collected: true
                             }
-                            setTaskReport(this.props.modal.entries.id, data)
-                            this.resetState();
-                            getTaskReports(this.props.dispatch, this.props.userData.uid)
+                            setTaskReport(this.props, this.props.modal.entries.id, data)
+                            this.resetState();                            
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
                         },
                         variant: 'primary',
                         text: 'שליחה'
@@ -417,6 +418,24 @@ class ModalBlock extends React.Component {
                         },
                         variant: 'danger',
                         text: 'הסרה'
+                    },
+                    {
+                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        variant: 'secondary',
+                        text: 'ביטול'
+                    }];
+                break;
+            case 'REMOVE_TASK':
+                title = 'מחיקת משימה';
+                body = 'לחיצה על "מחיקה", תמחוק את המשימה לצמיתות.';
+                buttons = [
+                    {
+                        onClick: () => {
+                            deleteTask(this.props, modal.entries.id)
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })                            
+                        },
+                        variant: 'danger',
+                        text: 'מחיקה'
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
@@ -571,120 +590,174 @@ class ModalBlock extends React.Component {
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>תאריך</Form.Label><br />
-                                <FormControl type="date"
-                                />
+                                <FormControl type="date" id="date" onChange={this.handleChange}
+                                />                                
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>שעה</Form.Label><br />
-                                <FormControl pattern="[0-9]{2}:[0-9]{2}" type="time"
+                                <FormControl pattern="[0-9]{2}:[0-9]{2}" type="time" id="time" onChange={this.handleChange}
                                 />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>עיר</Form.Label>
-                                <Form.Control />
+                                <Form.Control id="city" onChange={this.handleChange} />
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>רחוב ומספר</Form.Label>
-                                <Form.Control />
+                                <Form.Control id="address" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>ספק</Form.Label>
-                                <Form.Control />
+                                <Form.Control id="name" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>שם איש קשר</Form.Label>
-                                <Form.Control />
+                                <Form.Control id="contact" onChange={this.handleChange} />
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>טלפון איש קשר</Form.Label>
-                                <Form.Control />
+                                <Form.Control id="contactNumber" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>הערות</Form.Label>
-                                <Form.Control as="textarea" rows="3" />
+                                <Form.Control as="textarea" rows="3" id="comment" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                     </Form>
                 );
                 buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => {                            
+                            let data = {
+                                date: this.state.date,
+                                time: this.state.time,
+                                city: this.state.city,
+                                address: this.state.address,
+                                name: this.state.name,
+                                contact: this.state.contact,
+                                contactNumber: this.state.contactNumber,
+                                comment: this.state.comment                               
+                            }
+                            addTask(this.props.dispatch, this.props.userData.region, data)                            
+                            this.resetState()
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })                             
+                        },
                         variant: 'primary',
                         text: 'הוספה'
                     },
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => {
+                            this.resetState() 
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                        },
                         variant: 'secondary',
                         text: 'סגירה'
                     }];
                 break;
             case 'EDIT_TASK':
-                /* For adding a task (Admins only) */
-                let task = modal.entries;
+                /* For editnig a task (Admins only) */
+                let task = modal.entries;            
                 let date = task.timestamp.toDate();
                 let year = date.getFullYear();
-                let month = ('0' + date.getMonth()).slice(-2);
+                let month = ('0' + (date.getMonth() + 1)).slice(-2);
                 let day = ('0' + date.getDate()).slice(-2);
-                let time = date.getHours() + ':' + ('0'+date.getMinutes()).slice(-2);
+                let time = ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);                
+
+                if (this.state.askDate == null) {  // if it is the first time rendering this form - otherwise goes into infinite loop
+                    this.setState({
+                        date: year + '-' + month + '-' + day,//`${year}-${month}-${day}`,
+                        time: time,
+                        city: task.city,
+                        address: task.address,
+                        name: task.name,
+                        contact: task['contact name'],
+                        contactNumber: task['contact number'],
+                        comment: (task.comment != null) ? task.comment : "" // TODO default comment
+                    })
+                }
+
                 title = 'עריכת איסוף';
                 body = (
                     <Form>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>תאריך</Form.Label><br />
-                                <FormControl type="date" value={`${year}-${month}-${day}`}
+                                <FormControl type="date" value={this.state.date} id="date" onChange={this.handleChange}
                                 />
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>שעה</Form.Label><br />
                                 <FormControl pattern="[0-9]{2}:[0-9]{2}" type="time"
-                                    value={time}/>
+                                    value={this.state.time} id="time" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>עיר</Form.Label>
-                                <Form.Control value={task.city}/>
+                                <Form.Control value={this.state.city} id="city" onChange={this.handleChange} />
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>רחוב ומספר</Form.Label>
-                                <Form.Control value={task.address}/>
+                                <Form.Control value={this.state.address} id="address" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>ספק</Form.Label>
-                                <Form.Control value={task.name}/>
+                                <Form.Control value={this.state.name} id="name" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>שם איש קשר</Form.Label>
-                                <Form.Control value={task['contact name']}/>
+                                <Form.Control value={this.state.contact} id="contact" onChange={this.handleChange} />
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>טלפון איש קשר</Form.Label>
-                                <Form.Control value={task['contact number']}/>
+                                <Form.Control value={this.state.contactNumber} id="contactNumber" onChange={this.handleChange} />
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col}>
+                                <Form.Label>הערות</Form.Label>
+                                <Form.Control as="textarea" value={this.state.comment} rows="3" id="comment" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                     </Form>
                     );
                     buttons = [
                         {
-                            onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                            onClick: () => {
+                                let data = {
+                                    date: this.state.date,
+                                    time: this.state.time,
+                                    city: this.state.city,
+                                    address: this.state.address,
+                                    name: this.state.name,
+                                    contact: this.state.contact,
+                                    contactNumber: this.state.contactNumber,
+                                    comment: this.state.comment
+                                }
+                                editTask(this.props.dispatch, modal.entries.region, modal.entries.id, data)
+                                this.resetState()
+                                this.props.dispatch({ type: 'CLOSE_MODAL' })
+                            },
                             variant: 'primary',
                             text: 'עריכה'
                         },
                         {
-                            onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                            onClick: () => {
+                                this.resetState()
+                                this.props.dispatch({ type: 'CLOSE_MODAL' })
+                            },
                             variant: 'secondary',
                             text: 'ביטול'
                         }];
