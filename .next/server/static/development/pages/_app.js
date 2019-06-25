@@ -129,8 +129,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dbActions_addTask__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../dbActions/addTask */ "./dbActions/addTask.js");
 /* harmony import */ var _dbActions_editTask__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../dbActions/editTask */ "./dbActions/editTask.js");
 /* harmony import */ var _dbActions_deleteTask__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../dbActions/deleteTask */ "./dbActions/deleteTask.js");
-/* harmony import */ var xlsx__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! xlsx */ "xlsx");
-/* harmony import */ var xlsx__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(xlsx__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var _dbActions_addUser__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../dbActions/addUser */ "./dbActions/addUser.js");
+/* harmony import */ var _dbActions_editUser__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../dbActions/editUser */ "./dbActions/editUser.js");
+/* harmony import */ var _dbActions_editUserAuth__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../dbActions/editUserAuth */ "./dbActions/editUserAuth.js");
+/* harmony import */ var xlsx__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! xlsx */ "xlsx");
+/* harmony import */ var xlsx__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(xlsx__WEBPACK_IMPORTED_MODULE_24__);
 
 
 
@@ -162,6 +165,9 @@ var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\
 
 
 
+
+
+
 var initialState = {
   mainCourseQ: 0,
   sideCourseQ: 0,
@@ -178,7 +184,14 @@ var initialState = {
   name: "",
   contact: "",
   contactNumber: "",
-  comment: ""
+  comment: "",
+  phone: "",
+  email: "",
+  tz: "",
+  firstName: "",
+  lastName: "",
+  region: "",
+  password: ""
 };
 
 var ModalBlock =
@@ -239,10 +252,10 @@ function (_React$Component) {
 
         rows.push(_babel_runtime_corejs2_core_js_object_values__WEBPACK_IMPORTED_MODULE_0___default()(taskRow));
       });
-      var wb = xlsx__WEBPACK_IMPORTED_MODULE_21___default.a.utils.book_new();
-      var wsAll = xlsx__WEBPACK_IMPORTED_MODULE_21___default.a.utils.aoa_to_sheet(rows);
-      xlsx__WEBPACK_IMPORTED_MODULE_21___default.a.utils.book_append_sheet(wb, wsAll, "All Tasks");
-      xlsx__WEBPACK_IMPORTED_MODULE_21___default.a.writeFile(wb, "LeketTasks.xlsx");
+      var wb = xlsx__WEBPACK_IMPORTED_MODULE_24___default.a.utils.book_new();
+      var wsAll = xlsx__WEBPACK_IMPORTED_MODULE_24___default.a.utils.aoa_to_sheet(rows);
+      xlsx__WEBPACK_IMPORTED_MODULE_24___default.a.utils.book_append_sheet(wb, wsAll, "All Tasks");
+      xlsx__WEBPACK_IMPORTED_MODULE_24___default.a.writeFile(wb, "LeketTasks.xlsx");
     }
   }, {
     key: "exportUsersXcell",
@@ -260,10 +273,10 @@ function (_React$Component) {
 
         rows.push(_babel_runtime_corejs2_core_js_object_values__WEBPACK_IMPORTED_MODULE_0___default()(userRow));
       });
-      var wb = xlsx__WEBPACK_IMPORTED_MODULE_21___default.a.utils.book_new();
-      var wsAll = xlsx__WEBPACK_IMPORTED_MODULE_21___default.a.utils.aoa_to_sheet(rows);
-      xlsx__WEBPACK_IMPORTED_MODULE_21___default.a.utils.book_append_sheet(wb, wsAll, "All Users");
-      xlsx__WEBPACK_IMPORTED_MODULE_21___default.a.writeFile(wb, "LeketUsers.xlsx");
+      var wb = xlsx__WEBPACK_IMPORTED_MODULE_24___default.a.utils.book_new();
+      var wsAll = xlsx__WEBPACK_IMPORTED_MODULE_24___default.a.utils.aoa_to_sheet(rows);
+      xlsx__WEBPACK_IMPORTED_MODULE_24___default.a.utils.book_append_sheet(wb, wsAll, "All Users");
+      xlsx__WEBPACK_IMPORTED_MODULE_24___default.a.writeFile(wb, "LeketUsers.xlsx");
     }
   }, {
     key: "verifyValuesForReport",
@@ -359,14 +372,14 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 177
+              lineNumber: 187
             },
             __self: this
           }, "\u05D7\u05DC\u05E7 \u05DE\u05D4\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E9\u05D1\u05D7\u05E8\u05EA \u05E9\u05D5\u05D1\u05E6\u05D5 \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4, \u05D5\u05D7\u05DC\u05E7 \u05DC\u05D0! \u05E0\u05D9\u05EA\u05DF \u05DC\u05E8\u05D0\u05D5\u05EA \u05DC\u05D0\u05D9\u05DC\u05D5 \u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E9\u05D5\u05D1\u05E6\u05EA \u05D1\u05E2\u05DE\u05D5\u05D3 ", react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_9___default.a, {
             href: "assigned-tasks",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 178
+              lineNumber: 188
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("a", {
@@ -377,7 +390,7 @@ function (_React$Component) {
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 178
+              lineNumber: 188
             },
             __self: this
           }, "\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E7\u05E8\u05D5\u05D1\u05D9\u05DD")), ".");
@@ -401,7 +414,7 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 195
+              lineNumber: 205
             },
             __self: this
           }, _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_1___default()(modal.entries).length, " \u05E9\u05D9\u05D1\u05D5\u05E5 \u05D4\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E0\u05DB\u05E9\u05DC! \u05D0\u05E0\u05D0 \u05E0\u05E1\u05D4 \u05DC\u05D4\u05E9\u05EA\u05D1\u05E5 \u05DC\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05D0\u05D7\u05E8\u05D9\u05DD.");
@@ -425,14 +438,14 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 213
+              lineNumber: 223
             },
             __self: this
           }, _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_1___default()(modal.entries).length, "                     \u05D4\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E9\u05D5\u05D1\u05E6\u05D5 \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4! \u05E0\u05D9\u05EA\u05DF \u05DC\u05E8\u05D0\u05D5\u05EA \u05D0\u05EA \u05DB\u05DC \u05D4\u05E9\u05D9\u05D1\u05D5\u05E6\u05D9\u05DD \u05E9\u05DC\u05DA \u05D1\u05E2\u05DE\u05D5\u05D3 ", react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_9___default.a, {
             href: "assigned-tasks",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 214
+              lineNumber: 224
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("a", {
@@ -443,7 +456,7 @@ function (_React$Component) {
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 214
+              lineNumber: 224
             },
             __self: this
           }, "\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05E7\u05E8\u05D5\u05D1\u05D9\u05DD")), ".");
@@ -479,7 +492,7 @@ function (_React$Component) {
               });
 
               Object(_dbActions_setCollected__WEBPACK_IMPORTED_MODULE_17__["default"])(modal.entries.id);
-              Object(_dbActions_refresh4User__WEBPACK_IMPORTED_MODULE_14__["default"])(_this4.props.dispatch, _this4.props.userData.region, _this4.props.userData.uid);
+              Object(_dbActions_refresh4User__WEBPACK_IMPORTED_MODULE_14__["default"])(_this4.props.dispatch, _this4.props.userData.region, _this4.props.userData.uid); //TODO put async in dbAction
             },
             variant: 'secondary',
             text: 'מאוחר יותר'
@@ -500,32 +513,32 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 256
+              lineNumber: 266
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 257
+              lineNumber: 267
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 258
+              lineNumber: 268
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 259
+              lineNumber: 269
             },
             __self: this
           }, "\u05E2\u05D9\u05E7\u05E8\u05D9\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["InputGroup"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 260
+              lineNumber: 270
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["FormControl"], {
@@ -534,44 +547,44 @@ function (_React$Component) {
             placeholder: "\u05DB\u05DE\u05D5\u05EA",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 261
+              lineNumber: 271
             },
             __self: this
           }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["InputGroup"].Append, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 265
+              lineNumber: 275
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["InputGroup"].Text, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 266
+              lineNumber: 276
             },
             __self: this
           }, "\u05DE\u05D9\u05DB\u05DC\u05D9\u05DD"))))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 271
+              lineNumber: 281
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 272
+              lineNumber: 282
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 273
+              lineNumber: 283
             },
             __self: this
           }, "\u05EA\u05D5\u05E1\u05E4\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["InputGroup"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 274
+              lineNumber: 284
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["FormControl"], {
@@ -580,44 +593,44 @@ function (_React$Component) {
             placeholder: "\u05DB\u05DE\u05D5\u05EA",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 275
+              lineNumber: 285
             },
             __self: this
           }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["InputGroup"].Append, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 279
+              lineNumber: 289
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["InputGroup"].Text, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 280
+              lineNumber: 290
             },
             __self: this
           }, "\u05DE\u05D9\u05DB\u05DC\u05D9\u05DD"))))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 285
+              lineNumber: 295
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 286
+              lineNumber: 296
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 287
+              lineNumber: 297
             },
             __self: this
           }, "\u05DE\u05D0\u05E4\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["InputGroup"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 288
+              lineNumber: 298
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["FormControl"], {
@@ -626,7 +639,7 @@ function (_React$Component) {
             placeholder: "\u05DB\u05DE\u05D5\u05EA",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 289
+              lineNumber: 299
             },
             __self: this
           }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -635,56 +648,56 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 293
+              lineNumber: 303
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 295
+              lineNumber: 305
             },
             __self: this
           }, "\u05D1\u05D7\u05D9\u05E8\u05EA \u05E1\u05D5\u05D2"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 296
+              lineNumber: 306
             },
             __self: this
           }, "\u05D0\u05E8\u05D2\u05D6\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 297
+              lineNumber: 307
             },
             __self: this
           }, "\u05E9\u05E7\u05D9\u05D5\u05EA \u05E1\u05D5\u05E4\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 298
+              lineNumber: 308
             },
             __self: this
           }, "\u05E9\u05E7\u05D9\u05DD"))))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 303
+              lineNumber: 313
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 304
+              lineNumber: 314
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 305
+              lineNumber: 315
             },
             __self: this
           }, "\u05DC\u05D7\u05DD"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["InputGroup"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 306
+              lineNumber: 316
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["FormControl"], {
@@ -693,7 +706,7 @@ function (_React$Component) {
             placeholder: "\u05DB\u05DE\u05D5\u05EA",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 307
+              lineNumber: 317
             },
             __self: this
           }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -702,50 +715,50 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 311
+              lineNumber: 321
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 313
+              lineNumber: 323
             },
             __self: this
           }, "\u05D1\u05D7\u05D9\u05E8\u05EA \u05E1\u05D5\u05D2"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 314
+              lineNumber: 324
             },
             __self: this
           }, "\u05D0\u05E8\u05D2\u05D6\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 315
+              lineNumber: 325
             },
             __self: this
           }, "\u05E9\u05E7\u05D9\u05D5\u05EA \u05E1\u05D5\u05E4\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 316
+              lineNumber: 326
             },
             __self: this
           }, "\u05E9\u05E7\u05D9\u05DD"))))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 321
+              lineNumber: 331
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 322
+              lineNumber: 332
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 323
+              lineNumber: 333
             },
             __self: this
           }, "\u05D4\u05E2\u05E8\u05D5\u05EA \u05E0\u05D5\u05E1\u05E4\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -755,7 +768,7 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 324
+              lineNumber: 334
             },
             __self: this
           }))));
@@ -790,26 +803,26 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 353
+              lineNumber: 363
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 354
+              lineNumber: 364
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 355
+              lineNumber: 365
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 356
+              lineNumber: 366
             },
             __self: this
           }, "\u05DE\u05D3\u05D5\u05E2 \u05DC\u05D0 \u05D1\u05D5\u05E6\u05E2 \u05D4\u05D0\u05D9\u05E1\u05D5\u05E3?"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -818,50 +831,50 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 357
+              lineNumber: 367
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 358
+              lineNumber: 368
             },
             __self: this
           }, "\u05D1\u05D7\u05E8 \u05E1\u05D9\u05D1\u05D4"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 359
+              lineNumber: 369
             },
             __self: this
           }, "\u05DC\u05D0 \u05E0\u05D5\u05EA\u05E8 \u05DE\u05D6\u05D5\u05DF"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 360
+              lineNumber: 370
             },
             __self: this
           }, "\u05DC\u05D0 \u05E0\u05E2\u05E0\u05D9\u05EA\u05D9"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 361
+              lineNumber: 371
             },
             __self: this
           }, "\u05E1\u05D9\u05D1\u05D4 \u05D0\u05D7\u05E8\u05EA")))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 365
+              lineNumber: 375
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 366
+              lineNumber: 376
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 367
+              lineNumber: 377
             },
             __self: this
           }, "\u05D4\u05E2\u05E8\u05D5\u05EA \u05E0\u05D5\u05E1\u05E4\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -871,7 +884,7 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 368
+              lineNumber: 378
             },
             __self: this
           }))));
@@ -910,7 +923,7 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 399
+              lineNumber: 409
             },
             __self: this
           }, modal.entries.notes);
@@ -937,7 +950,7 @@ function (_React$Component) {
                 type: 'CLOSE_MODAL'
               });
 
-              Object(_dbActions_refresh4User__WEBPACK_IMPORTED_MODULE_14__["default"])(_this4.props.dispatch, _this4.props.userData.region, _this4.props.userData.uid);
+              Object(_dbActions_refresh4User__WEBPACK_IMPORTED_MODULE_14__["default"])(_this4.props.dispatch, _this4.props.userData.region, _this4.props.userData.uid); //TODO put async in dbAction
             },
             variant: 'danger',
             text: 'הסרה'
@@ -979,21 +992,301 @@ function (_React$Component) {
         case 'ADD_USER':
           /* For adding a volunteer (Admins only) */
           title = 'הוספת מתנדב';
-          body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", {
+          body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 449
+              lineNumber: 459
             },
             __self: this
-          });
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 460
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 461
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 462
+            },
+            __self: this
+          }, "\u05E9\u05DD \u05E4\u05E8\u05D8\u05D9"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            id: "firstName",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 463
+            },
+            __self: this
+          }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 466
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 467
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 468
+            },
+            __self: this
+          }, "\u05E9\u05DD \u05DE\u05E9\u05E4\u05D7\u05D4"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            id: "lastName",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 469
+            },
+            __self: this
+          }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 472
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 473
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 474
+            },
+            __self: this
+          }, "\u05EA\u05E2\u05D5\u05D3\u05EA \u05D6\u05D4\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            id: "tz",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 475
+            },
+            __self: this
+          }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 478
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 479
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 480
+            },
+            __self: this
+          }, "\u05D0\u05D6\u05D5\u05E8 \u05D0\u05D9\u05E1\u05D5\u05E3"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            as: "select",
+            id: "region",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 481
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 482
+            },
+            __self: this
+          }, "\u05D1\u05D7\u05E8 \u05D0\u05D6\u05D5\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 483
+            },
+            __self: this
+          }, "\u05E9\u05E8\u05D5\u05DF")))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 487
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 488
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 489
+            },
+            __self: this
+          }, "\u05DB\u05EA\u05D5\u05D1\u05EA \u05D3\u05D5\u05D0\u05E8 \u05D0\u05DC\u05E7\u05D8\u05E8\u05D5\u05E0\u05D9"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            type: "email",
+            id: "email",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 490
+            },
+            __self: this
+          }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 493
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 494
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 495
+            },
+            __self: this
+          }, "\u05DE\u05E1\u05E4\u05E8 \u05D8\u05DC\u05E4\u05D5\u05DF"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            id: "phone",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 496
+            },
+            __self: this
+          }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 499
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 500
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 501
+            },
+            __self: this
+          }, "\u05E8\u05D7\u05D5\u05D1 \u05D5\u05DE\u05E1\u05E4\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            id: "address",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 502
+            },
+            __self: this
+          })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 504
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 505
+            },
+            __self: this
+          }, "\u05E2\u05D9\u05E8 \u05DE\u05D2\u05D5\u05E8\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            id: "city",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 506
+            },
+            __self: this
+          }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 509
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 510
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 511
+            },
+            __self: this
+          }, "\u05D4\u05E2\u05E8\u05D4"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            as: "textarea",
+            rows: "3",
+            id: "comment",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 512
+            },
+            __self: this
+          }))));
           buttons = [{
             onClick: function onClick() {
-              return _this4.props.dispatch({
+              var user = {
+                firstName: _this4.state.firstName,
+                lastName: _this4.state.lastName,
+                tz: _this4.state.tz,
+                region: _this4.state.region,
+                email: _this4.state.email,
+                phone: _this4.state.phone,
+                address: _this4.state.address,
+                city: _this4.state.city,
+                comment: _this4.state.comment,
+                disabled: false,
+                admin: false
+              };
+              Object(_dbActions_addUser__WEBPACK_IMPORTED_MODULE_21__["default"])(_this4.props, user);
+
+              _this4.resetState();
+
+              _this4.props.dispatch({
+                type: 'CLOSE_MODAL'
+              });
+            },
+            variant: 'primary',
+            text: 'שליחה'
+          }, {
+            onClick: function onClick() {
+              _this4.resetState();
+
+              _this4.props.dispatch({
                 type: 'CLOSE_MODAL'
               });
             },
             variant: 'secondary',
-            text: 'סגירה'
+            text: 'ביטול'
           }];
           break;
 
@@ -1003,7 +1296,7 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 460
+              lineNumber: 551
             },
             __self: this
           });
@@ -1019,329 +1312,88 @@ function (_React$Component) {
           break;
 
         case 'EDIT_USER':
-          {
-            /* For editing volunteer's details (Admins only) */
-            var user = modal.entries;
-            title = 'עריכת פרטי מתנדב';
-            body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"], {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 474
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 475
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
-              as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 476
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 477
-              },
-              __self: this
-            }, "\u05E9\u05DD \u05E4\u05E8\u05D8\u05D9"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
-              value: user.firstName,
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 478
-              },
-              __self: this
-            }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 481
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
-              as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 482
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 483
-              },
-              __self: this
-            }, "\u05E9\u05DD \u05DE\u05E9\u05E4\u05D7\u05D4"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
-              value: user.lastName,
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 484
-              },
-              __self: this
-            }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 487
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
-              as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 488
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 489
-              },
-              __self: this
-            }, "\u05EA\u05E2\u05D5\u05D3\u05EA \u05D6\u05D4\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
-              value: user.tz,
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 490
-              },
-              __self: this
-            }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 493
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
-              as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 494
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 495
-              },
-              __self: this
-            }, "\u05D0\u05D6\u05D5\u05E8 \u05D0\u05D9\u05E1\u05D5\u05E3"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
-              as: "select",
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 496
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 497
-              },
-              __self: this
-            }, "\u05E8\u05D0\u05E9\u05D5\u05DF \u05DC\u05E6\u05D9\u05D5\u05DF"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 498
-              },
-              __self: this
-            }, "\u05E8\u05E2\u05E0\u05E0\u05D4"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 499
-              },
-              __self: this
-            }, "\u05EA\u05DC \u05D0\u05D1\u05D9\u05D1")))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 503
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
-              as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 504
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 505
-              },
-              __self: this
-            }, "\u05DB\u05EA\u05D5\u05D1\u05EA \u05D3\u05D5\u05D0\u05E8 \u05D0\u05DC\u05E7\u05D8\u05E8\u05D5\u05E0\u05D9"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
-              type: "email",
-              value: user.email,
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 506
-              },
-              __self: this
-            }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 509
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
-              as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 510
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 511
-              },
-              __self: this
-            }, "\u05DE\u05E1\u05E4\u05E8 \u05D8\u05DC\u05E4\u05D5\u05DF"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
-              type: "email",
-              value: user.phone,
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 512
-              },
-              __self: this
-            }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 515
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
-              as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 516
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 517
-              },
-              __self: this
-            }, "\u05E8\u05D7\u05D5\u05D1 \u05D5\u05DE\u05E1\u05E4\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
-              value: user.street,
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 518
-              },
-              __self: this
-            })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
-              as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 520
-              },
-              __self: this
-            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 521
-              },
-              __self: this
-            }, "\u05E2\u05D9\u05E8 \u05DE\u05D2\u05D5\u05E8\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
-              value: user.city,
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 522
-              },
-              __self: this
-            }))));
-            buttons = [{
-              onClick: function onClick() {
-                return _this4.props.dispatch({
-                  type: 'CLOSE_MODAL'
-                });
-              },
-              variant: 'primary',
-              text: 'שליחה'
-            }, {
-              onClick: function onClick() {
-                return _this4.props.dispatch({
-                  type: 'CLOSE_MODAL'
-                });
-              },
-              variant: 'secondary',
-              text: 'ביטול'
-            }];
-            break;
+          /* For editing volunteer's details (Admins only) */
+          var user = modal.entries;
+
+          if (this.state.tz == "" && modal.isOpen) {
+            // if it is the first time rendering this form - otherwise goes into infinite loop
+            this.setState({
+              firstName: user.firstName,
+              lastName: user.lastName,
+              tz: user.tz,
+              region: user.region,
+              email: user.email,
+              phone: user.phone,
+              address: user.address,
+              city: user.city,
+              comment: user.comment
+            });
           }
 
-        case 'REMOVE_USER':
-          {
-            /* For deleting a user (Admins only) */
-            var _user = modal.entries;
-            title = 'סגירת חשבון מתנדב';
-            body = "\u05E1\u05D2\u05D9\u05E8\u05EA \u05D7\u05E9\u05D1\u05D5\u05DF \u05D4\u05DE\u05EA\u05E0\u05D3\u05D1 ".concat(_user.firstName, " ").concat(_user.lastName, ": \u05DE\u05EA\u05E0\u05D3\u05D1 \u05E9\u05E0\u05DE\u05D7\u05E7 \u05DE\u05D4\u05DE\u05E2\u05E8\u05DB\u05EA \u05DC\u05D0 \u05D9\u05D5\u05DB\u05DC \u05DC\u05D4\u05EA\u05D7\u05D1\u05E8. \u05EA\u05D9\u05E2\u05D5\u05D3 \u05D4\u05E4\u05E2\u05D9\u05DC\u05D5\u05EA \u05E9\u05DC\u05D5 \u05D9\u05D9\u05E9\u05DE\u05E8 \u05D5\u05E0\u05D9\u05EA\u05DF \u05D9\u05D4\u05D9\u05D4 \u05DC\u05D4\u05E4\u05E2\u05D9\u05DC \u05DE\u05D7\u05D3\u05E9 \u05D0\u05EA \u05D4\u05DE\u05E9\u05EA\u05DE\u05E9.");
-            buttons = [{
-              onClick: function onClick() {
-                Object(_dbActions_setUndoTask__WEBPACK_IMPORTED_MODULE_13__["default"])(modal.entries.id);
-
-                _this4.props.dispatch({
-                  type: 'CLOSE_MODAL'
-                });
-
-                Object(_dbActions_refresh4User__WEBPACK_IMPORTED_MODULE_14__["default"])(_this4.props.dispatch, _this4.props.userData.region, _this4.props.userData.uid);
-              },
-              variant: 'danger',
-              text: 'סגירת חשבון'
-            }, {
-              onClick: function onClick() {
-                return _this4.props.dispatch({
-                  type: 'CLOSE_MODAL'
-                });
-              },
-              variant: 'secondary',
-              text: 'ביטול'
-            }];
-            break;
-          }
-
-        case 'RESET_PASSWORD':
-          {
-            /* For deleting a user (Admins only) */
-            var _user2 = modal.entries;
-            title = 'איפוס סיסמה למתנדב';
-            body = "\u05D0\u05D9\u05E4\u05D5\u05E1 \u05D4\u05E1\u05D9\u05E1\u05DE\u05D4 \u05DC\u05DE\u05EA\u05E0\u05D3\u05D1 ".concat(_user2.firstName, " ").concat(_user2.lastName, ": \u05D9\u05D9\u05E9\u05DC\u05D7 \u05DE\u05D9\u05D9\u05DC \u05DC\u05DB\u05EA\u05D5\u05D1\u05EA\u05D5 ").concat(_user2.email, " \u05D5\u05D3\u05E8\u05DB\u05D5 \u05D9\u05EA\u05D1\u05E7\u05E9 \u05DC\u05D4\u05D6\u05D9\u05DF \u05E1\u05D9\u05E1\u05DE\u05D4 \u05D7\u05D3\u05E9\u05D4. \u05D9\u05E9 \u05DC\u05D5\u05D5\u05D3\u05D0 \u05E2\u05DD \u05D4\u05DE\u05EA\u05E0\u05D3\u05D1 \u05E9\u05DB\u05EA\u05D5\u05D1\u05EA \u05D4\u05DE\u05D9\u05D9\u05DC \u05D4\u05DE\u05D5\u05D6\u05E0\u05EA \u05D1\u05DE\u05E2\u05E8\u05DB\u05EA \u05D4\u05D9\u05D0 \u05D0\u05DB\u05DF \u05DB\u05EA\u05D5\u05D1\u05EA\u05D5 \u05D4\u05E4\u05E2\u05D9\u05DC\u05D4.");
-            buttons = [{
-              onClick: function onClick() {
-                Object(_dbActions_setUndoTask__WEBPACK_IMPORTED_MODULE_13__["default"])(modal.entries.id);
-
-                _this4.props.dispatch({
-                  type: 'CLOSE_MODAL'
-                });
-
-                Object(_dbActions_refresh4User__WEBPACK_IMPORTED_MODULE_14__["default"])(_this4.props.dispatch, _this4.props.userData.region, _this4.props.userData.uid);
-              },
-              variant: 'danger',
-              text: 'איפוס סיסמה'
-            }, {
-              onClick: function onClick() {
-                return _this4.props.dispatch({
-                  type: 'CLOSE_MODAL'
-                });
-              },
-              variant: 'secondary',
-              text: 'ביטול'
-            }];
-            break;
-          }
-
-        case 'ADD_TASK':
-          /* For adding a task (Admins only) */
-          title = 'הוספת איסוף';
+          title = 'עריכת פרטי מתנדב';
           body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 589
+              lineNumber: 577
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 578
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 579
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 580
+            },
+            __self: this
+          }, "\u05E9\u05DD \u05E4\u05E8\u05D8\u05D9"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            value: this.state.firstName,
+            id: "firstName",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 581
+            },
+            __self: this
+          }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 584
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 585
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 586
+            },
+            __self: this
+          }, "\u05E9\u05DD \u05DE\u05E9\u05E4\u05D7\u05D4"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            value: this.state.lastName,
+            id: "lastName",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 587
+            },
+            __self: this
+          }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
               lineNumber: 590
@@ -1360,10 +1412,350 @@ function (_React$Component) {
               lineNumber: 592
             },
             __self: this
+          }, "\u05EA\u05E2\u05D5\u05D3\u05EA \u05D6\u05D4\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            value: this.state.tz,
+            id: "tz",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 593
+            },
+            __self: this
+          }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 596
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 597
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 598
+            },
+            __self: this
+          }, "\u05D0\u05D6\u05D5\u05E8 \u05D0\u05D9\u05E1\u05D5\u05E3"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            as: "select",
+            value: this.state.region,
+            id: "region",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 599
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("option", {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 600
+            },
+            __self: this
+          }, "\u05E9\u05E8\u05D5\u05DF")))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 604
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 605
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 606
+            },
+            __self: this
+          }, "\u05DB\u05EA\u05D5\u05D1\u05EA \u05D3\u05D5\u05D0\u05E8 \u05D0\u05DC\u05E7\u05D8\u05E8\u05D5\u05E0\u05D9"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            type: "email",
+            value: this.state.email,
+            id: "email",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 607
+            },
+            __self: this
+          }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 610
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 611
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 612
+            },
+            __self: this
+          }, "\u05DE\u05E1\u05E4\u05E8 \u05D8\u05DC\u05E4\u05D5\u05DF"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            value: this.state.phone,
+            id: "phone",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 613
+            },
+            __self: this
+          }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 616
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 617
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 618
+            },
+            __self: this
+          }, "\u05E8\u05D7\u05D5\u05D1 \u05D5\u05DE\u05E1\u05E4\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            value: this.state.address,
+            id: "address",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 619
+            },
+            __self: this
+          })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 621
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 622
+            },
+            __self: this
+          }, "\u05E2\u05D9\u05E8 \u05DE\u05D2\u05D5\u05E8\u05D9\u05DD"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
+            value: this.state.city,
+            id: "city",
+            onChange: this.handleChange,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 623
+            },
+            __self: this
+          }))));
+          buttons = [{
+            onClick: function onClick() {
+              var changes = {
+                firstName: _this4.state.firstName,
+                lastName: _this4.state.lastName,
+                tz: _this4.state.tz,
+                region: _this4.state.region,
+                email: _this4.state.email,
+                phone: _this4.state.phone,
+                address: _this4.state.address,
+                city: _this4.state.city,
+                comment: _this4.state.comment
+              };
+              Object(_dbActions_editUser__WEBPACK_IMPORTED_MODULE_22__["default"])(_this4.props, user.uid, changes);
+
+              _this4.resetState();
+
+              _this4.props.dispatch({
+                type: 'CLOSE_MODAL'
+              });
+            },
+            variant: 'primary',
+            text: 'שליחה'
+          }, {
+            onClick: function onClick() {
+              _this4.resetState();
+
+              _this4.props.dispatch({
+                type: 'CLOSE_MODAL'
+              });
+            },
+            variant: 'secondary',
+            text: 'ביטול'
+          }];
+          break;
+
+        case 'REMOVE_USER':
+          {
+            /* For deleting a user (Admins only) */
+            var _user = modal.entries;
+            title = 'סגירת חשבון מתנדב';
+            body = "\u05E1\u05D2\u05D9\u05E8\u05EA \u05D7\u05E9\u05D1\u05D5\u05DF \u05D4\u05DE\u05EA\u05E0\u05D3\u05D1 ".concat(_user.firstName, " ").concat(_user.lastName, ": \u05DE\u05EA\u05E0\u05D3\u05D1 \u05E9\u05D9\u05D9\u05E1\u05D2\u05E8 \u05D7\u05E9\u05D1\u05D5\u05E0\u05D5 \u05DC\u05D0 \u05D9\u05D5\u05DB\u05DC \u05DC\u05D4\u05EA\u05D7\u05D1\u05E8. \u05EA\u05D9\u05E2\u05D5\u05D3 \u05D4\u05E4\u05E2\u05D9\u05DC\u05D5\u05EA \u05E9\u05DC\u05D5 \u05D9\u05D9\u05E9\u05DE\u05E8 \u05D5\u05E0\u05D9\u05EA\u05DF \u05D9\u05D4\u05D9\u05D4 \u05DC\u05D4\u05E4\u05E2\u05D9\u05DC \u05DE\u05D7\u05D3\u05E9 \u05D0\u05EA \u05D4\u05DE\u05E9\u05EA\u05DE\u05E9.");
+            buttons = [{
+              onClick: function onClick() {
+                var changes = {
+                  disabled: true
+                };
+                Object(_dbActions_editUserAuth__WEBPACK_IMPORTED_MODULE_23__["default"])(_this4.props, _user.uid, changes);
+                Object(_dbActions_editUser__WEBPACK_IMPORTED_MODULE_22__["default"])(_this4.props, _user.uid, changes);
+
+                _this4.props.dispatch({
+                  type: 'CLOSE_MODAL'
+                });
+              },
+              variant: 'danger',
+              text: 'סגירת חשבון'
+            }, {
+              onClick: function onClick() {
+                return _this4.props.dispatch({
+                  type: 'CLOSE_MODAL'
+                });
+              },
+              variant: 'secondary',
+              text: 'ביטול'
+            }];
+            break;
+          }
+
+        case 'CHANGE_PASSWORD':
+          {
+            /* For deleting a user (Admins only) */
+            var _user2 = modal.entries;
+            title = 'שינוי סיסמה למתנדב';
+            body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 687
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 688
+              },
+              __self: this
+            }, "\u05D4\u05D9\u05E0\u05DA \u05E2\u05D5\u05DE\u05D3 \u05DC\u05E9\u05E0\u05D5\u05EA \u05D0\u05EA \u05D4\u05E1\u05D9\u05E1\u05DE\u05D4 \u05DC\u05DE\u05EA\u05E0\u05D3\u05D1 ", _user2.firstName, " ", _user2.lastName, ".  \u05D9\u05E9 \u05DC\u05D5\u05D5\u05D3\u05D0 \u05E2\u05DD \u05D4\u05DE\u05EA\u05E0\u05D3\u05D1 \u05E9\u05D4\u05D5\u05D0 \u05DE\u05DB\u05D9\u05E8 \u05D0\u05EA \u05D4\u05E1\u05D9\u05E1\u05DE\u05D4 \u05D4\u05D7\u05D3\u05E9\u05D4."), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"], {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 689
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 690
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+              as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 691
+              },
+              __self: this
+            }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("br", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 692
+              },
+              __self: this
+            }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 692
+              },
+              __self: this
+            }, "\u05E1\u05D9\u05E1\u05DE\u05D4 \u05D7\u05D3\u05E9\u05D4"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("br", {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 692
+              },
+              __self: this
+            }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["FormControl"], {
+              id: "password",
+              onChange: this.handleChange,
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 693
+              },
+              __self: this
+            })))));
+            buttons = [{
+              onClick: function onClick() {
+                var changes = {
+                  password: _this4.state.password
+                };
+                Object(_dbActions_editUserAuth__WEBPACK_IMPORTED_MODULE_23__["default"])(_this4.props, _user2.uid, changes);
+
+                _this4.resetState();
+
+                _this4.props.dispatch({
+                  type: 'CLOSE_MODAL'
+                });
+              },
+              variant: 'danger',
+              text: 'איפוס סיסמה'
+            }, {
+              onClick: function onClick() {
+                _this4.resetState();
+
+                _this4.props.dispatch({
+                  type: 'CLOSE_MODAL'
+                });
+              },
+              variant: 'secondary',
+              text: 'ביטול'
+            }];
+            break;
+          }
+
+        case 'ADD_TASK':
+          /* For adding a task (Admins only) */
+          title = 'הוספת איסוף';
+          body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"], {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 724
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 725
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
+            as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 726
+            },
+            __self: this
+          }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 727
+            },
+            __self: this
           }, "\u05EA\u05D0\u05E8\u05D9\u05DA"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("br", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 592
+              lineNumber: 727
             },
             __self: this
           }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["FormControl"], {
@@ -1372,26 +1764,26 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 593
+              lineNumber: 728
             },
             __self: this
           })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 596
+              lineNumber: 731
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 597
+              lineNumber: 732
             },
             __self: this
           }, "\u05E9\u05E2\u05D4"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("br", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 597
+              lineNumber: 732
             },
             __self: this
           }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["FormControl"], {
@@ -1401,26 +1793,26 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 598
+              lineNumber: 733
             },
             __self: this
           }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 602
+              lineNumber: 737
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 603
+              lineNumber: 738
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 604
+              lineNumber: 739
             },
             __self: this
           }, "\u05E2\u05D9\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -1428,20 +1820,20 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 605
+              lineNumber: 740
             },
             __self: this
           })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 607
+              lineNumber: 742
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 608
+              lineNumber: 743
             },
             __self: this
           }, "\u05E8\u05D7\u05D5\u05D1 \u05D5\u05DE\u05E1\u05E4\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -1449,26 +1841,26 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 609
+              lineNumber: 744
             },
             __self: this
           }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 612
+              lineNumber: 747
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 613
+              lineNumber: 748
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 614
+              lineNumber: 749
             },
             __self: this
           }, "\u05E1\u05E4\u05E7"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -1476,26 +1868,26 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 615
+              lineNumber: 750
             },
             __self: this
           }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 618
+              lineNumber: 753
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 619
+              lineNumber: 754
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 620
+              lineNumber: 755
             },
             __self: this
           }, "\u05E9\u05DD \u05D0\u05D9\u05E9 \u05E7\u05E9\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -1503,20 +1895,20 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 621
+              lineNumber: 756
             },
             __self: this
           })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 623
+              lineNumber: 758
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 624
+              lineNumber: 759
             },
             __self: this
           }, "\u05D8\u05DC\u05E4\u05D5\u05DF \u05D0\u05D9\u05E9 \u05E7\u05E9\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -1524,26 +1916,26 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 625
+              lineNumber: 760
             },
             __self: this
           }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 628
+              lineNumber: 763
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 629
+              lineNumber: 764
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 630
+              lineNumber: 765
             },
             __self: this
           }, "\u05D4\u05E2\u05E8\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -1553,7 +1945,7 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 631
+              lineNumber: 766
             },
             __self: this
           }))));
@@ -1601,7 +1993,7 @@ function (_React$Component) {
           var day = ('0' + date.getDate()).slice(-2);
           var time = ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);
 
-          if (this.state.askDate == null) {
+          if (this.state.date == null && modal.isOpen) {
             // if it is the first time rendering this form - otherwise goes into infinite loop
             this.setState({
               date: year + '-' + month + '-' + day,
@@ -1621,32 +2013,32 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 689
+              lineNumber: 824
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 690
+              lineNumber: 825
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 691
+              lineNumber: 826
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 692
+              lineNumber: 827
             },
             __self: this
           }, "\u05EA\u05D0\u05E8\u05D9\u05DA"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("br", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 692
+              lineNumber: 827
             },
             __self: this
           }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["FormControl"], {
@@ -1656,26 +2048,26 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 693
+              lineNumber: 828
             },
             __self: this
           })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 696
+              lineNumber: 831
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 697
+              lineNumber: 832
             },
             __self: this
           }, "\u05E9\u05E2\u05D4"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("br", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 697
+              lineNumber: 832
             },
             __self: this
           }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["FormControl"], {
@@ -1686,26 +2078,26 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 698
+              lineNumber: 833
             },
             __self: this
           }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 702
+              lineNumber: 837
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 703
+              lineNumber: 838
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 704
+              lineNumber: 839
             },
             __self: this
           }, "\u05E2\u05D9\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -1714,20 +2106,20 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 705
+              lineNumber: 840
             },
             __self: this
           })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 707
+              lineNumber: 842
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 708
+              lineNumber: 843
             },
             __self: this
           }, "\u05E8\u05D7\u05D5\u05D1 \u05D5\u05DE\u05E1\u05E4\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -1736,26 +2128,26 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 709
+              lineNumber: 844
             },
             __self: this
           }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 712
+              lineNumber: 847
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 713
+              lineNumber: 848
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 714
+              lineNumber: 849
             },
             __self: this
           }, "\u05E1\u05E4\u05E7"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -1764,26 +2156,26 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 715
+              lineNumber: 850
             },
             __self: this
           }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 718
+              lineNumber: 853
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 719
+              lineNumber: 854
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 720
+              lineNumber: 855
             },
             __self: this
           }, "\u05E9\u05DD \u05D0\u05D9\u05E9 \u05E7\u05E9\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -1792,20 +2184,20 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 721
+              lineNumber: 856
             },
             __self: this
           })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 723
+              lineNumber: 858
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 724
+              lineNumber: 859
             },
             __self: this
           }, "\u05D8\u05DC\u05E4\u05D5\u05DF \u05D0\u05D9\u05E9 \u05E7\u05E9\u05E8"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -1814,26 +2206,26 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 725
+              lineNumber: 860
             },
             __self: this
           }))), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Row, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 728
+              lineNumber: 863
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Group, {
             as: react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Col"],
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 729
+              lineNumber: 864
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Label, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 730
+              lineNumber: 865
             },
             __self: this
           }, "\u05D4\u05E2\u05E8\u05D5\u05EA"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Form"].Control, {
@@ -1844,7 +2236,7 @@ function (_React$Component) {
             onChange: this.handleChange,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 731
+              lineNumber: 866
             },
             __self: this
           }))));
@@ -1883,26 +2275,16 @@ function (_React$Component) {
           }];
           break;
 
-        case 'ADD_TASK_CSV':
-          /* For adding multiple tasks via uploading a .CSV file (Admins only) */
-          title = 'הוספת איסופים מקובץ';
-          body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", {
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 768
-            },
-            __self: this
-          });
-          buttons = [{
-            onClick: function onClick() {
-              return _this4.props.dispatch({
-                type: 'CLOSE_MODAL'
-              });
-            },
-            variant: 'secondary',
-            text: 'סגירה'
-          }];
-          break;
+        /*  case 'ADD_TASK_CSV':                            TODO remove?               
+              title = 'הוספת איסופים מקובץ';
+              body = <span></span>;
+              buttons = [
+                  {
+                      onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                      variant: 'secondary',
+                      text: 'סגירה'
+                  }];
+              break;*/
         // Why is it called csv if it exports to xlsx?
 
         case 'EXPORT_TASK_CSV':
@@ -1911,7 +2293,7 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("h2", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 781
+              lineNumber: 915
             },
             __self: this
           }, "\u05DC\u05D7\u05E5 \u05DB\u05D3\u05D9 \u05DC\u05D9\u05D9\u05E6\u05D0 \u05D3\u05D5\u05D7.");
@@ -1937,7 +2319,7 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("h2", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 800
+              lineNumber: 934
             },
             __self: this
           }, "\u05DC\u05D7\u05E5 \u05DB\u05D3\u05D9 \u05DC\u05D9\u05D9\u05E6\u05D0 \u05D3\u05D5\u05D7.");
@@ -1959,41 +2341,44 @@ function (_React$Component) {
           break;
       }
 
+      console.log(this.state);
       return react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Modal"], {
         show: modal.isOpen,
         onHide: function onHide() {
-          return _this4.props.dispatch({
+          _this4.resetState();
+
+          _this4.props.dispatch({
             type: 'CLOSE_MODAL'
           });
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 819
+          lineNumber: 953
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Modal"].Header, {
         closeButton: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 820
+          lineNumber: 958
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Modal"].Title, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 821
+          lineNumber: 959
         },
         __self: this
       }, title)), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Modal"].Body, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 823
+          lineNumber: 961
         },
         __self: this
       }, body), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_12__["Modal"].Footer, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 826
+          lineNumber: 964
         },
         __self: this
       }, buttons.map(function (button) {
@@ -2003,7 +2388,7 @@ function (_React$Component) {
           onClick: button.onClick,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 829
+            lineNumber: 967
           },
           __self: this
         }, button.text);
@@ -2083,6 +2468,35 @@ function addTask(dispatch, region, data) {
   console.log("added succesfully"); //  TODO dispatch modal
 
   Object(_getAllRegionTasks__WEBPACK_IMPORTED_MODULE_1__["default"])(dispatch, region); // refresh page data
+}
+
+/***/ }),
+
+/***/ "./dbActions/addUser.js":
+/*!******************************!*\
+  !*** ./dbActions/addUser.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return addUser; });
+/* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config/firebaseConfig */ "./config/firebaseConfig.js");
+/* harmony import */ var _getAllUsers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getAllUsers */ "./dbActions/getAllUsers.js");
+
+
+function addUser(props, user) {
+  // check if email already exists in authentication system
+  var addUserFunc = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__["default"].functions().httpsCallable('addUser');
+  addUserFunc(user).then(function (result) {
+    console.log(result);
+    var userCollection = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__["default"].firestore().collection('users');
+    userCollection.doc(result.data.uid).set(user).then(function () {
+      Object(_getAllUsers__WEBPACK_IMPORTED_MODULE_1__["default"])(props.dispatch); // refresh
+      // TODO modal success info
+    });
+  });
 }
 
 /***/ }),
@@ -2193,6 +2607,61 @@ function editTask(dispatch, region, taskID, data) {
 
 /***/ }),
 
+/***/ "./dbActions/editUser.js":
+/*!*******************************!*\
+  !*** ./dbActions/editUser.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return editUser; });
+/* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config/firebaseConfig */ "./config/firebaseConfig.js");
+/* harmony import */ var _getAllUsers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getAllUsers */ "./dbActions/getAllUsers.js");
+
+
+function editUser(props, uid, changes) {
+  var userCollection = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__["default"].firestore().collection('users');
+  userCollection.doc(uid).set(changes, {
+    merge: true
+  }).then(function () {
+    Object(_getAllUsers__WEBPACK_IMPORTED_MODULE_1__["default"])(props.dispatch); // refresh
+    // TODO modal success info
+  });
+}
+
+/***/ }),
+
+/***/ "./dbActions/editUserAuth.js":
+/*!***********************************!*\
+  !*** ./dbActions/editUserAuth.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return editUserAuth; });
+/* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config/firebaseConfig */ "./config/firebaseConfig.js");
+/* harmony import */ var _getAllUsers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./getAllUsers */ "./dbActions/getAllUsers.js");
+
+
+function editUserAuth(props, uid, changes) {
+  var updateUserFunc = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__["default"].functions().httpsCallable('updateUser');
+  var data = {
+    uid: uid,
+    changes: changes
+  };
+  updateUserFunc(data).then(function (result) {
+    Object(_getAllUsers__WEBPACK_IMPORTED_MODULE_1__["default"])(props.dispatch); // refresh        
+
+    console.log(result);
+  });
+}
+
+/***/ }),
+
 /***/ "./dbActions/getAllRegionTasks.js":
 /*!****************************************!*\
   !*** ./dbActions/getAllRegionTasks.js ***!
@@ -2219,6 +2688,38 @@ function getAllRegionTasks(dispatch, region) {
     dispatch({
       type: 'GETALLREGIONTASKS',
       tasks: tasks
+    });
+  });
+}
+
+/***/ }),
+
+/***/ "./dbActions/getAllUsers.js":
+/*!**********************************!*\
+  !*** ./dbActions/getAllUsers.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getAllUsers; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../config/firebaseConfig */ "./config/firebaseConfig.js");
+
+
+function getAllUsers(dispatch) {
+  var db = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_1__["default"].firestore();
+  var users = [];
+  db.collection("users").get().then(function (querySnapshot) {
+    querySnapshot.forEach(function (user) {
+      users.push(Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, user.data(), {
+        uid: user.id
+      }));
+    });
+    dispatch({
+      type: 'GETALLUSERS',
+      users: users
     });
   });
 }
