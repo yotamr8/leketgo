@@ -4,6 +4,7 @@ import {Card, Button, ButtonToolbar, Tooltip, OverlayTrigger, Dropdown, Form, Bu
 import fire from '../config/firebaseConfig'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Link from 'next/link'
+import editUser from '../dbActions/editUser'
 
 class Entry extends React.Component {
     constructor(props) {
@@ -161,9 +162,17 @@ class Entry extends React.Component {
                         text: <span><i className="fas fa-unlock-alt fa-fw"></i>שינוי סיסמה</span>
                     },
                     {
-                        onClick: () => this.props.dispatch({ type: 'PUSH_TOAST', title: 'הועלו בהצלחה', body:'איזה כיף', delay: 5000}),
+                        onClick: () => {
+                            let changes = { admin: !this.props.entry.admin }
+                            editUser(this.props, this.props.entry.uid, changes).then((success) => {
+                                if (success) { var title = 'הצלחה'; var body = ' שינוי סטטוס מנהל בוצע בהצלחה.'; }
+                                else { var title = 'אי הצלחה'; var body = ' שינוי סטטוס מנהל לא הצליח.'; }
+                                this.props.dispatch({ type: 'PUSH_TOAST', title: title, body: body, delay: 5000 })
+                            })
+                            
+                        },
                         variant: 'outline-secondary',
-                        text: <span><i className="fas fa-crown"></i>הפוך למנהל</span>
+                        text: (this.props.entry.admin) ? <span><i className="fas fa-crown"></i>הפוך למתנדב</span> : <span><i className="fas fa-crown"></i>הפוך למנהל</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REMOVE_USER', entries: this.props.entry}),
@@ -319,7 +328,7 @@ class Entry extends React.Component {
                                     </td>;       
                                 case 'adminUsers':
                                     return (
-                                    <td className="align-middle" key={column}>
+                                    <td className="align-middle" key={column+'admin'}>
                                     <span style={{whiteSpace: 'nowrap'}}>
                                         <Dropdown width='200'>
                                             <Dropdown.Toggle variant="secondary" id="dropdown-basic">

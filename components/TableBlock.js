@@ -45,8 +45,7 @@ class TableBlock extends React.Component {
 	}
 
 	componentDidMount() {
-        if (!this.props.isLogin) {
-			console.log(this.divElement);
+        if (!this.props.isLogin) {			
 			if(this.divElement.current) {
 				const actionBarHeight = this.divElement.current.clientHeight;
 				let root = document.documentElement;
@@ -54,8 +53,12 @@ class TableBlock extends React.Component {
 			}
         }
 	}
-	
-	componentDidUpdate() {
+
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.unassignedTasks != this.props.unassignedTasks) {
+            this.cancelSelection()
+        }
         if (!this.props.isLogin) {
 			const actionBarHeight = this.divElement.current.clientHeight;
 			let root = document.documentElement;
@@ -113,8 +116,7 @@ class TableBlock extends React.Component {
 	}
 
 	assignTasks() {        
-        setAssignedTasks(this.props, this.state.selectedEntries, this.state.entrySelectedCounter)
-        this.cancelSelection()
+        setAssignedTasks(this.props, this.state.selectedEntries, this.state.entrySelectedCounter)        
 	}
 
 	handleChangeForm(event) {		
@@ -166,6 +168,10 @@ class TableBlock extends React.Component {
 		}
 	}
 
+    handleFilterChange(event) {
+        console.log(event)
+    }
+
 	render() {
 		// Setting actionsBar
 		let actionsBar = '';
@@ -216,7 +222,7 @@ class TableBlock extends React.Component {
 			actionsBar = 
 				<Navbar bg='light'>
 					<Form>
-					<input type='file' id='fileUploader' accept='xlsx' style={{ display: "none" }} onChange={(e) => handleFileUpload(e.target.files[0])} />
+					<input type='file' id='fileUploader' accept='xlsx' style={{ display: "none" }} onChange={(e) => handleFileUpload(this.props, e.target.files[0])} />
 						<Row>
 							<Col>
 						<ButtonGroup>
@@ -250,9 +256,9 @@ class TableBlock extends React.Component {
 								</InputGroup>
 							</Col>
 							<Col>
-								<ButtonGroup aria-label="Basic example">
-									<Button variant="secondary">טרם שובצו</Button>
-									<Button variant="secondary">טרם בוצעו</Button>
+                                <ButtonGroup aria-label="Basic example">
+                                    <Button variant="secondary" onClick={this.handleFilterChange}>טרם שובצו</Button>
+                                    <Button variant="secondary" onClick={this.handleFilterChange}>טרם בוצעו</Button>
 								</ButtonGroup>
 							</Col>
 						</Row>

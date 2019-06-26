@@ -168,7 +168,7 @@ class ModalBlock extends React.Component {
            to the REPORT_FILL modal */
         let isValid = true; // TODO add logic to validation
         if (isValid) {
-			let re = /^\d+$/
+			let re = /^\d{0,}$/
 			let isMainCourseQDigit = re.test(this.state.mainCourseQ);
 			let isSideCourseQDigit = re.test(this.state.sideCourseQ);
 			let isPastriesQDigit = re.test(this.state.pastriesQ);
@@ -203,7 +203,8 @@ class ModalBlock extends React.Component {
                 data["foodContainerQuantity" + (i + 1)] = this.state[fields[i]]
             }
 
-            setTaskReport(this.props, this.props.modal.entries.id, data)           
+            setTaskReport(this.props, this.props.modal.entries.id, data)
+            return true
         }
     }
 
@@ -709,6 +710,12 @@ class ModalBlock extends React.Component {
                                     <Form.Control value={this.state.city} id="city" onChange={this.handleChange} />
                                 </Form.Group>
                             </Form.Row>
+                            <Form.Row>                                
+                                <Form.Group as={Col}>
+                                    <Form.Label>הערה</Form.Label>
+                                    <Form.Control value={this.state.comment} id="comment" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
                         </Form>;
                 buttons = [
                     {
@@ -728,7 +735,11 @@ class ModalBlock extends React.Component {
                             if (user.email != this.state.email) {   // so email in auth wouldn't be updated for nothing
                                 changes.email = this.state.email
                             }
-                            editUser(this.props, user.uid, changes)    
+                            editUser(this.props, user.uid, changes).then((success) => {
+                                if (success) { var title = 'הצלחה'; var body = ' שינוי פרטי המשתמש הצליחה.'; }
+                                else { var title = 'אי הצלחה'; var body = ' שינוי פרטי המשתמש לא הצליחה.'; }
+                                this.props.dispatch({ type: 'PUSH_TOAST', title: title, body: body, delay: 5000 })
+                            })    
                             this.resetState()
                             this.props.dispatch({ type: 'CLOSE_MODAL' })
 							}
@@ -754,9 +765,12 @@ class ModalBlock extends React.Component {
                 buttons = [
                     {
                         onClick: () => {
-                            let changes = { disabled: true }
-                            editUserAuth(this.props, user.uid, changes)
-                            editUser(this.props, user.uid, changes)
+                            let changes = { disabled: true }                            
+                            editUser(this.props, user.uid, changes).then((success) => {
+                                if (success) { var title = 'הצלחה'; var body = ' סגירת חשבון המשתמש הצליחה.'; }
+                                else { var title = 'אי הצלחה'; var body = ' סגירת חשבון המשתמש לא הצליחה.'; }
+                                this.props.dispatch({ type: 'PUSH_TOAST', title: title, body: body, delay: 5000 })
+                            })
                             this.props.dispatch({ type: 'CLOSE_MODAL' })                           
                         },
                         variant: 'danger',
@@ -768,6 +782,33 @@ class ModalBlock extends React.Component {
                         text: 'ביטול'
                     }];
                 break;
+                }
+            case 'ACTIVATE_USER':
+                {
+                    let user = modal.entries;
+                    title = 'הפעלת חשבון מתנדב';
+                    body = `הפעלת חשבון המתנדב ${user.firstName} ${user.lastName}: 
+                        מתנדב זה יוכל לחזור לפעילות מלאה באתר.`;
+                    buttons = [
+                        {
+                            onClick: () => {
+                                let changes = { disabled: false }
+                                editUser(this.props, user.uid, changes).then((success) => {
+                                    if (success) { var title = 'הצלחה'; var body = ' הפעלת חשבון המשתמש הצליחה.'; }
+                                    else { var title = 'אי הצלחה'; var body = ' הפעלת חשבון המשתמש לא הצליחה.'; }
+                                    this.props.dispatch({ type: 'PUSH_TOAST', title: title, body: body, delay: 5000 })
+                                })
+                                this.props.dispatch({ type: 'CLOSE_MODAL' })
+                            },
+                            variant: 'primary',
+                            text: 'הפעלת חשבון'
+                        },
+                        {
+                            onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                            variant: 'secondary',
+                            text: 'ביטול'
+                        }];
+                    break;
                 }
             case 'CHANGE_PASSWORD':
                 {

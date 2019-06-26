@@ -5,7 +5,7 @@ export default function getAllRegionTasks(dispatch, region) {
     var tasks = [];
     db.collection("tasks")
         .where("region", "==", region)
-        .orderBy("timestamp", "desc")
+        .orderBy("timestamp")
         .get().then(function (querySnapshot) {
         querySnapshot.forEach(function (task) {
             tasks.push({ ...task.data(), id: task.id })
