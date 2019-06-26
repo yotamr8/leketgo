@@ -6,6 +6,7 @@ export default function getHistory(dispatch, uid) {
 
     db.collection("tasks")
         .where("volunteerUid", "==", uid)
+        .where("reportFilled", "==", true)
         .get()
         .then((querySnapshot) => {
             var tasks = [];

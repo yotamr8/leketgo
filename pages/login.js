@@ -23,7 +23,6 @@ class Login extends Component {
 
     componentWillMount() {
         if (!this.props.authChecked) checkAuthAndRefresh(this.props.dispatch)
-
     }
 	
     handleSubmit = (e) => {

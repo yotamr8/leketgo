@@ -41,6 +41,8 @@ function addTasksToDB(props, data) {
         let date = year + "-" + month + "-" + day
         var timeStamp = timeStampCreator.fromDate(new Date(date + 'T' + row[2]));
 
+        var firstSuccess = false;
+
         taskCollection.doc().set({  // generates unique id
             name: row[0],
             timestamp: timeStamp,
@@ -49,10 +51,15 @@ function addTasksToDB(props, data) {
             "contact number": row[5],
             "contact name": row[6],
             notes: row[7],
-            region: row[8],           
+            region: row[8],
             volunteerUid: null,
             reportFilled: false,
             collected: false
+        }).then(() => {
+            if (!firstSuccess) {
+                firstSuccess = true;
+                props.dispatch({ type: 'PUSH_TOAST', title: 'success', body: 'Data loaded from file successfully.', delay: 5000 })  //TODO cant write here in hebrew
+            }
         });
         getAllRegionTasks(props.dispatch, props.userData.region)
     }
