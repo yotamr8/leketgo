@@ -31,9 +31,12 @@ class ModalBlock extends React.Component {
             breadQ: 0,
             breadS: "",
             formComment: "",
-            startDate: new Date()
+            startDate: new Date(),
+			validated: false
         }
         this.dateHandleChange = this.dateHandleChange.bind(this);
+		this.validateUserInfo = this.validateUserInfo.bind(this);
+		this.validateTaskInfo = this.validateTaskInfo.bind(this);
     }
 	
     resetState() {
@@ -95,6 +98,58 @@ class ModalBlock extends React.Component {
 		XLSX.writeFile(wb, "LeketUsers.xlsx")
 		
 	}
+	
+	handleChange = e => {
+    const { name, value } = e.target;
+
+    this.setState(prevState => ({
+      post: { ...prevState.post, [name]: value }
+    }));
+  };
+  
+    validateTaskInfo(event){
+		const form = event.currentTarget;
+		
+		let formPhone = document.getElementById('formPhone').value;
+		let isPhoneValid = /^\d{10}$/.test(formPhone);
+		console.log("phone length valid: " + isPhoneValid);
+		
+		if(!isPhoneValid) {
+			this.state.validated = false;
+		}
+		
+        if (!this.state.validated) {
+          console.log("nonvalid")
+        }
+        this.setState({ validated: true });
+	}
+	
+	validateUserInfo(event){
+		const form = event.currentTarget;
+		
+		let formEmail = document.getElementById('formEmail').value;
+		let isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(formEmail)
+        console.log("mail valid: " + isMailValid);
+		
+		let formTZ = document.getElementById('formTZ').value;
+		let isTZValid = /^\d{9}$/.test(formTZ);
+		// TODO add real TZ check
+		console.log("TZ length valid: " + isTZValid);
+		
+		let formPhone = document.getElementById('formPhone').value;
+		let isPhoneValid = /^\d{10}$/.test(formPhone);
+		console.log("phone length valid: " + isPhoneValid);
+		
+		if(!formEmail || !formTZ || !isPhoneValid) {
+			this.state.validated = false;
+		}
+		
+        if (!this.state.validated) {
+          console.log("nonvalid")
+        }
+        this.setState({ validated: true });
+		
+	}
 	  
     handleChange = (e) => {
         /* This method is only relevant
@@ -109,6 +164,17 @@ class ModalBlock extends React.Component {
            to the REPORT_FILL modal */
         let isValid = true;
         if (isValid) {
+			let re = /^\d+$/
+			let isMainCourseQDigit = re.test(this.state.mainCourseQ);
+			let isSideCourseQDigit = re.test(this.state.sideCourseQ);
+			let isPastriesQDigit = re.test(this.state.pastriesQ);
+			let isBreadQDigit = re.test(this.state.breadQ);
+			if(!isMainCourseQDigit || !isSideCourseQDigit || !isPastriesQDigit || !isBreadQDigit){
+				console.log("inhere!");
+				return false
+			}
+			console.log("outhere!");
+			
             let numOfFields = 0;
             let fields = [];
             if (this.state.mainCourseQ > 0) { numOfFields++; fields.push("mainCourseQ"); }
@@ -133,6 +199,7 @@ class ModalBlock extends React.Component {
                 data["foodContainerQuantity" + (i + 1)] = this.state[fields[i]]
             }
             setTaskReport(this.props.modal.entries.id, data)
+			return true;
         }
     }
 
@@ -327,10 +394,13 @@ class ModalBlock extends React.Component {
                     {
                         onClick: () => {
                             this.props.dispatch({ type: 'CLOSE_MODAL' });
-                            this.verifyValuesForReport(modal);
-                            this.resetState();
-                            getTaskReports(this.props.dispatch, this.props.userData.uid)                        },
-                            variant: 'primary',
+                            let verified = this.verifyValuesForReport(modal);
+                            if(verified){
+								this.resetState();
+								getTaskReports(this.props.dispatch, this.props.userData.uid)
+							}
+						},
+                        variant: 'primary',
                         text: 'שליחה'
                     },
                     {
@@ -410,8 +480,62 @@ class ModalBlock extends React.Component {
             case 'ADD_USER':
                 /* For adding a volunteer (Admins only) */
                 title = 'הוספת מתנדב';
-                body = <span></span>;
+                body = (
+                    <Form noValidate
+                            validated={this.state.validated}>
+                        <Form.Row>
+                            <Form.Group as={Col}>
+                                <Form.Label>שם פרטי</Form.Label><br />
+								<Form.Control/>
+                            </Form.Group>
+                            <Form.Group as={Col}>
+                                <Form.Label>שם משפחה</Form.Label><br />
+								<Form.Control/>
+							</Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col}>
+                                <Form.Label>כתובת</Form.Label>
+								<Form.Control
+								/>
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+						    <Form.Group as={Col} controlId="formTZ">
+                                <Form.Label>תעודת זהות</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+							<Form.Group as={Col}>
+                                <Form.Label>אזור</Form.Label>
+								<Form.Control as="select">
+									<option>שרון</option>
+                                </Form.Control>
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="formEmail">
+                                <Form.Label>מייל</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+                            <Form.Group as={Col} controlId="formPhone">
+                                <Form.Label>טלפון</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+                        </Form.Row>
+						<Form.Row>
+                            <Form.Group as={Col}>
+                                <Form.Label>הערות</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+                        </Form.Row>
+                    </Form>
+                );
                 buttons = [
+                    {
+                        onClick: e => this.validateUserInfo(e),
+                        variant: 'primary',
+                        text: 'הוספה'
+                    },
                     {
                         onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
                         variant: 'secondary',
@@ -435,7 +559,8 @@ class ModalBlock extends React.Component {
                 let user = modal.entries;
                 title = 'עריכת פרטי מתנדב';
                 body =
-                        <Form>
+                        <Form noValidate
+                            validated={this.state.validated}>
                             <Form.Row>
                                 <Form.Group as={Col}>
                                     <Form.Label>שם פרטי</Form.Label>
@@ -449,7 +574,7 @@ class ModalBlock extends React.Component {
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col}>
+                                <Form.Group as={Col} controlId="formTZ">
                                     <Form.Label>תעודת זהות</Form.Label>
                                     <Form.Control value={user.tz} />
                                 </Form.Group>
@@ -465,13 +590,13 @@ class ModalBlock extends React.Component {
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col}>
+                                <Form.Group as={Col} controlId="formEmail">
                                     <Form.Label>כתובת דואר אלקטרוני</Form.Label>
                                     <Form.Control type="email" value={user.email}/>
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col}>
+                                <Form.Group as={Col} controlId="formPhone">
                                     <Form.Label>מספר טלפון</Form.Label>
                                     <Form.Control type="email" value={user.phone}/>
                                 </Form.Group>
@@ -489,7 +614,10 @@ class ModalBlock extends React.Component {
                         </Form>;
                 buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: e => {
+							this.validateUserInfo(e);
+							this.props.dispatch({ type: 'CLOSE_MODAL' })
+							},
                         variant: 'primary',
                         text: 'שליחה'
                     },
@@ -550,7 +678,8 @@ class ModalBlock extends React.Component {
                 /* For adding a task (Admins only) */
                 title = 'הוספת איסוף';
                 body = (
-                    <Form>
+                    <Form noValidate
+                        validated={this.state.validated}>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>תאריך</Form.Label><br />
@@ -584,7 +713,7 @@ class ModalBlock extends React.Component {
                                 <Form.Label>שם איש קשר</Form.Label>
                                 <Form.Control />
                             </Form.Group>
-                            <Form.Group as={Col}>
+                            <Form.Group as={Col} controlId="formPhone">
                                 <Form.Label>טלפון איש קשר</Form.Label>
                                 <Form.Control />
                             </Form.Group>
@@ -593,7 +722,10 @@ class ModalBlock extends React.Component {
                 );
                 buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+					onClick: e => {
+						this.validateTaskInfo(e),
+						this.props.dispatch({ type: 'CLOSE_MODAL' })
+					},
                         variant: 'primary',
                         text: 'הוספה'
                     },
@@ -647,7 +779,7 @@ class ModalBlock extends React.Component {
                                 <Form.Label>שם איש קשר</Form.Label>
                                 <Form.Control value={task['contact name']}/>
                             </Form.Group>
-                            <Form.Group as={Col}>
+                            <Form.Group as={Col} controlId="formPhone">
                                 <Form.Label>טלפון איש קשר</Form.Label>
                                 <Form.Control value={task['contact number']}/>
                             </Form.Group>
@@ -656,7 +788,10 @@ class ModalBlock extends React.Component {
                     );
                     buttons = [
                         {
-                            onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                            onClick: e => {
+								this.validateTaskInfo(e);
+								this.props.dispatch({ type: 'CLOSE_MODAL' })
+							},
                             variant: 'primary',
                             text: 'עריכה'
                         },
