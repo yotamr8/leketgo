@@ -62,7 +62,10 @@ const reducer = (state = initialState, action) => {
         case 'PUSH_TOAST':
             {
             let newToasts = [...state.toasts];
+            let date = new Date();
+            let timestamp = date.getTime();
             newToasts.push({
+                id: timestamp,
                 title: action.title,
                 body: action.body,
                 icon: (action.icon ? action.icon : ''),
@@ -73,7 +76,8 @@ const reducer = (state = initialState, action) => {
         case 'DISMISS_TOAST':
             {
                 let newToasts = [...state.toasts];
-                newToasts = newToasts.splice(action.index, 1);
+                let toastToDis = newToasts.findIndex((toast) => action.timestamp == toast.timestamp);
+                newToasts = newToasts.splice(toastToDis, 1);
                 return { ...state, toasts: newToasts};
             }
         default:

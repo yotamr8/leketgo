@@ -13,7 +13,7 @@ class ToastBlock extends React.Component {
 
     handleClose() {
         this.setState({show: false});
-        setTimeout(() => this.props.dispatch({ type: 'DISMISS_TOAST', index: this.props.key }), 2000);
+        setTimeout(() => this.props.dispatch({ type: 'DISMISS_TOAST', timestamp: this.props.toast }), 2000);
     }
 
     componentDidMount() {
@@ -22,14 +22,16 @@ class ToastBlock extends React.Component {
 
     render() {
         return ( 
-            <Toast key={this.props.key} onClose={this.handleClose} show={this.state.show} delay={this.props.toast.delay} autohide>
-                        <Toast.Header>
-                        {/* <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" /> */}
-                        <strong className="mr-auto">{this.props.toast.title}</strong>
-                        {/* <small>just now</small> */}
-                        </Toast.Header>
-                        <Toast.Body>{this.props.toast.body}</Toast.Body>
-            </Toast>);
+            <div className='mb-2' style={{'display': this.state.show ? 'block' : 'none'}}>
+                <Toast key={this.props.key} onClose={this.handleClose} show={this.state.show} delay={this.props.toast.delay} autohide>
+                            <Toast.Header>
+                            {/* <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" /> */}
+                            <strong className="mr-auto">{this.props.toast.title}</strong>
+                            {/* <small>just now</small> */}
+                            </Toast.Header>
+                            <Toast.Body>{this.props.toast.body}</Toast.Body>
+                </Toast>
+            </div>);
     }
 }
 export default connect(state => state)(ToastBlock);

@@ -172,6 +172,15 @@ class Entry extends React.Component {
                     }
                 ];
                 break;
+                case 'adminUsersDeactivated':
+                        buttons = [
+                            {
+                                onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ACTIVATE_USER', entries: this.props.entry}),
+                                variant: 'outline-primary',
+                                text: <span><i className="fas fa-history"></i>הפעלת חשבון</span>
+                            },
+                        ];
+                        break;
             case 'adminTasks':
                 buttons = [
                     {
@@ -273,6 +282,27 @@ class Entry extends React.Component {
                                     </span>
                                     </td>
                                     );
+                                    case 'adminUsersDeactivated':
+                                            return (
+                                            <td className="align-middle" key={column}>
+                                            <span style={{whiteSpace: 'nowrap'}}>
+                                                <Dropdown width='200'>
+                                                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                                        פעולות
+                                                    </Dropdown.Toggle>
+                                                    <Dropdown.Menu>
+                                                    {buttons.map((button) => {
+                                                    return (
+                                                        <Dropdown.Item key={button.text} onClick={button.onClick}>
+                                                        {button.text}
+                                                        </Dropdown.Item>
+                                                        );
+                                                    })}
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+                                            </span>
+                                            </td>
+                                            );
                                 case 'adminTasks':
                                         return <td className="align-middle" key={column}>
                                         <span style={{whiteSpace: 'nowrap'}}>

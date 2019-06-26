@@ -9,13 +9,13 @@ class Toasts extends React.Component {
     render() {
         return (
             <div
-            aria-live="assertive"
+            aria-live="polite"
             aria-atomic="true"
             style={{
               position: 'relative',
               left: '20px',
-              top: '600px',
-              zIndex: '2000'
+              top: '80px',
+              zIndex: '2000',
             }}
           >
             <div

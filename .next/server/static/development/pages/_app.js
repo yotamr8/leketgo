@@ -145,7 +145,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\\ModalBlock.js";
+var _jsxFileName = "C:\\Users\\baram\\Git\\LeketGo\\components\\ModalBlock.js";
 
 /* ModalBlock
  * This component is responsible for any modal window in the app,
@@ -2434,7 +2434,6 @@ function (_React$Component) {
           break;
 
         case 'TASK_STATUS':
-<<<<<<< HEAD
           {
             title = 'סטטוס';
             var _task = modal.entries;
@@ -2561,28 +2560,6 @@ function (_React$Component) {
             }];
             break;
           }
-=======
-          title = 'סטטוס';
-          body = react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("div", {
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 1002
-            },
-            __self: this
-          }, "\u05D2\u05D5\u05E3 \u05D4\u05E1\u05D8\u05D8\u05D5\u05E1");
-          buttons = [{
-            onClick: function onClick() {
-              _this4.resetState();
-
-              _this4.props.dispatch({
-                type: 'CLOSE_MODAL'
-              });
-            },
-            variant: 'secondary',
-            text: 'ביטול'
-          }];
-          break;
->>>>>>> fe69567122d8aa902e3c7be5bfc99a94f5174397
 
         /*  case 'ADD_TASK_CSV':                            TODO remove?               
               title = 'הוספת איסופים מקובץ';
@@ -2602,11 +2579,7 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("h2", {
             __source: {
               fileName: _jsxFileName,
-<<<<<<< HEAD
               lineNumber: 1058
-=======
-              lineNumber: 1031
->>>>>>> fe69567122d8aa902e3c7be5bfc99a94f5174397
             },
             __self: this
           }, "\u05DC\u05D7\u05E5 \u05DB\u05D3\u05D9 \u05DC\u05D9\u05D9\u05E6\u05D0 \u05D3\u05D5\u05D7.");
@@ -2632,11 +2605,7 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("h2", {
             __source: {
               fileName: _jsxFileName,
-<<<<<<< HEAD
               lineNumber: 1077
-=======
-              lineNumber: 1050
->>>>>>> fe69567122d8aa902e3c7be5bfc99a94f5174397
             },
             __self: this
           }, "\u05DC\u05D7\u05E5 \u05DB\u05D3\u05D9 \u05DC\u05D9\u05D9\u05E6\u05D0 \u05D3\u05D5\u05D7.");
@@ -2669,52 +2638,32 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-<<<<<<< HEAD
           lineNumber: 1096
-=======
-          lineNumber: 1069
->>>>>>> fe69567122d8aa902e3c7be5bfc99a94f5174397
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_13__["Modal"].Header, {
         closeButton: true,
         __source: {
           fileName: _jsxFileName,
-<<<<<<< HEAD
           lineNumber: 1101
-=======
-          lineNumber: 1074
->>>>>>> fe69567122d8aa902e3c7be5bfc99a94f5174397
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_13__["Modal"].Title, {
         __source: {
           fileName: _jsxFileName,
-<<<<<<< HEAD
           lineNumber: 1102
-=======
-          lineNumber: 1075
->>>>>>> fe69567122d8aa902e3c7be5bfc99a94f5174397
         },
         __self: this
       }, title)), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_13__["Modal"].Body, {
         __source: {
           fileName: _jsxFileName,
-<<<<<<< HEAD
           lineNumber: 1104
-=======
-          lineNumber: 1077
->>>>>>> fe69567122d8aa902e3c7be5bfc99a94f5174397
         },
         __self: this
       }, body), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_13__["Modal"].Footer, {
         __source: {
           fileName: _jsxFileName,
-<<<<<<< HEAD
           lineNumber: 1107
-=======
-          lineNumber: 1080
->>>>>>> fe69567122d8aa902e3c7be5bfc99a94f5174397
         },
         __self: this
       }, buttons.map(function (button) {
@@ -2724,11 +2673,7 @@ function (_React$Component) {
           onClick: button.onClick,
           __source: {
             fileName: _jsxFileName,
-<<<<<<< HEAD
             lineNumber: 1110
-=======
-            lineNumber: 1083
->>>>>>> fe69567122d8aa902e3c7be5bfc99a94f5174397
           },
           __self: this
         }, button.text);
@@ -2774,7 +2719,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\\ToastBlock.js";
+var _jsxFileName = "C:\\Users\\baram\\Git\\LeketGo\\components\\ToastBlock.js";
 
 
 
@@ -2809,7 +2754,7 @@ function (_React$Component) {
       setTimeout(function () {
         return _this2.props.dispatch({
           type: 'DISMISS_TOAST',
-          index: _this2.props.key
+          timestamp: _this2.props.toast
         });
       }, 2000);
     }
@@ -2827,7 +2772,17 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Toast"], {
+      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
+        className: "mb-2",
+        style: {
+          'display': this.state.show ? 'block' : 'none'
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 25
+        },
+        __self: this
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Toast"], {
         key: this.props.key,
         onClose: this.handleClose,
         show: this.state.show,
@@ -2835,29 +2790,29 @@ function (_React$Component) {
         autohide: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 25
+          lineNumber: 26
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Toast"].Header, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 26
+          lineNumber: 27
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("strong", {
         className: "mr-auto",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 28
+          lineNumber: 29
         },
         __self: this
       }, this.props.toast.title)), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["Toast"].Body, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 31
+          lineNumber: 32
         },
         __self: this
-      }, this.props.toast.body));
+      }, this.props.toast.body)));
     }
   }]);
 
@@ -2894,7 +2849,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\\Toasts.js";
+var _jsxFileName = "C:\\Users\\baram\\Git\\LeketGo\\components\\Toasts.js";
 
 
 
@@ -2914,12 +2869,12 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
-        "aria-live": "assertive",
+        "aria-live": "polite",
         "aria-atomic": "true",
         style: {
           position: 'relative',
           left: '20px',
-          top: '600px',
+          top: '80px',
           zIndex: '2000'
         },
         __source: {
@@ -4986,7 +4941,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\pages\\_app.js";
+var _jsxFileName = "C:\\Users\\baram\\Git\\LeketGo\\pages\\_app.js";
 
 
 
@@ -5108,7 +5063,10 @@ var reducer = function reducer() {
       {
         var newToasts = Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_8__["default"])(state.toasts);
 
+        var date = new Date();
+        var timestamp = date.getTime();
         newToasts.push({
+          id: timestamp,
           title: action.title,
           body: action.body,
           icon: action.icon ? action.icon : '',
@@ -5123,7 +5081,11 @@ var reducer = function reducer() {
       {
         var _newToasts = Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_8__["default"])(state.toasts);
 
-        _newToasts = _newToasts.splice(action.index, 1);
+        var toastToDis = _newToasts.findIndex(function (toast) {
+          return action.timestamp == toast.timestamp;
+        });
+
+        _newToasts = _newToasts.splice(toastToDis, 1);
         return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_9__["default"])({}, state, {
           toasts: _newToasts
         });
@@ -5177,32 +5139,32 @@ function (_App) {
       return react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(next_app__WEBPACK_IMPORTED_MODULE_13__["Container"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 116
+          lineNumber: 120
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_12__["Provider"], {
         store: store,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 117
+          lineNumber: 121
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_ModalBlock_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 118
+          lineNumber: 122
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_Toasts_js__WEBPACK_IMPORTED_MODULE_16__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 119
+          lineNumber: 123
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, pageProps, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 120
+          lineNumber: 124
         },
         __self: this
       }))));
