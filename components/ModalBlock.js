@@ -121,7 +121,7 @@ class ModalBlock extends React.Component {
     verifyValuesForReport() {
         /* This method is only relevant
            to the REPORT_FILL modal */
-        let isValid = true;
+        let isValid = true; // TODO add logic to validation
         if (isValid) {
             let numOfFields = 0;
             let fields = [];
@@ -190,7 +190,10 @@ class ModalBlock extends React.Component {
                 );
                 buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => {
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                            console.log(modal.entries)
+                        },
                         variant: 'secondary',
                         text: 'סגירה'
                     }];
@@ -200,17 +203,38 @@ class ModalBlock extends React.Component {
                  * We still need to review this and adjust
                  * according to the feedback we received.
                  */
+                console.log(modal.entries)
+                let options = { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric' };
+                var succeeded = modal.entries.succeeded.map((task) =>
+                    <li>{task.name} - {task.timestamp.toDate().toLocaleDateString('he-IL', options)}</li>
+                );
+                var failed = modal.entries.failed.map((task) =>
+                    <li>{task.name} - { task.timestamp.toDate().toLocaleDateString('he-IL', options)}</li>
+                );
+                console.log(succeeded)
                 title = 'כשלון בשיבוץ האיסופים';
                 body = (
                     <span>
-                    {Object.keys(modal.entries).length} שיבוץ האיסופים נכשל! אנא נסה להשתבץ לאיסופים אחרים.
+                        השיבוץ לאיסופים שבחרת נכשל!
+                        לפניך רשימת המשימות שניתן להשתבץ אליהם:
+                        <ul>{succeeded}</ul>
+                        ורשימת המשימות שלא ניתן להשתבץ אליהם:
+                        <ul>{failed}</ul>                        
                     </span>
-                );
+                );  
                 buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ASSIGN_TASKS_SUCCESS', entries: modal.entries.succeeded }),
                         variant: 'secondary',
-                        text: 'סגירה'
+                        text: 'שבץ מה שאפשר'
+                    },
+                    {
+                        onClick: () => {    /* cancel the assignments */
+                            modal.entries.succeeded.forEach((task) => { setUndoTask(this.props, task.id) } )                             
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                        },
+                        variant: 'primary',
+                        text: 'בטל הכל'
                     }];
                 break;
             case 'ASSIGN_TASKS_SUCCESS':
@@ -422,9 +446,8 @@ class ModalBlock extends React.Component {
                 buttons = [
                     {
                         onClick: () => {
-                            setUndoTask(modal.entries.id)
-                            this.props.dispatch({ type: 'CLOSE_MODAL' })
-                            refresh4User(this.props.dispatch, this.props.userData.region, this.props.userData.uid); //TODO put async in dbAction
+                            setUndoTask(this.props, modal.entries.id)
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })                            
                         },
                         variant: 'danger',
                         text: 'הסרה'
@@ -631,12 +654,14 @@ class ModalBlock extends React.Component {
                                 firstName: this.state.firstName,
                                 lastName: this.state.lastName,
                                 tz: this.state.tz,
-                                region: this.state.region,
-                                email: this.state.email,
+                                region: this.state.region,                                
                                 phone: this.state.phone,
                                 address: this.state.address,
                                 city: this.state.city,
                                 comment: this.state.comment                             
+                            }
+                            if (user.email != this.state.email) {   // so email in auth wouldn't be updated for nothing
+                                changes.email = this.state.email
                             }
                             editUser(this.props, user.uid, changes)    
                             this.resetState()
