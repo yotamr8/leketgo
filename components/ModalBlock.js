@@ -262,11 +262,11 @@ class ModalBlock extends React.Component {
                  */
                 console.log(modal.entries)
                 let options = { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric' };
-                var succeeded = modal.entries.succeeded.map((task) =>
-                    <li>{task.name} - {task.timestamp.toDate().toLocaleDateString('he-IL', options)}</li>
+                var succeeded = modal.entries.succeeded.map((task, index) =>
+                    <li key={index}>{task.name} - {task.timestamp.toDate().toLocaleDateString('he-IL', options)}</li>
                 );
-                var failed = modal.entries.failed.map((task) =>
-                    <li>{task.name} - { task.timestamp.toDate().toLocaleDateString('he-IL', options)}</li>
+                var failed = modal.entries.failed.map((task, index) =>
+                    <li key={index}>{task.name} - { task.timestamp.toDate().toLocaleDateString('he-IL', options)}</li>
                 );
                 console.log(succeeded)
                 title = 'כשלון בשיבוץ האיסופים';
@@ -997,11 +997,37 @@ class ModalBlock extends React.Component {
                         }];
                     break;
             case 'TASK_STATUS':
+                {
                 title = 'סטטוס';
-                body = (
-                    <div>גוף הסטטוס</div>
-                );
-                buttons = {
+                let task = modal.entries;
+                let isCollected = task.collected;
+                let isFilled = task.reportFilled;
+                let uid = task.volunteerUid;
+                let user = null;
+                if (uid) {
+                    user = this.props.users.find((user) => user.uid == uid);
+                }
+                body =
+                    (
+                        <Form noValidate
+                        validated={this.state.validated}>
+                        <Form.Row>
+                            <Form.Group as={Col}>
+                                <Form.Label>שובץ</Form.Label><br />
+                                <FormControl type="text" value={uid ? user.firstName + ' ' + user.lastName : 'טרם'} disabled/>
+                            </Form.Group>
+                            <Form.Group as={Col}>
+                                <Form.Label>בוצע</Form.Label><br />
+                                <FormControl type="text" value={isCollected ? 'כן' : 'טרם'} disabled/>
+                            </Form.Group>
+                            <Form.Group as={Col}>
+                                <Form.Label>מושב</Form.Label><br />
+                                <FormControl type="text" value={isFilled ? 'כן' : 'טרם'} disabled/>
+                            </Form.Group>
+                        </Form.Row>
+                    </Form>
+                    );
+                buttons = [
                     {
                         onClick: () => {
                             this.resetState()
@@ -1010,9 +1036,10 @@ class ModalBlock extends React.Component {
                         variant: 'secondary',
                         text: 'ביטול'
                     }
-                }
+                ]
 
                 break;
+            }
           /*  case 'ADD_TASK_CSV':                            TODO remove?               
                 title = 'הוספת איסופים מקובץ';
                 body = <span></span>;
