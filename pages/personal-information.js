@@ -4,6 +4,7 @@ import {Form, Button, Col, Navbar} from 'react-bootstrap'
 import Header from '../components/Header.js'
 import checkAuthAndRefresh from '../dbActions/checkAuth'
 import Loading from './loading'
+import editPersonal from '../dbActions/editPersonal'
 
 class Personal_information extends Component {
     constructor(...args) {
@@ -41,6 +42,8 @@ class Personal_information extends Component {
           event.stopPropagation();
         }
         this.setState({ validated: true });
+
+        editPersonal
       }
 
     render() {

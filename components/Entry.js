@@ -142,7 +142,7 @@ class Entry extends React.Component {
                         text: <span><i className={"far fa-calendar-check fa-fw "+ nm}></i>{this.props.tableTasksCardView ? <br/> : ''}דיווח</span>
                     },
                     {
-                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE' }),
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE', entries: this.props.entry  }),
                         variant: 'outline-secondary',
                         text: <span><i className={"far fa-calendar-times fa-fw "+ nm}></i>{this.props.tableTasksCardView ? <br/> : ''}לא בוצע</span>
                     },
@@ -156,7 +156,7 @@ class Entry extends React.Component {
                         text: <span><i className="far fa-edit fa-fw"></i>עריכה</span>
                     },
                     {
-                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'RESET_PASSWORD', entries: this.props.entry}),
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'CHANGE_PASSWORD', entries: this.props.entry}),
                         variant: 'outline-secondary',
                         text: <span><i className="fas fa-unlock-alt fa-fw"></i>איפוס סיסמה</span>
                     },

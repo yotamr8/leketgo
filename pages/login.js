@@ -18,9 +18,7 @@ class Login extends Component {
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
-        })
-        console.log(this.state.email);
-        console.log(this.state.password);
+        })        
     }
 
     componentWillMount() {
@@ -41,6 +39,20 @@ class Login extends Component {
                     event.stopPropagation();
                     this.props.dispatch({ type: 'LOGIN_ERR', msg: err.message });
                 });
+    }
+
+    resetPassword = (e) => {
+        var auth = fire.auth();
+        var emailAddress = this.state.email;
+
+        auth.sendPasswordResetEmail(emailAddress).then(() => {
+            console.log("mail sent")
+            // TODO open modal - a mail has been sent to the email: this.state.email with a link. if you do not want to reset your password - dont do anything.
+        }).catch((err) => {
+            console.log("not sent", err)
+            this.props.dispatch({ type: 'LOGIN_ERR', msg: err.message }); // this is done so the error message appears in the alert below            
+        });
+        
     }
 
     render() {
@@ -68,7 +80,7 @@ class Login extends Component {
                                             <Form.Label>סיסמה</Form.Label>
                                             <Form.Control type="password" id="password" onChange={this.handleChange} />
                                         </Form.Group>
-                                        <p><Link href="#">שכחתי סיסמה</Link></p>
+                                        <p onClick={this.resetPassword}><Link href="#">שכחתי סיסמה</Link></p>
                                         <Button type="submit" onClick={this.handleSubmit} variant="primary">
                                             התחברות
                                         </Button>

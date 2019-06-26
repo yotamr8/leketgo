@@ -9,48 +9,63 @@
 import Link from 'next/link'
 import React from 'react'
 import { connect } from 'react-redux'
-import {Modal, ModalDialog, Button, Form, FormControl, Col, InputGroup} from 'react-bootstrap'
+import { Modal, ModalDialog, Button, Form, FormControl, Col, InputGroup } from 'react-bootstrap'
 import setUndoTask from '../dbActions/setUndoTask'
 import refresh4User from '../dbActions/refresh4User'
 import setTaskReport from '../dbActions/setTaskReport'
 import getTaskReports from '../dbActions/getTaskReports'
 import setTaskCollected from '../dbActions/setCollected'
+import addTask from '../dbActions/addTask'
+import editTask from '../dbActions/editTask'
+import deleteTask from '../dbActions/deleteTask'
+import addUser from '../dbActions/addUser'
+import editUser from '../dbActions/editUser'
+import editUserAuth from '../dbActions/editUserAuth'
 import XLSX from 'xlsx'
 
+const initialState = {
+    mainCourseQ: 0,
+    sideCourseQ: 0,
+    pastriesQ: 0,
+    pastriesS: "",
+    breadQ: 0,
+    breadS: "",
+    startDate: new Date(),
+    nonCollectedReason: "",
+    date: null,
+    time: null,
+    city: "",
+    address: "",
+    name: "",
+    contact: "",
+    contactNumber: "",
+    comment: "",
+    phone: "",
+    email: "",
+    tz: "",
+    firstName: "",
+    lastName: "",
+    region: "",
+    password : "",
+	validated: false
+}
 
 class ModalBlock extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {
-            /* The ModalBlock state properties are only
-               relevant to the REPORT_FILL modal */
-            mainCourseQ: 0,
-            sideCourseQ: 0,
-            pastriesQ: 0,
-            pastriesS: "",
-            breadQ: 0,
-            breadS: "",
-            formComment: "",
-            startDate: new Date(),
-			validated: false
-        }
+        this.state = initialState;
+        /* The ModalBlock state properties are only
+            relevant to the REPORT_FILL modal */                                
         this.dateHandleChange = this.dateHandleChange.bind(this);
 		this.validateUserInfo = this.validateUserInfo.bind(this);
 		this.validateTaskInfo = this.validateTaskInfo.bind(this);
+		this.handleChange = this.handleChange.bind(this);
     }
 	
     resetState() {
         /* This method is only relevant
            to the REPORT_FILL modal */
-        this.setState({
-            mainCourseQ: 0,
-            sideCourseQ: 0,
-            pastriesQ: 0,
-            pastriesS: "",
-            breadQ: 0,
-            breadS: "",
-            formComment: ""
-        })
+        this.setState(initialState)
     }
 
     dateHandleChange(date) {
@@ -107,47 +122,36 @@ class ModalBlock extends React.Component {
     }));
   };
   
-    validateTaskInfo(event){
-		const form = event.currentTarget;
+    validateTaskInfo(){
 		
-		let formPhone = document.getElementById('formPhone').value;
-		let isPhoneValid = /^\d{10}$/.test(formPhone);
+		let isPhoneValid = /^\d{10}$/.test(this.state.contactNumber);
 		console.log("phone length valid: " + isPhoneValid);
 		
-		if(!isPhoneValid) {
-			this.state.validated = false;
-		}
-		
-        if (!this.state.validated) {
+        if (!isPhoneValid) {
           console.log("nonvalid")
+		  return false;
         }
-        this.setState({ validated: true });
+		return true;
 	}
 	
-	validateUserInfo(event){
-		const form = event.currentTarget;
+	validateUserInfo(){
 		
-		let formEmail = document.getElementById('formEmail').value;
-		let isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(formEmail)
+		let isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.state.email)
         console.log("mail valid: " + isMailValid);
 		
-		let formTZ = document.getElementById('formTZ').value;
-		let isTZValid = /^\d{9}$/.test(formTZ);
+		let isTZValid = /^\d{9}$/.test(this.state.tz);
 		// TODO add real TZ check
 		console.log("TZ length valid: " + isTZValid);
 		
-		let formPhone = document.getElementById('formPhone').value;
-		let isPhoneValid = /^\d{10}$/.test(formPhone);
+		let isPhoneValid = /^\d{10}$/.test(this.state.phone);
 		console.log("phone length valid: " + isPhoneValid);
 		
-		if(!formEmail || !formTZ || !isPhoneValid) {
-			this.state.validated = false;
-		}
-		
-        if (!this.state.validated) {
+		if(!isMailValid || !isTZValid || !isPhoneValid) {
           console.log("nonvalid")
+		  return false;
         }
         this.setState({ validated: true });
+		return true;
 		
 	}
 	  
@@ -184,7 +188,7 @@ class ModalBlock extends React.Component {
             let data = {
                 reportFilled: true,
                 reportFieldNum: numOfFields,
-                reportComment: this.state.formComment,
+                reportComment: this.state.comment,
                 collected: true
             }
             let dic = {
@@ -198,8 +202,8 @@ class ModalBlock extends React.Component {
                 data["foodContainerType" + (i + 1)] = (fields[i] == "mainCourseQ" || fields[i] == "sideCourseQ") ? 'מיכלים' : (fields[i] == "pastriesQ") ? this.state.pastriesS : this.state.breadS;
                 data["foodContainerQuantity" + (i + 1)] = this.state[fields[i]]
             }
-            setTaskReport(this.props.modal.entries.id, data)
-			return true;
+
+            setTaskReport(this.props, this.props.modal.entries.id, data)           
         }
     }
 
@@ -298,7 +302,7 @@ class ModalBlock extends React.Component {
                     onClick: () => {
                         this.props.dispatch({ type: 'CLOSE_MODAL' })
                         setTaskCollected(modal.entries.id);
-                        refresh4User(this.props.dispatch, this.props.userData.region, this.props.userData.uid);
+                        refresh4User(this.props.dispatch, this.props.userData.region, this.props.userData.uid); //TODO put async in dbAction
                     },
                     variant: 'secondary',
                     text: 'מאוחר יותר'
@@ -384,27 +388,29 @@ class ModalBlock extends React.Component {
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>הערות נוספות</Form.Label>
-                        <Form.Control as="textarea" rows="3"
-                            id="formComment" onChange={this.handleChange}/>
+                                    <Form.Control as="textarea" rows="3"
+                                    id="comment" onChange={this.handleChange}/>
                             </Form.Group>
                         </Form.Row>
                     </Form>
                 );
                 buttons = [
                     {
-                        onClick: () => {
-                            this.props.dispatch({ type: 'CLOSE_MODAL' });
+                        onClick: () => {                            
                             let verified = this.verifyValuesForReport(modal);
-                            if(verified){
-								this.resetState();
-								getTaskReports(this.props.dispatch, this.props.userData.uid)
+							if(verified){
+								this.resetState();                            
+								this.props.dispatch({ type: 'CLOSE_MODAL' });
 							}
-						},
+                        },
                         variant: 'primary',
                         text: 'שליחה'
                     },
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => {
+                            this.resetState();                            
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                        },
                         variant: 'secondary',
                         text: 'סגירה'
                     }];
@@ -417,7 +423,8 @@ class ModalBlock extends React.Component {
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>מדוע לא בוצע האיסוף?</Form.Label>
-                                <Form.Control as="select">
+                                <Form.Control as="select" id="nonCollectedReason" onChange={this.handleChange}>
+                                    <option>בחר סיבה</option>
                                     <option>לא נותר מזון</option>
                                     <option>לא נעניתי</option>
                                     <option>סיבה אחרת</option>
@@ -427,14 +434,24 @@ class ModalBlock extends React.Component {
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>הערות נוספות</Form.Label>
-                                <Form.Control as="textarea" rows="3"/>
+                                <Form.Control as="textarea" rows="3" id="comment" onChange={this.handleChange}/>
                             </Form.Group>
                         </Form.Row>
                     </Form>
                 );
                 buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => {                            
+                            let data = {
+                                reportFilled: true,
+                                reportFieldNum: 0,
+                                reportComment: this.state.nonCollectedReason + ' - ' + this.state.comment,
+                                collected: true
+                            }
+                            setTaskReport(this.props, this.props.modal.entries.id, data)
+                            this.resetState();                            
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                        },
                         variant: 'primary',
                         text: 'שליחה'
                     },
@@ -466,7 +483,7 @@ class ModalBlock extends React.Component {
                         onClick: () => {
                             setUndoTask(modal.entries.id)
                             this.props.dispatch({ type: 'CLOSE_MODAL' })
-                            refresh4User(this.props.dispatch, this.props.userData.region, this.props.userData.uid);
+                            refresh4User(this.props.dispatch, this.props.userData.region, this.props.userData.uid); //TODO put async in dbAction
                         },
                         variant: 'danger',
                         text: 'הסרה'
@@ -477,149 +494,17 @@ class ModalBlock extends React.Component {
                         text: 'ביטול'
                     }];
                 break;
-            case 'ADD_USER':
-                /* For adding a volunteer (Admins only) */
-                title = 'הוספת מתנדב';
-                body = (
-                    <Form noValidate
-                            validated={this.state.validated}>
-                        <Form.Row>
-                            <Form.Group as={Col}>
-                                <Form.Label>שם פרטי</Form.Label><br />
-								<Form.Control/>
-                            </Form.Group>
-                            <Form.Group as={Col}>
-                                <Form.Label>שם משפחה</Form.Label><br />
-								<Form.Control/>
-							</Form.Group>
-                        </Form.Row>
-                        <Form.Row>
-                            <Form.Group as={Col}>
-                                <Form.Label>כתובת</Form.Label>
-								<Form.Control
-								/>
-                            </Form.Group>
-                        </Form.Row>
-                        <Form.Row>
-						    <Form.Group as={Col} controlId="formTZ">
-                                <Form.Label>תעודת זהות</Form.Label>
-                                <Form.Control />
-                            </Form.Group>
-							<Form.Group as={Col}>
-                                <Form.Label>אזור</Form.Label>
-								<Form.Control as="select">
-									<option>שרון</option>
-                                </Form.Control>
-                            </Form.Group>
-                        </Form.Row>
-                        <Form.Row>
-                            <Form.Group as={Col} controlId="formEmail">
-                                <Form.Label>מייל</Form.Label>
-                                <Form.Control />
-                            </Form.Group>
-                            <Form.Group as={Col} controlId="formPhone">
-                                <Form.Label>טלפון</Form.Label>
-                                <Form.Control />
-                            </Form.Group>
-                        </Form.Row>
-						<Form.Row>
-                            <Form.Group as={Col}>
-                                <Form.Label>הערות</Form.Label>
-                                <Form.Control />
-                            </Form.Group>
-                        </Form.Row>
-                    </Form>
-                );
+            case 'REMOVE_TASK':
+                title = 'מחיקת משימה';
+                body = 'לחיצה על "מחיקה", תמחוק את המשימה לצמיתות.';
                 buttons = [
                     {
-                        onClick: e => this.validateUserInfo(e),
-                        variant: 'primary',
-                        text: 'הוספה'
-                    },
-                    {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
-                        variant: 'secondary',
-                        text: 'סגירה'
-                    }];
-                break;
-            case 'ADD_USER_CSV':
-                /* For adding multiple volunteers via uploading a .CSV file (Admins only) */
-                title = 'הוספת מתנדבים מקובץ';
-                body = <span></span>;
-                buttons = [
-                    {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
-                        variant: 'secondary',
-                        text: 'סגירה'
-                    }];
-                break;
-            case 'EDIT_USER':
-                {
-                /* For editing volunteer's details (Admins only) */
-                let user = modal.entries;
-                title = 'עריכת פרטי מתנדב';
-                body =
-                        <Form noValidate
-                            validated={this.state.validated}>
-                            <Form.Row>
-                                <Form.Group as={Col}>
-                                    <Form.Label>שם פרטי</Form.Label>
-                                    <Form.Control value={user.firstName} />
-                                </Form.Group>
-                            </Form.Row>
-                            <Form.Row>
-                                <Form.Group as={Col}>
-                                    <Form.Label>שם משפחה</Form.Label>
-                                    <Form.Control value={user.lastName} />
-                                </Form.Group>
-                            </Form.Row>
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="formTZ">
-                                    <Form.Label>תעודת זהות</Form.Label>
-                                    <Form.Control value={user.tz} />
-                                </Form.Group>
-                            </Form.Row>
-                            <Form.Row>
-                                <Form.Group as={Col}>
-                                    <Form.Label>אזור איסוף</Form.Label>
-                                    <Form.Control as="select">
-                                        <option>ראשון לציון</option>
-                                        <option>רעננה</option>
-                                        <option>תל אביב</option>
-                                    </Form.Control>
-                                </Form.Group>
-                            </Form.Row>
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="formEmail">
-                                    <Form.Label>כתובת דואר אלקטרוני</Form.Label>
-                                    <Form.Control type="email" value={user.email}/>
-                                </Form.Group>
-                            </Form.Row>
-                            <Form.Row>
-                                <Form.Group as={Col} controlId="formPhone">
-                                    <Form.Label>מספר טלפון</Form.Label>
-                                    <Form.Control type="email" value={user.phone}/>
-                                </Form.Group>
-                            </Form.Row>
-                            <Form.Row>
-                                <Form.Group as={Col}>
-                                    <Form.Label>רחוב ומספר</Form.Label>
-                                    <Form.Control value={user.street} />
-                                </Form.Group>
-                                <Form.Group as={Col}>
-                                    <Form.Label>עיר מגורים</Form.Label>
-                                    <Form.Control value={user.city} />
-                                </Form.Group>
-                            </Form.Row>
-                        </Form>;
-                buttons = [
-                    {
-                        onClick: e => {
-							this.validateUserInfo(e);
-							this.props.dispatch({ type: 'CLOSE_MODAL' })
-							},
-                        variant: 'primary',
-                        text: 'שליחה'
+                        onClick: () => {
+                            deleteTask(this.props, modal.entries.id)
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })                            
+                        },
+                        variant: 'danger',
+                        text: 'מחיקה'
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
@@ -627,19 +512,228 @@ class ModalBlock extends React.Component {
                         text: 'ביטול'
                     }];
                 break;
+            case 'ADD_USER':
+                /* For adding a volunteer (Admins only) */
+                title = 'הוספת מתנדב';
+                body =  <Form noValidate
+                            validated={this.state.validated}>>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>שם פרטי</Form.Label>
+                                    <Form.Control id="firstName" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>שם משפחה</Form.Label>
+                                    <Form.Control id="lastName" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} controlId="formTZ">
+                                    <Form.Label>תעודת זהות</Form.Label>
+                                    <Form.Control id="tz" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>אזור איסוף</Form.Label>
+                                    <Form.Control as="select" id="region" onChange={this.handleChange} >
+                                        <option>בחר אזור</option>
+                                        <option>שרון</option>
+                                    </Form.Control>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} controlId="formEmail">
+                                    <Form.Label>כתובת דואר אלקטרוני</Form.Label>
+                                    <Form.Control type="email" id="email" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} controlId="formPhone">
+                                    <Form.Label>מספר טלפון</Form.Label>
+                                    <Form.Control id="phone" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>רחוב ומספר</Form.Label>
+                                    <Form.Control id="address" onChange={this.handleChange} />
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label>עיר מגורים</Form.Label>
+                                    <Form.Control id="city" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>הערה</Form.Label>
+                                    <Form.Control as="textarea" rows="3" id="comment" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
+                        </Form>;
+                buttons = [
+                    {
+                        onClick: () => {
+							let valid = this.validateUserInfo()
+							if(valid){
+                            let user = {
+                                firstName: this.state.firstName,
+                                lastName: this.state.lastName,
+                                tz: this.state.tz,
+                                region: this.state.region,
+                                email: this.state.email,
+                                phone: this.state.phone,
+                                address: this.state.address,
+                                city: this.state.city,
+                                comment: this.state.comment,
+                                disabled: false,
+                                admin: false
+                            }
+                            addUser(this.props, user)
+                            this.resetState()
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+							}
+                        },
+                        variant: 'primary',
+                        text: 'שליחה'
+                    },
+                    {
+                        onClick: () => {
+                            this.resetState()
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                        },
+                        variant: 'secondary',
+                        text: 'ביטול'
+                    }];
+                break;
+            case 'ADD_USER_CSV':
+                /* For adding multiple volunteers via uploading a .CSV file (Admins only) */
+                title = 'הוספת מתנדבים מקובץ';
+                body =  <span></span>;
+                buttons = [
+                    {
+                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        variant: 'secondary',
+                        text: 'סגירה'
+                    }];
+                break;
+            case 'EDIT_USER':                
+                /* For editing volunteer's details (Admins only) */
+                let user = modal.entries;
+                if (this.state.tz == "" && modal.isOpen) {  // if it is the first time rendering this form - otherwise goes into infinite loop
+                    this.setState({
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        tz: user.tz,
+                        region: user.region,
+                        email: user.email,
+                        phone: user.phone,
+                        address: user.address,
+                        city: user.city,
+                        comment: user.comment
+                    })
                 }
+                title = 'עריכת פרטי מתנדב';
+                body =
+                        <Form noValidate
+                            validated={this.state.validated}>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>שם פרטי</Form.Label>
+                                    <Form.Control value={this.state.firstName} id="firstName" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>שם משפחה</Form.Label>
+                                    <Form.Control value={this.state.lastName} id="lastName" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} controlId="formTZ">
+                                    <Form.Label>תעודת זהות</Form.Label>
+                                    <Form.Control value={this.state.tz} id="tz" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>אזור איסוף</Form.Label>
+                                    <Form.Control as="select" value={this.state.region} id="region" onChange={this.handleChange} >
+                                        <option>שרון</option>                                        
+                                    </Form.Control>
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} controlId="formEmail">
+                                    <Form.Label>כתובת דואר אלקטרוני</Form.Label>
+                                    <Form.Control type="email" value={this.state.email} id="email" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col} controlId="formPhone">
+                                    <Form.Label>מספר טלפון</Form.Label>
+                                    <Form.Control value={this.state.phone} id="phone" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>רחוב ומספר</Form.Label>
+                                    <Form.Control value={this.state.address} id="address" onChange={this.handleChange} />
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label>עיר מגורים</Form.Label>
+                                    <Form.Control value={this.state.city} id="city" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
+                        </Form>;
+                buttons = [
+                    {
+                        onClick: () => {
+							let valid = this.validateUserInfo();
+							if(valid){
+                            let changes = {
+                                firstName: this.state.firstName,
+                                lastName: this.state.lastName,
+                                tz: this.state.tz,
+                                region: this.state.region,
+                                email: this.state.email,
+                                phone: this.state.phone,
+                                address: this.state.address,
+                                city: this.state.city,
+                                comment: this.state.comment                             
+                            }
+                            editUser(this.props, user.uid, changes)    
+                            this.resetState()
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+							}
+                        },
+                        variant: 'primary',
+                        text: 'שליחה'
+                    },
+                    {
+                        onClick: () => {
+                            this.resetState()
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                        },
+                        variant: 'secondary',
+                        text: 'ביטול'
+                    }];
+                break;                
             case 'REMOVE_USER':
                 {
                 /* For deleting a user (Admins only) */
                 let user = modal.entries;
                 title = 'סגירת חשבון מתנדב';
-                body = `סגירת חשבון המתנדב ${user.firstName} ${user.lastName}: מתנדב שנמחק מהמערכת לא יוכל להתחבר. תיעוד הפעילות שלו יישמר וניתן יהיה להפעיל מחדש את המשתמש.`;
+                body = `סגירת חשבון המתנדב ${user.firstName} ${user.lastName}: מתנדב שייסגר חשבונו לא יוכל להתחבר. תיעוד הפעילות שלו יישמר וניתן יהיה להפעיל מחדש את המשתמש.`;
                 buttons = [
                     {
                         onClick: () => {
-                            setUndoTask(modal.entries.id)
-                            this.props.dispatch({ type: 'CLOSE_MODAL' })
-                            refresh4User(this.props.dispatch, this.props.userData.region, this.props.userData.uid);
+                            let changes = { disabled: true }
+                            editUserAuth(this.props, user.uid, changes)
+                            editUser(this.props, user.uid, changes)
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })                           
                         },
                         variant: 'danger',
                         text: 'סגירת חשבון'
@@ -651,24 +745,40 @@ class ModalBlock extends React.Component {
                     }];
                 break;
                 }
-            case 'RESET_PASSWORD':
+            case 'CHANGE_PASSWORD':
                 {
                     /* For deleting a user (Admins only) */
                     let user = modal.entries;
-                    title = 'איפוס סיסמה למתנדב';
-                    body = `איפוס הסיסמה למתנדב ${user.firstName} ${user.lastName}: יישלח מייל לכתובתו ${user.email} ודרכו יתבקש להזין סיסמה חדשה. יש לוודא עם המתנדב שכתובת המייל המוזנת במערכת היא אכן כתובתו הפעילה.`;
+                    title = 'שינוי סיסמה למתנדב';
+                    body = (
+                        <span>
+                            <span>הינך עומד לשנות את הסיסמה למתנדב {user.firstName} {user.lastName}.  יש לוודא עם המתנדב שהוא מכיר את הסיסמה החדשה.</span>                            
+                            < Form >
+                                <Form.Row>
+                                    <Form.Group as={Col}>
+                                        <br/><Form.Label>סיסמה חדשה</Form.Label><br />
+                                        <FormControl id="password" onChange={this.handleChange} />
+                                    </Form.Group>                           
+                                </Form.Row>
+                            </Form >
+                        </span>);
+     
                     buttons = [
                         {
                             onClick: () => {
-                                setUndoTask(modal.entries.id)
-                                this.props.dispatch({ type: 'CLOSE_MODAL' })
-                                refresh4User(this.props.dispatch, this.props.userData.region, this.props.userData.uid);
+                                let changes = { password: this.state.password}
+                                editUserAuth(this.props, user.uid, changes)
+                                this.resetState()
+                                this.props.dispatch({ type: 'CLOSE_MODAL' })                                
                             },
                             variant: 'danger',
                             text: 'איפוס סיסמה'
                         },
                         {
-                            onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                            onClick: () => {
+                                this.resetState()
+                                this.props.dispatch({ type: 'CLOSE_MODAL' })
+                            },
                             variant: 'secondary',
                             text: 'ביטול'
                         }];
@@ -683,126 +793,186 @@ class ModalBlock extends React.Component {
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>תאריך</Form.Label><br />
-                                <FormControl type="date"
-                                />
+                                <FormControl type="date" id="date" onChange={this.handleChange}
+                                />                                
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>שעה</Form.Label><br />
-                                <FormControl pattern="[0-9]{2}:[0-9]{2}" type="time"
+                                <FormControl pattern="[0-9]{2}:[0-9]{2}" type="time" id="time" onChange={this.handleChange}
                                 />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>עיר</Form.Label>
-                                <Form.Control />
+                                <Form.Control id="city" onChange={this.handleChange} />
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>רחוב ומספר</Form.Label>
-                                <Form.Control />
+                                <Form.Control id="address" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>ספק</Form.Label>
-                                <Form.Control />
+                                <Form.Control id="name" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>שם איש קשר</Form.Label>
-                                <Form.Control />
+                                <Form.Control id="contact" onChange={this.handleChange} />
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formPhone">
+                            <Form.Group as={Col} controlId="formLastName">
                                 <Form.Label>טלפון איש קשר</Form.Label>
-                                <Form.Control />
+                                <Form.Control id="contactNumber" onChange={this.handleChange} />
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col}>
+                                <Form.Label>הערות</Form.Label>
+                                <Form.Control as="textarea" rows="3" id="comment" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                     </Form>
                 );
                 buttons = [
                     {
-					onClick: e => {
-						this.validateTaskInfo(e),
-						this.props.dispatch({ type: 'CLOSE_MODAL' })
-					},
+                        onClick: () => { 
+							let valid = this.validateTaskInfo();
+							if(valid){					
+                            let data = {
+                                date: this.state.date,
+                                time: this.state.time,
+                                city: this.state.city,
+                                address: this.state.address,
+                                name: this.state.name,
+                                contact: this.state.contact,
+                                contactNumber: this.state.contactNumber,
+                                comment: this.state.comment                               
+                            }
+                            addTask(this.props.dispatch, this.props.userData.region, data)                            
+                            this.resetState()
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })  
+							}							
+                        },
                         variant: 'primary',
                         text: 'הוספה'
                     },
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => {
+                            this.resetState() 
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                        },
                         variant: 'secondary',
                         text: 'סגירה'
                     }];
                 break;
             case 'EDIT_TASK':
-                /* For adding a task (Admins only) */
-                let task = modal.entries;
+                /* For editnig a task (Admins only) */
+                let task = modal.entries;            
                 let date = task.timestamp.toDate();
                 let year = date.getFullYear();
-                let month = ('0' + date.getMonth()).slice(-2);
+                let month = ('0' + (date.getMonth() + 1)).slice(-2);
                 let day = ('0' + date.getDate()).slice(-2);
-                let time = date.getHours() + ':' + ('0'+date.getMinutes()).slice(-2);
+                let time = ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);                
+
+                if (this.state.date == null && modal.isOpen) {  // if it is the first time rendering this form - otherwise goes into infinite loop
+                    this.setState({
+                        date: year + '-' + month + '-' + day,//`${year}-${month}-${day}`,
+                        time: time,
+                        city: task.city,
+                        address: task.address,
+                        name: task.name,
+                        contact: task['contact name'],
+                        contactNumber: task['contact number'],
+                        comment: (task.comment != null) ? task.comment : "" // TODO default comment
+                    })
+                }
+
                 title = 'עריכת איסוף';
                 body = (
-                    <Form>
+                    <Form noValidate
+                        validated={this.state.validated}>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>תאריך</Form.Label><br />
-                                <FormControl type="date" value={`${year}-${month}-${day}`}
+                                <FormControl type="date" value={this.state.date} id="date" onChange={this.handleChange}
                                 />
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>שעה</Form.Label><br />
                                 <FormControl pattern="[0-9]{2}:[0-9]{2}" type="time"
-                                    value={time}/>
+                                    value={this.state.time} id="time" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>עיר</Form.Label>
-                                <Form.Control value={task.city}/>
+                                <Form.Control value={this.state.city} id="city" onChange={this.handleChange} />
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>רחוב ומספר</Form.Label>
-                                <Form.Control value={task.address}/>
+                                <Form.Control value={this.state.address} id="address" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>ספק</Form.Label>
-                                <Form.Control value={task.name}/>
+                                <Form.Control value={this.state.name} id="name" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>שם איש קשר</Form.Label>
-                                <Form.Control value={task['contact name']}/>
+                                <Form.Control value={this.state.contact} id="contact" onChange={this.handleChange} />
                             </Form.Group>
                             <Form.Group as={Col} controlId="formPhone">
                                 <Form.Label>טלפון איש קשר</Form.Label>
-                                <Form.Control value={task['contact number']}/>
+                                <Form.Control value={this.state.contactNumber} id="contactNumber" onChange={this.handleChange} />
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col}>
+                                <Form.Label>הערות</Form.Label>
+                                <Form.Control as="textarea" value={this.state.comment} rows="3" id="comment" onChange={this.handleChange} />
                             </Form.Group>
                         </Form.Row>
                     </Form>
                     );
                     buttons = [
                         {
-                            onClick: e => {
-								this.validateTaskInfo(e);
-								this.props.dispatch({ type: 'CLOSE_MODAL' })
-							},
+                            onClick: () => {
+								let valid = this.validateTaskInfo();
+								if(valid){
+                                let data = {
+                                    date: this.state.date,
+                                    time: this.state.time,
+                                    city: this.state.city,
+                                    address: this.state.address,
+                                    name: this.state.name,
+                                    contact: this.state.contact,
+                                    contactNumber: this.state.contactNumber,
+                                    comment: this.state.comment
+                                }
+                                editTask(this.props.dispatch, modal.entries.region, modal.entries.id, data)
+                                this.resetState()
+                                this.props.dispatch({ type: 'CLOSE_MODAL' })
+								}
+                            },
                             variant: 'primary',
                             text: 'עריכה'
                         },
                         {
-                            onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                            onClick: () => {
+                                this.resetState()
+                                this.props.dispatch({ type: 'CLOSE_MODAL' })
+                            },
                             variant: 'secondary',
                             text: 'ביטול'
                         }];
                     break;
-            case 'ADD_TASK_CSV':
-                /* For adding multiple tasks via uploading a .CSV file (Admins only) */
+          /*  case 'ADD_TASK_CSV':                            TODO remove?               
                 title = 'הוספת איסופים מקובץ';
                 body = <span></span>;
                 buttons = [
@@ -811,7 +981,7 @@ class ModalBlock extends React.Component {
                         variant: 'secondary',
                         text: 'סגירה'
                     }];
-                break;
+                break;*/
 			// Why is it called csv if it exports to xlsx?
             case 'EXPORT_TASK_CSV':
                 /* For exporting reports (Admins only) */
@@ -853,9 +1023,13 @@ class ModalBlock extends React.Component {
                     }];
 				break;
         }
-
+console.log(this.state)
         return (
-            <Modal show={modal.isOpen} onHide={() => this.props.dispatch({ type: 'CLOSE_MODAL' })}>
+            <Modal show={modal.isOpen} onHide={() => {
+                this.resetState()
+                this.props.dispatch({ type: 'CLOSE_MODAL' })
+            }
+            }>
                 <Modal.Header closeButton>
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>

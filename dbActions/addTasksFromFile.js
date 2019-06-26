@@ -21,24 +21,35 @@ export default function handleFileUpload(file){
 
 function addTasksToDB(data) {
     const taskCollection = fire.firestore().collection('tasks');
-    const timeStampCreator = fire.firebase_.firestore.Timestamp; //.firestore.Timestamp;
-    console.log(timeStampCreator);
+    const timeStampCreator = fire.firebase_.firestore.Timestamp;
     var rows = data.split(/[\r\n|\n]+/);
-    for (let i = 1; i < rows.length - 1; i++) {
+    for (let i = 1; i < rows.length ; i++) {
         var row = text2arr(rows[i]);
-        console.log(row);
-        var timeStamp = timeStampCreator.fromDate(new Date(row[2] + 'T' + row[3]));
-        taskCollection.doc(row[0] + '-' + row[2]).set({  // row[0]-taskID, row[2]-date. create unique id for each task.
-            name: row[1],
+
+        if (row[0] == "" || row[1] == "" || row[2] == "" || row[3] == ""
+            || row[4] == "" || row[5] == "" || row[6] == "" || row[8] == "") {
+            continue
+        }
+
+        console.log(row.length, row[1], row[1].split("/"))
+        let year = row[1].split('/')[2]
+        year = (year.length == 2) ? ("20" + year) : year
+        let month = row[1].split('/')[1]
+        month = (month.length == 1) ? ("0" + month) : month
+        let day = row[1].split('/')[0]
+        day = (day.length == 1) ? ("0" + day) : day
+        let date = year + "-" + month + "-" + day
+        var timeStamp = timeStampCreator.fromDate(new Date(date + 'T' + row[2]));
+
+        taskCollection.doc().set({  // generates unique id
+            name: row[0],
             timestamp: timeStamp,
-            city: row[4],
-            address: row[5],
-            "contact number": row[6],
-            "contact name": row[7],
-            notes: row[8],
-            region: row[9],
-            longitude: (row[10] == "") ? "" : Number(row[10]),
-            latitude: (row[11] == "") ? "" : Number(row[11]),
+            city: row[3],
+            address: row[4],
+            "contact number": row[5],
+            "contact name": row[6],
+            notes: row[7],
+            region: row[8],           
             volunteerUid: null,
             reportFilled: false,
             collected: false

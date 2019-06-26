@@ -28,7 +28,11 @@ const reducer = (state = initialState, action) => {
             return { ...state, isLoggedIn: false, loginErr: action.msg};
             break;
         case 'LOGOUT':
-            return { ...state, isLoggedIn: false};
+            return {
+                ...state, isLoggedIn: false, userData: {}, authChecked: false, loginErr: false,               
+                modal: { isOpen: false }, unassignedTasks: [], assignedTasks: [], taskReports: [],
+                regionalTasks: [], users: []
+            };
             break;
         case 'GETALLUSERS':
             return { ...state, users: action.users };
