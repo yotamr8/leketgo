@@ -216,7 +216,7 @@ class TableBlock extends React.Component {
 			actionsBar = 
 				<Navbar bg='light'>
 					<Form>
-					<input type='file' id='fileUploader' accept='xlsx' style={{ display: "none" }} onChange={(e) => handleFileUpload(e.target.files[0])} />
+					<input type='file' id='fileUploader' accept='xlsx' style={{ display: "none" }} onChange={(e) => handleFileUpload(this.props, e.target.files[0])} />
 						<Row>
 							<Col>
 						<ButtonGroup>

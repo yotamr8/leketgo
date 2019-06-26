@@ -14,7 +14,7 @@ export default function editUser(props, uid, changes) {
         editUserAuth(props, uid, authChanges)
     }
 
-    const userCollection = fire.firestore().collection('users');
+    const userCollection = fire.firestore().collection('users');    
     userCollection.doc(uid).set(
         changes,
         { merge: true }

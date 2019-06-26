@@ -709,6 +709,12 @@ class ModalBlock extends React.Component {
                                     <Form.Control value={this.state.city} id="city" onChange={this.handleChange} />
                                 </Form.Group>
                             </Form.Row>
+                            <Form.Row>                                
+                                <Form.Group as={Col}>
+                                    <Form.Label>הערה</Form.Label>
+                                    <Form.Control value={this.state.comment} id="comment" onChange={this.handleChange} />
+                                </Form.Group>
+                            </Form.Row>
                         </Form>;
                 buttons = [
                     {

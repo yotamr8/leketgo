@@ -9,37 +9,18 @@ import {Nav} from 'react-bootstrap'
 import Link from 'next/link'
 import { getWeekBeginning, getWeekEnding, getStartDate, getEndOfNextDay, getLastWeekBeginning } from '../dbActions/dates'
 
+
 class Users extends Component {
 
     constructor(props) {
         super(props);
-
-        var tasks = this.props.regionalTasks
-        var pastTasks = [];
-        var currentWeekTasks = [];
-        var futureTasks = [];
-        
-        var weekBeginning = getWeekBeginning()        
-        var weekEnding = getWeekEnding()             
-
-        for (let task of tasks) {
-            if (task.timestamp.toDate() < weekBeginning) {
-                pastTasks.push(task)
-            } 
-            if (task.timestamp.toDate() > weekBeginning && task.timestamp.toDate() < weekEnding) {
-                currentWeekTasks.push(task)
-            }
-            if (task.timestamp.toDate() > weekEnding) {
-                futureTasks.push(task)
-            }
-        }
 
         this.state = {
             tables: [
                 {
                     page: 'adminTasks',
                     name: 'משימות השבוע',
-                    data: currentWeekTasks,
+                    data: [],
                     isSearchable: true,
                     isSelectable: false,
                     type: 'tasks'
@@ -47,7 +28,7 @@ class Users extends Component {
                 {
                     page: 'adminTasksPast',
                     name: 'משימות עבר',
-                    data: pastTasks,
+                    data: [],
                     isSearchable: true,
                     isSelectable: false,
                     type: 'tasks'
@@ -55,7 +36,7 @@ class Users extends Component {
                 {
                     page: 'adminTasksFuture',
                     name: 'משימות עתידיות',
-                    data: futureTasks,
+                    data: [],
                     isSearchable: true,
                     isSelectable: false,
                     type: 'tasks'
@@ -70,7 +51,57 @@ class Users extends Component {
         checkAuthAndRefresh(this.props.dispatch)
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.regionalTasks !== this.props.regionalTasks) {
+            var tasks = this.props.regionalTasks
+            var pastTasks = [];
+            var currentWeekTasks = [];
+            var futureTasks = [];
 
+            var weekBeginning = getWeekBeginning()
+            var weekEnding = getWeekEnding()
+
+            for (let task of tasks) {
+                if (task.timestamp.toDate() < weekBeginning) {
+                    pastTasks.push(task)
+                }
+                if (task.timestamp.toDate() > weekBeginning && task.timestamp.toDate() < weekEnding) {
+                    currentWeekTasks.push(task)
+                }
+                if (task.timestamp.toDate() > weekEnding) {
+                    futureTasks.push(task)
+                }
+            }
+            this.setState({
+                tables: [
+                    {
+                        page: 'adminTasks',
+                        name: 'משימות השבוע',
+                        data: currentWeekTasks,
+                        isSearchable: true,
+                        isSelectable: false,
+                        type: 'tasks'
+                    },
+                    {
+                        page: 'adminTasksPast',
+                        name: 'משימות עבר',
+                        data: pastTasks,
+                        isSearchable: true,
+                        isSelectable: false,
+                        type: 'tasks'
+                    },
+                    {
+                        page: 'adminTasksFuture',
+                        name: 'משימות עתידיות',
+                        data: futureTasks,
+                        isSearchable: true,
+                        isSelectable: false,
+                        type: 'tasks'
+                    }
+                ]
+            })
+        }
+    }
 
     switchTable(index) {
         this.setState({activeTable: index});
