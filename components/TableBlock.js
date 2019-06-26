@@ -80,7 +80,7 @@ class TableBlock extends React.Component {
 			case 'adminTasks':
 					return ['status', 'date', 'time', 'street', 'city', 'name', 'actions'];
 			case 'adminTasksPast':
-					return ['status', 'date', 'time', 'street', 'city', 'name', 'actions'];
+					return ['status', 'date', 'time', 'street', 'city', 'name'];
 			case 'adminTasksFuture':
 			return ['status', 'date', 'time', 'street', 'city', 'name', 'actions'];
 			default:

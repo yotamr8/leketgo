@@ -200,6 +200,25 @@ class Entry extends React.Component {
                     }
                 ];
                 break;
+                case 'adminTasksFuture':
+                buttons = [
+                    {
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EDIT_TASK', entries: this.props.entry}),
+                        variant: 'outline-primary',
+                        text: <span><i className="far fa-edit fa-fw"></i>עריכה</span>
+                    },
+                    {
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_STATUS', entries: this.props.entry}),
+                        variant: 'outline-secondary',
+                        text: <span><i className="fas fa-question fa-fw"></i>סטטוס</span>
+                    },
+                    {
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REMOVE_TASK', entries: this.props.entry}),
+                        variant: 'outline-secondary',
+                        text: <span><i className="far fa-trash-alt fa-fw"></i>מחיקה</span>
+                    }
+                ];
+                break;
         }
         if (this.props.tableTasksCardView) {
             let values = this.getDataValues(this.props.entry);
@@ -260,7 +279,44 @@ class Entry extends React.Component {
                                             </Dropdown></span>
                                             </td>
                                             );
-                                    
+                                    case 'assignedTasks':
+                                        return (
+                                            <td className="align-middle" key={column}>
+                                            <span style={{whiteSpace: 'nowrap'}}><Dropdown width='200'>
+                                                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                                    פעולות
+                                                </Dropdown.Toggle>
+                                                <Dropdown.Menu>
+                                                {buttons.map((button) => {
+                                                        return (
+                                                            <Dropdown.Item key={button.text} onClick={button.onClick}>
+                                                            {button.text}
+                                                            </Dropdown.Item>
+                                                            );
+                                                        })}
+                                                </Dropdown.Menu>
+                                            </Dropdown></span>
+                                            </td>
+                                            );
+                                case 'adminTasksFuture':
+                                        return <td className="align-middle" key={column}>
+                                        <span style={{whiteSpace: 'nowrap'}}>
+                                            <Dropdown width='200'>
+                                                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+                                                    פעולות
+                                                </Dropdown.Toggle>
+                                                <Dropdown.Menu>
+                                                {buttons.map((button) => {
+                                                return (
+                                                    <Dropdown.Item key={button.text} onClick={button.onClick}>
+                                                    {button.text}
+                                                    </Dropdown.Item>
+                                                    );
+                                                })}
+                                                </Dropdown.Menu>
+                                            </Dropdown>
+                                        </span>
+                                    </td>;       
                                 case 'adminUsers':
                                     return (
                                     <td className="align-middle" key={column}>
