@@ -112,16 +112,12 @@ class TableBlock extends React.Component {
 		});
 	}
 
-	assignTasks() {
-        var taskIDs = [];
-        for (var taskID in this.state.selectedEntries) {
-            taskIDs.push(taskID)         
-        }
-        setAssignedTasks(this.props, taskIDs, this.state.entrySelectedCounter, this.state.selectedEntries)
+	assignTasks() {        
+        setAssignedTasks(this.props, this.state.selectedEntries, this.state.entrySelectedCounter)
+        this.cancelSelection()
 	}
 
-	handleChangeForm(event) {
-		
+	handleChangeForm(event) {		
 		let fleldVal = event.target.value;
 		this.setState({searchValue: fleldVal});
 	}

@@ -46,7 +46,8 @@ const initialState = {
     firstName: "",
     lastName: "",
     region: "",
-    password : ""
+    password : "",
+	validated: false
 }
 
 class ModalBlock extends React.Component {
@@ -56,6 +57,9 @@ class ModalBlock extends React.Component {
         /* The ModalBlock state properties are only
             relevant to the REPORT_FILL modal */                                
         this.dateHandleChange = this.dateHandleChange.bind(this);
+		this.validateUserInfo = this.validateUserInfo.bind(this);
+		this.validateTaskInfo = this.validateTaskInfo.bind(this);
+		this.handleChange = this.handleChange.bind(this);
     }
 	
     resetState() {
@@ -109,6 +113,47 @@ class ModalBlock extends React.Component {
 		XLSX.writeFile(wb, "LeketUsers.xlsx")
 		
 	}
+	
+	handleChange = (e) => {
+        const { name, value } = e.target;
+
+        this.setState(prevState => ({
+          post: { ...prevState.post, [name]: value }
+        }));
+    };
+  
+    validateTaskInfo(){
+		
+		let isPhoneValid = /^\d{10}$/.test(this.state.contactNumber);
+		console.log("phone length valid: " + isPhoneValid);
+		
+        if (!isPhoneValid) {
+          console.log("nonvalid")
+		  return false;
+        }
+		return true;
+	}
+	
+	validateUserInfo(){
+		
+		let isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.state.email)
+        console.log("mail valid: " + isMailValid);
+		
+		let isTZValid = /^\d{9}$/.test(this.state.tz);
+		// TODO add real TZ check
+		console.log("TZ length valid: " + isTZValid);
+		
+		let isPhoneValid = /^\d{10}$/.test(this.state.phone);
+		console.log("phone length valid: " + isPhoneValid);
+		
+		if(!isMailValid || !isTZValid || !isPhoneValid) {
+          console.log("nonvalid")
+		  return false;
+        }
+        this.setState({ validated: true });
+		return true;
+		
+	}
 	  
     handleChange = (e) => {
         /* This method is only relevant
@@ -121,8 +166,19 @@ class ModalBlock extends React.Component {
     verifyValuesForReport() {
         /* This method is only relevant
            to the REPORT_FILL modal */
-        let isValid = true;
+        let isValid = true; // TODO add logic to validation
         if (isValid) {
+			let re = /^\d+$/
+			let isMainCourseQDigit = re.test(this.state.mainCourseQ);
+			let isSideCourseQDigit = re.test(this.state.sideCourseQ);
+			let isPastriesQDigit = re.test(this.state.pastriesQ);
+			let isBreadQDigit = re.test(this.state.breadQ);
+			if(!isMainCourseQDigit || !isSideCourseQDigit || !isPastriesQDigit || !isBreadQDigit){
+				console.log("inhere!");
+				return false
+			}
+			console.log("outhere!");
+			
             let numOfFields = 0;
             let fields = [];
             if (this.state.mainCourseQ > 0) { numOfFields++; fields.push("mainCourseQ"); }
@@ -146,6 +202,7 @@ class ModalBlock extends React.Component {
                 data["foodContainerType" + (i + 1)] = (fields[i] == "mainCourseQ" || fields[i] == "sideCourseQ") ? 'מיכלים' : (fields[i] == "pastriesQ") ? this.state.pastriesS : this.state.breadS;
                 data["foodContainerQuantity" + (i + 1)] = this.state[fields[i]]
             }
+
             setTaskReport(this.props, this.props.modal.entries.id, data)           
         }
     }
@@ -190,7 +247,10 @@ class ModalBlock extends React.Component {
                 );
                 buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => {
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                            console.log(modal.entries)
+                        },
                         variant: 'secondary',
                         text: 'סגירה'
                     }];
@@ -200,17 +260,38 @@ class ModalBlock extends React.Component {
                  * We still need to review this and adjust
                  * according to the feedback we received.
                  */
+                console.log(modal.entries)
+                let options = { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric' };
+                var succeeded = modal.entries.succeeded.map((task) =>
+                    <li>{task.name} - {task.timestamp.toDate().toLocaleDateString('he-IL', options)}</li>
+                );
+                var failed = modal.entries.failed.map((task) =>
+                    <li>{task.name} - { task.timestamp.toDate().toLocaleDateString('he-IL', options)}</li>
+                );
+                console.log(succeeded)
                 title = 'כשלון בשיבוץ האיסופים';
                 body = (
                     <span>
-                    {Object.keys(modal.entries).length} שיבוץ האיסופים נכשל! אנא נסה להשתבץ לאיסופים אחרים.
+                        השיבוץ לאיסופים שבחרת נכשל!
+                        לפניך רשימת המשימות שניתן להשתבץ אליהם:
+                        <ul>{succeeded}</ul>
+                        ורשימת המשימות שלא ניתן להשתבץ אליהם:
+                        <ul>{failed}</ul>                        
                     </span>
-                );
+                );  
                 buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ASSIGN_TASKS_SUCCESS', entries: modal.entries.succeeded }),
                         variant: 'secondary',
-                        text: 'סגירה'
+                        text: 'שבץ מה שאפשר'
+                    },
+                    {
+                        onClick: () => {    /* cancel the assignments */
+                            modal.entries.succeeded.forEach((task) => { setUndoTask(this.props, task.id) } )                             
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                        },
+                        variant: 'primary',
+                        text: 'בטל הכל'
                     }];
                 break;
             case 'ASSIGN_TASKS_SUCCESS':
@@ -340,9 +421,11 @@ class ModalBlock extends React.Component {
                 buttons = [
                     {
                         onClick: () => {                            
-                            this.verifyValuesForReport(modal);
-                            this.resetState();                            
-                            this.props.dispatch({ type: 'CLOSE_MODAL' });
+                            let verified = this.verifyValuesForReport(modal);
+							if(verified){
+								this.resetState();                            
+								this.props.dispatch({ type: 'CLOSE_MODAL' });
+							}
                         },
                         variant: 'primary',
                         text: 'שליחה'
@@ -422,9 +505,8 @@ class ModalBlock extends React.Component {
                 buttons = [
                     {
                         onClick: () => {
-                            setUndoTask(modal.entries.id)
-                            this.props.dispatch({ type: 'CLOSE_MODAL' })
-                            refresh4User(this.props.dispatch, this.props.userData.region, this.props.userData.uid); //TODO put async in dbAction
+                            setUndoTask(this.props, modal.entries.id)
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })                            
                         },
                         variant: 'danger',
                         text: 'הסרה'
@@ -456,7 +538,7 @@ class ModalBlock extends React.Component {
             case 'ADD_USER':
                 /* For adding a volunteer (Admins only) */
                 title = 'הוספת מתנדב';
-                body =  <Form>
+                body =  <Form noValidate validated={this.state.validated}>
                             <Form.Row>
                                 <Form.Group as={Col}>
                                     <Form.Label>שם פרטי</Form.Label>
@@ -470,7 +552,7 @@ class ModalBlock extends React.Component {
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col}>
+                                <Form.Group as={Col} controlId="formTZ">
                                     <Form.Label>תעודת זהות</Form.Label>
                                     <Form.Control id="tz" onChange={this.handleChange} />
                                 </Form.Group>
@@ -485,13 +567,13 @@ class ModalBlock extends React.Component {
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col}>
+                                <Form.Group as={Col} controlId="formEmail">
                                     <Form.Label>כתובת דואר אלקטרוני</Form.Label>
                                     <Form.Control type="email" id="email" onChange={this.handleChange} />
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col}>
+                                <Form.Group as={Col} controlId="formPhone">
                                     <Form.Label>מספר טלפון</Form.Label>
                                     <Form.Control id="phone" onChange={this.handleChange} />
                                 </Form.Group>
@@ -516,6 +598,8 @@ class ModalBlock extends React.Component {
                 buttons = [
                     {
                         onClick: () => {
+							let valid = this.validateUserInfo()
+							if(valid){
                             let user = {
                                 firstName: this.state.firstName,
                                 lastName: this.state.lastName,
@@ -532,6 +616,7 @@ class ModalBlock extends React.Component {
                             addUser(this.props, user)
                             this.resetState()
                             this.props.dispatch({ type: 'CLOSE_MODAL' })
+							}
                         },
                         variant: 'primary',
                         text: 'שליחה'
@@ -574,7 +659,8 @@ class ModalBlock extends React.Component {
                 }
                 title = 'עריכת פרטי מתנדב';
                 body =
-                        <Form>
+                        <Form noValidate
+                            validated={this.state.validated}>
                             <Form.Row>
                                 <Form.Group as={Col}>
                                     <Form.Label>שם פרטי</Form.Label>
@@ -588,7 +674,7 @@ class ModalBlock extends React.Component {
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col}>
+                                <Form.Group as={Col} controlId="formTZ">
                                     <Form.Label>תעודת זהות</Form.Label>
                                     <Form.Control value={this.state.tz} id="tz" onChange={this.handleChange} />
                                 </Form.Group>
@@ -602,13 +688,13 @@ class ModalBlock extends React.Component {
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col}>
+                                <Form.Group as={Col} controlId="formEmail">
                                     <Form.Label>כתובת דואר אלקטרוני</Form.Label>
                                     <Form.Control type="email" value={this.state.email} id="email" onChange={this.handleChange} />
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col}>
+                                <Form.Group as={Col} controlId="formPhone">
                                     <Form.Label>מספר טלפון</Form.Label>
                                     <Form.Control value={this.state.phone} id="phone" onChange={this.handleChange} />
                                 </Form.Group>
@@ -627,20 +713,25 @@ class ModalBlock extends React.Component {
                 buttons = [
                     {
                         onClick: () => {
+							let valid = this.validateUserInfo();
+							if(valid){
                             let changes = {
                                 firstName: this.state.firstName,
                                 lastName: this.state.lastName,
                                 tz: this.state.tz,
-                                region: this.state.region,
-                                email: this.state.email,
+                                region: this.state.region,                                
                                 phone: this.state.phone,
                                 address: this.state.address,
                                 city: this.state.city,
                                 comment: this.state.comment                             
                             }
+                            if (user.email != this.state.email) {   // so email in auth wouldn't be updated for nothing
+                                changes.email = this.state.email
+                            }
                             editUser(this.props, user.uid, changes)    
                             this.resetState()
                             this.props.dispatch({ type: 'CLOSE_MODAL' })
+							}
                         },
                         variant: 'primary',
                         text: 'שליחה'
@@ -721,7 +812,8 @@ class ModalBlock extends React.Component {
                 /* For adding a task (Admins only) */
                 title = 'הוספת איסוף';
                 body = (
-                    <Form>
+                    <Form noValidate
+                        validated={this.state.validated}>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>תאריך</Form.Label><br />
@@ -755,7 +847,7 @@ class ModalBlock extends React.Component {
                                 <Form.Label>שם איש קשר</Form.Label>
                                 <Form.Control id="contact" onChange={this.handleChange} />
                             </Form.Group>
-                            <Form.Group as={Col}>
+                            <Form.Group as={Col} controlId="formLastName">
                                 <Form.Label>טלפון איש קשר</Form.Label>
                                 <Form.Control id="contactNumber" onChange={this.handleChange} />
                             </Form.Group>
@@ -770,7 +862,9 @@ class ModalBlock extends React.Component {
                 );
                 buttons = [
                     {
-                        onClick: () => {                            
+                        onClick: () => { 
+							let valid = this.validateTaskInfo();
+							if(valid){					
                             let data = {
                                 date: this.state.date,
                                 time: this.state.time,
@@ -783,7 +877,8 @@ class ModalBlock extends React.Component {
                             }
                             addTask(this.props.dispatch, this.props.userData.region, data)                            
                             this.resetState()
-                            this.props.dispatch({ type: 'CLOSE_MODAL' })                             
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })  
+							}							
                         },
                         variant: 'primary',
                         text: 'הוספה'
@@ -821,7 +916,8 @@ class ModalBlock extends React.Component {
 
                 title = 'עריכת איסוף';
                 body = (
-                    <Form>
+                    <Form noValidate
+                        validated={this.state.validated}>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>תאריך</Form.Label><br />
@@ -855,7 +951,7 @@ class ModalBlock extends React.Component {
                                 <Form.Label>שם איש קשר</Form.Label>
                                 <Form.Control value={this.state.contact} id="contact" onChange={this.handleChange} />
                             </Form.Group>
-                            <Form.Group as={Col}>
+                            <Form.Group as={Col} controlId="formPhone">
                                 <Form.Label>טלפון איש קשר</Form.Label>
                                 <Form.Control value={this.state.contactNumber} id="contactNumber" onChange={this.handleChange} />
                             </Form.Group>
@@ -871,6 +967,8 @@ class ModalBlock extends React.Component {
                     buttons = [
                         {
                             onClick: () => {
+								let valid = this.validateTaskInfo();
+								if(valid){
                                 let data = {
                                     date: this.state.date,
                                     time: this.state.time,
@@ -884,6 +982,7 @@ class ModalBlock extends React.Component {
                                 editTask(this.props.dispatch, modal.entries.region, modal.entries.id, data)
                                 this.resetState()
                                 this.props.dispatch({ type: 'CLOSE_MODAL' })
+								}
                             },
                             variant: 'primary',
                             text: 'עריכה'
@@ -965,7 +1064,7 @@ class ModalBlock extends React.Component {
                     }];
 				break;
         }
-console.log(this.state)
+
         return (
             <Modal show={modal.isOpen} onHide={() => {
                 this.resetState()

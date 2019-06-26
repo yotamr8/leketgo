@@ -28,3 +28,59 @@ export function getStartDate() {   // get the beginning time of the day
 
     return result;
 }
+
+export function getWeekBeginning() {
+    var now = new Date();
+    var result = new Date(now);
+
+    result.setDate(result.getDate() - result.getDay())  // set to sunday
+
+    result.setHours(0);
+    result.setMinutes(0);
+    result.setSeconds(0);
+    result.setMilliseconds(0);
+
+    return result;
+}
+
+export function getWeekEnding() {
+    var now = new Date();
+    var result = new Date(now);
+
+    result.setDate(result.getDate() + (6 - result.getDay()))  // set to saturday
+
+    result.setHours(23);
+    result.setMinutes(59);
+    result.setSeconds(59);
+    result.setMilliseconds(999);
+
+    return result;
+}
+
+export function getEndOfNextDay() {
+    var now = new Date();
+    var result = new Date(now);
+
+    result.setDate(result.getDate() + 1 )  // set to next day
+
+    result.setHours(23);
+    result.setMinutes(59);
+    result.setSeconds(59);
+    result.setMilliseconds(999);
+
+    return result;
+}
+
+export function getLastWeekBeginning() {
+    var now = new Date();
+    var result = new Date(now);
+
+    result.setDate(result.getDate() - (result.getDay() + 7) )  // set to sunday of last week
+
+    result.setHours(0);
+    result.setMinutes(0);
+    result.setSeconds(0);
+    result.setMilliseconds(0);
+
+    return result;
+}
