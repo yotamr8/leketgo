@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"/_app":"static/development/pages/_app.js","/_document":"static/development/pages/_document.js","/_error":"static/development/pages/_error.js","/tasks":"static/development/pages/tasks.js","/users":"static/development/pages/users.js"}
+=======
+{"/_app":"static/development/pages/_app.js","/_document":"static/development/pages/_document.js","/_error":"static/development/pages/_error.js","/index":"static/development/pages/index.js","/tasks":"static/development/pages/tasks.js","/users":"static/development/pages/users.js","/":"static/development/pages/index.js"}
+>>>>>>> fe69567122d8aa902e3c7be5bfc99a94f5174397

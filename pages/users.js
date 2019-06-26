@@ -11,12 +11,26 @@ import Link from 'next/link'
 class Users extends Component {
     constructor(props) {
         super(props);
+
+        var users = this.props.users;
+        var activeUsers = [];
+        var disabledUsers = [];
+
+        for (let user of users) {
+            if (user.disabled) {
+                disabledUsers.push(user)
+            } else {
+                activeUsers.push(user)
+            }
+        }
+        console.log(users, activeUsers, disabledUsers)
+
         this.state = {
             tables: [
                 {
                     page: 'adminUsers',
                     name: 'משתמשים פעילים',
-                    data: this.props.users,
+                    data: activeUsers,
                     isSearchable: true,
                     isSelectable: false,
                     type: 'users'
@@ -24,7 +38,7 @@ class Users extends Component {
                 {
                     page: 'adminUsersDeactivated',
                     name: 'משתמשים סגורים',
-                    data: '',
+                    data: disabledUsers,
                     isSearchable: true,
                     isSelectable: false,
                     type: 'users'
@@ -59,7 +73,7 @@ class Users extends Component {
                                     {this.state.tables.map((table, index) => {
                                     return (
                                         <Nav.Item>
-                                            <Link className='navlink' href="/users" ><a onClick={() => this.switchTable(index)} className={'nav-link' + (activeTable.page == table.page ? ' active' : '')}>{table.name}</a></Link>
+                                            <Link key={index} className='navlink' href="/users" ><a onClick={() => this.switchTable(index)} className={'nav-link' + (activeTable.page == table.page ? ' active' : '')}>{table.name}</a></Link>
                                         </Nav.Item>
                                         );
                                     })}
