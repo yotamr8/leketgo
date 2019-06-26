@@ -145,7 +145,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\baram\\Git\\LeketGo\\components\\ModalBlock.js";
+var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\\ModalBlock.js";
 
 /* ModalBlock
  * This component is responsible for any modal window in the app,
@@ -2433,14 +2433,24 @@ function (_React$Component) {
 
         case 'TASK_STATUS':
           title = 'סטטוס';
-          body = react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+          body = react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("div", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 903
+              lineNumber: 1002
             },
             __self: this
           }, "\u05D2\u05D5\u05E3 \u05D4\u05E1\u05D8\u05D8\u05D5\u05E1");
-          buttons = {};
+          buttons = [{
+            onClick: function onClick() {
+              _this4.resetState();
+
+              _this4.props.dispatch({
+                type: 'CLOSE_MODAL'
+              });
+            },
+            variant: 'secondary',
+            text: 'ביטול'
+          }];
           break;
 
         /*  case 'ADD_TASK_CSV':                            TODO remove?               
@@ -2461,11 +2471,7 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("h2", {
             __source: {
               fileName: _jsxFileName,
-<<<<<<< HEAD
-              lineNumber: 925
-=======
-              lineNumber: 1014
->>>>>>> 772bcacbd607da69f320f5e6d5cb73fe9e0e70ac
+              lineNumber: 1031
             },
             __self: this
           }, "\u05DC\u05D7\u05E5 \u05DB\u05D3\u05D9 \u05DC\u05D9\u05D9\u05E6\u05D0 \u05D3\u05D5\u05D7.");
@@ -2491,11 +2497,7 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("h2", {
             __source: {
               fileName: _jsxFileName,
-<<<<<<< HEAD
-              lineNumber: 944
-=======
-              lineNumber: 1033
->>>>>>> 772bcacbd607da69f320f5e6d5cb73fe9e0e70ac
+              lineNumber: 1050
             },
             __self: this
           }, "\u05DC\u05D7\u05E5 \u05DB\u05D3\u05D9 \u05DC\u05D9\u05D9\u05E6\u05D0 \u05D3\u05D5\u05D7.");
@@ -2528,52 +2530,32 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-<<<<<<< HEAD
-          lineNumber: 963
-=======
-          lineNumber: 1052
->>>>>>> 772bcacbd607da69f320f5e6d5cb73fe9e0e70ac
+          lineNumber: 1069
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_13__["Modal"].Header, {
         closeButton: true,
         __source: {
           fileName: _jsxFileName,
-<<<<<<< HEAD
-          lineNumber: 968
-=======
-          lineNumber: 1057
->>>>>>> 772bcacbd607da69f320f5e6d5cb73fe9e0e70ac
+          lineNumber: 1074
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_13__["Modal"].Title, {
         __source: {
           fileName: _jsxFileName,
-<<<<<<< HEAD
-          lineNumber: 969
-=======
-          lineNumber: 1058
->>>>>>> 772bcacbd607da69f320f5e6d5cb73fe9e0e70ac
+          lineNumber: 1075
         },
         __self: this
       }, title)), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_13__["Modal"].Body, {
         __source: {
           fileName: _jsxFileName,
-<<<<<<< HEAD
-          lineNumber: 971
-=======
-          lineNumber: 1060
->>>>>>> 772bcacbd607da69f320f5e6d5cb73fe9e0e70ac
+          lineNumber: 1077
         },
         __self: this
       }, body), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_13__["Modal"].Footer, {
         __source: {
           fileName: _jsxFileName,
-<<<<<<< HEAD
-          lineNumber: 974
-=======
-          lineNumber: 1063
->>>>>>> 772bcacbd607da69f320f5e6d5cb73fe9e0e70ac
+          lineNumber: 1080
         },
         __self: this
       }, buttons.map(function (button) {
@@ -2583,11 +2565,7 @@ function (_React$Component) {
           onClick: button.onClick,
           __source: {
             fileName: _jsxFileName,
-<<<<<<< HEAD
-            lineNumber: 977
-=======
-            lineNumber: 1066
->>>>>>> 772bcacbd607da69f320f5e6d5cb73fe9e0e70ac
+            lineNumber: 1083
           },
           __self: this
         }, button.text);
@@ -2633,7 +2611,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\baram\\Git\\LeketGo\\components\\ToastBlock.js";
+var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\\ToastBlock.js";
 
 
 
@@ -2753,7 +2731,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\baram\\Git\\LeketGo\\components\\Toasts.js";
+var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\\Toasts.js";
 
 
 
@@ -4845,7 +4823,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\baram\\Git\\LeketGo\\pages\\_app.js";
+var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\pages\\_app.js";
 
 
 

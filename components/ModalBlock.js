@@ -1001,7 +1001,7 @@ class ModalBlock extends React.Component {
                 body = (
                     <div>גוף הסטטוס</div>
                 );
-                buttons = {
+                buttons = [
                     {
                         onClick: () => {
                             this.resetState()
@@ -1010,7 +1010,7 @@ class ModalBlock extends React.Component {
                         variant: 'secondary',
                         text: 'ביטול'
                     }
-                }
+                ]
 
                 break;
           /*  case 'ADD_TASK_CSV':                            TODO remove?               

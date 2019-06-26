@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-{"/_app":"static/development/pages/_app.js","/_document":"static/development/pages/_document.js","/_error":"static/development/pages/_error.js","/index":"static/development/pages/index.js","/users":"static/development/pages/users.js","/":"static/development/pages/index.js"}
-=======
-{"/_app":"static/development/pages/_app.js","/_document":"static/development/pages/_document.js","/_error":"static/development/pages/_error.js","/assigned-tasks":"static/development/pages/assigned-tasks.js","/index":"static/development/pages/index.js","/login":"static/development/pages/login.js","/tasks":"static/development/pages/tasks.js","/users":"static/development/pages/users.js","/":"static/development/pages/index.js"}
->>>>>>> 772bcacbd607da69f320f5e6d5cb73fe9e0e70ac
+{"/_app":"static/development/pages/_app.js","/_document":"static/development/pages/_document.js","/_error":"static/development/pages/_error.js","/index":"static/development/pages/index.js","/tasks":"static/development/pages/tasks.js","/users":"static/development/pages/users.js","/":"static/development/pages/index.js"}

@@ -266,8 +266,7 @@ class TableBlock extends React.Component {
 						display: 'flex',
 						flexDirection: 'column',
 						alignItems: 'center',
-						justifyContent: 'center'
-		
+						justifyContent: 'center'		
 					}}>
 						<img src="/static/nothing.png" width="100"/>
 						<div style={{
