@@ -72,7 +72,7 @@ class Header extends React.Component {
                 <NavDropdown alignRight title={this.props.userData.firstName + ' ' + this.props.userData.lastName} id="basic-nav-dropdown">
                     <Link href="/personal-information"><a className='dropdown-item'><i className="far fa-user-circle fa-fw"></i>פרטים אישיים</a></Link>
                     <NavDropdown.Divider />
-                    <Link href='/login'><a className='dropdown-item' onClick={this.logout}><i className="fas fa-sign-out-alt fa-fw"></i>התנתקות</a></Link>
+                    <Link href='#'><a className='dropdown-item' onClick={this.logout}><i className="fas fa-sign-out-alt fa-fw"></i>התנתקות</a></Link>
                 </NavDropdown>
                 <ButtonToolbar>
                 <OverlayTrigger

@@ -114,13 +114,13 @@ class ModalBlock extends React.Component {
 		
 	}
 	
-	handleChange = e => {
-    const { name, value } = e.target;
+	handleChange = (e) => {
+        const { name, value } = e.target;
 
-    this.setState(prevState => ({
-      post: { ...prevState.post, [name]: value }
-    }));
-  };
+        this.setState(prevState => ({
+          post: { ...prevState.post, [name]: value }
+        }));
+    };
   
     validateTaskInfo(){
 		
@@ -538,8 +538,7 @@ class ModalBlock extends React.Component {
             case 'ADD_USER':
                 /* For adding a volunteer (Admins only) */
                 title = 'הוספת מתנדב';
-                body =  <Form noValidate
-                            validated={this.state.validated}>>
+                body =  <Form noValidate validated={this.state.validated}>
                             <Form.Row>
                                 <Form.Group as={Col}>
                                     <Form.Label>שם פרטי</Form.Label>
@@ -1048,7 +1047,7 @@ class ModalBlock extends React.Component {
                     }];
 				break;
         }
-console.log(this.state)
+
         return (
             <Modal show={modal.isOpen} onHide={() => {
                 this.resetState()

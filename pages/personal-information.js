@@ -4,12 +4,12 @@ import {Form, Button, Col, Navbar} from 'react-bootstrap'
 import Header from '../components/Header.js'
 import checkAuthAndRefresh from '../dbActions/checkAuth'
 import Loading from './loading'
-import editPersonal from '../dbActions/editPersonal'
+import editUser from '../dbActions/editUser'
 
 class Personal_information extends Component {
     constructor(...args) {
         super(...args);
-        this.state = { validated: false };
+        this.state = { validated: true };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -25,7 +25,7 @@ class Personal_information extends Component {
         console.log("mail valid: " + isMailValid);
 		
 		let formPassword = document.getElementById('formPassword').value;
-		let isPasswordlengthValid = /^.{6,}$/.test(formPassword);
+		let isPasswordlengthValid = /^.{6,}$|^$/.test(formPassword);
 		console.log("password length valid: " + isPasswordlengthValid);
 		
 		let formValidatePassword = document.getElementById('formValidatePassword').value;
@@ -35,15 +35,26 @@ class Personal_information extends Component {
 		if(!isPasswordlengthValid || !isMailValid || !isDoublePasswordsMatch) {
 			this.state.validated = false;
 		}
-		
-        console.log(formEmail);
+        
+        console.log(this.state.validated);
         if (!this.state.validated) {
           event.preventDefault();
           event.stopPropagation();
+        } else {
+            let user = this.props.userData
+            let formCity = document.getElementById('formCity').value;
+            let formAddress = document.getElementById('formAddress').value;
+            let formPhone = document.getElementById('formPhone').value;
+            let changes = {}
+            if (formEmail != user.email) { changes.email = formEmail }
+            if (formCity != user.city) { changes.city = formCity }
+            if (formAddress != user.address) { changes.address = formAddress }
+            if (formPhone != user.phone) { changes.phone = formPhone }
+            if (formPassword.length != 0) { changes.password = formPassword }
+            console.log(changes)
+            editUser(this.props, this.props.userData.uid, changes)     
         }
-        this.setState({ validated: true });
-
-        editPersonal
+        this.setState({ validated: true });        
       }
 
     render() {
@@ -99,16 +110,16 @@ class Personal_information extends Component {
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col} controlId="formStreet">
+                                <Form.Group as={Col} controlId="formAddress">
                                     <Form.Label>רחוב ומספר</Form.Label>
-                                    <Form.Control required defaultValue={user.address} />
+                                    <Form.Control required defaultValue={user.address}/>
 									<Form.Control.Feedback type="invalid">
                                         זהו שדה חובה.
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formCity">
                                     <Form.Label>עיר מגורים</Form.Label>
-                                    <Form.Control required defaultValue={user.city} />
+                                    <Form.Control required defaultValue={user.city}/>
 									<Form.Control.Feedback type="invalid">
                                         זהו שדה חובה.
                                     </Form.Control.Feedback>
@@ -120,14 +131,14 @@ class Personal_information extends Component {
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formPassword">
                                     <Form.Label>סיסמה חדשה</Form.Label>
-                                    <Form.Control type="password" />
+                                    <Form.Control type="password"/>
 									<Form.Control.Feedback type="invalid">
                                         אנא הכניסו סיסמא של 6 אותיות לפחות
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formValidatePassword">
                                     <Form.Label>וידוא סיסמה</Form.Label>
-                                    <Form.Control type="password" />
+                                    <Form.Control type="password"/>
                                     <Form.Text className="text-muted">
                                     יש להקליד את הסיסמה החדשה שנית
                                     </Form.Text>

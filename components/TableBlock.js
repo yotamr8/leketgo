@@ -83,13 +83,12 @@ class TableBlock extends React.Component {
 		});
 	}
 
-	assignTasks() {
-        
+	assignTasks() {        
         setAssignedTasks(this.props, this.state.selectedEntries, this.state.entrySelectedCounter)
+        this.cancelSelection()
 	}
 
-	handleChangeForm(event) {
-		
+	handleChangeForm(event) {		
 		let fleldVal = event.target.value;
 		this.setState({searchValue: fleldVal});
 	}

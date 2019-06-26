@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Header from '../components/Header.js'
 import Loading from './loading'
 import checkAuthAndRefresh from '../dbActions/checkAuth'
+import { getWeekBeginning, getWeekEnding, getStartDate, getEndOfNextDay, getLastWeekBeginning } from '../dbActions/dates'
 
 class Index extends Component {
     
@@ -44,6 +45,60 @@ class Index extends Component {
                 </div>
             );
         } else {
+            var tasks = this.props.regionalTasks
+            var users = this.props.users
+            console.log(users)
+
+            var urgentTasks = 0;
+            var weeklyTasks = 0;
+            var reportsAwaiting = 0;
+            var futureTasks = 0;
+
+            var now = new Date();
+            var weekBeginning = getWeekBeginning()
+            var dayBeginning = getStartDate()
+            var weekEnding = getWeekEnding()
+            var endOfNextDay = getEndOfNextDay()
+            var lastWeekBeginning = getLastWeekBeginning()
+
+            var uids = {};
+            var activeUsers = 0;
+            var totalUsers = 0;
+
+            for (let user of users) {
+                if (!user.disabled) {
+                    uids[user.uid] = false
+                    totalUsers++;
+                }
+            }
+            console.log(uids)
+
+            for (let task of tasks) {
+                if (task.volunteerUid != null && task.timestamp.toDate() > lastWeekBeginning) {
+                    uids[task.volunteerUid] = true
+                }
+                if (task.volunteerUid == null && task.timestamp.toDate() > dayBeginning && task.timestamp.toDate() < endOfNextDay) {
+                    urgentTasks++;
+                }            
+                if (task.timestamp.toDate() > weekBeginning && task.timestamp.toDate() < weekEnding) {
+                    weeklyTasks++;
+                }
+                if (task.timestamp.toDate() > now && task.timestamp.toDate() < weekEnding) {
+                    futureTasks++;
+                }
+                if ((task.collected && task.reportFilled == false) ||
+                    (task.volunteerUid != null && task.timestamp.toDate() < now && task.reportFilled == false)) {
+                    reportsAwaiting++;
+                }
+            }
+
+            for (let uid in uids) {
+                if (uids[uid]) {
+                    activeUsers++;
+                }
+            }
+
+            console.log(urgentTasks, weeklyTasks, futureTasks, reportsAwaiting )
             return <div>
             <Header page='index' />
             <div className='app'>
@@ -57,7 +112,7 @@ class Index extends Component {
                             <Card.Header>השבוע</Card.Header>
                             <Card.Body>
                             <Card.Text>
-                                <div style={{textAlign: 'center', fontSize: '2rem'}}>5</div>
+                                <div style={{ textAlign: 'center', fontSize: '2rem' }}>{urgentTasks}</div>
                                 <div>
                                     <ButtonToolbar>
                                     <OverlayTrigger
@@ -72,9 +127,9 @@ class Index extends Component {
                                     </OverlayTrigger>
                                     </ButtonToolbar>
                                 </div>
-                                <div className='mt-4'><i className="fas fa-hourglass-start fa-fw"></i>21 איסופים עתידיים</div>
-                                <div><i className="far fa-calendar-times fa-fw"></i>11 משובים לא מולאו</div>
-                                <div><i className="far fa-calendar-alt fa-fw"></i>51 איסופים סה"כ</div>
+                                <div className='mt-4'><i className="fas fa-hourglass-start fa-fw"></i>{futureTasks} איסופים עתידיים</div>
+                                <div><i className="far fa-calendar-times fa-fw"></i>{reportsAwaiting} משובים לא מולאו</div>
+                                <div><i className="far fa-calendar-alt fa-fw"></i>{weeklyTasks} איסופים סה"כ</div>
                             </Card.Text>
                             </Card.Body>
                         </Card>
@@ -82,9 +137,9 @@ class Index extends Component {
                                 <Card.Header>סטטוס מתנדבים</Card.Header>
                                 <Card.Body>
                                 <Card.Text>
-                                    <div style={{textAlign: 'center', fontSize: '2rem'}}>143</div>
+                                    <div style={{ textAlign: 'center', fontSize: '2rem' }}>{activeUsers}</div>
                                     <div  style={{textAlign: 'center'}}>מתנדבים פעילים השבוע</div>
-                                    <div className='mt-4'><i className="far fa-user fa-fw"></i>324 מתנדבים באזור {this.props.userData.region}</div>
+                                    <div className='mt-4'><i className="far fa-user fa-fw"></i>{totalUsers} מתנדבים באזור {this.props.userData.region}</div>
                                     <div><i className="far fa-envelope fa-fw"></i>2 אימותי דוא"ל ממתינים</div>
                                 </Card.Text>
                                 </Card.Body>
