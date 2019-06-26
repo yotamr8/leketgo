@@ -205,7 +205,7 @@ class TableBlock extends React.Component {
 									<option>מספר טלפון</option>
 									<option>דואר אלקטרוני</option>
 								</Form.Control>
-								<FormControl onChange={this.handleChangeForm.bind(this)} aria-describedby="basic-addon1" />
+								<FormControl onChange={this.handleChangeForm.bind(this)} placeholder='חיפוש' />
 								</InputGroup>
 							</Col>
 						</Row>
@@ -246,8 +246,14 @@ class TableBlock extends React.Component {
 									<option>איש קשר</option>
 									<option>טלפון</option>
 								</Form.Control>
-								<FormControl onChange={this.handleChangeForm.bind(this)} aria-describedby="basic-addon1" />
+								<FormControl onChange={this.handleChangeForm.bind(this)} placeholder='חיפוש' />
 								</InputGroup>
+							</Col>
+							<Col>
+								<ButtonGroup aria-label="Basic example">
+									<Button variant="secondary">טרם שובצו</Button>
+									<Button variant="secondary">טרם בוצעו</Button>
+								</ButtonGroup>
 							</Col>
 						</Row>
 					</Form>
