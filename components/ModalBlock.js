@@ -897,6 +897,23 @@ class ModalBlock extends React.Component {
                             text: 'ביטול'
                         }];
                     break;
+            case 'TASK_STATUS':
+                title = 'סטטוס';
+                body = (
+                    <div>גוף הסטטוס</div>
+                );
+                buttons = {
+                    {
+                        onClick: () => {
+                            this.resetState()
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                        },
+                        variant: 'secondary',
+                        text: 'ביטול'
+                    }
+                }
+
+                break;
           /*  case 'ADD_TASK_CSV':                            TODO remove?               
                 title = 'הוספת איסופים מקובץ';
                 body = <span></span>;

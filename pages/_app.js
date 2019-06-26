@@ -4,6 +4,7 @@ import {Provider} from 'react-redux'
 import App, {Container} from "next/app"
 import withRedux from 'next-redux-wrapper'
 import ModalBlock from '../components/ModalBlock.js'
+import Toasts from '../components/Toasts.js'
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -22,7 +23,6 @@ const reducer = (state = initialState, action) => {
         case 'LOGIN':
             return {
                 ...state, isLoggedIn: true, loginErr: false, userData: { ...action.user, uid:action.uid }};
-            console.log("logged in store")
             break;
         case 'LOGIN_ERR':
             return { ...state, isLoggedIn: false, loginErr: action.msg};
@@ -58,8 +58,26 @@ const reducer = (state = initialState, action) => {
             return { ...state, tasksCardView: false };
         case 'TASK_CARDS_VIEW':
             return { ...state, tasksCardView: true };
+            break;
+        case 'PUSH_TOAST':
+            {
+            let newToasts = [...state.toasts];
+            newToasts.push({
+                title: action.title,
+                body: action.body,
+                icon: (action.icon ? action.icon : ''),
+                delay: (action.delay ? action.delay : 3000),
+            });
+            return { ...state, toasts: newToasts};
+        }
+        case 'DISMISS_TOAST':
+            {
+                let newToasts = [...state.toasts];
+                newToasts = newToasts.splice(action.index, 1);
+                return { ...state, toasts: newToasts};
+            }
         default:
-            return state
+            return state;
     }
 };
 
@@ -73,6 +91,7 @@ var initialState = {
     modal: {
         isOpen: false,
     },
+    toasts: [],
     unassignedTasks: [],
     assignedTasks: [],
     taskReports: [],
@@ -97,6 +116,7 @@ class MyApp extends App {
             <Container>
                 <Provider store={store}>
                     <ModalBlock />
+                    <Toasts />
                     <Component {...pageProps} />  
                 </Provider>
             </Container>

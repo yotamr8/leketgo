@@ -37,10 +37,31 @@ class TableBlock extends React.Component {
 			searchValue: '',
 			searchField: this.props.page == 'adminUsers' ? 'firstName' : 'name',
 		};
+
+		this.divElement = React.createRef();
 		this.selectCallback = this.selectCallback.bind(this);
 		this.cancelSelection = this.cancelSelection.bind(this);
 		this.assignTasks = this.assignTasks.bind(this);
 	}
+
+	componentDidMount() {
+        if (!this.props.isLogin) {
+			console.log(this.divElement);
+			if(this.divElement.current) {
+				const actionBarHeight = this.divElement.current.clientHeight;
+				let root = document.documentElement;
+				root.style.setProperty('--bottom-navbar-height', actionBarHeight + "px");
+			}
+        }
+	}
+	
+	componentDidUpdate() {
+        if (!this.props.isLogin) {
+			const actionBarHeight = this.divElement.current.clientHeight;
+			let root = document.documentElement;
+            root.style.setProperty('--bottom-navbar-height', actionBarHeight + "px");
+        }
+    }
 
 	getTableColumns() {
 		switch (this.props.page) {
@@ -50,10 +71,18 @@ class TableBlock extends React.Component {
 				return ['date', 'time', 'fullAddressWithButtons', 'name', 'contactName', 'contactNumber', 'actions'];
 			case 'taskReports':
 				return ['date', 'time', 'fullAddressWithButtons', 'name', 'contactName', 'contactNumber', 'actions'];
+			case 'history':
+				return ['date', 'time', 'fullAddressWithButtons', 'name', 'contactName', 'contactNumber'];
 			case 'adminUsers':
-				return ['tz', 'firstName', 'lastName', 'email', 'phone', 'region', 'actions'];
+			return ['tz', 'firstName', 'lastName', 'email', 'phone', 'region', 'actions'];
+			case 'adminUsersDeactivated':
+			return ['tz', 'firstName', 'lastName', 'email', 'phone', 'region', 'actions'];
 			case 'adminTasks':
 					return ['status', 'date', 'time', 'street', 'city', 'name', 'actions'];
+			case 'adminTasksPast':
+					return ['status', 'date', 'time', 'street', 'city', 'name', 'actions'];
+			case 'adminTasksFuture':
+			return ['status', 'date', 'time', 'street', 'city', 'name', 'actions'];
 			default:
 				break;
 		}
@@ -142,50 +171,28 @@ class TableBlock extends React.Component {
 	}
 
 	render() {
-		if (this.props.data.length == 0){
-			return (
-				<div style={{
-					display: 'flex',
-					width: '100%',
-					alignItems: 'center',
-					justifyContent: 'center'
-				}}>
-					<div className="nothing" style= {{
-						display: 'flex',
-						flexDirection: 'column',
-						alignItems: 'center',
-						justifyContent: 'center'
-		
-					}}>
-						<img src="/static/nothing.png" width="100"/>
-						<div style={{
-							fontSize: '20px',
-							marginTop: '10px'
-						}}>המממ... אין כאן כלום</div>
-					</div>
-				</div>
-			);
-		} else {
+		// Setting actionsBar
 		let actionsBar = '';
 		if (this.props.isSelectable && this.state.entrySelectedCounter > 0) {
 			actionsBar = 
-				<Navbar bg='light' fixed='bottom'>
+				<Navbar bg='light'>
 					<ButtonGroup>
 						<Button onClick={this.assignTasks} variant='primary'>שיבוץ {this.state.entrySelectedCounter} איסופים</Button>
 						<Button onClick={this.cancelSelection} variant='secondary'>ביטול</Button>
 					</ButtonGroup>
 				</Navbar>;
 		}
-		if (this.props.isSearchable && this.props.page=='adminUsers') {
+		if (this.props.isSearchable && (this.props.page=='adminUsers' || this.props.page=='adminUsersDeactivated')) {
 			actionsBar = 
-				<Navbar bg='light' fixed='bottom'>
+				<Navbar bg='light'>
 					<Form>
 						<Row>
 							<Col>
-						<div className="btn-group" role="group" aria-label="Basic example">
+						<ButtonGroup>
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER', entries: this.props.entry})}>הוספת מתנדב</button>
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER_CSV', entries: this.props.entry})}>הוספה מקובץ</button></div>
+							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER_CSV', entries: this.props.entry})}>הוספה מקובץ</button>
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EXPORT_USER_CSV', entries: this.props.entry})}>ייצוא דוח מתנדבים</button>
+							</ButtonGroup>
 							</Col>
 							<Col>
 								<InputGroup className="mb-3">
@@ -209,23 +216,25 @@ class TableBlock extends React.Component {
 					</Form>
 				</Navbar>;
 		}
-		if (this.props.isSearchable && this.props.page=='adminTasks') {
+		if (this.props.isSearchable && (this.props.page=='adminTasks' || this.props.page=='adminTasksPast' || this.props.page=='adminTasksFuture')) {
 			actionsBar = 
-				<Navbar bg='light' fixed='bottom'>
+				<Navbar bg='light'>
 					<Form>
+					<input type='file' id='fileUploader' accept='xlsx' style={{ display: "none" }} onChange={(e) => handleFileUpload(e.target.files[0])} />
 						<Row>
 							<Col>
-						<div className="btn-group" role="group" aria-label="Basic example">
-							<input type='file' id='fileUploader' accept='xlsx' style={{ display: "none" }} onChange={(e) => handleFileUpload(e.target.files[0])} />
+						<ButtonGroup>
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK', entries: this.props.entry})}>הוספת איסוף</button>
+							
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick=
 							{() =>
 								document.getElementById('fileUploader').click()
 								//this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK_CSV', entries: this.props.entry})
 							}
 							>הוספה מקובץ</button>
+							
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EXPORT_TASK_CSV', entries: this.props.entry})}>ייצוא דוח איסופים</button>
-							</div>
+							</ButtonGroup>
 							</Col>
 							<Col>
 								<InputGroup className="mb-3">
@@ -248,8 +257,37 @@ class TableBlock extends React.Component {
 					</Form>
 				</Navbar>;
 		}
+
+		if (this.props.data.length == 0) {
+			return (<div>
+				<div style={{
+					display: 'flex',
+					width: '100%',
+					alignItems: 'center',
+					justifyContent: 'center'
+				}}>
+					<div className="nothing" style= {{
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+						justifyContent: 'center'
+		
+					}}>
+						<img src="/static/nothing.png" width="100"/>
+						<div style={{
+							fontSize: '20px',
+							marginTop: '10px'
+						}}>המממ... אין כאן כלום</div>
+					</div>
+				</div>
+				<div id='bottom-nav' ref={this.divElement}>
+			{actionsBar}
+			</div></div>
+			);
+		} else {
 		if (this.props.tableTasksCardView){
 			return (
+				<div>
 				<CardColumns>
 					{this.props.data.map((entry) => {
 						let options = { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -258,10 +296,13 @@ class TableBlock extends React.Component {
 								<Entry tableTasksCardView={this.props.tableTasksCardView} page={this.props.page} type={this.props.type} key={entry.id} selectCallback={this.selectCallback} entry={entry} tableColumns={this.state.tableColumns}/>
 						);})}
 				</CardColumns>
+				<div id='bottom-nav'  ref={this.divElement}>
+				</div>
+				</div>
 			);
 		}
 		else {
-		return (
+		return (<div>
 			<div className="table-responsive">
 				<Table hover responsive>
 					<thead>
@@ -296,10 +337,14 @@ class TableBlock extends React.Component {
 						})}
 					</tbody>
 				</Table>
-				{actionsBar}
+				
+			</div>
+			<div id='bottom-nav' ref={this.divElement}>
+			{actionsBar}
+			</div>
 			</div>
 		);}
-					}
+	}
 	}
 }
 

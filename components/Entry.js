@@ -158,7 +158,12 @@ class Entry extends React.Component {
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'CHANGE_PASSWORD', entries: this.props.entry}),
                         variant: 'outline-secondary',
-                        text: <span><i className="fas fa-unlock-alt fa-fw"></i>איפוס סיסמה</span>
+                        text: <span><i className="fas fa-unlock-alt fa-fw"></i>שינוי סיסמה</span>
+                    },
+                    {
+                        onClick: () => this.props.dispatch({ type: 'PUSH_TOAST', title: 'הועלו בהצלחה', body:'איזה כיף', delay: 5000}),
+                        variant: 'outline-secondary',
+                        text: <span><i className="fas fa-crown"></i>הפוך למנהל</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REMOVE_USER', entries: this.props.entry}),

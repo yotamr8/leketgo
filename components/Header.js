@@ -7,17 +7,60 @@ import Link from 'next/link'
 import '../static/bootstrap.min.scss'
 import '../static/styles.scss'
 import Logo from '../components/Logo.js'
+import Help from '../components/Help.js'
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             isUserDropdown: false,
+            userPages: [
+                {
+                    id: 'index',
+                    name: 'איסופים פנויים',
+                    href: '/'
+                },
+                {
+                    id: 'assignedTasks',
+                    name: 'האיסופים הקרובים שלי',
+                    href: 'assigned-tasks'
+                },
+                {
+                    id: 'taskReports',
+                    name: 'מילוי משוב',
+                    href: 'task-reports'
+                },
+                {
+                    id: 'history',
+                    name: 'היסטוריה',
+                    href: 'history'
+                },
+            ],
+            adminPages: [
+                {
+                    id: 'index',
+                    name: 'לוח בקרה',
+                    href: '/'
+                },
+                {
+                    id: 'adminUsers',
+                    name: 'מתנדבים',
+                    href: 'users'
+                },
+                {
+                    id: 'adminTasks',
+                    name: 'איסופים',
+                    href: 'tasks'
+                },
+            ]
         }
-
+        this.isActive = this.isActive.bind(this);
         this.toggleUserDropDown = this.toggleUserDropDown.bind(this);
     }
 
+    isActive(page) {
+        return page == this.props.active;
+    }
     componentDidMount() {
         if (!this.props.isLogin){
             let root = document.documentElement;
@@ -48,17 +91,20 @@ class Header extends React.Component {
             let trNum = this.props.taskReports.length;
             pages = 
             <Nav className="mr-auto">
-                <Link className='navlink' href="/"><a className='nav-link'>שיבוץ לאיסופים</a></Link>
-                <Link href="/assigned-tasks"><a className='nav-link'>איסופים קרובים {atNum > 0 ? <Badge variant="secondary">{atNum}</Badge> : ''}</a></Link>
-                <Link href="/task-reports"><a className='nav-link'>מילוי משוב {trNum > 0 ? <Badge variant="secondary">{trNum}</Badge> : ''}</a></Link>
-				<Link href="/history"><a className='nav-link'>היסטוריה</a></Link>
+            {this.state.userPages.map((page, index) => {
+                return (
+                    <Link className='navlink' href={page.href}><a className={'nav-link' + (this.isActive(page.id) ? ' active' : '')}>{page.name}</a></Link>
+                    );
+                })}
             </Nav>;
         } else {
             pages = 
             <Nav className="mr-auto">
-                <Link href="/"><a className='nav-link'>לוח בקרה</a></Link>
-                <Link href="/tasks"><a className='nav-link'>איסופים</a></Link>
-                <Link href="/users"><a className='nav-link'>מתנדבים</a></Link>
+                {this.state.adminPages.map((page, index) => {
+                return (
+                    <Link className='navlink' href={page.href}><a className={'nav-link' + (this.isActive(page.id) ? ' active' : '')}>{page.name}</a></Link>
+                    );
+                })}
             </Nav>;
         }
         let navbar = '';
@@ -74,18 +120,19 @@ class Header extends React.Component {
                     <NavDropdown.Divider />
                     <Link href='/login'><a className='dropdown-item' onClick={this.logout}><i className="fas fa-sign-out-alt fa-fw"></i>התנתקות</a></Link>
                 </NavDropdown>
-                <ButtonToolbar>
+                {this.props.userData.admin ? <ButtonToolbar>
                 <OverlayTrigger
                     key='help'
                     placement='bottom'
                     overlay={
                         <Tooltip id='tooltip'>
-                        עזרה
+                        מנהל
                         </Tooltip>
                     }>
-                    <Nav.Link><i className="fas fa-question-circle"></i></Nav.Link>
+                    <Nav.Link><i className="fas fa-crown nm"></i></Nav.Link>
                 </OverlayTrigger>
-                </ButtonToolbar>
+                </ButtonToolbar> : ''}
+                <Help page={this.props.active} />
                 </Nav>
             </Navbar.Collapse>
         </Navbar>;
@@ -99,7 +146,9 @@ class Header extends React.Component {
                         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                         <title>לקט־GO</title>
                     </Head>
+                    <div style={{zIndex: '2'}}>
                     {navbar}
+                    </div>
                 </div>
             );
     }

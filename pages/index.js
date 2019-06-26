@@ -31,21 +31,21 @@ class Index extends Component {
         if (!this.props.userData.admin) {
             return (
                 <div>
-                <Header page='index' />
-                <div className='app'>
-                <div className="wrapper d-flex justify-content-center">
-                    <main className="m-2" style={{ paddingBottom: '3rem' }}>
-                        {alert}
-                        <div className="mb-4 mt-4">
-                            <h2><img src='/static/assign.png' width="60"/>שיבוץ לאיסופים</h2>
-                        </div>
-                        <TableBlock isSelectable={true} data={this.props.unassignedTasks} page='index' type='tasks' />
-                    </main></div></div>
+                    <Header active='index' />
+                    <div className='app'>
+                    <div className="wrapper d-flex justify-content-center">
+                        <main className="m-2">
+                            {alert}
+                            <div className="mb-4 mt-4">
+                                <h2><img src='/static/assign.png' width="60"/>איסופים פנויים</h2>
+                            </div>
+                            <TableBlock isSelectable={true} data={this.props.unassignedTasks} page='index' type='tasks' />
+                        </main></div></div>
                 </div>
             );
         } else {
             return <div>
-            <Header page='index' />
+            <Header active='index' />
             <div className='app'>
             <div className="wrapper d-flex justify-content-center">
                 <main className="m-2" style={{ paddingBottom: '3rem' }}>

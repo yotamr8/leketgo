@@ -35,7 +35,7 @@ class Task_reports extends Component {
         }
         return (
             <div>
-                <Header />
+                <Header active='taskReports'/>
                 <div className='app'>
                     <div className="wrapper d-flex justify-content-center">
                         <main className="m-2" style={{ paddingBottom: '3rem' }}>

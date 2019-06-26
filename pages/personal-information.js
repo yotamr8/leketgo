@@ -40,9 +40,9 @@ class Personal_information extends Component {
         var user = this.props.userData;
         return (
                 <div>
-                    <Header /><div className='app'>
+                    <Header active='profile'/><div className='app'>
                     <div className="wrapper d-flex justify-content-center">
-                    <main className="m-2" style={{paddingBottom: '3rem'}}>
+                    <main className="m-2">
                         <div className="mt-4 mb-4">
                             <h2><img src='/static/profile.png' width="60"/>עדכון פרטים אישיים</h2>
                         </div>
@@ -108,11 +108,9 @@ class Personal_information extends Component {
                                     </Form.Text>
                                 </Form.Group>
                             </Form.Row>
-                            <Navbar bg='light' fixed='bottom'>
-                                <Button variant="primary" type="submit">
+                            <Button variant="primary" type="submit">
                                     שמירת שינויים
-                                </Button>
-                            </Navbar>
+                            </Button>
                         </Form>
                     </main></div></div>
                 </div>

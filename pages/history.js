@@ -35,12 +35,12 @@ class History extends Component {
         }
         return (
             <div>
-                <Header />
+                <Header active='history'/>
                 <div className='app'>
                     <div className="wrapper d-flex justify-content-center">
-                        <main className="m-2" style={{ paddingBottom: '3rem' }}>
+                        <main className="m-2">
                             <div className="mb-4 mt-4 d-flex flex-row justify-content-between align-items-center">
-                                <h2><img src='/static/report.png' width="60"/>מילוי משוב</h2>
+                                <h2><img src='/static/history.png' width="60"/>היסטוריה</h2>
                                 <ButtonGroup>
                                     <Button onClick={() => this.toList()} variant={!this.props.tasksCardView ? 'primary' : 'outline-secondary'}><i class="fas fa-list nm"></i></Button>
                                     <Button onClick={() => this.toCards()} variant={this.props.tasksCardView ? 'primary' : 'outline-secondary'}><i class="far fa-clone nm"></i></Button>

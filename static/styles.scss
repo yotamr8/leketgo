@@ -4,6 +4,13 @@ html {
   direction: rtl;
 }
 
+#bottom-nav {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+
 .wiggle {
   animation-name: wiggle;
   transform: rotate(5deg);
@@ -23,6 +30,7 @@ html {
 :root {
   --font-family-sans-serif: 'Heebo';
   --top-navbar-height: 0px;
+  --bottom-navbar-height: 0px;
 }
 
 body, .tooltip, .popover {
@@ -36,7 +44,7 @@ body, .tooltip, .popover {
 }
 
 .app {
-  height: calc(100vh - var(--top-navbar-height));
+  height: calc(100vh - var(--top-navbar-height) - var(--bottom-navbar-height));
   overflow-y: scroll;
 }
 
