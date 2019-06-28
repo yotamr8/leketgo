@@ -23,17 +23,17 @@ class Header extends React.Component {
                 {
                     id: 'assignedTasks',
                     name: 'האיסופים הקרובים שלי',
-                    href: 'assigned-tasks'
+                    href: '/assigned-tasks'
                 },
                 {
                     id: 'taskReports',
                     name: 'מילוי משוב',
-                    href: 'task-reports'
+                    href: '/task-reports'
                 },
                 {
                     id: 'history',
                     name: 'היסטוריה',
-                    href: 'history'
+                    href: '/history'
                 },
             ],
             adminPages: [
@@ -45,12 +45,12 @@ class Header extends React.Component {
                 {
                     id: 'adminUsers',
                     name: 'מתנדבים',
-                    href: 'users'
+                    href: '/users'
                 },
                 {
                     id: 'adminTasks',
                     name: 'איסופים',
-                    href: 'tasks'
+                    href: '/tasks'
                 },
             ]
         }
