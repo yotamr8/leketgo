@@ -46,10 +46,13 @@ class Login extends Component {
         var emailAddress = this.state.email;
 
         auth.sendPasswordResetEmail(emailAddress).then(() => {
-            console.log("mail sent")
+            console.log("mail sent");
+            var title = 'קישור לאיפוס סיסמא נשלח למייל בהצלחה'; 
+            var body = 'במידה ולא בדואר נכנס, יתכן כי בתיבת דואר זבל';
+            this.props.dispatch({ type: 'PUSH_TOAST', title: title, body: body, delay: 50000 })
             // TODO open modal - a mail has been sent to the email: this.state.email with a link. if you do not want to reset your password - dont do anything.
         }).catch((err) => {
-            console.log("not sent", err)
+            console.log("not sent", err);
             this.props.dispatch({ type: 'LOGIN_ERR', msg: err.message }); // this is done so the error message appears in the alert below            
         });
 
