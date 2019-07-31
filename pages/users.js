@@ -7,6 +7,7 @@ import checkAuthAndRefresh from '../dbActions/checkAuth'
 import Loading from './loading'
 import {Nav} from 'react-bootstrap'
 import Link from 'next/link'
+import Router from 'next/router'
 
 class Users extends Component {    
     constructor(props) {
@@ -82,6 +83,12 @@ class Users extends Component {
         if (!this.props.authChecked || !this.props.isLoggedIn) {
             return (<Loading />)
         }
+                
+        if (!this.props.userData.admin) {
+            Router.push('/');
+            return (<div></div>)
+        }
+
         let activeTable = this.state.tables[this.state.activeTable];
         return (
             <div>

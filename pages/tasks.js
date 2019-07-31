@@ -8,7 +8,7 @@ import Loading from './loading'
 import {Nav} from 'react-bootstrap'
 import Link from 'next/link'
 import { getWeekBeginning, getWeekEnding, getStartDate, getEndOfNextDay, getLastWeekBeginning } from '../dbActions/dates'
-
+import Router from 'next/router'
 
 class Users extends Component {
 
@@ -111,6 +111,12 @@ class Users extends Component {
         if (!this.props.authChecked || !this.props.isLoggedIn) {
             return (<Loading />)
         }
+        
+        if (!this.props.userData.admin) {
+            Router.push('/');
+            return (<div></div>)
+        }
+        console.log('after')
         let activeTable = this.state.tables[this.state.activeTable];
         return (
             <div>
