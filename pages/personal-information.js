@@ -9,7 +9,12 @@ import editUser from '../dbActions/editUser'
 class Personal_information extends Component {
     constructor(...args) {
         super(...args);
-        this.state = { validated: true };
+        this.state = { 	validated: true,
+						isMailValid: true,
+						isPasswordlengthValid: true,
+						isDoublePasswordsMatch: true,
+						isPhoneValid: true
+					};
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -21,18 +26,21 @@ class Personal_information extends Component {
         const form = event.currentTarget;
         
         let formEmail = document.getElementById('formEmail').value;
-		let isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(formEmail)
+		this.state.isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(formEmail)
         console.log("mail valid: " + isMailValid);
 		
+		this.state.isPhoneValid = /^\d{10}$/.test(this.state.contactNumber);
+		console.log("phone length valid: " + this.state.isPhoneValid);
+		
 		let formPassword = document.getElementById('formPassword').value;
-		let isPasswordlengthValid = /^.{6,}$|^$/.test(formPassword);
+		this.state.isPasswordlengthValid = /^.{6,}$|^$/.test(formPassword);
 		console.log("password length valid: " + isPasswordlengthValid);
 		
 		let formValidatePassword = document.getElementById('formValidatePassword').value;
-		let isDoublePasswordsMatch = formValidatePassword == formPassword;
+		this.state.isDoublePasswordsMatch = formValidatePassword == formPassword;
 		console.log("2nd Password match: " + isDoublePasswordsMatch)
 		
-		if(!isPasswordlengthValid || !isMailValid || !isDoublePasswordsMatch) {
+		if(!this.state.isPasswordlengthValid || !this.state.isMailValid || !this.state.isDoublePasswordsMatch || !this.state.isPhoneValid) {
 			this.state.validated = false;
 		}
         
@@ -96,16 +104,16 @@ class Personal_information extends Component {
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formEmail">
                                     <Form.Label>כתובת דואר אלקטרוני</Form.Label>
-                                    <Form.Control required type='email' defaultValue={user.email}/>
+                                    <Form.Control required type='email' defaultValue={user.email} isInvalid={!this.state.isMailValid}/>
                                     <Form.Control.Feedback type="invalid">
                                         זהו שדה חובה. אנא בדקו שהכנסתם כתובת תקינה.
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formPhone">
                                     <Form.Label>מספר טלפון</Form.Label>
-                                    <Form.Control required type='tel' defaultValue={user.phone}/>
+                                    <Form.Control required type='tel' defaultValue={user.phone} isInvalid={!this.state.isPhoneValid}/>
 									<Form.Control.Feedback type="invalid">
-                                        זהו שדה חובה.
+                                        אנא הכניסו מספר טלפון חוקי
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Form.Row>
@@ -131,14 +139,14 @@ class Personal_information extends Component {
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formPassword">
                                     <Form.Label>סיסמה חדשה</Form.Label>
-                                    <Form.Control type="password"/>
+                                    <Form.Control type="password" isInvalid={!this.state.isPasswordlengthValid}/>
 									<Form.Control.Feedback type="invalid">
                                         אנא הכניסו סיסמא של 6 אותיות לפחות
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formValidatePassword">
                                     <Form.Label>וידוא סיסמה</Form.Label>
-                                    <Form.Control type="password"/>
+                                    <Form.Control type="password" isInvalid={!this.state.isDoublePasswordsMatch}/>
                                     <Form.Text className="text-muted">
                                     יש להקליד את הסיסמה החדשה שנית
                                     </Form.Text>

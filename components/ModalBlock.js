@@ -47,7 +47,10 @@ const initialState = {
     lastName: "",
     region: "",
     password : "",
-	validated: false
+	validated: false,
+	isTZValid: false,
+	isMailValid: false,
+	isPhoneValid: false
 }
 
 class ModalBlock extends React.Component {
@@ -121,13 +124,13 @@ class ModalBlock extends React.Component {
           post: { ...prevState.post, [name]: value }
         }));
     };
-  
+	
     validateTaskInfo(){
 		
-		let isPhoneValid = /^\d{10}$/.test(this.state.contactNumber);
-		console.log("phone length valid: " + isPhoneValid);
+		this.state.isPhoneValid = /^\d{10}$/.test(this.state.contactNumber);
+		console.log("phone length valid: " + this.state.isPhoneValid);
 		
-        if (!isPhoneValid) {
+        if (!this.state.isPhoneValid) {
           console.log("nonvalid")
 		  return false;
         }
@@ -136,17 +139,16 @@ class ModalBlock extends React.Component {
 	
 	validateUserInfo(){
 		
-		let isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.state.email)
-        console.log("mail valid: " + isMailValid);
+		this.state.isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.state.email)
+        console.log("mail valid: " + this.state.isMailValid);
 		
-		let isTZValid = /^\d{9}$/.test(this.state.tz);
-		// TODO add real TZ check
-		console.log("TZ length valid: " + isTZValid);
+		this.state.isTZValid = /^\d{9}$/.test(this.state.tz);
+		console.log("TZ length valid: " + this.state.isTZValid);
 		
-		let isPhoneValid = /^\d{10}$/.test(this.state.phone);
-		console.log("phone length valid: " + isPhoneValid);
+		this.state.isPhoneValid = /^\d{10}$/.test(this.state.phone);
+		console.log("phone length valid: " + this.state.isPhoneValid);
 		
-		if(!isMailValid || !isTZValid || !isPhoneValid) {
+		if(!this.state.isMailValid || !this.state.isTZValid || !this.state.isPhoneValid) {
           console.log("nonvalid")
 		  return false;
         }
@@ -555,7 +557,10 @@ class ModalBlock extends React.Component {
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formTZ">
                                     <Form.Label>תעודת זהות</Form.Label>
-                                    <Form.Control id="tz" onChange={this.handleChange} />
+                                    <Form.Control id="tz" onChange={this.handleChange} isInvalid={!this.state.isTZValid}/>
+									<Form.Control.Feedback type="invalid">
+                                        אנא הכניסו תעודת זהות תקינה
+									</Form.Control.Feedback>
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
@@ -570,13 +575,19 @@ class ModalBlock extends React.Component {
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formEmail">
                                     <Form.Label>כתובת דואר אלקטרוני</Form.Label>
-                                    <Form.Control type="email" id="email" onChange={this.handleChange} />
-                                </Form.Group>
+                                    <Form.Control type="email" id="email" onChange={this.handleChange} isInvalid={!this.state.isMailValid}/>
+									<Form.Control.Feedback type="invalid">
+                                        אנא הכניסו כתובת דואר אלקטרוני חוקית
+									</Form.Control.Feedback>
+								</Form.Group>
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formPhone">
                                     <Form.Label>מספר טלפון</Form.Label>
-                                    <Form.Control id="phone" onChange={this.handleChange} />
+                                    <Form.Control id="phone" onChange={this.handleChange} isInvalid={!this.state.isPhoneValid}/>
+									<Form.Control.Feedback type="invalid">
+                                        אנא הכניסו מספר טלפון חוקי
+									</Form.Control.Feedback>
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
@@ -676,9 +687,12 @@ class ModalBlock extends React.Component {
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formTZ">
-                                    <Form.Label>תעודת זהות</Form.Label>
-                                    <Form.Control value={this.state.tz} id="tz" onChange={this.handleChange} />
-                                </Form.Group>
+                                    <Form.Label>תעודת זהות{this.state.isTZValid}</Form.Label>
+                                    <Form.Control value={this.state.tz} id="tz" onChange={this.handleChange} isInvalid={!this.state.isTZValid}/>
+									<Form.Control.Feedback type="invalid">
+                                        אנא הכניסו תעודת זהות תקינה
+									</Form.Control.Feedback>
+								</Form.Group>
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col}>
@@ -691,13 +705,19 @@ class ModalBlock extends React.Component {
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formEmail">
                                     <Form.Label>כתובת דואר אלקטרוני</Form.Label>
-                                    <Form.Control type="email" value={this.state.email} id="email" onChange={this.handleChange} />
-                                </Form.Group>
+                                    <Form.Control type="email" value={this.state.email} id="email" onChange={this.handleChange} isInvalid={!this.state.isMailValid}/>
+									<Form.Control.Feedback type="invalid">
+                                        אנא הכניסו כתובת דואר אלקטרוני חוקית
+									</Form.Control.Feedback>
+								</Form.Group>
                             </Form.Row>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formPhone">
                                     <Form.Label>מספר טלפון</Form.Label>
-                                    <Form.Control value={this.state.phone} id="phone" onChange={this.handleChange} />
+                                    <Form.Control value={this.state.phone} id="phone" onChange={this.handleChange} isInvalid={!this.state.isPhoneValid}/>
+									<Form.Control.Feedback type="invalid">
+                                        אנא הכניסו מספר טלפון חוקי
+									</Form.Control.Feedback>
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
@@ -716,7 +736,7 @@ class ModalBlock extends React.Component {
                                     <Form.Control value={this.state.comment} id="comment" onChange={this.handleChange} />
                                 </Form.Group>
                             </Form.Row>
-                        </Form>;
+                        </Form>
                 buttons = [
                     {
                         onClick: () => {
@@ -890,7 +910,10 @@ class ModalBlock extends React.Component {
                             </Form.Group>
                             <Form.Group as={Col} controlId="formLastName">
                                 <Form.Label>טלפון איש קשר</Form.Label>
-                                <Form.Control id="contactNumber" onChange={this.handleChange} />
+                                <Form.Control id="contactNumber" onChange={this.handleChange} isInvalid={!this.state.isPhoneValid}/>
+									<Form.Control.Feedback type="invalid">
+                                        אנא הכניסו מספר טלפון חוקי
+									</Form.Control.Feedback>
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
@@ -994,7 +1017,10 @@ class ModalBlock extends React.Component {
                             </Form.Group>
                             <Form.Group as={Col} controlId="formPhone">
                                 <Form.Label>טלפון איש קשר</Form.Label>
-                                <Form.Control value={this.state.contactNumber} id="contactNumber" onChange={this.handleChange} />
+                                <Form.Control value={this.state.contactNumber} id="contactNumber" onChange={this.handleChange} isInvalid={!this.state.isPhoneValid}/>
+									<Form.Control.Feedback type="invalid">
+                                        אנא הכניסו מספר טלפון חוקי
+									</Form.Control.Feedback>
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
