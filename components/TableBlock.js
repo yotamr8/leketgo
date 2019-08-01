@@ -3,7 +3,8 @@ import Entry from '../components/Entry'
 import { connect } from "react-redux"
 import { Table,CardColumns, Card, Button, ButtonGroup, InputGroup, Form, Col, Row, DropdownButton, Dropdown, FormControl, Navbar } from 'react-bootstrap'
 import setAssignedTasks from '../dbActions/setAssignedTasks'
-import handleFileUpload from '../dbActions/addTasksFromFile'
+import handleTaskFileUpload from '../dbActions/addTasksFromFile'
+import handleUserFileUpload from '../dbActions/addUsersFromFile'
 
 class TableBlock extends React.Component {
 	constructor(props) {
@@ -176,8 +177,7 @@ class TableBlock extends React.Component {
         })
     }
 
-    render() {
-        console.log(this.props)
+    render() {        
 		// Setting actionsBar
 		let actionsBar = '';
 		if (this.props.isSelectable && this.state.entrySelectedCounter > 0) {
@@ -197,7 +197,7 @@ class TableBlock extends React.Component {
 							<Col>
 						<ButtonGroup>
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER', entries: this.props.entry})}>הוספת מתנדב</button>
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER_CSV', entries: this.props.entry})}>הוספה מקובץ</button>
+							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_USER_FILE', entries: this.props.entry})}>הוספה מקובץ</button>
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EXPORT_USER_CSV', entries: this.props.entry})}>ייצוא דוח מתנדבים</button>
 							</ButtonGroup>
 							</Col>
@@ -227,7 +227,7 @@ class TableBlock extends React.Component {
 			actionsBar = 
 				<Navbar bg='light'>
 					<Form>
-					<input type='file' id='fileUploader' accept='xlsx' style={{ display: "none" }} onChange={(e) => handleFileUpload(this.props, e.target.files[0])} />
+					<input type='file' id='fileUploader' accept='xlsx' style={{ display: "none" }} onChange={(e) => handleTaskFileUpload(this.props, e.target.files[0])} />
 						<Row>
 							<Col>
 						<ButtonGroup>
@@ -353,8 +353,7 @@ class TableBlock extends React.Component {
                                     if (this.state.filterValue != "הכל" && statusMessage != this.state.filterValue) {
                                         return
                                     }
-                                }                            
-                                console.log(this.props.page, this.state.filterValue, entry)
+                                }                                                            
                                 for (let key in entry) {
 									if (key == this.state.searchField)
 										if(entry[key].includes(this.state.searchValue))

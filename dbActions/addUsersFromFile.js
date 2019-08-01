@@ -1,8 +1,8 @@
 import fire from '../config/firebaseConfig';
-import getAllRegionTasks from './getAllRegionTasks'
+import addUser from './addUser'
 import XLSX from 'xlsx';
 
-export default function handleFileUpload(props, file) {
+export default function handleUserFileUpload(props, file) {
     const reader = new FileReader();
 
     reader.onload = (evt) => {
@@ -19,48 +19,30 @@ export default function handleFileUpload(props, file) {
     console.log(file);
 }
 
-function addUsers(props, data) {
-    const taskCollection = fire.firestore().collection('tasks');
-    const timeStampCreator = fire.firebase_.firestore.Timestamp;
+function addUsers(props, data) {    
     var rows = data.split(/[\r\n|\n]+/);
     for (let i = 1; i < rows.length; i++) {
         var row = text2arr(rows[i]);
 
         if (row[0] == "" || row[1] == "" || row[2] == "" || row[3] == ""
-            || row[4] == "" || row[5] == "" || row[6] == "" || row[8] == "") {
+            || row[4] == "" || row[5] == "" || row[6] == "" || row[7] == "") {
             continue
         }
-
-        let year = row[1].split('/')[2]
-        year = (year.length == 2) ? ("20" + year) : year
-        let month = row[1].split('/')[1]
-        month = (month.length == 1) ? ("0" + month) : month
-        let day = row[1].split('/')[0]
-        day = (day.length == 1) ? ("0" + day) : day
-        let date = year + "-" + month + "-" + day
-        var timeStamp = timeStampCreator.fromDate(new Date(date + 'T' + row[2]));
-
-        var firstSuccess = false;
-
-        taskCollection.doc().set({  // generates unique id for task
-            name: row[0],
-            timestamp: timeStamp,
-            city: row[3],
-            address: row[4],
-            "contact number": row[5],
-            "contact name": row[6],
-            notes: row[7],
-            region: row[8],
-            volunteerUid: null,
-            reportFilled: false,
-            collected: false
-        }).then(() => {
-            if (!firstSuccess) {
-                firstSuccess = true;
-                props.dispatch({ type: 'PUSH_TOAST', title: 'הצלחה', body: 'המידע מהקובץ הועלה בהצלחה.', delay: 5000 })  //TODO cant write here in hebrew
-            }
-        });
-        getAllRegionTasks(props.dispatch, props.userData.region)
+               
+        let user = {
+            firstName: row[0],
+            lastName: row[1],
+            phone: row[2],
+            region: row[3],
+            tz: row[4],            
+            email: row[5],            
+            city: row[6],
+            address: row[7],            
+            comment: (row[8] != "") ? row[8] : "",
+            admin: (row[9] != "") ? row[9] : false,
+            disabled: (row[10] != "") ? row[10] : false            
+        }
+        addUser(props, user)        
     }
 }
 

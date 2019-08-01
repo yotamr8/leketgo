@@ -21,6 +21,8 @@ import deleteTask from '../dbActions/deleteTask'
 import addUser from '../dbActions/addUser'
 import editUser from '../dbActions/editUser'
 import editUserAuth from '../dbActions/editUserAuth'
+import handleTaskFileUpload from '../dbActions/addTasksFromFile'
+import handleUserFileUpload from '../dbActions/addUsersFromFile'
 import XLSX from 'xlsx'
 
 const initialState = {
@@ -51,8 +53,8 @@ const initialState = {
 	isTZValid: false,
 	isMailValid: false,
     isPhoneValid: false,
-    fileInputPlaceholderDefault: 'בחירת קובץ',
-    fileInputPlaceholder: 'בחירת קובץ'
+    fileInputPlaceholderDefault: { name: 'בחירת קובץ' },
+    fileInputPlaceholder: { name: 'בחירת קובץ' }
 }
 
 class ModalBlock extends React.Component {
@@ -77,7 +79,7 @@ class ModalBlock extends React.Component {
 
     handleFileChange(selectorFiles)
     {
-        this.setState({fileInputPlaceholder: selectorFiles[0].name});
+        this.setState({fileInputPlaceholder: selectorFiles[0]});
         console.log(selectorFiles[0].name);
     }
 
@@ -652,25 +654,26 @@ class ModalBlock extends React.Component {
                         text: 'ביטול'
                     }];
                 break;
-            case 'ADD_USER_CSV':
+            case 'ADD_USER_FILE':
                 /* For adding multiple volunteers via uploading a .CSV file (Admins only) */
                 title = 'הוספת מתנדבים מקובץ';
                 body = <div>
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon01" onChange={ (e) => this.handleFileChange(e.target.files)}/>
-                                <label class="custom-file-label" for="inputGroupFile01">{this.state.fileInputPlaceholder}</label>
-                                
+                                aria-describedby="inputGroupFileAddon01" onChange={(e) => this.handleFileChange(e.target.files)}
+                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"                            />
+                                <label class="custom-file-label" for="inputGroupFile01">{this.state.fileInputPlaceholder.name}</label>                                
                             </div>
                         </div>
-                        <small id="emailHelp" class="form-text text-muted">על הקובץ להיות בפורמט CSV.</small>
+                        <small id="emailHelp" class="form-text text-muted">על הקובץ להיות בפורמט xls או xlsx.</small>
                         </div>;
                 buttons = [
                     {
-                        onClick: () => {
-                            // REPLACE THIS LINE WITH PROPER FUNCTION
-                            this.setState({fileInputPlaceholder: this.state.fileInputPlaceholderDefault});
+                        onClick: () => {                            
+                            handleUserFileUpload(this.props, this.state.fileInputPlaceholder);
+                            this.props.dispatch({ type: 'CLOSE_MODAL' });
+                            this.setState({fileInputPlaceholder: this.state.fileInputPlaceholderDefault});  // return input line to defalut "בחירת קובץ"
                         },
                         variant: 'primary',
                         text: 'העלאה'

@@ -2,7 +2,7 @@ import fire from '../config/firebaseConfig';
 import getAllRegionTasks from './getAllRegionTasks'
 import XLSX from 'xlsx';
 
-export default function handleFileUpload(props, file){
+export default function handleTaskFileUpload(props, file){
     const reader = new FileReader();
 
     reader.onload = (evt) => {
