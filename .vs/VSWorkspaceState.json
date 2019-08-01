@@ -3,9 +3,8 @@
     "",
     "\\components",
     "\\dbActions",
-    "\\functions",
     "\\pages"
   ],
-  "SelectedNode": "\\pages\\loading.js",
+  "SelectedNode": "\\pages\\login.js",
   "PreviewInSolutionExplorer": false
 }
