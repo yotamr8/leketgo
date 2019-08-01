@@ -107,8 +107,8 @@ class Users extends Component {
         this.setState({activeTable: index});
     }
 
-    render() {
-        if (!this.props.authChecked || !this.props.isLoggedIn) {
+    render() {        
+        if (!this.props.authChecked || !this.props.isLoggedIn || !this.props.updated.tasks ) {
             return (<Loading />)
         }
         
@@ -116,7 +116,7 @@ class Users extends Component {
             Router.push('/');
             return (<div></div>)
         }
-        console.log('after')
+
         let activeTable = this.state.tables[this.state.activeTable];
         return (
             <div>

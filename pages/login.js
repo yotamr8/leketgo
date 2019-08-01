@@ -102,7 +102,7 @@ class Login extends Component {
                                                 <Form.Control type="password" id="password" onChange={this.handleChange} />
                                             </Form.Group>                                            
                                             <p>
-                                                <Link href="forgotPassword"><a>שכחתי סיסמה</a></Link>
+                                                <Link href="/forgotPassword"><a>שכחתי סיסמה</a></Link>
                                             </p>
                                             <Button type="submit" onClick={this.handleSubmit} variant="primary">
                                                 התחברות

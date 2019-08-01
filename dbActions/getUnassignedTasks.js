@@ -22,5 +22,6 @@ export default function getUnassigned(dispatch, region){
             });
             console.log(tasks)
             dispatch({ type: 'UNASSIGNEDTASKS', tasks: tasks });
+            dispatch({ type: 'UPDATE_UPDATED_LIST', data: 'unassigned' })
         });
 }

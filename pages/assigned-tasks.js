@@ -29,7 +29,7 @@ class Assigned_tasks extends Component {
     }
 
     render() {
-        if (!this.props.authChecked || !this.props.isLoggedIn) {
+        if (!this.props.authChecked || !this.props.isLoggedIn || !this.props.updated.assigned) {
             return (<Loading />)
         }
 

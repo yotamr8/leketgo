@@ -16,7 +16,14 @@ class Index extends Component {
     }
     
     render() {
-        if (!this.props.authChecked || !this.props.isLoggedIn) {
+        let dataUpdated = false;
+        if (this.props.userData.admin) {
+            dataUpdated = this.props.updated.users && this.props.updated.tasks
+        } else {
+            dataUpdated = this.props.updated.unassigned && this.props.updated.assigned && this.props.updated.reports
+        }
+
+        if (!this.props.authChecked || !this.props.isLoggedIn || !dataUpdated) {
             return (<Loading />)
         }
 

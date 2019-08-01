@@ -80,7 +80,7 @@ class Users extends Component {
     }
 	
 	render() {
-        if (!this.props.authChecked || !this.props.isLoggedIn) {
+        if (!this.props.authChecked || !this.props.isLoggedIn || !this.props.updated.users) {
             return (<Loading />)
         }
                 
