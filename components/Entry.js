@@ -52,24 +52,26 @@ class Entry extends React.Component {
                             </a>
                         </OverlayTrigger></span>
                 )
-                if (entry.collected) {
-                    if (entry.reportFilled) {
-                        statusIcon = 'fas fa-calendar-check';
-                        statusMessage = 'בוצע ומושב';
-                    }
-                    else {
-                        statusIcon = 'far fa-calendar-check';
-                        statusMessage = 'בוצע ולא מושב';
+
+                if (entry.volunteerUid) {
+                    if (entry.collected) {
+                        if (entry.reportFilled) {
+                            statusIcon = 'fas fa-calendar-check';
+                            statusMessage = 'מולא משוב';
+                        }
+                        else {
+                            statusIcon = 'far fa-calendar-check';
+                            statusMessage = 'בוצע ללא משוב';
+                        }
+                    } else {
+                        statusIcon = 'fas fa-calendar-times';
+                        statusMessage = 'שובץ ולא בוצע';
                     }
                 } else {
-                    if (entry.reportFilled) {
-                        statusIcon = 'fas fa-calendar-times';
-                        statusMessage = 'לא בוצע ומושב';
-                    } else {
-                        statusIcon = 'far fa-calendar-times';
-                        statusMessage = 'לא בוצע ולא מושב';
-                    }
+                    statusIcon = 'far fa-calendar-times';
+                    statusMessage = 'לא שובץ';
                 }
+              
                 return {
                     tid: entry.id,
                     date: date.toLocaleDateString('he-IL', options),

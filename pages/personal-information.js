@@ -154,7 +154,7 @@ class Personal_information extends Component {
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formPassword">
                                     <Form.Label>סיסמה חדשה</Form.Label>
-                                    <Form.Control type="password" isInvalid={!this.state.isPasswordlengthValid}/>
+                                    <Form.Control type="password" defaultValue="" isInvalid={!this.state.isPasswordlengthValid}/>
 									<Form.Control.Feedback type="invalid">
                                         אנא הכניסו סיסמא של 6 אותיות לפחות
                                     </Form.Control.Feedback>

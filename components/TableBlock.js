@@ -8,7 +8,8 @@ import handleFileUpload from '../dbActions/addTasksFromFile'
 class TableBlock extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
+        this.state = {
+            filterValue: "הכל",
 			tableColumns: this.getTableColumns(),
 			entrySelectedCounter: 0,
 			selectedEntries: {},
@@ -168,11 +169,15 @@ class TableBlock extends React.Component {
 		}
 	}
 
-    handleFilterChange(event) {
-        console.log(event)
+    handleFilterChange(filter) {        
+        console.log(filter)
+        this.setState({
+            filterValue: filter
+        })
     }
 
-	render() {
+    render() {
+        console.log(this.props)
 		// Setting actionsBar
 		let actionsBar = '';
 		if (this.props.isSelectable && this.state.entrySelectedCounter > 0) {
@@ -256,9 +261,12 @@ class TableBlock extends React.Component {
 								</InputGroup>
 							</Col>
 							<Col>
-                                <ButtonGroup aria-label="Basic example">
-                                    <Button variant="secondary" onClick={this.handleFilterChange}>טרם שובצו</Button>
-                                    <Button variant="secondary" onClick={this.handleFilterChange}>טרם בוצעו</Button>
+                            <ButtonGroup aria-label="Basic example">
+                                    <Button variant="secondary" onClick={ () => this.handleFilterChange("הכל")}>הכל</Button>
+                                    <Button variant="secondary" onClick={ () => this.handleFilterChange("לא שובץ")}>לא שובץ</Button>
+                                    <Button variant="secondary" onClick={ () => this.handleFilterChange("שובץ ולא בוצע")}>שובץ ולא בוצע</Button>
+                                    <Button variant="secondary" onClick={ () => this.handleFilterChange("בוצע ללא משוב")}>בוצע ללא משוב</Button>
+                                    <Button variant="secondary" onClick={ () => this.handleFilterChange("מולא משוב")}>מולא משוב</Button>
 								</ButtonGroup>
 							</Col>
 						</Row>
@@ -330,16 +338,30 @@ class TableBlock extends React.Component {
 							if (this.state.selectedEntries[entry.id]){
 								isSelected = true;
 							}
-							let ret = <Entry page={this.props.page} isSelected={isSelected} isSelectable={this.props.isSelectable} type={this.props.type} key={entry.id} selectCallback={this.selectCallback} entry={entry} tableColumns={this.state.tableColumns}/>
-							if (this.props.isSearchable){
-								for (let key in entry){
+                            let ret = <Entry page={this.props.page} isSelected={isSelected} isSelectable={this.props.isSelectable} type={this.props.type} key={entry.id} selectCallback={this.selectCallback} entry={entry} tableColumns={this.state.tableColumns} />                            
+
+                            if (this.props.isSearchable) {
+                                
+                                if (this.props.page == 'adminTasksPast' || this.props.page == 'adminTasksFuture' || this.props.page == 'adminTasks') {
+                                    var statusMessage = "";
+                                    if (entry.volunteerUid) {
+                                        if (entry.collected) {
+                                            if (entry.reportFilled) { statusMessage = 'מולא משוב'; }
+                                            else { statusMessage = 'בוצע ללא משוב'; }
+                                        } else { statusMessage = 'שובץ ולא בוצע'; }
+                                    } else { statusMessage = 'לא שובץ'; }
+                                    if (this.state.filterValue != "הכל" && statusMessage != this.state.filterValue) {
+                                        return
+                                    }
+                                }                            
+                                console.log(this.props.page, this.state.filterValue, entry)
+                                for (let key in entry) {
 									if (key == this.state.searchField)
 										if(entry[key].includes(this.state.searchValue))
 											return ret;
 								}
-							}
-							else {
-							return ret;
+							} else {
+							    return ret;
 							}
 						})}
 					</tbody>
