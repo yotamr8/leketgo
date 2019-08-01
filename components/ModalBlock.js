@@ -333,7 +333,7 @@ class ModalBlock extends React.Component {
                 {
                     onClick: () => this.props.dispatch({ type: 'OPEN_MODAL',msg: 'REPORT_FILL', entries: modal.entries }),
                     variant: 'primary',
-                    text: 'דיווח'
+                    text: 'מילוי משוב'
                 },
                 {
                     onClick: () => {
@@ -796,7 +796,7 @@ class ModalBlock extends React.Component {
 							}
                         },
                         variant: 'primary',
-                        text: 'שליחה'
+                        text: 'אישור'
                     },
                     {
                         onClick: () => {
@@ -1083,7 +1083,7 @@ class ModalBlock extends React.Component {
 								}
                             },
                             variant: 'primary',
-                            text: 'עריכה'
+                            text: 'אישור'
                         },
                         {
                             onClick: () => {

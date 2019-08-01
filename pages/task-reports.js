@@ -28,9 +28,8 @@ class Task_reports extends Component {
         this.props.dispatch({ type: 'TASK_CARDS_VIEW' })
     }
 
-    render() {
-        console.log(this.props);
-        if (!this.props.authChecked || !this.props.isLoggedIn) {
+    render() {        
+        if (!this.props.authChecked || !this.props.isLoggedIn || !this.props.updated.reports) {
             return (<Loading />)
         }
         return (

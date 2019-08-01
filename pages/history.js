@@ -30,7 +30,7 @@ class History extends Component {
 
     render() {
         console.log(this.props);
-        if (!this.props.authChecked || !this.props.isLoggedIn) {
+        if (!this.props.authChecked || !this.props.isLoggedIn || !this.props.updated.history) {
             return (<Loading />)
         }
         return (

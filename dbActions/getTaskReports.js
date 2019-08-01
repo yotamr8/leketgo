@@ -20,5 +20,6 @@ export default function getTaskReports(dispatch, uid) {
                 }
             });
             dispatch({ type: 'TASKREPORTS', tasks: tasks });
+            dispatch({ type: 'UPDATE_UPDATED_LIST', data: 'reports' })
         });
 }

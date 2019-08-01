@@ -17,5 +17,6 @@ export default function getAssigned(dispatch, uid) {
                 tasks.push(task);
             });
             dispatch({ type: 'ASSIGNEDTASKS', tasks: tasks });
+            dispatch({ type: 'UPDATE_UPDATED_LIST', data: 'assigned' })
         });
 }

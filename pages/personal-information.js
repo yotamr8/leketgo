@@ -23,22 +23,27 @@ class Personal_information extends Component {
     }
 	
     handleSubmit(event) {
+        console.log(event)
+        event.preventDefault();
+        event.stopPropagation();
         const form = event.currentTarget;
         
         let formEmail = document.getElementById('formEmail').value;
 		this.state.isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(formEmail)
-        console.log("mail valid: " + isMailValid);
-		
-		this.state.isPhoneValid = /^\d{10}$/.test(this.state.contactNumber);
+        console.log("mail valid: " + this.state.isMailValid);
+
+        let formPhone = document.getElementById('formPhone').value;
+        console.log(formPhone)
+        this.state.isPhoneValid = /^\d{10}$/.test(formPhone);
 		console.log("phone length valid: " + this.state.isPhoneValid);
 		
 		let formPassword = document.getElementById('formPassword').value;
 		this.state.isPasswordlengthValid = /^.{6,}$|^$/.test(formPassword);
-		console.log("password length valid: " + isPasswordlengthValid);
+        console.log("password length valid: " + this.state.isPasswordlengthValid);
 		
 		let formValidatePassword = document.getElementById('formValidatePassword').value;
 		this.state.isDoublePasswordsMatch = formValidatePassword == formPassword;
-		console.log("2nd Password match: " + isDoublePasswordsMatch)
+        console.log("2nd Password match: " + this.state.isDoublePasswordsMatch)
 		
 		if(!this.state.isPasswordlengthValid || !this.state.isMailValid || !this.state.isDoublePasswordsMatch || !this.state.isPhoneValid) {
 			this.state.validated = false;
@@ -48,11 +53,11 @@ class Personal_information extends Component {
         if (!this.state.validated) {
           event.preventDefault();
           event.stopPropagation();
-        } else {
+        } else {         
             let user = this.props.userData
             let formCity = document.getElementById('formCity').value;
             let formAddress = document.getElementById('formAddress').value;
-            let formPhone = document.getElementById('formPhone').value;
+            
             let changes = {}
             if (formEmail != user.email) { changes.email = formEmail }
             if (formCity != user.city) { changes.city = formCity }
@@ -60,12 +65,22 @@ class Personal_information extends Component {
             if (formPhone != user.phone) { changes.phone = formPhone }
             if (formPassword.length != 0) { changes.password = formPassword }
             console.log(changes)
-            editUser(this.props, this.props.userData.uid, changes)     
+            editUser(this.props, this.props.userData.uid, changes).then((success) => {
+                if (success) {
+                    this.props.dispatch({ type: 'PUSH_TOAST', title: 'הצלחה', body: 'השינויים נשמרו בהצלחה.', delay: 5000 })
+                } else {
+                    this.props.dispatch({ type: 'PUSH_TOAST', title: 'בעיה', body: 'השינויים לא נשמרו בהצלחה.', delay: 5000 })
+                }
+            }).catch(() => {
+                this.props.dispatch({ type: 'PUSH_TOAST', title: 'בעיה', body: 'השינויים לא נשמרו בהצלחה.', delay: 5000 })
+            })
+            
         }
         this.setState({ validated: true });        
       }
 
     render() {
+        console.log(this.props)
         if (!this.props.authChecked || !this.props.isLoggedIn) {
             return (<Loading />);
         }

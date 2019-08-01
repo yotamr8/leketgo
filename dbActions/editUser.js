@@ -10,13 +10,17 @@ export default function editUser(props, uid, changes) {
     }
     if (changes.password) {
         authChanges.password = changes.password
+        delete changes.password
     }
     if (changes.disabled != undefined) {
-        authChanges.disabled = changes.disabled
+        authChanges.disabled = changes.disabled        
     }
     if (Object.keys(authChanges).length != 0) {
         editUserAuth(props, uid, authChanges)
     }
+
+    
+
 
     const userCollection = fire.firestore().collection('users');    
     return userCollection.doc(uid).set(

@@ -8,5 +8,6 @@ export default function getAllUsers(dispatch) {
             users.push({ ...user.data(), uid: user.id})
         });
         dispatch({ type: 'GETALLUSERS', users: users })
+        dispatch({ type: 'UPDATE_UPDATED_LIST', data: 'users'})
     });
 }

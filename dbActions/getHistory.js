@@ -16,5 +16,6 @@ export default function getHistory(dispatch, uid) {
                 tasks.push(task);
             });
             dispatch({ type: 'HISTORYTASKS', tasks: tasks });
+            dispatch({ type: 'UPDATE_UPDATED_LIST', data: 'history' })
         });
 }

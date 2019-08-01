@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state, isLoggedIn: false, userData: {}, authChecked: false, loginErr: false,               
                 modal: { isOpen: false }, unassignedTasks: [], assignedTasks: [], taskReports: [],
-                regionalTasks: [], users: []
+                regionalTasks: [], users: [], updated: {}
             };
             break;
         case 'GETALLUSERS':
@@ -54,8 +54,16 @@ const reducer = (state = initialState, action) => {
             break;
         case 'CLOSE_MODAL':
             return { ...state, modal: { ...state.modal, isOpen: false } };
+            break;
+        case 'UPDATE_UPDATED_LIST':
+            return { ...state, updated: { ...state.updated, [action.data]: true } }
+            break;
+        case 'RESET_UPDATED_LIST':
+            return { ...state, updated: {} }
+            break;
         case 'TASK_LIST_VIEW':
             return { ...state, tasksCardView: false };
+            break;
         case 'TASK_CARDS_VIEW':
             return { ...state, tasksCardView: true };
             break;
@@ -71,7 +79,8 @@ const reducer = (state = initialState, action) => {
                 icon: (action.icon ? action.icon : ''),
                 delay: (action.delay ? action.delay : 3000),
             });
-            return { ...state, toasts: newToasts};
+            return { ...state, toasts: newToasts };
+            break;
         }
         case 'DISMISS_TOAST':
             {
@@ -101,7 +110,8 @@ var initialState = {
     taskReports: [],
     regionalTasks: [],
 	historyTasks: [],
-    users: []
+    users: [],
+    updated: {}
 }
 
 const makeStore = (initialState, options) => {

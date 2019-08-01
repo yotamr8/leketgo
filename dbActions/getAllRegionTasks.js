@@ -10,6 +10,7 @@ export default function getAllRegionTasks(dispatch, region) {
         querySnapshot.forEach(function (task) {
             tasks.push({ ...task.data(), id: task.id })
         });
-		dispatch({ type: 'GETALLREGIONTASKS', tasks: tasks })
+        dispatch({ type: 'GETALLREGIONTASKS', tasks: tasks })
+        dispatch({ type: 'UPDATE_UPDATED_LIST', data: 'tasks' })
     });
 }

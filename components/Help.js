@@ -24,7 +24,7 @@ class Help extends React.Component {
         <Popover
           title={`עזרה`}
         >
-          בדף עדכון פרטים אישיים עושים כל מיני דברים כאלה טובים מגניבים מדהימים.
+          בדף עדכון פרטים אישיים ניתן לשנות סיסמא
         </Popover>}>
         {/* <OverlayTrigger
             key='help'

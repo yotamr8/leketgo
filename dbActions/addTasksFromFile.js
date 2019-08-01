@@ -13,8 +13,7 @@ export default function handleFileUpload(props, file){
         const ws = wb.Sheets[wsname];
 
         const data = XLSX.utils.sheet_to_csv(ws, { header: 1 });
-        addTasksToDB(props, data);
-        console.log("Data from file was read succesfully.");
+        addTasksToDB(props, data);        
     };
     reader.readAsBinaryString(file);
     console.log(file);
@@ -43,7 +42,7 @@ function addTasksToDB(props, data) {
 
         var firstSuccess = false;
 
-        taskCollection.doc().set({  // generates unique id
+        taskCollection.doc().set({  // generates unique id for task
             name: row[0],
             timestamp: timeStamp,
             city: row[3],
@@ -58,7 +57,7 @@ function addTasksToDB(props, data) {
         }).then(() => {
             if (!firstSuccess) {
                 firstSuccess = true;
-                props.dispatch({ type: 'PUSH_TOAST', title: 'success', body: 'Data loaded from file successfully.', delay: 5000 })  //TODO cant write here in hebrew
+                props.dispatch({ type: 'PUSH_TOAST', title: 'הצלחה', body: 'המידע מהקובץ הועלה בהצלחה.', delay: 5000 })  //TODO cant write here in hebrew
             }
         });
         getAllRegionTasks(props.dispatch, props.userData.region)
