@@ -608,7 +608,7 @@ function (_React$Component) {
               });
             },
             variant: 'primary',
-            text: 'דיווח'
+            text: 'מילוי משוב'
           }, {
             onClick: function onClick() {
               _this4.props.dispatch({
@@ -1824,7 +1824,7 @@ function (_React$Component) {
               }
             },
             variant: 'primary',
-            text: 'שליחה'
+            text: 'אישור'
           }, {
             onClick: function onClick() {
               _this4.resetState();
@@ -2588,7 +2588,7 @@ function (_React$Component) {
               }
             },
             variant: 'primary',
-            text: 'עריכה'
+            text: 'אישור'
           }, {
             onClick: function onClick() {
               _this4.resetState();

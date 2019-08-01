@@ -48,7 +48,7 @@ class Login extends Component {
         auth.sendPasswordResetEmail(emailAddress).then(() => {
             console.log("mail sent");
             var title = 'קישור לאיפוס סיסמא נשלח למייל בהצלחה'; 
-            var body = 'במידה ולא בדואר נכנס, יתכן כי בתיבת דואר זבל';
+            var body = 'במידה ולא נמצא בדואר נכנס, יתכן כי נמצא בתיבת דואר זבל.';
             this.props.dispatch({ type: 'PUSH_TOAST', title: title, body: body, delay: 50000 })
             // TODO open modal - a mail has been sent to the email: this.state.email with a link. if you do not want to reset your password - dont do anything.
         }).catch((err) => {
@@ -93,15 +93,17 @@ class Login extends Component {
                                         {this.props.loginErr ?
                                             <Alert className='mb-4' style={{ textAlign: 'left', direction: 'ltr' }} variant='danger'><i class="ltr fas fa-exclamation-circle"></i>{this.props.loginErr}</Alert> : ''}
                                         <Form onSubmit={e => this.handleSubmit(e)}>
-                                            <Form.Group controlId="formBasicEmail">
+                                            <Form.Group>
                                                 <Form.Label>כתובת דואר אלקטרוני</Form.Label>
                                                 <Form.Control type="email" id="email" onChange={this.handleChange} />
                                             </Form.Group>
-                                            <Form.Group controlId="formBasicPassword">
+                                            <Form.Group>
                                                 <Form.Label>סיסמה</Form.Label>
                                                 <Form.Control type="password" id="password" onChange={this.handleChange} />
-                                            </Form.Group>
-                                            <p onClick={this.resetPassword}><Link href="#">שכחתי סיסמה</Link></p>
+                                            </Form.Group>                                            
+                                            <p>
+                                                <Link href="forgotPassword"><a>שכחתי סיסמה</a></Link>
+                                            </p>
                                             <Button type="submit" onClick={this.handleSubmit} variant="primary">
                                                 התחברות
                                                 </Button>
