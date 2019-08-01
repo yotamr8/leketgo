@@ -230,8 +230,8 @@ class TableBlock extends React.Component {
 							
 							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick=
 							{() =>
-								document.getElementById('fileUploader').click()
-								//this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK_CSV', entries: this.props.entry})
+								// document.getElementById('fileUploader').click()
+								this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK_CSV', entries: this.props.entry})
 							}
 							>הוספה מקובץ</button>
 							

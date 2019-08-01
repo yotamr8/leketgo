@@ -172,7 +172,7 @@ class Entry extends React.Component {
                             
                         },
                         variant: 'outline-secondary',
-                        text: (this.props.entry.admin) ? <span><i className="fas fa-crown"></i>הפוך למתנדב</span> : <span><i className="fas fa-crown"></i>הפוך למנהל</span>
+                        text: (this.props.entry.admin) ? <span><i className="fas fa-user fa-fw"></i>הפוך למתנדב</span> : <span><i className="fas fa-crown"></i>הפוך למנהל</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REMOVE_USER', entries: this.props.entry}),
@@ -198,11 +198,6 @@ class Entry extends React.Component {
                         text: <span><i className="far fa-edit fa-fw"></i>עריכה</span>
                     },
                     {
-                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_STATUS', entries: this.props.entry}),
-                        variant: 'outline-secondary',
-                        text: <span><i className="fas fa-question fa-fw"></i>סטטוס</span>
-                    },
-                    {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REMOVE_TASK', entries: this.props.entry}),
                         variant: 'outline-secondary',
                         text: <span><i className="far fa-trash-alt fa-fw"></i>מחיקה</span>
@@ -215,11 +210,6 @@ class Entry extends React.Component {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EDIT_TASK', entries: this.props.entry}),
                         variant: 'outline-primary',
                         text: <span><i className="far fa-edit fa-fw"></i>עריכה</span>
-                    },
-                    {
-                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_STATUS', entries: this.props.entry}),
-                        variant: 'outline-secondary',
-                        text: <span><i className="fas fa-question fa-fw"></i>סטטוס</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REMOVE_TASK', entries: this.props.entry}),

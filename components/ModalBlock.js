@@ -50,7 +50,9 @@ const initialState = {
 	validated: false,
 	isTZValid: false,
 	isMailValid: false,
-	isPhoneValid: false
+    isPhoneValid: false,
+    fileInputPlaceholderDefault: 'בחירת קובץ',
+    fileInputPlaceholder: 'בחירת קובץ'
 }
 
 class ModalBlock extends React.Component {
@@ -62,13 +64,21 @@ class ModalBlock extends React.Component {
         this.dateHandleChange = this.dateHandleChange.bind(this);
 		this.validateUserInfo = this.validateUserInfo.bind(this);
 		this.validateTaskInfo = this.validateTaskInfo.bind(this);
-		this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleFileChange = this.handleFileChange.bind(this);
     }
 	
     resetState() {
         /* This method is only relevant
-           to the REPORT_FILL modal */
-        this.setState(initialState)
+           to the REPORT_FILL modal and UploadCSV modals*/
+        this.setState(initialState);
+        this.setState({fileInputPlaceholder: this.state.fileInputPlaceholderDefault});
+    }
+
+    handleFileChange(selectorFiles)
+    {
+        this.setState({fileInputPlaceholder: selectorFiles[0].name});
+        console.log(selectorFiles[0].name);
     }
 
     dateHandleChange(date) {
@@ -645,10 +655,31 @@ class ModalBlock extends React.Component {
             case 'ADD_USER_CSV':
                 /* For adding multiple volunteers via uploading a .CSV file (Admins only) */
                 title = 'הוספת מתנדבים מקובץ';
-                body =  <span></span>;
+                body = <div>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                aria-describedby="inputGroupFileAddon01" onChange={ (e) => this.handleFileChange(e.target.files)}/>
+                                <label class="custom-file-label" for="inputGroupFile01">{this.state.fileInputPlaceholder}</label>
+                                
+                            </div>
+                        </div>
+                        <small id="emailHelp" class="form-text text-muted">על הקובץ להיות בפורמט CSV.</small>
+                        </div>;
                 buttons = [
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => {
+                            // REPLACE THIS LINE WITH PROPER FUNCTION
+                            this.setState({fileInputPlaceholder: this.state.fileInputPlaceholderDefault});
+                        },
+                        variant: 'primary',
+                        text: 'העלאה'
+                    },
+                    {
+                        onClick: () => {
+                            this.props.dispatch({ type: 'CLOSE_MODAL' });
+                            this.setState({fileInputPlaceholder: this.state.fileInputPlaceholderDefault});
+                        },
                         variant: 'secondary',
                         text: 'סגירה'
                     }];
@@ -857,7 +888,7 @@ class ModalBlock extends React.Component {
                                 this.props.dispatch({ type: 'CLOSE_MODAL' })                                
                             },
                             variant: 'danger',
-                            text: 'איפוס סיסמה'
+                            text: 'שינוי סיסמה'
                         },
                         {
                             onClick: () => {
@@ -1063,68 +1094,44 @@ class ModalBlock extends React.Component {
                             text: 'ביטול'
                         }];
                     break;
-            case 'TASK_STATUS':
-                {
-                title = 'סטטוס';
-                let task = modal.entries;
-                let isCollected = task.collected;
-                let isFilled = task.reportFilled;
-                let uid = task.volunteerUid;
-                let user = null;
-                if (uid) {
-                    user = this.props.users.find((user) => user.uid == uid);
-                }
-                body =
-                    (
-                        <Form noValidate
-                        validated={this.state.validated}>
-                        <Form.Row>
-                            <Form.Group as={Col}>
-                                <Form.Label>שובץ</Form.Label><br />
-                                <FormControl type="text" value={uid ? user.firstName + ' ' + user.lastName : 'טרם'} disabled/>
-                            </Form.Group>
-                            <Form.Group as={Col}>
-                                <Form.Label>בוצע</Form.Label><br />
-                                <FormControl type="text" value={isCollected ? 'כן' : 'טרם'} disabled/>
-                            </Form.Group>
-                            <Form.Group as={Col}>
-                                <Form.Label>מושב</Form.Label><br />
-                                <FormControl type="text" value={isFilled ? 'כן' : 'טרם'} disabled/>
-                            </Form.Group>
-                        </Form.Row>
-                    </Form>
-                    );
+            
+            case 'ADD_TASK_CSV':           
+                title = 'הוספת איסופים מקובץ';
+                body = <div>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                aria-describedby="inputGroupFileAddon01" onChange={ (e) => this.handleFileChange(e.target.files)}/>
+                                <label class="custom-file-label" for="inputGroupFile01">{this.state.fileInputPlaceholder}</label>
+                                
+                            </div>
+                        </div>
+                        <small id="emailHelp" class="form-text text-muted">על הקובץ להיות בפורמט CSV.</small>
+                        </div>;
                 buttons = [
                     {
                         onClick: () => {
-                            this.resetState()
-                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                            // REPLACE THIS LINE WITH PROPER FUNCTION
+                            this.setState({fileInputPlaceholder: this.state.fileInputPlaceholderDefault});
                         },
-                        variant: 'secondary',
-                        text: 'ביטול'
-                    }
-                ]
-
-                break;
-            }
-          /*  case 'ADD_TASK_CSV':                            TODO remove?               
-                title = 'הוספת איסופים מקובץ';
-                body = <span></span>;
-                buttons = [
+                        variant: 'primary',
+                        text: 'העלאה'
+                    },
                     {
-                        onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
+                        onClick: () => {
+                            this.props.dispatch({ type: 'CLOSE_MODAL' });
+                            this.setState({fileInputPlaceholder: this.state.fileInputPlaceholderDefault});
+                        },
                         variant: 'secondary',
                         text: 'סגירה'
                     }];
-                break;*/
+                break;
 			// Why is it called csv if it exports to xlsx?
             case 'EXPORT_TASK_CSV':
                 /* For exporting reports (Admins only) */
-                title = 'ייצוא דוח';
+                title = 'ייצוא טבלת משימות';
                 body = (
-                    <h2>
-						לחץ כדי לייצא דוח.
-					</h2>
+                    <div>טבלת האיסופים תיוצא למכשירך האישי בקובץ XLSX (עבור Office Excel משנת 2007 והלאה).</div>
                 );
                 buttons = [
                     {
@@ -1139,17 +1146,15 @@ class ModalBlock extends React.Component {
                     }];
                 break;
 			case 'EXPORT_USER_CSV':
-				title = 'ייצוא דוח';
+				title = 'ייצוא טבלת משתמשים';
                 body = (
-                    <h2>
-						לחץ כדי לייצא דוח.
-					</h2>
+                    <div>טבלת המשתמשים תיוצא למכשירך האישי בקובץ XLSX (עבור Office Excel משנת 2007 והלאה).</div>
                 );
                 buttons = [
                     {
 					onClick: () => this.exportUsersXcell() ,
                         variant: 'primary',
-                        text: 'ייצא דוח'
+                        text: 'ייצוא דוח'
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'CLOSE_MODAL' }),
@@ -1161,8 +1166,8 @@ class ModalBlock extends React.Component {
 
         return (
             <Modal show={modal.isOpen} onHide={() => {
-                this.resetState()
-                this.props.dispatch({ type: 'CLOSE_MODAL' })
+                this.resetState();
+                this.props.dispatch({ type: 'CLOSE_MODAL' });
             }
             }>
                 <Modal.Header closeButton>
