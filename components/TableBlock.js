@@ -226,22 +226,14 @@ class TableBlock extends React.Component {
 		if (this.props.isSearchable && (this.props.page=='adminTasks' || this.props.page=='adminTasksPast' || this.props.page=='adminTasksFuture')) {
 			actionsBar = 
 				<Navbar bg='light'>
-					<Form>
-					<input type='file' id='fileUploader' accept='xlsx' style={{ display: "none" }} onChange={(e) => handleTaskFileUpload(this.props, e.target.files[0])} />
+					<Form>                    
 						<Row>
 							<Col>
-						<ButtonGroup>
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK', entries: this.props.entry})}>הוספת איסוף</button>
-							
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick=
-							{() =>
-								// document.getElementById('fileUploader').click()
-								this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK_CSV', entries: this.props.entry})
-							}
-							>הוספה מקובץ</button>
-							
-							<button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EXPORT_TASK_CSV', entries: this.props.entry})}>ייצוא דוח איסופים</button>
-							</ButtonGroup>
+						        <ButtonGroup>
+							        <button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-primary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK', entries: this.props.entry})}>הוספת איסוף</button>							
+                                    <button style={{ whiteSpace: 'nowrap' }} type="button" className="btn btn-secondary" onClick={() =>this.props.dispatch({ type: 'OPEN_MODAL', msg: 'ADD_TASK_FILE', entries: this.props.entry})}>הוספה מקובץ</button>							
+							        <button style={{whiteSpace: 'nowrap'}} type="button" className="btn btn-secondary" onClick={() => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'EXPORT_TASK_CSV', entries: this.props.entry})}>ייצוא דוח איסופים</button>
+							    </ButtonGroup>
 							</Col>
 							<Col>
 								<InputGroup className="mb-3">

@@ -21,8 +21,14 @@ export default function addTask(dispatch, region, data) {
         volunteerUid: null,
         reportFilled: false,
         collected: false
-    });
-    console.log("added succesfully")
+    })
+        .then(() => {
+            props.dispatch({ type: 'PUSH_TOAST', title: 'משימה נוספה בהצלחה', body: `משימת ${data.name} נוספה בהצלחה.`, delay: 5000 })
+        })
+        .catch(() => {
+            props.dispatch({ type: 'PUSH_TOAST', title: 'שגיאה בהוספת משימה', body: `לא ניתן היה להוסיף את משימת ${data.name}.`, delay: 5000 })
+        });
+    
 //  TODO dispatch modal
     getAllRegionTasks(dispatch, region) // refresh page data
 } 

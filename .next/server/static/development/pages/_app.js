@@ -2687,7 +2687,7 @@ function (_React$Component) {
           }];
           break;
 
-        case 'ADD_TASK_CSV':
+        case 'ADD_TASK_FILE':
           title = 'הוספת איסופים מקובץ';
           body = react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("div", {
             __source: {
@@ -2717,6 +2717,7 @@ function (_React$Component) {
             onChange: function onChange(e) {
               return _this4.handleFileChange(e.target.files);
             },
+            accept: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel",
             __source: {
               fileName: _jsxFileName,
               lineNumber: 1106
@@ -2727,10 +2728,10 @@ function (_React$Component) {
             for: "inputGroupFile01",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 1108
+              lineNumber: 1109
             },
             __self: this
-          }, this.state.fileInputPlaceholder))), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("small", {
+          }, this.state.fileInputPlaceholder.name))), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("small", {
             id: "emailHelp",
             class: "form-text text-muted",
             __source: {
@@ -2738,13 +2739,19 @@ function (_React$Component) {
               lineNumber: 1112
             },
             __self: this
-          }, "\u05E2\u05DC \u05D4\u05E7\u05D5\u05D1\u05E5 \u05DC\u05D4\u05D9\u05D5\u05EA \u05D1\u05E4\u05D5\u05E8\u05DE\u05D8 CSV."));
+          }, "\u05E2\u05DC \u05D4\u05E7\u05D5\u05D1\u05E5 \u05DC\u05D4\u05D9\u05D5\u05EA \u05D1\u05E4\u05D5\u05E8\u05DE\u05D8 xls \u05D0\u05D5 xlsx."));
           buttons = [{
             onClick: function onClick() {
-              // REPLACE THIS LINE WITH PROPER FUNCTION
+              Object(_dbActions_addTasksFromFile__WEBPACK_IMPORTED_MODULE_25__["default"])(_this4.props, _this4.state.fileInputPlaceholder);
+
+              _this4.props.dispatch({
+                type: 'CLOSE_MODAL'
+              });
+
               _this4.setState({
                 fileInputPlaceholder: _this4.state.fileInputPlaceholderDefault
-              });
+              }); // return input line to defalut "בחירת קובץ"
+
             },
             variant: 'primary',
             text: 'העלאה'
@@ -2770,7 +2777,7 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("div", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 1137
+              lineNumber: 1138
             },
             __self: this
           }, "\u05D8\u05D1\u05DC\u05EA \u05D4\u05D0\u05D9\u05E1\u05D5\u05E4\u05D9\u05DD \u05EA\u05D9\u05D5\u05E6\u05D0 \u05DC\u05DE\u05DB\u05E9\u05D9\u05E8\u05DA \u05D4\u05D0\u05D9\u05E9\u05D9 \u05D1\u05E7\u05D5\u05D1\u05E5 XLSX (\u05E2\u05D1\u05D5\u05E8 Office Excel \u05DE\u05E9\u05E0\u05EA 2007 \u05D5\u05D4\u05DC\u05D0\u05D4).");
@@ -2796,7 +2803,7 @@ function (_React$Component) {
           body = react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("div", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 1154
+              lineNumber: 1155
             },
             __self: this
           }, "\u05D8\u05D1\u05DC\u05EA \u05D4\u05DE\u05E9\u05EA\u05DE\u05E9\u05D9\u05DD \u05EA\u05D9\u05D5\u05E6\u05D0 \u05DC\u05DE\u05DB\u05E9\u05D9\u05E8\u05DA \u05D4\u05D0\u05D9\u05E9\u05D9 \u05D1\u05E7\u05D5\u05D1\u05E5 XLSX (\u05E2\u05D1\u05D5\u05E8 Office Excel \u05DE\u05E9\u05E0\u05EA 2007 \u05D5\u05D4\u05DC\u05D0\u05D4).");
@@ -2829,32 +2836,32 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 1171
+          lineNumber: 1172
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_13__["Modal"].Header, {
         closeButton: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 1176
+          lineNumber: 1177
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_13__["Modal"].Title, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 1177
+          lineNumber: 1178
         },
         __self: this
       }, title)), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_13__["Modal"].Body, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 1179
+          lineNumber: 1180
         },
         __self: this
       }, body), react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_13__["Modal"].Footer, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 1182
+          lineNumber: 1183
         },
         __self: this
       }, buttons.map(function (button) {
@@ -2864,7 +2871,7 @@ function (_React$Component) {
           onClick: button.onClick,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 1185
+            lineNumber: 1186
           },
           __self: this
         }, button.text);
@@ -3166,8 +3173,21 @@ function addTask(dispatch, region, data) {
     volunteerUid: null,
     reportFilled: false,
     collected: false
-  });
-  console.log("added succesfully"); //  TODO dispatch modal
+  }).then(function () {
+    props.dispatch({
+      type: 'PUSH_TOAST',
+      title: '����� ����� ������',
+      body: "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD ".concat(data.name, " \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD."),
+      delay: 5000
+    });
+  }).catch(function () {
+    props.dispatch({
+      type: 'PUSH_TOAST',
+      title: '����� ������ �����',
+      body: "\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD \uFFFD\uFFFD \uFFFD\uFFFD\uFFFD\uFFFD\uFFFD ".concat(data.name, "."),
+      delay: 5000
+    });
+  }); //  TODO dispatch modal
 
   Object(_getAllRegionTasks__WEBPACK_IMPORTED_MODULE_1__["default"])(dispatch, region); // refresh page data
 }
@@ -3215,13 +3235,27 @@ function addTasksToDB(props, data) {
   var taskCollection = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__["default"].firestore().collection('tasks');
   var timeStampCreator = _config_firebaseConfig__WEBPACK_IMPORTED_MODULE_0__["default"].firebase_.firestore.Timestamp;
   var rows = data.split(/[\r\n|\n]+/);
+  var numOfValidRows = rows.length - 1; // num of valid rows starts at the number of rows minus headers
+
+  var numOfSuccess = 0;
+  var numOfFailure = 0;
 
   for (var i = 1; i < rows.length; i++) {
     var row = text2arr(rows[i]);
 
-    if (row[0] == "" || row[1] == "" || row[2] == "" || row[3] == "" || row[4] == "" || row[5] == "" || row[6] == "" || row[8] == "") {
+    if (row[0] == "" || row[1] == "" || row[2] == "" || row[3] == "" // check for row validity
+    || row[4] == "" || row[5] == "" || row[6] == "" || row[8] == "") {
+      numOfValidRows--; // if row is not valid, reduce numOfValidRows by 1
+
+      console.log(numOfValidRows, numOfSuccess, numOfFailure);
+
+      if (numOfFailure + numOfSuccess == numOfValidRows) {
+        adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure);
+      }
+
       continue;
-    }
+    } // get timestamp out of date columns
+
 
     var year = row[1].split('/')[2];
     year = year.length == 2 ? "20" + year : year;
@@ -3231,9 +3265,8 @@ function addTasksToDB(props, data) {
     day = day.length == 1 ? "0" + day : day;
     var date = year + "-" + month + "-" + day;
     var timeStamp = timeStampCreator.fromDate(new Date(date + 'T' + row[2]));
-    var firstSuccess = false;
     taskCollection.doc().set({
-      // generates unique id for task
+      // generates unique id for task, and set its fields
       name: row[0],
       timestamp: timeStamp,
       city: row[3],
@@ -3246,17 +3279,42 @@ function addTasksToDB(props, data) {
       reportFilled: false,
       collected: false
     }).then(function () {
-      if (!firstSuccess) {
-        firstSuccess = true;
-        props.dispatch({
-          type: 'PUSH_TOAST',
-          title: 'הצלחה',
-          body: 'המידע מהקובץ הועלה בהצלחה.',
-          delay: 5000
-        }); //TODO cant write here in hebrew
+      // in case of success
+      numOfSuccess++;
+      console.log(numOfValidRows, numOfSuccess, numOfFailure);
+
+      if (numOfFailure + numOfSuccess == numOfValidRows) {
+        adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure);
+      }
+    }).catch(function (err) {
+      // in case of error
+      console.log(err);
+      console.log(numOfValidRows, numOfSuccess, numOfFailure);
+      numOfFailure++;
+
+      if (numOfFailure + numOfSuccess == numOfValidRows) {
+        adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure);
       }
     });
     Object(_getAllRegionTasks__WEBPACK_IMPORTED_MODULE_1__["default"])(props.dispatch, props.userData.region);
+  }
+}
+
+function adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure) {
+  if (numOfValidRows == numOfFailure) {
+    props.dispatch({
+      type: 'PUSH_TOAST',
+      title: 'שגיאה בהעלאת הנתונים מהקובץ',
+      body: "\u05DC\u05D0 \u05D4\u05D9\u05D4 \u05E0\u05D9\u05EA\u05DF \u05DC\u05D4\u05E2\u05DC\u05D5\u05EA \u05D0\u05E3 \u05E9\u05D5\u05E8\u05D4 \u05DE\u05EA\u05D5\u05DA \u05D4\u05E7\u05D5\u05D1\u05E5, \u05DE\u05EA\u05D5\u05DA ".concat(numOfValidRows, " \u05E9\u05D5\u05E8\u05D5\u05EA \u05EA\u05E7\u05D9\u05E0\u05D5\u05EA."),
+      delay: 10000
+    });
+  } else {
+    props.dispatch({
+      type: 'PUSH_TOAST',
+      title: 'המידע מהקובץ נשמר במאגר הנתונים',
+      body: "\u05DE\u05EA\u05D5\u05DA ".concat(numOfValidRows, " \u05E9\u05D5\u05E8\u05D5\u05EA \u05EA\u05E7\u05D9\u05E0\u05D5\u05EA \u05D1\u05E7\u05D5\u05D1\u05E5, \u05D4\u05D5\u05E2\u05DC\u05D5 ").concat(numOfSuccess, " \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4."),
+      delay: 10000
+    });
   }
 }
 

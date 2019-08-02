@@ -107,8 +107,7 @@ class Users extends Component {
         this.setState({activeTable: index});
     }
 
-    render() {    
-        console.log(this.props)
+    render() {            
         if (!this.props.authChecked || !this.props.isLoggedIn || !this.props.updated.tasks ) {
             return (<Loading />)
         }

@@ -146,8 +146,7 @@ class Index extends Component {
                                 <Card.Text>
                                     <div style={{ textAlign: 'center', fontSize: '2rem' }}>{activeUsers}</div>
                                     <div  style={{textAlign: 'center'}}>מתנדבים פעילים השבוע</div>
-                                    <div className='mt-4'><i className="far fa-user fa-fw"></i>{totalUsers} מתנדבים באזור {this.props.userData.region}</div>
-                                    <div><i className="far fa-envelope fa-fw"></i>2 אימותי דוא"ל ממתינים</div>
+                                    <div className='mt-4'><i className="far fa-user fa-fw"></i>{totalUsers} מתנדבים באזור {this.props.userData.region}</div>                                    
                                 </Card.Text>
                                 </Card.Body>
                             </Card>

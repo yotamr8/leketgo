@@ -102,7 +102,13 @@ class Users extends Component {
                                     {this.state.tables.map((table, index) => {
                                     return (
                                         <Nav.Item>
-                                            <Link key={index} className='navlink' href="/users" ><a onClick={() => this.switchTable(index)} className={'nav-link' + (activeTable.page == table.page ? ' active' : '')}>{table.name}</a></Link>
+                                            <Link key={index} className='navlink' href="/users" >
+                                                <a>
+                                                    <span onClick={() => this.switchTable(index)} className={'nav-link' + (activeTable.page == table.page ? ' active' : '')}>
+                                                        {table.name}
+                                                    </span>
+                                                </a>
+                                            </Link>
                                         </Nav.Item>
                                         );
                                     })}

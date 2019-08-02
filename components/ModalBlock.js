@@ -662,7 +662,7 @@ class ModalBlock extends React.Component {
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="inputGroupFile01"
                                 aria-describedby="inputGroupFileAddon01" onChange={(e) => this.handleFileChange(e.target.files)}
-                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"                            />
+                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
                                 <label class="custom-file-label" for="inputGroupFile01">{this.state.fileInputPlaceholder.name}</label>                                
                             </div>
                         </div>
@@ -1098,24 +1098,25 @@ class ModalBlock extends React.Component {
                         }];
                     break;
             
-            case 'ADD_TASK_CSV':           
+            case 'ADD_TASK_FILE':           
                 title = 'הוספת איסופים מקובץ';
-                body = <div>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon01" onChange={ (e) => this.handleFileChange(e.target.files)}/>
-                                <label class="custom-file-label" for="inputGroupFile01">{this.state.fileInputPlaceholder}</label>
-                                
+                body =  <div>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                        aria-describedby="inputGroupFileAddon01" onChange={(e) => this.handleFileChange(e.target.files)}
+                                        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                                    <label class="custom-file-label" for="inputGroupFile01">{this.state.fileInputPlaceholder.name}</label>
+                                </div>
                             </div>
-                        </div>
-                        <small id="emailHelp" class="form-text text-muted">על הקובץ להיות בפורמט CSV.</small>
+                            <small id="emailHelp" class="form-text text-muted">על הקובץ להיות בפורמט xls או xlsx.</small>
                         </div>;
                 buttons = [
                     {
                         onClick: () => {
-                            // REPLACE THIS LINE WITH PROPER FUNCTION
-                            this.setState({fileInputPlaceholder: this.state.fileInputPlaceholderDefault});
+                            handleTaskFileUpload(this.props, this.state.fileInputPlaceholder);
+                            this.props.dispatch({ type: 'CLOSE_MODAL' });
+                            this.setState({ fileInputPlaceholder: this.state.fileInputPlaceholderDefault });  // return input line to defalut "בחירת קובץ"
                         },
                         variant: 'primary',
                         text: 'העלאה'

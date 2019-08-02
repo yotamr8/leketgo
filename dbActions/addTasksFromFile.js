@@ -23,14 +23,21 @@ function addTasksToDB(props, data) {
     const taskCollection = fire.firestore().collection('tasks');
     const timeStampCreator = fire.firebase_.firestore.Timestamp;
     var rows = data.split(/[\r\n|\n]+/);
-    for (let i = 1; i < rows.length ; i++) {
+    var numOfValidRows = rows.length - 1; // num of valid rows starts at the number of rows minus headers
+    var numOfSuccess = 0;
+    var numOfFailure = 0;
+    for (let i = 1; i < rows.length; i++) {
         var row = text2arr(rows[i]);
 
-        if (row[0] == "" || row[1] == "" || row[2] == "" || row[3] == ""
+        if (row[0] == "" || row[1] == "" || row[2] == "" || row[3] == ""    // check for row validity
             || row[4] == "" || row[5] == "" || row[6] == "" || row[8] == "") {
+            numOfValidRows--;               // if row is not valid, reduce numOfValidRows by 1
+            console.log(numOfValidRows, numOfSuccess, numOfFailure)
+            if (numOfFailure + numOfSuccess == numOfValidRows) { adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure) }
             continue
         }
-        
+
+        // get timestamp out of date columns
         let year = row[1].split('/')[2]
         year = (year.length == 2) ? ("20" + year) : year
         let month = row[1].split('/')[1]
@@ -40,9 +47,7 @@ function addTasksToDB(props, data) {
         let date = year + "-" + month + "-" + day
         var timeStamp = timeStampCreator.fromDate(new Date(date + 'T' + row[2]));
 
-        var firstSuccess = false;
-
-        taskCollection.doc().set({  // generates unique id for task
+        taskCollection.doc().set({  // generates unique id for task, and set its fields
             name: row[0],
             timestamp: timeStamp,
             city: row[3],
@@ -54,13 +59,28 @@ function addTasksToDB(props, data) {
             volunteerUid: null,
             reportFilled: false,
             collected: false
-        }).then(() => {
-            if (!firstSuccess) {
-                firstSuccess = true;
-                props.dispatch({ type: 'PUSH_TOAST', title: 'הצלחה', body: 'המידע מהקובץ הועלה בהצלחה.', delay: 5000 })  //TODO cant write here in hebrew
-            }
+        })
+        .then(() => {       // in case of success
+            numOfSuccess++;
+            console.log(numOfValidRows, numOfSuccess, numOfFailure)
+            if (numOfFailure + numOfSuccess == numOfValidRows) { adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure) }
+        
+        })
+        .catch((err) => {      // in case of error
+            console.log(err)
+            console.log(numOfValidRows, numOfSuccess, numOfFailure)
+            numOfFailure++;
+            if (numOfFailure + numOfSuccess == numOfValidRows) { adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure) }
         });
         getAllRegionTasks(props.dispatch, props.userData.region)
+    }
+}
+
+function adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure) {
+    if (numOfValidRows == numOfFailure) {
+        props.dispatch({ type: 'PUSH_TOAST', title: 'שגיאה בהעלאת הנתונים מהקובץ', body: `לא היה ניתן להעלות אף שורה מתוך הקובץ, מתוך ${numOfValidRows} שורות תקינות.`, delay: 10000 })
+    } else {
+        props.dispatch({ type: 'PUSH_TOAST', title: 'המידע מהקובץ נשמר במאגר הנתונים', body: `מתוך ${numOfValidRows} שורות תקינות בקובץ, הועלו ${numOfSuccess} בהצלחה.`, delay: 10000 })
     }
 }
 
