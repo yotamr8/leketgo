@@ -72,7 +72,12 @@ function sendCompletionMsg() {
     if (succeeded.length == numberOfTasks) {
         props.dispatch({ type: 'OPEN_MODAL', msg: 'ASSIGN_TASKS_SUCCESS', entries: succeeded });
     } else {
-        props.dispatch({ type: 'OPEN_MODAL', msg: 'ASSIGN_TASKS_FAILED', entries: { succeeded: succeeded, failed:failed } });
+        if (succeeded.length == 0) {
+            props.dispatch({ type: 'OPEN_MODAL', msg: 'ASSIGN_TASKS_FAILED', entries: { failed: failed } });
+        } else {
+            props.dispatch({ type: 'OPEN_MODAL', msg: 'ASSIGN_TASKS_MIX', entries: { succeeded: succeeded, failed: failed } });
+        }
+
     }
     refresh4User(props.dispatch, props.userData.region, props.userData.uid);
 }

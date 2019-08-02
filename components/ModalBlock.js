@@ -187,11 +187,9 @@ class ModalBlock extends React.Component {
 			let isSideCourseQDigit = re.test(this.state.sideCourseQ);
 			let isPastriesQDigit = re.test(this.state.pastriesQ);
 			let isBreadQDigit = re.test(this.state.breadQ);
-			if(!isMainCourseQDigit || !isSideCourseQDigit || !isPastriesQDigit || !isBreadQDigit){
-				console.log("inhere!");
+			if(!isMainCourseQDigit || !isSideCourseQDigit || !isPastriesQDigit || !isBreadQDigit){				
 				return false
-			}
-			console.log("outhere!");
+			}		
 			
             let numOfFields = 0;
             let fields = [];
@@ -249,15 +247,15 @@ class ModalBlock extends React.Component {
         var buttons = [];
         
         switch (modal.msg) {
-            case 'ASSIGN_TASKS_MIX':
+            case 'ASSIGN_TASKS_FAILED':
                 /* Partial success when assigning tasks.
                  * We still need to review this and adjust
                  * according to the feedback we received.
                  */
-                title = 'הצלחה חלקית';
+                title = 'תקלה בשיבוץ האיסופים';
                 body = (
                     <span>
-                    חלק מהאיסופים שבחרת שובצו בהצלחה, וחלק לא! ניתן לראות לאילו איסופים שובצת בעמוד <Link href="assigned-tasks"><a onClick={() => this.props.dispatch({ type: 'CLOSE_MODAL' })}>איסופים קרובים</a></Link>.
+                    לא ניתן היה לשבץ אף אחד מהאיסופים שבחרת. אנא רענן את העמוד ונסה שנית.
                     </span>
                 );
                 buttons = [
@@ -270,12 +268,11 @@ class ModalBlock extends React.Component {
                         text: 'סגירה'
                     }];
                 break;
-            case 'ASSIGN_TASKS_FAILED':
+            case 'ASSIGN_TASKS_MIX':
                 /* Failure when assigning tasks.
                  * We still need to review this and adjust
                  * according to the feedback we received.
-                 */
-                console.log(modal.entries)
+                 */                
                 let options = { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric' };
                 var succeeded = modal.entries.succeeded.map((task, index) =>
                     <li key={index}>{task.name} - {task.timestamp.toDate().toLocaleDateString('he-IL', options)}</li>
@@ -283,8 +280,8 @@ class ModalBlock extends React.Component {
                 var failed = modal.entries.failed.map((task, index) =>
                     <li key={index}>{task.name} - { task.timestamp.toDate().toLocaleDateString('he-IL', options)}</li>
                 );
-                console.log(succeeded)
-                title = 'כשלון בשיבוץ האיסופים';
+               
+                title = 'תקלה בשיבוץ האיסופים';
                 body = (
                     <span>
                         השיבוץ לאיסופים שבחרת נכשל!
@@ -338,14 +335,18 @@ class ModalBlock extends React.Component {
                     text: 'מילוי משוב'
                 },
                 {
+                    onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE', entries: modal.entries }),
+                    variant: 'primary',
+                    text: 'לא נאסף אוכל'
+                },
+                {
                     onClick: () => {
                         this.props.dispatch({ type: 'CLOSE_MODAL' })
-                        setTaskCollected(modal.entries.id);
-                        refresh4User(this.props.dispatch, this.props.userData.region, this.props.userData.uid); //TODO put async in dbAction
+                        setTaskCollected(modal.entries.id, this.props);                        
                     },
                     variant: 'secondary',
                     text: 'מאוחר יותר'
-                },
+                },                
                 {
                     onClick: () => {
                         this.props.dispatch({ type: 'CLOSE_MODAL' })
@@ -791,7 +792,7 @@ class ModalBlock extends React.Component {
                             }
                             editUser(this.props, user.uid, changes).then((success) => {
                                 if (success) { var title = 'הצלחה'; var body = ' שינוי פרטי המשתמש הצליחה.'; }
-                                else { var title = 'אי הצלחה'; var body = ' שינוי פרטי המשתמש לא הצליחה.'; }
+                                else { var title = 'תקלה'; var body = ' שינוי פרטי המשתמש לא הצליחה.'; }
                                 this.props.dispatch({ type: 'PUSH_TOAST', title: title, body: body, delay: 5000 })
                             })    
                             this.resetState()
@@ -973,7 +974,7 @@ class ModalBlock extends React.Component {
                                 contactNumber: this.state.contactNumber,
                                 comment: this.state.comment                               
                             }
-                            addTask(this.props.dispatch, this.props.userData.region, data)                            
+                            addTask(this.props, this.props.userData.region, data)                            
                             this.resetState()
                             this.props.dispatch({ type: 'CLOSE_MODAL' })  
 							}							
@@ -1080,7 +1081,7 @@ class ModalBlock extends React.Component {
                                     contactNumber: this.state.contactNumber,
                                     comment: this.state.comment
                                 }
-                                editTask(this.props.dispatch, modal.entries.region, modal.entries.id, data)
+                                editTask(this.props, modal.entries.region, modal.entries.id, data)
                                 this.resetState()
                                 this.props.dispatch({ type: 'CLOSE_MODAL' })
 								}
@@ -1139,7 +1140,10 @@ class ModalBlock extends React.Component {
                 );
                 buttons = [
                     {
-					onClick: () => this.exportTasksXcell() ,
+                        onClick: () => {
+                            this.exportTasksXcell();
+                            this.props.dispatch({ type: 'CLOSE_MODAL' });
+                        },
                         variant: 'primary',
                         text: 'ייצא דוח'
                     },
@@ -1156,7 +1160,10 @@ class ModalBlock extends React.Component {
                 );
                 buttons = [
                     {
-					onClick: () => this.exportUsersXcell() ,
+                        onClick: () => {
+                            this.exportUsersXcell();
+                            this.props.dispatch({ type: 'CLOSE_MODAL' });
+                        },
                         variant: 'primary',
                         text: 'ייצוא דוח'
                     },

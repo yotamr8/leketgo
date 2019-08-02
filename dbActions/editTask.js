@@ -1,10 +1,7 @@
-import fire from '../config/firebaseConfig'
+﻿import fire from '../config/firebaseConfig'
 import getAllRegionTasks from './getAllRegionTasks'
 
-export default function editTask(dispatch, region, taskID, data) {
-
-    // TODO verify values exist before trying to create timestamp or item in collection
-
+export default function editTask(props, region, taskID, data) {
     const taskCollection = fire.firestore().collection('tasks');
     var timeStampCreator = fire.firebase_.firestore.Timestamp;
     var timeStamp = timeStampCreator.fromDate(new Date(data.date + 'T' + data.time));
@@ -20,8 +17,14 @@ export default function editTask(dispatch, region, taskID, data) {
             notes: data.comment
         },
         { merge: true }
-    ).then(console.log("edited succesfully"));
+    )
+        .then(() => {
+            props.dispatch({ type: 'PUSH_TOAST', title: `הצלחה`, body: `פרטי משימת ${data.name} שונו בהצלחה.`, delay: 5000 })        
+        })
+        .catch(() => {
+            props.dispatch({ type: 'PUSH_TOAST', title: `תקלה בשינוי פרטי המשימה`, body: `לא ניתן היה לשנות את פרטי משימת ${data.name}.`, delay: 5000 })        
+        });
     
     //  TODO dispatch modal
-    getAllRegionTasks(dispatch, region) // refresh page data
+    getAllRegionTasks(props.dispatch, region) // refresh page data
 }

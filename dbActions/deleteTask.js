@@ -1,15 +1,13 @@
-import fire from '../config/firebaseConfig'
+﻿import fire from '../config/firebaseConfig'
 import getAllRegionTasks from './getAllRegionTasks'
 
-export default function setTaskReport(props, taskID) {
+export default function setTaskReport(props, taskID) {  
     const taskCollection = fire.firestore().collection('tasks');
-    taskCollection.doc(taskID).delete().then(() => {
-        console.log("Document successfully deleted!");
+    taskCollection.doc(taskID).delete().then(() => {      
+        props.dispatch({ type: 'PUSH_TOAST', title: `הצלחה`, body: `המשימה נמחקה בהצלחה.`, delay: 5000 })        
     }).catch((error) => {
-        console.error("Error removing document: ", error);
+        props.dispatch({ type: 'PUSH_TOAST', title: `תקלה במחיקת המשימה`, body: `לא ניתן היה למחוק את המשימה: ${error}.`, delay: 5000 })        
     });
 
-
-    //  TODO dispatch modal
     getAllRegionTasks(props.dispatch, props.userData.region) // refresh page data
 }

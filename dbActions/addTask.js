@@ -1,7 +1,7 @@
-import fire from '../config/firebaseConfig'
+ο»Ώimport fire from '../config/firebaseConfig'
 import getAllRegionTasks from './getAllRegionTasks'
 
-export default function addTask(dispatch, region, data) {
+export default function addTask(props, region, data) {
 
 // TODO verify values exist before trying to create timestamp or item in collection
 
@@ -23,12 +23,12 @@ export default function addTask(dispatch, region, data) {
         collected: false
     })
         .then(() => {
-            props.dispatch({ type: 'PUSH_TOAST', title: 'ξωιξδ περτδ αδφμηδ', body: `ξωιξϊ ${data.name} περτδ αδφμηδ.`, delay: 5000 })
+            props.dispatch({ type: 'PUSH_TOAST', title: 'ΧΧ©Χ™ΧΧ” Χ Χ•Χ΅Χ¤Χ” Χ‘Χ”Χ¦ΧΧ—Χ”', body: `ΧΧ©Χ™ΧΧª ${data.name} Χ Χ•Χ΅Χ¤Χ” Χ‘Χ”Χ¦ΧΧ—Χ”.`, delay: 5000 })
         })
         .catch(() => {
-            props.dispatch({ type: 'PUSH_TOAST', title: 'ωβιΰδ αδερτϊ ξωιξδ', body: `μΰ πιϊο διδ μδερισ ΰϊ ξωιξϊ ${data.name}.`, delay: 5000 })
+            props.dispatch({ type: 'PUSH_TOAST', title: 'Χ©Χ’Χ™ΧΧ” Χ‘Χ”Χ•Χ΅Χ¤Χª ΧΧ©Χ™ΧΧ”', body: `ΧΧ Χ Χ™ΧªΧ Χ”Χ™Χ” ΧΧ”Χ•Χ΅Χ™Χ£ ΧΧª ΧΧ©Χ™ΧΧª ${data.name}.`, delay: 5000 })
         });
     
 //  TODO dispatch modal
-    getAllRegionTasks(dispatch, region) // refresh page data
+    getAllRegionTasks(props.dispatch, region) // refresh page data
 } 
