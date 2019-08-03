@@ -335,11 +335,6 @@ class ModalBlock extends React.Component {
                     text: 'מילוי משוב'
                 },
                 {
-                    onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE', entries: modal.entries }),
-                    variant: 'primary',
-                    text: 'לא נאסף אוכל'
-                },
-                {
                     onClick: () => {
                         this.props.dispatch({ type: 'CLOSE_MODAL' })
                         setTaskCollected(modal.entries.id, this.props);                        
