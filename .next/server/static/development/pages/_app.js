@@ -147,7 +147,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\\ModalBlock.js";
+var _jsxFileName = "C:\\Users\\baram\\Git\\leketgo\\components\\ModalBlock.js";
 
 /* ModalBlock
  * This component is responsible for any modal window in the app,
@@ -2912,7 +2912,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\\ToastBlock.js";
+var _jsxFileName = "C:\\Users\\baram\\Git\\leketgo\\components\\ToastBlock.js";
 
 
 
@@ -3042,7 +3042,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\components\\Toasts.js";
+var _jsxFileName = "C:\\Users\\baram\\Git\\leketgo\\components\\Toasts.js";
 
 
 
@@ -5513,7 +5513,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "C:\\Users\\mwilchek\\Documents\\GitHub\\LeketGo\\pages\\_app.js";
+var _jsxFileName = "C:\\Users\\baram\\Git\\leketgo\\pages\\_app.js";
 
 
 

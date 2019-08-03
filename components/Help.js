@@ -10,6 +10,17 @@ import '../static/styles.scss'
 class Help extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            instruction: {
+                index: this.props.userData.admin ? 'dashboard' : 'index',
+                profile: 'profile',
+                assignedTasks: 'assignedTasks',
+                taskReports: 'taskReports',
+                history: 'history',
+                adminTasks: 'adminTasks',
+                adminUsers: 'adminUsers'
+            }
+        }
     }
 
     render() {
@@ -24,7 +35,7 @@ class Help extends React.Component {
         <Popover
           title={`עזרה`}
         >
-          בדף עדכון פרטים אישיים ניתן לשנות סיסמא
+        {this.state.instruction[this.props.page]}
         </Popover>}>
         {/* <OverlayTrigger
             key='help'
