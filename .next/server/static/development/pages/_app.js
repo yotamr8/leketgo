@@ -635,7 +635,7 @@ function (_React$Component) {
                 type: 'CLOSE_MODAL'
               });
             },
-            variant: 'secondary',
+            variant: 'danger',
             text: 'ביטול פעולה'
           }];
           break;

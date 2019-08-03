@@ -351,7 +351,7 @@ class ModalBlock extends React.Component {
                     onClick: () => {
                         this.props.dispatch({ type: 'CLOSE_MODAL' })
                     },
-                    variant: 'secondary',
+                    variant: 'danger',
                     text: 'ביטול פעולה'
                 }      
                 ];
