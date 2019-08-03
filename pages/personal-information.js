@@ -152,6 +152,7 @@ class Personal_information extends Component {
                             <h2>שינוי סיסמה</h2>
                             </div>
                             <Form.Row>
+                                    <input style={{ display: "none" }} type="password" name="fakepasswordremembered" />
                                 <Form.Group as={Col} controlId="formPassword">
                                     <Form.Label>סיסמה חדשה</Form.Label>
                                     <Form.Control type="password" defaultValue="" isInvalid={!this.state.isPasswordlengthValid}/>
