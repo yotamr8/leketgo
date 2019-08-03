@@ -92,7 +92,7 @@ class ModalBlock extends React.Component {
       }
 
 	exportTasksXcell(){
-		let rows = ["address", "city", "collected", "contact name", "contact number", "foodContainerQuantity1", "foodContainerQuantity2", "foodContainerQuantity3", "foodContainerQuantity4", "foodContainerType1", "foodContainerType2", "foodContainerType3", "foodContainerType4", "foodDesc1", "foodDesc2", "foodDesc3", "foodDesc4", "name", "notes", "region", "reportComment", "reportFieldNum", "reportFilled", "timestamp", "volunteerUid"]
+		let rows = [["address", "city", "collected", "contact name", "contact number", "foodContainerQuantity1", "foodContainerQuantity2", "foodContainerQuantity3", "foodContainerQuantity4", "foodContainerType1", "foodContainerType2", "foodContainerType3", "foodContainerType4", "foodDesc1", "foodDesc2", "foodDesc3", "foodDesc4", "name", "notes", "region", "reportComment", "reportFieldNum", "reportFilled", "timestamp", "volunteerUid"]]
 		this.props.regionalTasks.forEach((task) => {
 			let taskRow = []
 			rows[0].forEach((key) => {
