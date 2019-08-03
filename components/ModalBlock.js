@@ -92,11 +92,10 @@ class ModalBlock extends React.Component {
       }
 
 	exportTasksXcell(){
-		// TODO decide if this line should stay also
-		let rows = [Object.keys(this.props.regionalTasks[0])]
+		let rows = [["address", "city", "collected", "contact name", "contact number", "foodContainerQuantity1", "foodContainerQuantity2", "foodContainerQuantity3", "foodContainerQuantity4", "foodContainerType1", "foodContainerType2", "foodContainerType3", "foodContainerType4", "foodDesc1", "foodDesc2", "foodDesc3", "foodDesc4", "name", "notes", "region", "reportComment", "reportFieldNum", "reportFilled", "timestamp", "volunteerUid"]]
 		this.props.regionalTasks.forEach((task) => {
 			let taskRow = []
-			Object.keys(this.props.regionalTasks[0]).forEach((key) => {
+			rows[0].forEach((key) => {
 				taskRow.push(task[key])
 			})
 		     rows.push(Object.values(taskRow))
@@ -346,7 +345,7 @@ class ModalBlock extends React.Component {
                     onClick: () => {
                         this.props.dispatch({ type: 'CLOSE_MODAL' })
                     },
-                    variant: 'secondary',
+                    variant: 'danger',
                     text: 'ביטול פעולה'
                 }      
                 ];
