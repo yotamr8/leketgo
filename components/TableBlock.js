@@ -177,7 +177,7 @@ class TableBlock extends React.Component {
         })
     }
 
-    render() {        
+    render() {           
 		// Setting actionsBar
 		let actionsBar = '';
 		if (this.props.isSelectable && this.state.entrySelectedCounter > 0) {
@@ -254,11 +254,11 @@ class TableBlock extends React.Component {
 							</Col>
 							<Col>
                             <ButtonGroup aria-label="Basic example">
-                                    <Button variant="secondary" onClick={ () => this.handleFilterChange("הכל")}>הכל</Button>
-                                    <Button variant="secondary" onClick={ () => this.handleFilterChange("לא שובץ")}>לא שובץ</Button>
-                                    <Button variant="secondary" onClick={ () => this.handleFilterChange("שובץ ולא בוצע")}>שובץ ולא בוצע</Button>
-                                    <Button variant="secondary" onClick={ () => this.handleFilterChange("בוצע ללא משוב")}>בוצע ללא משוב</Button>
-                                    <Button variant="secondary" onClick={ () => this.handleFilterChange("מולא משוב")}>מולא משוב</Button>
+                                <Button variant={ (this.state.filterValue == "הכל") ? "primary" : "secondary"} onClick={() => this.handleFilterChange("הכל")}>הכל</Button>
+                                <Button variant={(this.state.filterValue == "לא שובץ") ? "primary" : "secondary"} onClick={ () => this.handleFilterChange("לא שובץ")}>לא שובץ</Button>
+                                <Button variant={(this.state.filterValue == "שובץ ולא בוצע") ? "primary" : "secondary"} onClick={ () => this.handleFilterChange("שובץ ולא בוצע")}>שובץ ולא בוצע</Button>
+                                <Button variant={(this.state.filterValue == "בוצע ללא משוב") ? "primary" : "secondary"} onClick={ () => this.handleFilterChange("בוצע ללא משוב")}>בוצע ללא משוב</Button>
+                                <Button variant={(this.state.filterValue == "מולא משוב") ? "primary" : "secondary"} onClick={ () => this.handleFilterChange("מולא משוב")}>מולא משוב</Button>
 								</ButtonGroup>
 							</Col>
 						</Row>

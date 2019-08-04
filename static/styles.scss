@@ -260,3 +260,26 @@ h2 img {
     right: 50px;
     top: -90px;
   }
+
+.phoneButtons{
+    display : none
+}
+
+.filterButton{
+
+}
+
+.chosenFilterButton{
+
+}
+
+@media screen and (max-width: 600px) {
+    .phoneButtons{
+        display: block; 
+        font-size: 50px;               
+    }
+
+    .phoneButtons i {
+        margin: 10px 10px 10px 10px;
+    }
+}

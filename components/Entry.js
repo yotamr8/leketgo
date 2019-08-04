@@ -30,27 +30,20 @@ class Entry extends React.Component {
                 let statusIcon;
                 let statusMessage;
                 let fullAddressWithButtons = (
-                    <span>{entry.address +', '+ entry.city}<OverlayTrigger
-                        placement='top'
-                        overlay={
-                            <Tooltip>
-                            העתקת כתובת
-                            </Tooltip>
-                        }>
-                            <CopyToClipboard text={entry.address +', '+ entry.city}><a href={'#'+entry.id}><i style={{cursor: 'pointer'}} className="ml-2 far fa-clipboard nm"></i></a>
-                            </CopyToClipboard>
-                        </OverlayTrigger>
+                    <span>
+                        {entry.address + ', ' + entry.city}
+                        <div className="phoneButtons">
+                            <OverlayTrigger placement='top' overlay={<Tooltip>העתקת כתובת</Tooltip>}>
+                                <CopyToClipboard text={entry.address +', '+ entry.city}><a href={'#'+entry.id}><i style={{cursor: 'pointer'}} className="ml-2 far fa-clipboard nm"></i></a></CopyToClipboard>
+                            </OverlayTrigger>
 
-                        <OverlayTrigger
-                        placement='top'
-                        overlay={
-                            <Tooltip>
-                            חיפוש ב־Waze
-                            </Tooltip>
-                        }>
-                            <a target="_blank" href={`https://waze.com/ul?q=` + entry.address +', '+ entry.city}><i style={{cursor: 'pointer'}} className="ml-2 fab fa-waze nm"></i>
-                            </a>
-                        </OverlayTrigger></span>
+                            <OverlayTrigger placement='top' overlay={<Tooltip>חיפוש ב־Waze</Tooltip>}>
+                                <a target="_blank" href={`https://waze.com/ul?q=` + entry.address + ', ' + entry.city}>
+                                        <i style={{ cursor: 'pointer' }} className="ml-2 fab fa-waze nm"></i>
+                                </a>
+                            </OverlayTrigger>
+                        </div>
+                    </span>
                 )
 
                 if (entry.volunteerUid) {
