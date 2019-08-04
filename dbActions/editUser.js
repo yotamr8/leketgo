@@ -2,6 +2,11 @@ import fire from '../config/firebaseConfig'
 import getAllUsers from './getAllUsers'
 import editUserAuth from './editUserAuth'
 
+/*
+    Function get uid of user, and changes that are to be made in users data.
+    Each valid task data, is added to database.
+    At the end, sends feedback to user with toast about how many tasks out of valid rows were succesfully added, and refreshes the page data.
+*/
 
 export default function editUser(props, uid, changes) {
     var authChanges = {}

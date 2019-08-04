@@ -9,7 +9,7 @@ var firebaseConfig = {
     messagingSenderId: "427584696273",
     appId: "1:427584696273:web:286a00c4ddae79ec"
 };
-// Initialize Firebase
+// Initialize Firebase - and make sure only once
 const fire = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
 
 export default fire;

@@ -1,4 +1,4 @@
-export function getEndDate() {     // if it is Thursday or after, return time of next Saturday. else, return time of this saturday.
+export function getEndDate() {     // if it is Thursday or after, return time of next Saturday. else, return time of this saturday. for unassigned tasks.
     var now = new Date();
     var result = new Date(now);
     var weekDay = result.getDay();

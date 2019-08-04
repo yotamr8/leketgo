@@ -1,6 +1,11 @@
 ﻿import fire from '../config/firebaseConfig'
 import getAllRegionTasks from './getAllRegionTasks'
 
+/*
+    Function gets the region, taskID and data of the task, and updates task with new data.
+    At the end, sends feedback to user with toast.
+*/
+
 export default function editTask(props, region, taskID, data) {
     const taskCollection = fire.firestore().collection('tasks');
     var timeStampCreator = fire.firebase_.firestore.Timestamp;
@@ -25,6 +30,5 @@ export default function editTask(props, region, taskID, data) {
             props.dispatch({ type: 'PUSH_TOAST', title: `תקלה בשינוי פרטי המשימה`, body: `לא ניתן היה לשנות את פרטי משימת ${data.name}.`, delay: 5000 })        
         });
     
-    //  TODO dispatch modal
     getAllRegionTasks(props.dispatch, region) // refresh page data
 }

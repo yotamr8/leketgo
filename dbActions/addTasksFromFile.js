@@ -2,6 +2,12 @@ import fire from '../config/firebaseConfig';
 import getAllRegionTasks from './getAllRegionTasks'
 import XLSX from 'xlsx';
 
+/*
+    Function uploads data from the excel file, and iterates through rows, assuming each row represents a valid task.
+    Each valid task data, is added to database.
+    At the end, sends feedback to user with toast about how many tasks out of valid rows were succesfully added, and refreshes the page data.
+*/
+
 export default function handleTaskFileUpload(props, file){
     const reader = new FileReader();
 
@@ -9,7 +15,7 @@ export default function handleTaskFileUpload(props, file){
         const bstr = evt.target.result;
         const wb = XLSX.read(bstr, { type: 'binary' });
 
-        const wsname = wb.SheetNames[0];
+        const wsname = wb.SheetNames[0];    
         const ws = wb.Sheets[wsname];
 
         const data = XLSX.utils.sheet_to_csv(ws, { header: 1 });
@@ -22,18 +28,21 @@ export default function handleTaskFileUpload(props, file){
 function addTasksToDB(props, data) {
     const taskCollection = fire.firestore().collection('tasks');
     const timeStampCreator = fire.firebase_.firestore.Timestamp;
+
     var rows = data.split(/[\r\n|\n]+/);
-    var numOfValidRows = rows.length - 1; // num of valid rows starts at the number of rows minus headers
-    var numOfSuccess = 0;
-    var numOfFailure = 0;
+    var numOfValidRows = rows.length - 1;   // num of valid rows starts at the number of rows minus headers
+    var numOfSuccess = 0;                   // num of rows that were loaded succesfully to database
+    var numOfFailure = 0;                   // num of rows that were not loaded succesfully to database
+
     for (let i = 1; i < rows.length; i++) {
         var row = text2arr(rows[i]);
 
         if (row[0] == "" || row[1] == "" || row[2] == "" || row[3] == ""    // check for row validity
             || row[4] == "" || row[5] == "" || row[6] == "" || row[8] == "") {
-            numOfValidRows--;               // if row is not valid, reduce numOfValidRows by 1
-            console.log(numOfValidRows, numOfSuccess, numOfFailure)
-            if (numOfFailure + numOfSuccess == numOfValidRows) { adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure) }
+            numOfValidRows--;               // if row is not valid, reduce numOfValidRows by 1            
+            if (numOfFailure + numOfSuccess == numOfValidRows) {    // if finished interating through rows - pop toast for user feedback 
+                adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure)
+            }
             continue
         }
 
@@ -61,22 +70,24 @@ function addTasksToDB(props, data) {
             collected: false
         })
         .then(() => {       // in case of success
-            numOfSuccess++;
-            console.log(numOfValidRows, numOfSuccess, numOfFailure)
-            if (numOfFailure + numOfSuccess == numOfValidRows) { adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure) }
+            numOfSuccess++;            
+            if (numOfFailure + numOfSuccess == numOfValidRows) {    // if finished interating through rows - pop toast for user feedback 
+                adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure)
+            }
         
         })
         .catch((err) => {      // in case of error
-            console.log(err)
-            console.log(numOfValidRows, numOfSuccess, numOfFailure)
+            console.log(err)            
             numOfFailure++;
-            if (numOfFailure + numOfSuccess == numOfValidRows) { adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure) }
-        });
-        getAllRegionTasks(props.dispatch, props.userData.region)
+            if (numOfFailure + numOfSuccess == numOfValidRows) {    // if finished interating through rows - pop toast for user feedback 
+                adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure)
+            }
+        });        
     }
 }
 
 function adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure) {
+    getAllRegionTasks(props.dispatch, props.userData.region) // refresh data for app
     if (numOfValidRows == numOfFailure) {
         props.dispatch({ type: 'PUSH_TOAST', title: 'שגיאה בהעלאת הנתונים מהקובץ', body: `לא היה ניתן להעלות אף שורה מתוך הקובץ, מתוך ${numOfValidRows} שורות תקינות.`, delay: 10000 })
     } else {

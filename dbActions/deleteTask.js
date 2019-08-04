@@ -1,6 +1,11 @@
 ﻿import fire from '../config/firebaseConfig'
 import getAllRegionTasks from './getAllRegionTasks'
 
+/*
+    Function get taskID, and deletes it.
+    At the end, sends feedback to user about the success of the action.
+*/
+
 export default function setTaskReport(props, taskID) {  
     const taskCollection = fire.firestore().collection('tasks');
     taskCollection.doc(taskID).delete().then(() => {      

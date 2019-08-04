@@ -328,31 +328,32 @@ class ModalBlock extends React.Component {
                 title = 'דיווח';
                 body = 'אנא בחר אחת מן האפשרויות לדיווח:';
                 buttons = [
-                {
-                    onClick: () => this.props.dispatch({ type: 'OPEN_MODAL',msg: 'REPORT_FILL', entries: modal.entries }),
-                    variant: 'success',
-                    text: 'בוצע - מילוי משוב'
-                },
-                {
-                    onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE', entries: this.props.entry }),
-                    variant: 'primary',
-                    text: 'לא בוצע'
-                },
-                {
-                    onClick: () => {
-                        this.props.dispatch({ type: 'CLOSE_MODAL' })
-                        setTaskCollected(modal.entries.id, this.props);                        
-                    },
-                    variant: 'secondary',
-                    text: 'מאוחר יותר'
-                },                
-                {
-                    onClick: () => {
-                        this.props.dispatch({ type: 'CLOSE_MODAL' })
-                    },
-                    variant: 'danger',
-                    text: 'ביטול פעולה'
-                }      
+                    /*{
+                        onClick: () => {
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                            setTaskCollected(modal.entries.id, this.props);
+                        },
+                        variant: 'primary',
+                        text: 'בוצע'
+                    },*/
+                    {
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL',msg: 'REPORT_FILL', entries: modal.entries }),
+                        variant: 'primary',
+                        text: 'בוצע – מילוי משוב'
+                    },                    
+                
+                    {
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE', entries: this.props.entry }),
+                        variant: 'primary',
+                        text: 'לא בוצע'
+                    },                              
+                    {
+                        onClick: () => {
+                            this.props.dispatch({ type: 'CLOSE_MODAL' })
+                        },
+                        variant: 'secondary',
+                        text: 'סגירה'
+                    }      
                 ];
                 break;
             case 'REPORT_FILL':

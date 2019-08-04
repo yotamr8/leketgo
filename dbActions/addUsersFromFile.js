@@ -2,6 +2,11 @@ import fire from '../config/firebaseConfig';
 import addUser from './addUser'
 import XLSX from 'xlsx';
 
+/*
+    Function uploads data from the excel file, and iterates through rows, assuming each row represents a valid user.
+    Each valid user data, is sent to addUser function.    
+*/
+
 export default function handleUserFileUpload(props, file) {
     const reader = new FileReader();
 
@@ -24,7 +29,7 @@ function addUsers(props, data) {
     for (let i = 1; i < rows.length; i++) {
         var row = text2arr(rows[i]);
 
-        if (row[0] == "" || row[1] == "" || row[2] == "" || row[3] == ""
+        if (row[0] == "" || row[1] == "" || row[2] == "" || row[3] == ""    // if row doesn't have vital data for user - skip
             || row[4] == "" || row[5] == "" || row[6] == "" || row[7] == "") {
             continue
         }
@@ -39,8 +44,8 @@ function addUsers(props, data) {
             city: row[6],
             address: row[7],            
             comment: (row[8] != "") ? row[8] : "",
-            admin: (row[9] != "") ? row[9] : false,
-            disabled: (row[10] != "") ? row[10] : false            
+            admin: (row[9] != "") ? ((row[9] == "true" ? true : false)) : false,        
+            disabled: (row[10] != "") ? ((row[10] == "true" ? true : false)) : false            
         }
         addUser(props, user)        
     }

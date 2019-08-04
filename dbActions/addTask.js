@@ -1,9 +1,12 @@
 ﻿import fire from '../config/firebaseConfig'
 import getAllRegionTasks from './getAllRegionTasks'
 
-export default function addTask(props, region, data) {
+/*
+    Function gets the region and data of the task, and creates new task with data.
+    At the end, sends feedback to user with toast, and refreshes the page data.
+*/
 
-// TODO verify values exist before trying to create timestamp or item in collection
+export default function addTask(props, region, data) {
 
     const taskCollection = fire.firestore().collection('tasks');
     var timeStampCreator = fire.firebase_.firestore.Timestamp;
@@ -22,6 +25,7 @@ export default function addTask(props, region, data) {
         reportFilled: false,
         collected: false
     })
+        // pop toast to give feedback to user
         .then(() => {
             props.dispatch({ type: 'PUSH_TOAST', title: 'משימה נוספה בהצלחה', body: `משימת ${data.name} נוספה בהצלחה.`, delay: 5000 })
         })
@@ -29,6 +33,5 @@ export default function addTask(props, region, data) {
             props.dispatch({ type: 'PUSH_TOAST', title: 'שגיאה בהוספת משימה', body: `לא ניתן היה להוסיף את משימת ${data.name}.`, delay: 5000 })
         });
     
-//  TODO dispatch modal
     getAllRegionTasks(props.dispatch, region) // refresh page data
 } 
