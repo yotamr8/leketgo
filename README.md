@@ -3,14 +3,40 @@
 An all-hebrew NextJS app for managing food collecting tasks in the real world.<br>
 In the making for [Leket Israel (The National Food Bank)](https://www.leket.org/en/), a non-profit organization that rescues surplus food for those in need.
 
-## Overview
+# Overview
 
 Developed by Bar Amir, Matan Wilchek, Alon Kagan and Roey Ravits as our semestrial project in the [Google Technologies for Cloud and Web Development Workshop](https://sites.google.com/site/cloudweb18b/) at Tel Aviv University.
 
-## Getting Started
-## Running the Tests
+# Installation
 
-## Deploying to Firebase
+The Web app is running on Chrome, Safari, Firefox. <br>
+In order to edit code, you will need to install NodeJS.
+
+# Usage Instructions
+
+## Login page
+
+In case of forgetting your password, you can reset it using 'forgot password'.<br>
+A link to reset your password will be sent to your mail.
+
+## Control panel page
+
+You can view informative data about this week volunteers and tasks.
+
+## Volunteers page
+
+You can view the list of active and inactive users (volunteers).<br>
+You can add a new user menually or 'from file'.<br>
+If you choose 'from file', you will need to follow the example file ("/users.xlsx"), and fill the same columns and fields.<br>
+For every active user you can take different actions under 'options'. You can edit his personal info, change his password, change his permissions to administrator, or disable his account.<br>
+For every inactive user you can bring him back to be active.<br>
+You can export the list of users as an excel file using 'export users report'.
+
+## Tasks Page
+
+
+
+# Deploying to Firebase
 
 ```bash
 npm run build
@@ -36,7 +62,7 @@ everything (include functions) -
 firebase deploy 
 ```
 *It's possible that chrome will show the old site. If so you'll first need to clean the web_cache and cookies
-## Built With
+# architectural overview
 * [Next.js](https://github.com/zeit/next.js) – The React Framework
 * [React Bootstrap](https://github.com/react-bootstrap/react-bootstrap) – The most popular front-end framework, rebuilt for React
 * [Firebase](https://firebase.google.com/) – Application development platform by Google
