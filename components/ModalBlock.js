@@ -325,13 +325,18 @@ class ModalBlock extends React.Component {
                 break;
             case 'TASK_DONE':
                 /* For when a volunteer marks an assignment `done` */
-                title = 'האיסוף בוצע';
-                body = 'תודה! האיסוף סומן כבוצע. השלב הבא הוא למלא משוב.';
+                title = 'דיווח';
+                body = 'אנא בחר אחת מן האפשרויות לדיווח:';
                 buttons = [
                 {
                     onClick: () => this.props.dispatch({ type: 'OPEN_MODAL',msg: 'REPORT_FILL', entries: modal.entries }),
+                    variant: 'success',
+                    text: 'בוצע - מילוי משוב'
+                },
+                {
+                    onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE', entries: this.props.entry }),
                     variant: 'primary',
-                    text: 'מילוי משוב'
+                    text: 'לא בוצע'
                 },
                 {
                     onClick: () => {

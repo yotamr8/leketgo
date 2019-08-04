@@ -15,7 +15,7 @@ class TableBlock extends React.Component {
 			entrySelectedCounter: 0,
 			selectedEntries: {},
 			columnNames: {
-				'actions': 'פעולות',
+				'actions': 'אפשרויות',
 				'date': 'תאריך',
 				'time': 'שעה',
 				'city': 'עיר',
@@ -79,15 +79,15 @@ class TableBlock extends React.Component {
 			case 'history':
 				return ['date', 'time', 'fullAddressWithButtons', 'name', 'contactName', 'contactNumber'];
 			case 'adminUsers':
-			return ['tz', 'firstName', 'lastName', 'email', 'phone', 'region', 'actions'];
+			    return ['tz', 'firstName', 'lastName', 'email', 'phone', 'region', 'actions'];
 			case 'adminUsersDeactivated':
-			return ['tz', 'firstName', 'lastName', 'email', 'phone', 'region', 'actions'];
+			    return ['tz', 'firstName', 'lastName', 'email', 'phone', 'region', 'actions'];
 			case 'adminTasks':
-					return ['status', 'date', 'time', 'street', 'city', 'name', 'actions'];
+				return ['status', 'date', 'time', 'street', 'city', 'name', 'actions'];
 			case 'adminTasksPast':
-					return ['status', 'date', 'time', 'street', 'city', 'name'];
+				return ['status', 'date', 'time', 'street', 'city', 'name'];
 			case 'adminTasksFuture':
-			return ['status', 'date', 'time', 'street', 'city', 'name', 'actions'];
+		        return ['status', 'date', 'time', 'street', 'city', 'name', 'actions'];
 			default:
 				break;
 		}

@@ -128,13 +128,8 @@ class Entry extends React.Component {
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_DONE', entries: this.props.entry}),
                         variant: 'outline-primary',
-                        text: <span><i className={"far fa-calendar-check fa-fw "+ nm}></i>{this.props.tableTasksCardView ? <br/> : ''}בוצע</span>
-                    },
-                    {
-                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE', entries: this.props.entry }),
-                        variant: 'outline-secondary',
-                        text: <span><i className={"far fa-calendar-times fa-fw " + nm}></i>{this.props.tableTasksCardView ? <br /> : ''}לא בוצע</span>
-                    },
+                        text: <span><i className={"far fa-calendar-check fa-fw "+ nm}></i>{this.props.tableTasksCardView ? <br/> : ''}דיווח</span>
+                    },                    
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'TASK_CANCEL', entries: this.props.entry }),
                         variant: 'outline-secondary',
@@ -147,7 +142,7 @@ class Entry extends React.Component {
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_FILL', entries: this.props.entry }),
                         variant: 'outline-primary',
-                        text: <span><i className={"far fa-calendar-check fa-fw "+ nm}></i>{this.props.tableTasksCardView ? <br/> : ''}דיווח</span>
+                        text: <span><i className={"far fa-calendar-check fa-fw "+ nm}></i>{this.props.tableTasksCardView ? <br/> : ''}בוצע - מילוי משוב</span>
                     },
                     {
                         onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE', entries: this.props.entry  }),
@@ -271,7 +266,7 @@ class Entry extends React.Component {
                                             <td className="align-middle" key={column}>
                                             <span style={{whiteSpace: 'nowrap'}}><Dropdown width='200'>
                                                 <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                                    פעולות
+                                                    אפשרויות
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
                                                 {buttons.map((button) => {
@@ -290,7 +285,7 @@ class Entry extends React.Component {
                                             <td className="align-middle" key={column}>
                                             <span style={{whiteSpace: 'nowrap'}}><Dropdown width='200'>
                                                 <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                                    פעולות
+                                                    אפשרויות
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
                                                 {buttons.map((button) => {
@@ -309,7 +304,7 @@ class Entry extends React.Component {
                                         <span style={{whiteSpace: 'nowrap'}}>
                                             <Dropdown width='200'>
                                                 <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                                    פעולות
+                                                    אפשרויות
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
                                                 {buttons.map((button) => {
@@ -329,7 +324,7 @@ class Entry extends React.Component {
                                     <span style={{whiteSpace: 'nowrap'}}>
                                         <Dropdown width='200'>
                                             <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                                פעולות
+                                                אפשרויות
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu>
                                             {buttons.map((button) => {
@@ -350,7 +345,7 @@ class Entry extends React.Component {
                                             <span style={{whiteSpace: 'nowrap'}}>
                                                 <Dropdown width='200'>
                                                     <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                                        פעולות
+                                                        אפשרויות
                                                     </Dropdown.Toggle>
                                                     <Dropdown.Menu>
                                                     {buttons.map((button) => {
@@ -370,7 +365,7 @@ class Entry extends React.Component {
                                         <span style={{whiteSpace: 'nowrap'}}>
                                             <Dropdown width='200'>
                                                 <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                                    פעולות
+                                                    אפשרויות
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
                                                 {buttons.map((button) => {
@@ -390,7 +385,7 @@ class Entry extends React.Component {
                                         <span style={{whiteSpace: 'nowrap'}}>
                                             <Dropdown width='200'>
                                                 <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                                    פעולות
+                                                    אפשרויות
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
                                                     {buttons.map((button) => {

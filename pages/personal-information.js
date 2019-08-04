@@ -9,7 +9,7 @@ import editUser from '../dbActions/editUser'
 class Personal_information extends Component {
     constructor(...args) {
         super(...args);
-        this.state = { 	validated: true,
+        this.state = { 	validated: true,        
 						isMailValid: true,
 						isPasswordlengthValid: true,
 						isDoublePasswordsMatch: true,
@@ -18,14 +18,15 @@ class Personal_information extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-	componentWillMount() {
+	componentWillMount() {      // runs everytime the page is entered, checks that user has permission to see page, and refreshes the data.
         checkAuthAndRefresh(this.props.dispatch)
     }
 	
-    handleSubmit(event) {
-        console.log(event)
-        event.preventDefault();
-        event.stopPropagation();
+    handleSubmit(event) {       // callback when user click "שמירת שינויים"        
+        event.preventDefault();     //prevents page from refreshing
+        event.stopPropagation();    //prevents page from refreshing
+
+        // validate data fields
         const form = event.currentTarget;
         
         let formEmail = document.getElementById('formEmail').value;
@@ -48,12 +49,8 @@ class Personal_information extends Component {
 		if(!this.state.isPasswordlengthValid || !this.state.isMailValid || !this.state.isDoublePasswordsMatch || !this.state.isPhoneValid) {
 			this.state.validated = false;
 		}
-        
-        console.log(this.state.validated);
-        if (!this.state.validated) {
-          event.preventDefault();
-          event.stopPropagation();
-        } else {         
+                
+        if (this.state.validated){         
             let user = this.props.userData
             let formCity = document.getElementById('formCity').value;
             let formAddress = document.getElementById('formAddress').value;
@@ -69,18 +66,17 @@ class Personal_information extends Component {
                 if (success) {
                     this.props.dispatch({ type: 'PUSH_TOAST', title: 'הצלחה', body: 'השינויים נשמרו בהצלחה.', delay: 5000 })
                 } else {
-                    this.props.dispatch({ type: 'PUSH_TOAST', title: 'בעיה', body: 'השינויים לא נשמרו בהצלחה.', delay: 5000 })
+                    this.props.dispatch({ type: 'PUSH_TOAST', title: 'שגיאה', body: 'אירעה תקלה, והשינויים בפרטים האישיים לא נשמרו.', delay: 5000 })
                 }
             }).catch(() => {
-                this.props.dispatch({ type: 'PUSH_TOAST', title: 'בעיה', body: 'השינויים לא נשמרו בהצלחה.', delay: 5000 })
+                this.props.dispatch({ type: 'PUSH_TOAST', title: 'שגיאה', body: 'אירעה תקלה, והשינויים בפרטים האישיים לא נשמרו.', delay: 5000 })
             })
             
         }
         this.setState({ validated: true });        
       }
 
-    render() {
-        console.log(this.props)
+    render() {        
         if (!this.props.authChecked || !this.props.isLoggedIn) {
             return (<Loading />);
         }
@@ -93,11 +89,7 @@ class Personal_information extends Component {
                         <div className="mt-4 mb-4">
                             <h2><img src='/static/profile.png' width="60"/>עדכון פרטים אישיים</h2>
                         </div>
-                        <Form
-                            noValidate
-                            validated={this.state.validated}
-                            onSubmit={e => this.handleSubmit(e)}
-                        >
+                        <Form noValidate validated={this.state.validated} onSubmit={e => this.handleSubmit(e)}>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formFirsName">
                                     <Form.Label>שם פרטי</Form.Label>
@@ -152,7 +144,7 @@ class Personal_information extends Component {
                             <h2>שינוי סיסמה</h2>
                             </div>
                             <Form.Row>
-                                    <input style={{ display: "none" }} type="password" name="fakepasswordremembered" />
+                                <input style={{ display: "none" }} type="password" name="fakepasswordremembered" />
                                 <Form.Group as={Col} controlId="formPassword">
                                     <Form.Label>סיסמה חדשה</Form.Label>
                                     <Form.Control type="password" defaultValue="" isInvalid={!this.state.isPasswordlengthValid}/>
