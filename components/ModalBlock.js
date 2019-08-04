@@ -136,14 +136,20 @@ class ModalBlock extends React.Component {
           post: { ...prevState.post, [name]: value }
         }));
     };
-	
+
+    handleChange = (e) => {
+        /* This method is only relevant
+           to the REPORT_FILL modal */
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+
     validateTaskInfo(){
 		
-		this.state.isPhoneTaskValid = /^\d{10}$/.test(this.state.contactNumber);
-		console.log("phone length valid: " + this.state.isPhoneTaskValid);
+		this.state.isPhoneTaskValid = /^\d{10}$/.test(this.state.contactNumber);		
 		
-        if (!this.state.isPhoneTaskValid) {
-          console.log("nonvalid")
+        if (!this.state.isPhoneTaskValid) {          
 		  return false;
         }
 		return true;
@@ -151,17 +157,13 @@ class ModalBlock extends React.Component {
 	
 	validateUserInfo(){
 		
-		this.state.isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.state.email)
-        console.log("mail valid: " + this.state.isMailValid);
+		this.state.isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.state.email)        
 		
-		this.state.isTZValid = /^\d{9}$/.test(this.state.tz);
-		console.log("TZ length valid: " + this.state.isTZValid);
+		this.state.isTZValid = /^\d{9}$/.test(this.state.tz);		
 		
-		this.state.isPhoneValid = /^\d{10}$/.test(this.state.phone);
-		console.log("phone length valid: " + this.state.isPhoneValid);
+		this.state.isPhoneValid = /^\d{10}$/.test(this.state.phone);		
 		
-		if(!this.state.isMailValid || !this.state.isTZValid || !this.state.isPhoneValid) {
-          console.log("nonvalid")
+		if(!this.state.isMailValid || !this.state.isTZValid || !this.state.isPhoneValid) {       
 		  return false;
         }
         this.setState({ validated: true });
@@ -171,30 +173,18 @@ class ModalBlock extends React.Component {
     
     validateUserInfoBeforeRendering(){
 		
-		this.state.isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.state.email)
-        console.log("mail valid: " + this.state.isMailValid);
+		this.state.isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.state.email)        
 		
-		this.state.isTZValid = /^\d{9}$/.test(this.state.tz);
-		console.log("TZ length valid: " + this.state.isTZValid);
+		this.state.isTZValid = /^\d{9}$/.test(this.state.tz);		
 		
-		this.state.isPhoneValid = /^\d{10}$/.test(this.state.phone);
-		console.log("phone length valid: " + this.state.isPhoneValid);
+		this.state.isPhoneValid = /^\d{10}$/.test(this.state.phone);		
 		
-		if(!this.state.isMailValid || !this.state.isTZValid || !this.state.isPhoneValid) {
-          console.log("nonvalid")
+		if(!this.state.isMailValid || !this.state.isTZValid || !this.state.isPhoneValid) {        
 		  return false;
         }
         //this.setState({ validated: true });
 		return true;
 		
-    }
-
-    handleChange = (e) => {
-        /* This method is only relevant
-           to the REPORT_FILL modal */
-        this.setState({
-            [e.target.id]: e.target.value
-        })
     }
 
     verifyValuesForReport() {
@@ -366,7 +356,7 @@ class ModalBlock extends React.Component {
                     },                    
                 
                     {
-                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE', entries: this.props.entry }),
+                        onClick: () => this.props.dispatch({ type: 'OPEN_MODAL', msg: 'REPORT_UNDONE', entries: modal.entries }),
                         variant: 'primary',
                         text: 'לא בוצע'
                     },                              
@@ -511,6 +501,7 @@ class ModalBlock extends React.Component {
                                 reportComment: this.state.nonCollectedReason + ' - ' + this.state.comment,
                                 collected: true
                             }
+                            console.log(this.props)
                             setTaskReport(this.props, this.props.modal.entries.id, data)
                             this.resetState();                            
                             this.props.dispatch({ type: 'CLOSE_MODAL' })
@@ -815,7 +806,7 @@ class ModalBlock extends React.Component {
                             }
                             editUser(this.props, user.uid, changes).then((success) => {
                                 if (success) { var title = 'הצלחה'; var body = ' שינוי פרטי המשתמש הצליחה.'; }
-                                else { var title = 'תקלה'; var body = ' שינוי פרטי המשתמש לא הצליחה.'; }
+                                else { var title = 'שגיאה'; var body = ' שינוי פרטי המשתמש לא הצליחה.'; }
                                 this.props.dispatch({ type: 'PUSH_TOAST', title: title, body: body, delay: 5000 })
                             })    
                             this.resetState()
@@ -910,7 +901,11 @@ class ModalBlock extends React.Component {
                         {
                             onClick: () => {
                                 let changes = { password: this.state.password}
-                                editUserAuth(this.props, user.uid, changes)
+                                editUserAuth(this.props, user.uid, changes).then((success) => {
+                                    if (success) { var title = 'הצלחה'; var body = 'שינוי סיסמת המשתמש הצליחה.'; }
+                                    else { var title = 'שגיאה'; var body = 'אירעה תקלה בעת הנסיון לשנות את סיסמת המשתמש, והיא לא שונתה.'; }
+                                    this.props.dispatch({ type: 'PUSH_TOAST', title: title, body: body, delay: 5000 })
+                                })    
                                 this.resetState()
                                 this.props.dispatch({ type: 'CLOSE_MODAL' })                                
                             },

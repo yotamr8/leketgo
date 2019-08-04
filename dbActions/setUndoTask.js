@@ -1,6 +1,11 @@
 ﻿import fire from '../config/firebaseConfig'
 import refresh4User from './refresh4User'
 
+/*
+    Function gets task id, and unassigns it from any user (sets its volunteerUid as 'null').   
+    Then sends feedback toast to user.
+*/
+
 export default function setUndoTask(props, taskID) {
     const db = fire.firestore();
     db.collection("tasks").doc(taskID).set(

@@ -14,9 +14,16 @@ var props;
 var taskIDs;
 var taskID;
 
-/* runs as a recursive function, because a only one firebase transaction can run at a time.
-The reason this is done in a transaction, is to cover the possobility that 2 volunteers try
-to assign themselves to the same task in the same time. */
+/*
+    Function gets selected tasks, and assigns them to user's uid.
+    Then sends data to modal, that tells if the assignment was successful or not.
+
+    runs as a recursive function, because only one firebase transaction can run at a time.
+    The reason this is done in a transaction, is to cover the possobility that 2 volunteers try
+    to assign themselves to the same task in the same time.
+*/
+
+
 
 export default function setAssignedTasks(properties, selectedEntries, entrySelectedCounter) {
     numOfSuccesses = 0;

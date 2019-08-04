@@ -1,6 +1,11 @@
 import fire from '../config/firebaseConfig'
 import { getStartDate } from './dates'
 
+/*
+    Function gets volunteers uid, and pulls all tasks assigned to that volunteer, that were not collected yet.        
+    Then it stores data in state, and updates the updated list that 'assigned' data is updated.    
+*/
+
 export default function getAssigned(dispatch, uid) {
     const db = fire.firestore();
 
@@ -16,7 +21,7 @@ export default function getAssigned(dispatch, uid) {
                 task.id = doc.id;
                 tasks.push(task);
             });
-            dispatch({ type: 'ASSIGNEDTASKS', tasks: tasks });
-            dispatch({ type: 'UPDATE_UPDATED_LIST', data: 'assigned' })
+            dispatch({ type: 'ASSIGNEDTASKS', tasks: tasks });              // saves data to state.
+            dispatch({ type: 'UPDATE_UPDATED_LIST', data: 'assigned' })     // update updated list that data is up to date.
         });
 }

@@ -3,9 +3,10 @@ import getAllUsers from './getAllUsers'
 import editUserAuth from './editUserAuth'
 
 /*
-    Function get uid of user, and changes that are to be made in users data.
-    Each valid task data, is added to database.
-    At the end, sends feedback to user with toast about how many tasks out of valid rows were succesfully added, and refreshes the page data.
+    Function gets uid of user and changes that are to be made in users data.    
+    If changes contain email, password or disabled, changes are also made in auth.
+    All changes (except password which isn't saved in database) are made in database.
+    At the end, sends true if successful or false if not, so mother function can sent appropriavte toast.
 */
 
 export default function editUser(props, uid, changes) {
@@ -23,9 +24,6 @@ export default function editUser(props, uid, changes) {
     if (Object.keys(authChanges).length != 0) {
         editUserAuth(props, uid, authChanges)
     }
-
-    
-
 
     const userCollection = fire.firestore().collection('users');    
     return userCollection.doc(uid).set(

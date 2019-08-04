@@ -27,7 +27,7 @@ class Header extends React.Component {
                 },
                 {
                     id: 'taskReports',
-                    name: 'מילוי משוב',
+                    name: 'משובים ממתינים',
                     href: '/task-reports'
                 },
                 {

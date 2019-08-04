@@ -1,6 +1,11 @@
 ﻿import fire from '../config/firebaseConfig'
 import refresh4User from './refresh4User'
 
+/*
+    Function gets task id, and sets its 'collected' field as true.        
+    Then sends feedback toast to user.
+*/
+
 export default function setTaskCollected(taskID, props) {
     const db = fire.firestore();
     db.collection("tasks").doc(taskID).set(

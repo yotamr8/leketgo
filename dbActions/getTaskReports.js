@@ -1,6 +1,11 @@
 import fire from '../config/firebaseConfig'
 import { getStartDate } from './dates'
 
+/*
+    Function gets volunteers uid, and pulls all history reports awaiting for that volunteer.        
+    Then it stores data in state, and updates the updated list that 'reports' data is updated.    
+*/
+
 export default function getTaskReports(dispatch, uid) {
     const db = fire.firestore();
 
@@ -19,7 +24,7 @@ export default function getTaskReports(dispatch, uid) {
                     }
                 }
             });
-            dispatch({ type: 'TASKREPORTS', tasks: tasks });
-            dispatch({ type: 'UPDATE_UPDATED_LIST', data: 'reports' })
+            dispatch({ type: 'TASKREPORTS', tasks: tasks });            // saves users data to state.
+            dispatch({ type: 'UPDATE_UPDATED_LIST', data: 'reports' })  // update updated list that reports data is up to date.
         });
 }
