@@ -12,12 +12,8 @@ const initialState = {
     isPasswordlengthValid: true,
     isDoublePasswordsMatch: true,
     isPhoneValid: true,
-    formEmail: "",
-    formPhone: "",
-    formPassword: "",
-    formValidatePassword: "",
-    formCity: "",
-    formAddress: ""
+    isAddressValid: true,
+    isCityValid: true
 }
 
 class Personal_information extends Component {
@@ -33,6 +29,15 @@ class Personal_information extends Component {
 
 	componentWillMount() {      // runs everytime the page is entered, checks that user has permission to see page, and refreshes the data.
         checkAuthAndRefresh(this.props.dispatch)
+        this.setState({
+            email: this.props.userData.email,
+            phone: this.props.userData.phone,
+            address: this.props.userData.address,
+            city: this.props.userData.city,
+            password: "",
+            validatePassword: ""
+        })
+        this.validateValues()
     }
 
     handleChange = (e) => {
@@ -41,62 +46,50 @@ class Personal_information extends Component {
         })
     };
 
+    validateValues() {
+        this.state.isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.state.email)
+        this.state.isPhoneValid = /^\d{10}$/.test(this.state.phone);
+        this.state.isPasswordlengthValid = /^.{6,}$|^$/.test(this.state.password);
+        this.state.isDoublePasswordsMatch = this.state.validatePassword == this.state.password;
+        this.state.isAddressValid = /^(?!\s*$).+/.test(this.state.address);
+        this.state.isCityValid = /^(?!\s*$).+/.test(this.state.city);
+
+        this.state.validated =  this.state.isPasswordlengthValid && this.state.isMailValid &&
+                                this.state.isDoublePasswordsMatch && this.state.isPhoneValid &&
+                                this.state.isCityValid && this.state.isAddressValid
+    }
+
     handleSubmit(event) {       // callback when user clicks "שמירת שינויים"        
         event.preventDefault();     //prevents page from refreshing
         event.stopPropagation();    //prevents page from refreshing
 
-        // validate data fields
-        const form = event.currentTarget;
-        
-        //let formEmail = document.getElementById('formEmail').value;
-		this.state.isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(formEmail)
-        console.log("mail valid: " + this.state.isMailValid);
+        this.validateValues();
 
-        //let formPhone = document.getElementById('formPhone').value;
-        console.log(formPhone)
-        this.state.isPhoneValid = /^\d{10}$/.test(formPhone);
-		console.log("phone length valid: " + this.state.isPhoneValid);
-		
-		//let formPassword = document.getElementById('formPassword').value;
-		this.state.isPasswordlengthValid = /^.{6,}$|^$/.test(formPassword);
-        console.log("password length valid: " + this.state.isPasswordlengthValid);
-		
-		//let formValidatePassword = document.getElementById('formValidatePassword').value;
-		this.state.isDoublePasswordsMatch = formValidatePassword == formPassword;
-        console.log("2nd Password match: " + this.state.isDoublePasswordsMatch)
-		
-		if(!this.state.isPasswordlengthValid || !this.state.isMailValid || !this.state.isDoublePasswordsMatch || !this.state.isPhoneValid) {
-			this.state.validated = false;
-		}
-                
         if (this.state.validated){         
-            let user = this.props.userData
-            //let formCity = document.getElementById('formCity').value;
-            //let formAddress = document.getElementById('formAddress').value;
-            
+            let user = this.props.userData                     
             let changes = {}
-            if (formEmail != user.email) { changes.email = formEmail }
-            if (formCity != user.city) { changes.city = formCity }
-            if (formAddress != user.address) { changes.address = formAddress }
-            if (formPhone != user.phone) { changes.phone = formPhone }
-            if (formPassword.length != 0) { changes.password = formPassword }
-            console.log(changes)
+
+            if (this.state.email != user.email) { changes.email = this.state.email }
+            if (this.state.city != user.city) { changes.city = this.state.city }
+            if (this.state.address != user.address) { changes.address = this.state.address }
+            if (this.state.phone != user.phone) { changes.phone = this.state.phone }
+            if (this.state.password.length != 0) { changes.password = this.state.password }
+
             editUser(this.props, this.props.userData.uid, changes).then((success) => {
                 if (success) {
-                    this.props.dispatch({ type: 'PUSH_TOAST', title: 'הצלחה', body: 'השינויים נשמרו בהצלחה.', delay: 5000 })
+                    this.props.dispatch({ type: 'PUSH_TOAST', title: 'הצלחה', body: 'השינויים בפרטים האישיים נשמרו בהצלחה', delay: 5000 })
                 } else {
-                    this.props.dispatch({ type: 'PUSH_TOAST', title: 'שגיאה', body: 'אירעה תקלה, והשינויים בפרטים האישיים לא נשמרו.', delay: 5000 })
+                    this.props.dispatch({ type: 'PUSH_TOAST', title: 'שגיאה', body: 'השינויים בפרטים האישיים לא נשמרו', delay: 5000 })
                 }
             }).catch(() => {
-                this.props.dispatch({ type: 'PUSH_TOAST', title: 'שגיאה', body: 'אירעה תקלה, והשינויים בפרטים האישיים לא נשמרו.', delay: 5000 })
+                this.props.dispatch({ type: 'PUSH_TOAST', title: 'שגיאה', body: 'השינויים בפרטים האישיים לא נשמרו', delay: 5000 })
             })
             
         }
-        this.setState({ validated: true });        
       }
 
-    render() {  
-        console.log(this.state)
+    render() {         
+        this.validateValues()
         if (!this.props.authChecked || !this.props.isLoggedIn) {
             return (<Loading />);
         }
@@ -109,7 +102,7 @@ class Personal_information extends Component {
                         <div className="mt-4 mb-4">
                             <h2><img src='/static/profile.png' width="60"/>עדכון פרטים אישיים</h2>
                         </div>
-                        <Form noValidate validated={this.state.validated} onSubmit={e => this.handleSubmit(e)}>
+                        <Form onSubmit={e => this.handleSubmit(e)}>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formFirsName">
                                     <Form.Label>שם פרטי</Form.Label>
@@ -129,14 +122,14 @@ class Personal_information extends Component {
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col} controlId="formEmail">
+                                    <Form.Group as={Col} controlId="email">
                                     <Form.Label>כתובת דואר אלקטרוני</Form.Label>
-                                    <Form.Control required type='email' defaultValue={user.email} isInvalid={!this.state.isMailValid} onChange={this.handleChange}/>
+                                    <Form.Control required type='email' defaultValue={user.email} noValidate isInvalid={!this.state.isMailValid} onChange={this.handleChange}/>
                                     <Form.Control.Feedback type="invalid">
                                         זהו שדה חובה. אנא בדקו שהכנסתם כתובת תקינה.
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formPhone">
+                                    <Form.Group as={Col} controlId="phone">
                                     <Form.Label>מספר טלפון</Form.Label>
                                     <Form.Control required type='tel' defaultValue={user.phone} isInvalid={!this.state.isPhoneValid} onChange={this.handleChange}/>
 									<Form.Control.Feedback type="invalid">
@@ -145,16 +138,16 @@ class Personal_information extends Component {
                                 </Form.Group>
                             </Form.Row>
                             <Form.Row>
-                                <Form.Group as={Col} controlId="formAddress">
+                                    <Form.Group as={Col} controlId="address">
                                     <Form.Label>רחוב ומספר</Form.Label>
-                                    <Form.Control required defaultValue={user.address} onChange={this.handleChange}/>
+                                    <Form.Control required defaultValue={user.address} isInvalid={!this.state.isAddressValid} onChange={this.handleChange}/>
 									<Form.Control.Feedback type="invalid">
                                         זהו שדה חובה.
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formCity">
+                                <Form.Group as={Col} controlId="city">
                                     <Form.Label>עיר מגורים</Form.Label>
-                                    <Form.Control required defaultValue={user.city} onChange={this.handleChange}/>
+                                    <Form.Control required defaultValue={user.city} isInvalid={!this.state.isCityValid} onChange={this.handleChange}/>
 									<Form.Control.Feedback type="invalid">
                                         זהו שדה חובה.
                                     </Form.Control.Feedback>
@@ -163,16 +156,16 @@ class Personal_information extends Component {
                             <div className="mt-4 mb-4">
                             <h2>שינוי סיסמה</h2>
                             </div>
-                            <Form.Row>
-                                <input style={{ display: "none" }} type="password" name="fakepasswordremembered" />
-                                <Form.Group as={Col} controlId="formPassword">
+                            <Form.Row>                                
+                                    <Form.Group as={Col} controlId="password">
+                                    <input style={{ display: "none" }} type="password" name="fakepasswordremembered" />
                                     <Form.Label>סיסמה חדשה</Form.Label>
                                     <Form.Control type="password" defaultValue="" isInvalid={!this.state.isPasswordlengthValid} onChange={this.handleChange}/>
 									<Form.Control.Feedback type="invalid">
                                         אנא הכניסו סיסמא של 6 אותיות לפחות
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formValidatePassword">
+                                    <Form.Group as={Col} controlId="validatePassword">
                                     <Form.Label>וידוא סיסמה</Form.Label>
                                     <Form.Control type="password" isInvalid={!this.state.isDoublePasswordsMatch} onChange={this.handleChange}/>
                                     <Form.Text className="text-muted">

@@ -17,6 +17,6 @@ export default function setTaskReport(props, taskID, data) {
             props.dispatch({ type: 'PUSH_TOAST', title: `הצלחה`, body: `המשוב שמילאת נשמר במערכת. תודה רבה!`, delay: 10000 })                    
         })
         .catch(() => {
-            props.dispatch({ type: 'PUSH_TOAST', title: `שגיאה`, body: `לא ניתן היה לשמור את המשוב שמילאת במערכת. אנא בדוק את התקשורת במכשירך, ונסה שנית. אם התקלה חוזרת אנא צור קשר עם המנהל/ת.`, delay: 15000 })        
+            props.dispatch({ type: 'PUSH_TOAST', title: `שגיאה`, body: `לא ניתן היה לשמור את המשוב שמילאת במערכת. אנא בדוק את התקשורת במכשירך, ונסה שנית. אם התקלה חוזרת אנא צור קשר עם המנהל/ת`, delay: 15000 })        
         });
 }

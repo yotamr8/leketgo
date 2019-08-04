@@ -93,7 +93,11 @@ class Header extends React.Component {
             <Nav className="mr-auto">
             {this.state.userPages.map((page, index) => {
                 return (
-                    <Link key={index} className='navlink' href={page.href}><a className={'nav-link' + (this.isActive(page.id) ? ' active' : '')}>{page.name}</a></Link>
+                    <Link key={index} href={page.href}>
+                        <a>
+                            <span className={'nav-link' + (this.isActive(page.id) ? ' active' : '')}>{page.name}</span>
+                        </a>
+                    </Link>
                     );
                 })}
             </Nav>;

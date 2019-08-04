@@ -23,8 +23,6 @@ var taskID;
     to assign themselves to the same task in the same time.
 */
 
-
-
 export default function setAssignedTasks(properties, selectedEntries, entrySelectedCounter) {
     numOfSuccesses = 0;
     numOfFailures = 0;
