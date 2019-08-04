@@ -55,7 +55,14 @@ const initialState = {
     isPhoneValid: false,
     isPhoneTaskValid: false,
     fileInputPlaceholderDefault: { name: 'בחירת קובץ' },
-    fileInputPlaceholder: { name: 'בחירת קובץ' }
+    fileInputPlaceholder: { name: 'בחירת קובץ' },
+    isMainCourseQDigit: true,
+    isSideCourseQDigit: true,
+    isPastriesQDigit: true,
+    isBreadQDigit: true,
+    isPastriesValid: true,
+    isBreadValid: true,
+    reportFillValidated: true
 }
 
 class ModalBlock extends React.Component {
@@ -181,10 +188,36 @@ class ModalBlock extends React.Component {
 		
 		if(!this.state.isMailValid || !this.state.isTZValid || !this.state.isPhoneValid) {        
 		  return false;
-        }
-        //this.setState({ validated: true });
+        }        
 		return true;
 		
+    }
+
+    sendReport() {
+        let numOfFields = 0;
+        let fields = [];
+        if (this.state.mainCourseQ > 0) { numOfFields++; fields.push("mainCourseQ"); }
+        if (this.state.sideCourseQ > 0) { numOfFields++; fields.push("sideCourseQ"); }
+        if (this.state.pastriesQ > 0) { numOfFields++; fields.push("pastriesQ"); }
+        if (this.state.breadQ > 0) { numOfFields++; fields.push("breadQ"); }
+        let data = {
+            reportFilled: true,
+            reportFieldNum: numOfFields,
+            reportComment: this.state.comment,
+            collected: true
+        }
+        let dic = {
+            "mainCourseQ": 'עיקריות',
+            "sideCourseQ": 'תוספות',
+            "pastriesQ": 'מאפים',
+            "breadQ": 'לחם'
+        }
+        for (let i = 0; i < numOfFields; i++) {
+            data["foodDesc" + (i + 1)] = dic[fields[i]];
+            data["foodContainerType" + (i + 1)] = (fields[i] == "mainCourseQ" || fields[i] == "sideCourseQ") ? 'מיכלים' : (fields[i] == "pastriesQ") ? this.state.pastriesS : this.state.breadS;
+            data["foodContainerQuantity" + (i + 1)] = this.state[fields[i]]
+        }
+        setTaskReport(this.props, this.props.modal.entries.id, data)        
     }
 
     verifyValuesForReport() {
@@ -193,40 +226,21 @@ class ModalBlock extends React.Component {
         let isValid = true; // TODO add logic to validation
         if (isValid) {
 			let re = /^\d{0,}$/
-			let isMainCourseQDigit = re.test(this.state.mainCourseQ);
-			let isSideCourseQDigit = re.test(this.state.sideCourseQ);
-			let isPastriesQDigit = re.test(this.state.pastriesQ);
-			let isBreadQDigit = re.test(this.state.breadQ);
-			if(!isMainCourseQDigit || !isSideCourseQDigit || !isPastriesQDigit || !isBreadQDigit){				
-				return false
-			}		
-			
-            let numOfFields = 0;
-            let fields = [];
-            if (this.state.mainCourseQ > 0) { numOfFields++; fields.push("mainCourseQ"); }
-            if (this.state.sideCourseQ > 0) { numOfFields++; fields.push("sideCourseQ"); }
-            if (this.state.pastriesQ > 0) { numOfFields++; fields.push("pastriesQ"); }
-            if (this.state.breadQ > 0) { numOfFields++; fields.push("breadQ"); }
-            let data = {
-                reportFilled: true,
-                reportFieldNum: numOfFields,
-                reportComment: this.state.comment,
-                collected: true
-            }
-            let dic = {
-                "mainCourseQ": 'עיקריות',
-                "sideCourseQ": 'תוספות',
-                "pastriesQ": 'מאפים',
-                "breadQ": 'לחם'
-            }
-            for (let i = 0; i < numOfFields; i++) {
-                data["foodDesc" + (i + 1)] = dic[fields[i]];
-                data["foodContainerType" + (i + 1)] = (fields[i] == "mainCourseQ" || fields[i] == "sideCourseQ") ? 'מיכלים' : (fields[i] == "pastriesQ") ? this.state.pastriesS : this.state.breadS;
-                data["foodContainerQuantity" + (i + 1)] = this.state[fields[i]]
-            }
+            this.state.isMainCourseQDigit = re.test(this.state.mainCourseQ);
+            this.state.isSideCourseQDigit = re.test(this.state.sideCourseQ);
+            this.state.isPastriesQDigit = re.test(this.state.pastriesQ);
+            this.state.isBreadQDigit = re.test(this.state.breadQ);
+            this.state.isPastriesValid = (/^(?!\s*$).+/.test(this.state.pastriesS) && (this.state.pastriesQ > 0)) || (this.state.pastriesQ == 0)
+            this.state.isBreadValid = (/^(?!\s * $).+/.test(this.state.breadS) && (this.state.breadQ > 0)) || (this.state.breadQ == 0)
 
-            setTaskReport(this.props, this.props.modal.entries.id, data)
-            return true
+            console.log(this.state.isPastriesValid, this.state.isBreadValid, this.state.pastriesS, this.state.breadS)
+ 
+            if (!this.state.isMainCourseQDigit || !this.state.isSideCourseQDigit || !this.state.isPastriesQDigit
+                || !this.state.isBreadQDigit || !this.state.isPastriesValid || !this.state.isBreadValid)                
+            {				
+				this.state.reportFillValidated = false
+            }	            
+            this.state.reportFillValidated = true
         }
     }
 
@@ -250,14 +264,15 @@ class ModalBlock extends React.Component {
          *            However, when declaring variables inside a case, you should
          *            Use a 'let' declaration and wrap the case inside a block,
          *            as seen in a few of the cases below. DO NOT REMOVE THEM. 
-         */
+        */
         var modal = this.props.modal; // Just for keeping things shorter
         var title = '';
         var body = '';
         var buttons = [];
         this.validateUserInfoBeforeRendering();
         this.validateTaskInfo();
-        
+        this.verifyValuesForReport();
+
         switch (modal.msg) {
             case 'ASSIGN_TASKS_FAILED':
                 /* Partial success when assigning tasks.
@@ -380,25 +395,31 @@ class ModalBlock extends React.Component {
                                 <InputGroup>
                             <FormControl id="mainCourseQ"
                                 onChange={this.handleChange}
-                                    placeholder="כמות"
-                                    />
+                                placeholder="כמות" isInvalid={!this.state.isMainCourseQDigit}
+                            />                                    
                                     <InputGroup.Append>
                                     <InputGroup.Text>מיכלים</InputGroup.Text>
                                     </InputGroup.Append>
-                                </InputGroup>
+                                    <Form.Control.Feedback type="invalid">
+                                        יש למלא רק ספרות
+                                    </Form.Control.Feedback>
+                                </InputGroup>                                
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>תוספות</Form.Label>
                                 <InputGroup>
-                            <FormControl id="sideCourseQ"
-                                onChange={this.handleChange}
+                                    <FormControl id="sideCourseQ"
+                                        onChange={this.handleChange} isInvalid={!this.state.isSideCourseQDigit}
                                     placeholder="כמות"
                                     />
                                     <InputGroup.Append>
                                     <InputGroup.Text>מיכלים</InputGroup.Text>
                                     </InputGroup.Append>
+                                    <Form.Control.Feedback type="invalid">
+                                        יש למלא רק ספרות
+                                    </Form.Control.Feedback>
                                 </InputGroup>
                             </Form.Group>
                         </Form.Row>
@@ -411,12 +432,15 @@ class ModalBlock extends React.Component {
                                     placeholder="כמות"
                                     />
                             <Form.Control as="select" id="pastriesS"
-                                onChange={this.handleChange}>
+                                        onChange={this.handleChange} isInvalid={!this.state.isPastriesValid}>
                                         <option>בחירת סוג</option>
                                         <option>ארגזים</option>
                                         <option>שקיות סופר</option>
                                         <option>שקים</option>
-                                    </Form.Control>
+                            </Form.Control>
+                                    <Form.Control.Feedback type="invalid">
+                                        יש למלא רק ספרות, ולבחור את סוג האריזה
+                                    </Form.Control.Feedback>
                                 </InputGroup>
                             </Form.Group>
                         </Form.Row>
@@ -429,12 +453,15 @@ class ModalBlock extends React.Component {
                                     placeholder="כמות"
                                     />
                             <Form.Control as="select" id="breadS"
-                                onChange={this.handleChange}>
+                                onChange={this.handleChange} isInvalid={!this.state.isBreadValid}>
                                         <option>בחירת סוג</option>
                                         <option>ארגזים</option>
                                         <option>שקיות סופר</option>
                                         <option>שקים</option>
-                                    </Form.Control>
+                            </Form.Control>
+                                    <Form.Control.Feedback type="invalid">
+                                        יש למלא רק ספרות, ולבחור את סוג האריזה
+                                    </Form.Control.Feedback>
                                 </InputGroup>
                             </Form.Group>
                         </Form.Row>
@@ -450,8 +477,9 @@ class ModalBlock extends React.Component {
                 buttons = [
                     {
                         onClick: () => {                            
-                            let verified = this.verifyValuesForReport(modal);
-							if(verified){
+                            let verified = this.state.reportFillValidated;
+                            if (verified) {
+                                this.sendReport()
 								this.resetState();                            
 								this.props.dispatch({ type: 'CLOSE_MODAL' });
 							}
