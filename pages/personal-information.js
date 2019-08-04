@@ -120,7 +120,7 @@ class Personal_information extends Component {
                                     <Form.Label>מספר טלפון</Form.Label>
                                     <Form.Control required type='tel' defaultValue={user.phone} isInvalid={!this.state.isPhoneValid}/>
 									<Form.Control.Feedback type="invalid">
-                                        אנא הכניסו מספר טלפון חוקי
+                                        אנא הכניסו מספר טלפון חוקי בן 10 ספרות, ללא מקף
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Form.Row>

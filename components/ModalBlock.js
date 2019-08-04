@@ -53,6 +53,7 @@ const initialState = {
 	isTZValid: false,
 	isMailValid: false,
     isPhoneValid: false,
+    isPhoneTaskValid: false,
     fileInputPlaceholderDefault: { name: 'בחירת קובץ' },
     fileInputPlaceholder: { name: 'בחירת קובץ' }
 }
@@ -138,10 +139,10 @@ class ModalBlock extends React.Component {
 	
     validateTaskInfo(){
 		
-		this.state.isPhoneValid = /^\d{10}$/.test(this.state.contactNumber);
-		console.log("phone length valid: " + this.state.isPhoneValid);
+		this.state.isPhoneTaskValid = /^\d{10}$/.test(this.state.contactNumber);
+		console.log("phone length valid: " + this.state.isPhoneTaskValid);
 		
-        if (!this.state.isPhoneValid) {
+        if (!this.state.isPhoneTaskValid) {
           console.log("nonvalid")
 		  return false;
         }
@@ -166,8 +167,28 @@ class ModalBlock extends React.Component {
         this.setState({ validated: true });
 		return true;
 		
-	}
-	  
+    }
+    
+    validateUserInfoBeforeRendering(){
+		
+		this.state.isMailValid = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(this.state.email)
+        console.log("mail valid: " + this.state.isMailValid);
+		
+		this.state.isTZValid = /^\d{9}$/.test(this.state.tz);
+		console.log("TZ length valid: " + this.state.isTZValid);
+		
+		this.state.isPhoneValid = /^\d{10}$/.test(this.state.phone);
+		console.log("phone length valid: " + this.state.isPhoneValid);
+		
+		if(!this.state.isMailValid || !this.state.isTZValid || !this.state.isPhoneValid) {
+          console.log("nonvalid")
+		  return false;
+        }
+        //this.setState({ validated: true });
+		return true;
+		
+    }
+
     handleChange = (e) => {
         /* This method is only relevant
            to the REPORT_FILL modal */
@@ -244,6 +265,8 @@ class ModalBlock extends React.Component {
         var title = '';
         var body = '';
         var buttons = [];
+        this.validateUserInfoBeforeRendering();
+        this.validateTaskInfo();
         
         switch (modal.msg) {
             case 'ASSIGN_TASKS_FAILED':
@@ -571,7 +594,7 @@ class ModalBlock extends React.Component {
                                     <Form.Label>תעודת זהות</Form.Label>
                                     <Form.Control id="tz" onChange={this.handleChange} isInvalid={!this.state.isTZValid}/>
 									<Form.Control.Feedback type="invalid">
-                                        אנא הכניסו תעודת זהות תקינה
+                                        אנא הכניסו תעודת זהות תקינה בת 9 ספרות
 									</Form.Control.Feedback>
                                 </Form.Group>
                             </Form.Row>
@@ -598,7 +621,7 @@ class ModalBlock extends React.Component {
                                     <Form.Label>מספר טלפון</Form.Label>
                                     <Form.Control id="phone" onChange={this.handleChange} isInvalid={!this.state.isPhoneValid}/>
 									<Form.Control.Feedback type="invalid">
-                                        אנא הכניסו מספר טלפון חוקי
+                                    אנא הכניסו מספר טלפון חוקי בן 10 ספרות, ללא מקף
 									</Form.Control.Feedback>
                                 </Form.Group>
                             </Form.Row>
@@ -724,7 +747,7 @@ class ModalBlock extends React.Component {
                                     <Form.Label>תעודת זהות{this.state.isTZValid}</Form.Label>
                                     <Form.Control value={this.state.tz} id="tz" onChange={this.handleChange} isInvalid={!this.state.isTZValid}/>
 									<Form.Control.Feedback type="invalid">
-                                        אנא הכניסו תעודת זהות תקינה
+                                    אנא הכניסו תעודת זהות תקינה בת 9 ספרות
 									</Form.Control.Feedback>
 								</Form.Group>
                             </Form.Row>
@@ -750,7 +773,7 @@ class ModalBlock extends React.Component {
                                     <Form.Label>מספר טלפון</Form.Label>
                                     <Form.Control value={this.state.phone} id="phone" onChange={this.handleChange} isInvalid={!this.state.isPhoneValid}/>
 									<Form.Control.Feedback type="invalid">
-                                        אנא הכניסו מספר טלפון חוקי
+                                    אנא הכניסו מספר טלפון חוקי בן 10 ספרות, ללא מקף
 									</Form.Control.Feedback>
                                 </Form.Group>
                             </Form.Row>
@@ -944,9 +967,9 @@ class ModalBlock extends React.Component {
                             </Form.Group>
                             <Form.Group as={Col} controlId="formLastName">
                                 <Form.Label>טלפון איש קשר</Form.Label>
-                                <Form.Control id="contactNumber" onChange={this.handleChange} isInvalid={!this.state.isPhoneValid}/>
+                                <Form.Control id="contactNumber" onChange={this.handleChange} isInvalid={!this.state.isPhoneTaskValid}/>
 									<Form.Control.Feedback type="invalid">
-                                        אנא הכניסו מספר טלפון חוקי
+                                    אנא הכניסו מספר טלפון חוקי בן 10 ספרות, ללא מקף
 									</Form.Control.Feedback>
                             </Form.Group>
                         </Form.Row>
@@ -1051,9 +1074,9 @@ class ModalBlock extends React.Component {
                             </Form.Group>
                             <Form.Group as={Col} controlId="formPhone">
                                 <Form.Label>טלפון איש קשר</Form.Label>
-                                <Form.Control value={this.state.contactNumber} id="contactNumber" onChange={this.handleChange} isInvalid={!this.state.isPhoneValid}/>
+                                <Form.Control value={this.state.contactNumber} id="contactNumber" onChange={this.handleChange} isInvalid={!this.state.isPhoneTaskValid}/>
 									<Form.Control.Feedback type="invalid">
-                                        אנא הכניסו מספר טלפון חוקי
+                                        אנא הכניסו מספר טלפון חוקי בן 10 ספרות, ללא מקף
 									</Form.Control.Feedback>
                             </Form.Group>
                         </Form.Row>
