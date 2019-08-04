@@ -3,7 +3,7 @@ import getAllRegionTasks from './getAllRegionTasks'
 
 /*
     Function gets the region, taskID and data of the task, and updates task with new data.
-    At the end, sends feedback to user with toast.
+    At the end, sends feedback to user with toast, and refreshes page data.
 */
 
 export default function editTask(props, region, taskID, data) {
@@ -24,11 +24,10 @@ export default function editTask(props, region, taskID, data) {
         { merge: true }
     )
         .then(() => {
+            getAllRegionTasks(props.dispatch, props.userData.region) // refresh page data
             props.dispatch({ type: 'PUSH_TOAST', title: `הצלחה בשינוי פרטי משימה`, body: `פרטי משימת ${data.name} שונו בהצלחה`, delay: 5000 })        
         })
         .catch(() => {
             props.dispatch({ type: 'PUSH_TOAST', title: `שגיאה בשינוי פרטי המשימה`, body: `לא ניתן היה לשנות את פרטי משימת ${data.name}`, delay: 5000 })        
-        });
-    
-    getAllRegionTasks(props.dispatch, region) // refresh page data
+        });       
 }
