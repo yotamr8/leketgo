@@ -16,6 +16,6 @@ export default function setTaskCollected(taskID, props) {
             props.dispatch({ type: 'PUSH_TOAST', title: `הצלחה`, body: `המשימה סומנה כבוצעה במערכת. תודה רבה!`, delay: 5000 })        
         })
         .catch(() => {
-            props.dispatch({ type: 'PUSH_TOAST', title: `שגיאה`, body: `אירעה תקלה בנסיון לסמן שהמשימה בוצעה במערכת. אנא בדוק את התקשורת במכשירך, ונסה שנית. אם התקלה חוזרת אנא צור קשר עם המנהל/ת.`, delay: 15000 })        
+            props.dispatch({ type: 'PUSH_TOAST', title: `שגיאה`, body: `אירעה תקלה בנסיון לסמן שהמשימה בוצעה במערכת. אנא בדוק את התקשורת במכשירך, ונסה שנית. אם התקלה חוזרת אנא צור קשר עם המנהל/ת`, delay: 15000 })        
         });
 }

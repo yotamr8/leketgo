@@ -89,9 +89,9 @@ function addTasksToDB(props, data) {
 function adminFeedback(props, numOfValidRows, numOfSuccess, numOfFailure) {
     getAllRegionTasks(props.dispatch, props.userData.region) // refresh data for app
     if (numOfValidRows == numOfFailure) {
-        props.dispatch({ type: 'PUSH_TOAST', title: 'שגיאה בהעלאת הנתונים מהקובץ', body: `לא היה ניתן להעלות אף שורה מתוך הקובץ, מתוך ${numOfValidRows} שורות תקינות.`, delay: 10000 })
+        props.dispatch({ type: 'PUSH_TOAST', title: 'שגיאה בהעלאת הנתונים מהקובץ', body: `לא היה ניתן להעלות אף שורה מתוך הקובץ, מתוך ${numOfValidRows} שורות תקינות`, delay: 10000 })
     } else {
-        props.dispatch({ type: 'PUSH_TOAST', title: 'המידע מהקובץ נשמר במאגר הנתונים', body: `מתוך ${numOfValidRows} שורות תקינות בקובץ, הועלו ${numOfSuccess} בהצלחה.`, delay: 10000 })
+        props.dispatch({ type: 'PUSH_TOAST', title: 'המידע מהקובץ נשמר במאגר הנתונים', body: `מתוך ${numOfValidRows} שורות תקינות בקובץ, הועלו ${numOfSuccess} בהצלחה`, delay: 10000 })
     }
 }
 

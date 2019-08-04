@@ -129,13 +129,13 @@ class ModalBlock extends React.Component {
 		
 	}
 	
-	handleChange = (e) => {
+	/*handleChange = (e) => {
         const { name, value } = e.target;
 
         this.setState(prevState => ({
           post: { ...prevState.post, [name]: value }
         }));
-    };
+    };*/
 
     handleChange = (e) => {
         /* This method is only relevant
@@ -805,8 +805,8 @@ class ModalBlock extends React.Component {
                                 changes.email = this.state.email
                             }
                             editUser(this.props, user.uid, changes).then((success) => {
-                                if (success) { var title = 'הצלחה'; var body = ' שינוי פרטי המשתמש הצליחה.'; }
-                                else { var title = 'שגיאה'; var body = ' שינוי פרטי המשתמש לא הצליחה.'; }
+                                if (success) { var title = 'הצלחה'; var body = ' שינוי פרטי המשתמש הצליחה'; }
+                                else { var title = 'שגיאה'; var body = ' שינוי פרטי המשתמש לא הצליחה'; }
                                 this.props.dispatch({ type: 'PUSH_TOAST', title: title, body: body, delay: 5000 })
                             })    
                             this.resetState()
@@ -836,8 +836,8 @@ class ModalBlock extends React.Component {
                         onClick: () => {
                             let changes = { disabled: true }                            
                             editUser(this.props, user.uid, changes).then((success) => {
-                                if (success) { var title = 'הצלחה'; var body = ' סגירת חשבון המשתמש הצליחה.'; }
-                                else { var title = 'אי הצלחה'; var body = ' סגירת חשבון המשתמש לא הצליחה.'; }
+                                if (success) { var title = 'הצלחה'; var body = 'סגירת חשבון המשתמש הצליחה'; }
+                                else { var title = 'אי הצלחה'; var body = 'סגירת חשבון המשתמש לא הצליחה'; }
                                 this.props.dispatch({ type: 'PUSH_TOAST', title: title, body: body, delay: 5000 })
                             })
                             this.props.dispatch({ type: 'CLOSE_MODAL' })                           
@@ -863,8 +863,8 @@ class ModalBlock extends React.Component {
                             onClick: () => {
                                 let changes = { disabled: false }
                                 editUser(this.props, user.uid, changes).then((success) => {
-                                    if (success) { var title = 'הצלחה'; var body = ' הפעלת חשבון המשתמש הצליחה.'; }
-                                    else { var title = 'אי הצלחה'; var body = ' הפעלת חשבון המשתמש לא הצליחה.'; }
+                                    if (success) { var title = 'הצלחה'; var body = 'הפעלת חשבון המשתמש הצליחה'; }
+                                    else { var title = 'אי הצלחה'; var body = 'הפעלת חשבון המשתמש לא הצליחה'; }
                                     this.props.dispatch({ type: 'PUSH_TOAST', title: title, body: body, delay: 5000 })
                                 })
                                 this.props.dispatch({ type: 'CLOSE_MODAL' })
@@ -902,8 +902,8 @@ class ModalBlock extends React.Component {
                             onClick: () => {
                                 let changes = { password: this.state.password}
                                 editUserAuth(this.props, user.uid, changes).then((success) => {
-                                    if (success) { var title = 'הצלחה'; var body = 'שינוי סיסמת המשתמש הצליחה.'; }
-                                    else { var title = 'שגיאה'; var body = 'אירעה תקלה בעת הנסיון לשנות את סיסמת המשתמש, והיא לא שונתה.'; }
+                                    if (success) { var title = 'הצלחה'; var body = 'שינוי סיסמת המשתמש הצליחה'; }
+                                    else { var title = 'שגיאה'; var body = 'אירעה תקלה בעת הנסיון לשנות את סיסמת המשתמש, והיא לא שונתה'; }
                                     this.props.dispatch({ type: 'PUSH_TOAST', title: title, body: body, delay: 5000 })
                                 })    
                                 this.resetState()
